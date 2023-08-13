@@ -5,3 +5,4 @@ nav:
   - About: about.md
   - 'Contact':
     - 'Writing your docs': 'about.md'
+theme: readthedocs
