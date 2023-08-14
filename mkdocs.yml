@@ -2,8 +2,13 @@
 site_name: Docs - Plexo Soft
 nav:
   - Home: index.md
-  - Deployment: mkdocs_deploy.md
-  - Credits: credits/credits.md
+  - Documentation:
+      - Getting Started: mkdocs_deploy.md
+      - Advanced Topics:
+          - Topic A: mkdocs_deploy.md
+          - Topic B: mkdocs_deploy.md
+  - About: about.md
+
 
 # THEME
 theme:
