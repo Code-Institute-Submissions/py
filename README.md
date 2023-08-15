@@ -36,31 +36,32 @@ Musa's Voting System is a holistic solution for all voting needs, combining the 
 
 ---
 
-## Badges
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-
 ## Documentation
+View full documentation at:
 
-- **Plexosoft Documentation**: [**Plexosoft Docs**](https://plexoio.github.io/py/)
+[![Plexosoft Documentation](https://img.shields.io/badge/View-Plexosoft_Documentation-blue)](https://plexoio.github.io/py/) 
 
 ## Access & Credentials
 
-- **Deployed Link**: [**Musa**](https://musa-voting-077e0d53fa15.herokuapp.com/)
+Deployed project and login credentials found below.
 
-### Buyer
+### Access
+[![Deployed Project](https://img.shields.io/badge/View-Deployed_Project-blue)](https://musa-voting-077e0d53fa15.herokuapp.com/) 
+
+### Credentials
+#### Buyer
 
 - **Username**: user
 - **Password**: musa12345678
 - **Role**: Not Publisher, Not Admin & Not verified (set back to Not Verified for testing)
 
-### Administrator
+#### Administrator
 
 - **Username**: frank
 - **Password**: musa12345678
 - **Role**: Verified & Admin
 
-### Superuser (Only for Code Institute)
+#### Superuser (Only for Code Institute)
 
 - **Username**: Musa
 - **Password**: `Sent on project submission`
@@ -82,6 +83,10 @@ Musa's Voting System is a holistic solution for all voting needs, combining the 
     3. Used to validate code.
     4. Used to confirm whether or not my code snippet is correct after many minutes or even hours of self-debugging.
     5. Understand the use of different keywords, know libraries and modules, and more.
+
+## Badges
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 ## Author
 
