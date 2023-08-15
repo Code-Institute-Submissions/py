@@ -1,13 +1,26 @@
-# Welcome to MkDocs
+# Welcome to Plexosoft Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Index
+1. Design
+    - [Design Thinking](design-thinking/overview.md)
+    - [User-Centric Design](user-centric/overview.md)
+    - [Entity Relationship Diagram ERD](erd/erd.md)
+2. Development
+    - [Agile Development](agile-development/agile_development.md)
+    - [Bugs, Testing & Security](bug-test-security/bug_test_security.md)
+3. Features
+    - [Actual Features Explained](actual-features/actual_features.md)
+    - [Future Features Explained](future-features/future_features.md)
+4. Tech
+    - [Technologies Used](tech-used/tech_used.md)
+5. Initialize
+    - [Workspace Set Up & Deployment Process](setup-and-deployment/setup_and_deployment.md)
+6. Snack
+    - [Developer's Snack](developer-snack/developer_snack.md)
+7. About
+    - [Vendor](vendor/vendor.md)
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+---
 
 ## Project layout
 

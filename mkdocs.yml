@@ -1,14 +1,36 @@
 # GENERAL & NAVs
-site_name: Docs - Plexo Soft
+site_name: Plexosoft Docs
 nav:
   - Home: index.md
-  - Documentation:
-      - Getting Started: mkdocs_deploy.md
-      - Advanced Topics:
-          - Topic A: mkdocs_deploy.md
-          - Topic B: mkdocs_deploy.md
-  - About: about.md
-
+  - Design:
+      - Design Thinking:
+          - Overview: design-thinking/overview.md
+          - Idea Outline: design-thinking/idea-outline/idea_outline.md
+          - Empathy: design-thinking/empathy/empathy.md
+          - Personas: design-thinking/personas/personas.md
+          - Definition: design-thinking/definition/definition.md
+          - Persona: design-thinking/persona/persona.md
+          - Ideate: design-thinking/ideate/ideate.md
+          - Conclusion: design-thinking/conclusion/conclusion.md
+          - PoC Prototype: design-thinking/PoC/poc.md
+      - User-Centric Design:
+          - Overview: user-centric/overview.md
+          - Strategy: user-centric/strategy/strategy.md
+          - Scope: user-centric/scope/scope.md
+          - Structure: user-centric/structure/structure.md
+          - Skeleton: user-centric/skeleton/skeleton.md
+          - Surface: user-centric/surface/surface.md
+      - Entity Relationship Diagram ERD:
+          - Overview: erd/erd.md
+          - Diagram: erd/diagram/diagram.md
+          - Table Model: erd/table-model/table_model.md
+          - Developer Experience: erd/dev-experience/dev_experience.md
+  - Development: m.md
+  - Features: t.md
+  - Tech: y.md
+  - Initialize: i.md
+  - Snack: s.md
+  - About: mkdocs_deploy.md
 
 # THEME
 theme:
@@ -25,18 +47,18 @@ theme:
     - content.code.copy
   language: en
   palette:
-    - scheme: default
+    - scheme: slate
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
-      primary: teal
-      accent: purple
-    - scheme: slate
+      primary: light blue
+      accent: yellow
+    - scheme: default
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-      primary: teal
-      accent: lime
+      primary: white
+      accent: indigo
 
 # EXTRA
 extra:
@@ -64,8 +86,10 @@ markdown_extensions:
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_generator: !!python/name:materialx.emoji.to_svg # COPYRIGHT
 
-# COPYRIGHT
+
 copyright: |
-  &copy; 2023 <a href="https://github.com/plexoio"  target="_blank" rel="noopener">Frank Arellano</a>
+  &copy; 2023 by <a href="https://github.com/plexoio"  target="_blank" rel="noopener">Frank Arellano</a> 
+  with 
+  <a href="https://www.mkdocs.org/"  target="_blank" rel="noopener">MkDocs</a>
