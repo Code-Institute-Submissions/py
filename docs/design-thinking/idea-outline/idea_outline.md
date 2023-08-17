@@ -1,8 +1,5 @@
-**Plexosoft Design Thinking**
+## Empathy: Transforming ideas into reality
 
-**Idea Outline:**
-
-**Empathy: Transforming ideas into reality**
 - **Business intentions**: Understand the distinction between software licensing and software ownership.
 
 - **Target Audience**: Catering to businesses, developers, and individuals aiming for an online presence or venture.
@@ -25,7 +22,8 @@
 
 - **Blockchain Enthusiasts**: Serving pioneers intrigued by Blockchain technology and in search of Blockchain development.
 
-**Definition**: 
+## Definition: Paying attention to our user's needs
+
 - **Transparency**: Users demand clarity in business operations.
 
 - **Inclusiveness**: The service caters to developers, businesses, and individuals alike.
@@ -46,7 +44,7 @@
 
 - **Technological Relevance**: Keeping pace with latest technologies, such as Blockchain, is crucial.
 
-**Ideation**:
+## Ideation: Solving real problems
 
 - **Software Clarification**: Clearly differentiate between software ownership and software licensing in the menu, terms of use, and product display, using distinct badges for each product type.
   
