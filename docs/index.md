@@ -1,5 +1,8 @@
 # Welcome to Plexosoft Documentation
-[![GitHub Repository](https://img.shields.io/badge/View-Repository_on_Github-blue)](https://github.com/plexoio/py) [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GitHub Repository](https://img.shields.io/badge/View-Repository_on_Github-blue)](https://github.com/plexoio/py) [![No License](https://img.shields.io/badge/License-No_License-red)](LICENSE.md) 
+
+> You cannot reproduce, distribute, or create derivative works from this project.
+
 
 ## Index
 1. Design

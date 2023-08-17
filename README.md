@@ -86,7 +86,9 @@ Deployed project and login credentials found below.
 
 ## Badges
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![No License](https://img.shields.io/badge/License-No_License-red)](LICENSE.md) 
+
+> You cannot reproduce, distribute, or create derivative works from this project.
 
 ## Author
 
