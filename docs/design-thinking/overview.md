@@ -1,15 +1,6 @@
-# Design Thinking
-We wanted to give it a try this time by implementing design thinking before even attempting to work on the user-centric design.
+# Design Thinking: Charting Our Journey
 
-We tested a total of **4 real people**, which is not ideal, but the results were just as surprising as if we had tested more individuals.
-
-After conducting deductive reasoning, we found that the tested users agreed on the following problems and needs: transparency, better layout and presentation, motivation, reduction of external influences, KYC (Know Your Customer), security, anonymity, assistance, legality, traditional & modern technologies, inclusivity, and performance.
-
-The detailed problems and desired solutions can be found in the design thinking paper for the Musa voting system.
-
-Finally, we have identified our problems and solutions for this first iteration, although there is still much to be included. We will definitely clarify things further when conducting the user-centric design.
-
-To assist us in the next step, we have developed a Proof-of-Concept (PoC) mind map to illustrate what is expected for this iteration. Adhering to this will guarantee that we are meeting the expectations of real users and solving a real-life problem rather than relying on speculation or imagination.
+At Plexosoft, our commitment to user-centric solutions has always been unwavering. As we embark on our next project, we have embraced a design thinking approach, ensuring that every decision made aligns with the genuine needs and aspirations of our users. This document presents an outline of our strategy, guiding us from understanding our users' nuances to ideating actionable solutions. Let's embark on this journey together, ensuring that innovation is always paired with empathy and utility.
 
 ## Index
 1. [Idea Outline](idea-outline/idea_outline.md)
