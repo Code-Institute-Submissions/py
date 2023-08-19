@@ -33,6 +33,26 @@
 10. **Do you have any suggestions for the founder to improve this initiative?**  
    I'd recommend ample patience and thorough market research. Instead of creating another social media platform, the focus should be on differentiating oneself. Maintaining motivation is vital. Engaging users through both digital and physical interactions—where emotions and sensations are more pronounced (like IoT)—can be beneficial. Integrating the latest technologies, like AI, can further enhance the experience.
 
+## Key Insights from Orlando's Interview
+
+- Prioritizes improved UI/UX in software platforms.
+- Strongly values mobile application accessibility and the convenience of Google Play payments.
+- Desires clear distinctions between software ownership and licensing, especially when third-party services are involved.
+- Highly values convenience in services, including fingerprint authentication and minimal data re-entry.
+- Dislikes information-overloaded platforms.
+- Is open to the adoption of cutting-edge technologies like AI and Blockchain.
+- Does not see the need for new social media platforms but acknowledges potential improvements in current ones.
+- Emphasizes the importance of extended services, especially those enhancing security and privacy.
+- Considers protection of digital identity crucial.
+- Encounters challenges with marketing, stakeholder engagement, and capital acquisition.
+- Prioritizes feeling secure with a service that meets his needs intuitively.
+- Values streamlined processes and clear software descriptions.
+- Favors platforms offering a blend of digital and physical interactions for a richer user experience.
+- Prefers dedicated platforms, like blogs or forums, for updates and desires ease of use in engagement platforms.
+- Advocates for differentiating services rather than emulating existing platforms.
+- Recognizes the potential of integrating advanced technologies with traditional methods for enhanced user engagement.
+- Emphasizes the importance of thorough market research, patience, and keep in mind the continuous user's motivation in business endeavors.
+
 ## Persona 2: Anna
 - **Age:** 24 
 - **Location:** Ukraine
