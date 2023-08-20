@@ -71,7 +71,9 @@
 29. touch env.py
 os.environ["DATABASE_URL"] = "<copiedURL>"
 os.environ["SECRET_KEY"]="my_super^secret@key"
-then in settings.py
+os.environ["IN_DEVELOPMENT"] = "True"
+
+then in settings.py:
 
 import os
 import dj_database_url
@@ -79,8 +81,16 @@ if os.path.isfile('env.py'):
     import env
 
 AND:
+IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
+DEBUG = IN_DEVELOPMENT
 
-if production:
+if IN_DEVELOPMENT:
+    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu104.gitpod.io',]
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
+
+    
+if IN_DEVELOPMENT:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -91,4 +101,10 @@ else:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
-30. 
+30. Set up Heroku variables:
+DATABASE_URL
+PORT = 8000
+SECRET_KEY
+31. heroku config:set DISABLE_COLLECTSTATIC=1
+32. In heroku config vars add:
+HEROKU_HOSTNAME
