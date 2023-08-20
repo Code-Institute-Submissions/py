@@ -1,4 +1,4 @@
-# Setup & Deployment
+## Setup & Deployment
 
 **1. Initial Setup:**
 
