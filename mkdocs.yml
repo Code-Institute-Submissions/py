@@ -25,11 +25,17 @@ nav:
           - Diagram: erd/diagram/diagram.md
           - Table Model: erd/table-model/table_model.md
           - Developer Experience: erd/dev-experience/dev_experience.md
-  - Development: m.md
-  - Features: t.md
-  - Tech: y.md
-  - Initialize: i.md
-  - Snack: s.md
+  - Development:
+      - Agile Development: agile-development/agile_development.md
+  - Features:
+      - Actual Features: actual-features/actual_features.md
+      - Future Features: future-features/future_features.md
+  - Tech:
+      - Technologies Used: tech-used/tech_used.md
+  - Initialize:
+      - Workspace Set Up & Deployment Process: setup-and-deployment/setup_and_deployment.md
+  - Snack:
+      - Developer's Snack: developer-snack/developer_snack.md
   - About: mkdocs_deploy.md
 
 # THEME
