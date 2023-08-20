@@ -17,7 +17,7 @@
 13. python3 manage.py createsuperuser
 14. git status
 15. git remote -v
-16. pip show django | grep Version
+16. pip show django | grep Version OR ls ../.pip-modules/lib
 17. pip3 install django-allauth==0.54.0
 18. Allauth settings:
     AUTHENTICATION_BACKENDS = [
@@ -48,5 +48,6 @@
         'allauth.account',
         'allauth.socialaccount',
     ]
-
-
+19. mkdir templates
+20. mkdir templates/allauth
+21. cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/ 
