@@ -46,7 +46,7 @@ View full documentation at:
 Deployed project and login credentials found below.
 
 ### Access
-[![Deployed Project](https://img.shields.io/badge/View-Deployed_Project-blue)](https://musa-voting-077e0d53fa15.herokuapp.com/) 
+[![Deployed Project](https://img.shields.io/badge/View-Deployed_Project-blue)](https://plexosoft-2714f270803c.herokuapp.com/) 
 
 ### Credentials
 #### Buyer
