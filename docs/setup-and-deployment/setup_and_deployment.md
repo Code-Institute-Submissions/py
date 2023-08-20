@@ -51,3 +51,6 @@
 19. mkdir templates
 20. mkdir templates/allauth
 21. cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/ 
+22. mkdir static
+23. mkdir media
+24. mkdir static/css
