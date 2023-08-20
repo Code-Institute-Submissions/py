@@ -26,5 +26,8 @@
    "editor.defaultFormatter": "HookyQR.beautify",
    "[yaml]": {
       "editor.defaultFormatter": "redhat.vscode-yaml"
+   },
+   "[python]": {
+      "editor.defaultFormatter": "ms-python.python"
    }
 }
