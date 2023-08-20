@@ -108,3 +108,6 @@ SECRET_KEY
 31. heroku config:set DISABLE_COLLECTSTATIC=1
 32. In heroku config vars add:
 HEROKU_HOSTNAME
+33. Create 'Procfile' file:
+web: gunicorn django_plexosoft.wsgi:application
+34. Deploy to heroku
