@@ -7,8 +7,10 @@
     Add:
     *.sqllite3
     *.pyc
-6. pip3 install cloudinary
-7. pip3 install django-cloudinary-storage
+6. pip3 install cloudinary (not necessary)
+7. pip3 install django-cloudinary-storage (not necessary)
+- pip3 uninstall cloudinary
+- pip3 uninstall django-cloudinary-storage
 8. pip3 install dj_database_url
 9. pip3 freeze requirements.txt OR pip3 freeze > requirements.txt
 10. python3 manage.py makemigrations --dry-run
@@ -54,3 +56,39 @@
 22. mkdir static
 23. mkdir media
 24. mkdir static/css
+    On settings.py:
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+    MEDIA_URL = '/media/'
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+25. curl https://cli-assets.heroku.com/install.sh | sh
+26. heroku login -i
+27. heroku create plexosoft
+28. create db on ElephantSQL
+29. touch env.py
+os.environ["DATABASE_URL"] = "<copiedURL>"
+os.environ["SECRET_KEY"]="my_super^secret@key"
+then in settings.py
+
+import os
+import dj_database_url
+if os.path.isfile('env.py'):
+    import env
+
+AND:
+
+if production:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+30. 
