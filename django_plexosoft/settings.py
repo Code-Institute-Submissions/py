@@ -30,7 +30,10 @@ IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = IN_DEVELOPMENT
 
-ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu104.gitpod.io']
+if IN_DEVELOPMENT:
+    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu104.gitpod.io',]
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
 
 # Application definition
 
