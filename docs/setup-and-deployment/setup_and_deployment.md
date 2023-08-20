@@ -1,113 +1,243 @@
-1. pip3 install 'django<4' gunicorn psycopg2
-2. pip3 freeze requirements.txt OR pip3 freeze > requirements.txt
-3. django-admin startproject djangopost .
-4. python3 manage.py startapp blog
-    add to settings.py INSTALLED_APPS
-5. touch .gitignore
-    Add:
-    *.sqllite3
-    *.pyc
-6. pip3 install cloudinary (not necessary)
-7. pip3 install django-cloudinary-storage (not necessary)
-- pip3 uninstall cloudinary
-- pip3 uninstall django-cloudinary-storage
-8. pip3 install dj_database_url
-9. pip3 freeze requirements.txt OR pip3 freeze > requirements.txt
-10. python3 manage.py makemigrations --dry-run
-11. python3 manage.py migrate --plan
-12. python3 manage.py migrate
-13. python3 manage.py createsuperuser
-14. git status
-15. git remote -v
-16. pip show django | grep Version OR ls ../.pip-modules/lib
-17. pip3 install django-allauth==0.54.0
-18. Allauth settings:
-    AUTHENTICATION_BACKENDS = [
-        # Needed to login by username in Django admin, regardless of `allauth`
-        'django.contrib.auth.backends.ModelBackend',
+# Setup & Deployment
 
-        # `allauth` specific authentication methods, such as login by e-mail
-        'allauth.account.auth_backends.AuthenticationBackend',
-    ]
+**1. Initial Setup:**
 
-    SITE_ID = 1  # for social media callback
+- Install necessary packages:
+  ```bash
+  pip3 install 'django<4' gunicorn psycopg2
+  ```
 
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+- Freeze and save your dependencies:
+  ```bash
+  pip3 freeze > requirements.txt
+  ```
 
-    ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-    ACCOUNT_EMAIL_REQUIRED = True
-    ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-    ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
-    ACCOUNT_USERNAME_MIN_LENGTH = 4
-    LOGIN_URL = '/account/login/'
-    LOGIN_REDIRECT_URL = '/'
+- Start your Django project and app:
+  ```bash
+  django-admin startproject djangopost .
+  python3 manage.py startapp blog
+  ```
 
-    `'django.template.context_processors.request',`
+  *Note: Remember to add your app to the `INSTALLED_APPS` list in `settings.py`.*
 
-        INSTALLED_APPS = [
-        'django.contrib.sites',
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-    ]
-19. mkdir templates
-20. mkdir templates/allauth
-21. cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/ 
-22. mkdir static
-23. mkdir media
-24. mkdir static/css
-    On settings.py:
-    STATIC_URL = '/static/'
+**2. Version Control with Git:**
 
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+- Create a `.gitignore` file:
+  ```bash
+  touch .gitignore
+  ```
 
-    MEDIA_URL = '/media/'
+  Then add the following lines to `.gitignore`:
+  ```
+  *.sqllite3
+  *.pyc
+  ```
 
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-25. curl https://cli-assets.heroku.com/install.sh | sh
-26. heroku login -i
-27. heroku create plexosoft
-28. create db on ElephantSQL
-29. touch env.py
-os.environ["DATABASE_URL"] = "<copiedURL>"
-os.environ["SECRET_KEY"]="my_super^secret@key"
-os.environ["IN_DEVELOPMENT"] = "True"
+  Check the status and remote with:
+  ```bash
+  git status
+  git remote -v
+  ```
 
-then in settings.py:
+**3. Image Hosting with Cloudinary (Optional):**
 
-import os
-import dj_database_url
-if os.path.isfile('env.py'):
-    import env
+- Install packages:
+  ```bash
+  pip3 install cloudinary django-cloudinary-storage
+  ```
 
-AND:
-IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
-DEBUG = IN_DEVELOPMENT
+  *If not needed, you can uninstall them with:*
+  ```bash
+  pip3 uninstall cloudinary django-cloudinary-storage
+  ```
 
-if IN_DEVELOPMENT:
-    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu104.gitpod.io',]
-else:
-    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
+**4. Database Configuration:**
 
-    
-if IN_DEVELOPMENT:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
-30. Set up Heroku variables:
-DATABASE_URL
-PORT = 8000
-SECRET_KEY
-31. heroku config:set DISABLE_COLLECTSTATIC=1
-32. In heroku config vars add:
-HEROKU_HOSTNAME
-33. Create 'Procfile' file:
-web: gunicorn django_plexosoft.wsgi:application
-34. Deploy to heroku
+- Install additional packages:
+  ```bash
+  pip3 install dj_database_url
+  ```
+
+  *Note: Remember to freeze your updated requirements.*
+  ```bash
+  pip3 freeze > requirements.txt
+  ```
+
+- Make database migrations:
+  ```bash
+  python3 manage.py makemigrations --dry-run
+  python3 manage.py migrate --plan
+  python3 manage.py migrate
+  ```
+
+- Create super user:
+  ```bash
+  python3 manage.py createsuperuser
+  ```
+
+**5. Authentication with Allauth:**
+
+- Install the package:
+  ```bash
+  pip3 install django-allauth==0.54.0
+  ```
+
+  Add configurations to `settings.py`:
+  ```python
+  # Add this to your INSTALLED_APPS:
+  'django.contrib.sites',
+  'allauth',
+  'allauth.account',
+  'allauth.socialaccount',
+
+  # Add these settings:
+  AUTHENTICATION_BACKENDS = [ ... ]
+  SITE_ID = 1
+  EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+  # ... (and so on for the other allauth settings)
+  ```
+
+  Create templates:
+  ```bash
+  mkdir templates
+  mkdir templates/allauth
+  cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/ 
+  ```
+
+**6. Static and Media Configuration:**
+
+  ```bash
+  mkdir static media static/css
+  ```
+
+  Update `settings.py` with:
+  ```python
+  STATIC_URL = '/static/'
+  STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+  MEDIA_URL = '/media/'
+  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+  ```
+
+**7. Deploying with Heroku:**
+
+- Install Heroku CLI:
+  ```bash
+  curl https://cli-assets.heroku.com/install.sh | sh
+  ```
+
+- Login and create app:
+  ```bash
+  heroku login -i
+  heroku create plexosoft
+  ```
+
+- Setup environment:
+  ```bash
+  touch env.py
+  ```
+
+  Add the following in `env.py`:
+  ```python
+  os.environ["DATABASE_URL"] = "<copiedURL>"
+  os.environ["SECRET_KEY"]="my_super^secret@key"
+  os.environ["IN_DEVELOPMENT"] = "True"
+  ```
+
+  Update `settings.py` with provided configurations.
+
+- Set up Heroku variables:
+  ```bash
+  heroku config:set DISABLE_COLLECTSTATIC=1
+  ```
+
+- Create a `Procfile`:
+  ```bash
+  echo "web: gunicorn django_plexosoft.wsgi:application" > Procfile
+  ```
+
+- Finally, deploy to Heroku!
+
+## Simplified Version
+
+1. `pip3 install 'django<4' gunicorn psycopg2`
+
+2. `pip3 freeze > requirements.txt`
+
+3. `django-admin startproject djangopost .`
+
+4. `python3 manage.py startapp blog`  
+   (Add to `settings.py` under `INSTALLED_APPS`)
+
+5. `touch .gitignore`  
+   Add:  
+   ```
+   *.sqllite3
+   *.pyc
+   ```
+
+6. Optional: `pip3 install cloudinary`
+
+7. Optional: `pip3 install django-cloudinary-storage`
+
+8. Optional: 
+   ```
+   pip3 uninstall cloudinary
+   pip3 uninstall django-cloudinary-storage
+   ```
+
+9. `pip3 install dj_database_url`
+
+10. `pip3 freeze > requirements.txt`
+
+11. `python3 manage.py makemigrations --dry-run`
+
+12. `python3 manage.py migrate --plan`
+
+13. `python3 manage.py migrate`
+
+14. `python3 manage.py createsuperuser`
+
+15. `git status`
+
+16. `git remote -v`
+
+17. Check Django version: `pip show django | grep Version OR ls ../.pip-modules/lib`
+
+18. `pip3 install django-allauth==0.54.0`  
+   (Add the provided settings to `settings.py`)
+
+19. `mkdir templates`
+
+20. `mkdir templates/allauth`
+
+21. `cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/`
+
+22. `mkdir static`
+
+23. `mkdir media`
+
+24. `mkdir static/css`  
+   (Update `settings.py` with provided settings)
+
+25. `curl https://cli-assets.heroku.com/install.sh | sh`
+
+26. `heroku login -i`
+
+27. `heroku create plexosoft`
+
+28. Create a database on ElephantSQL.
+
+29. Create `env.py` and add the given environment variables. Update `settings.py` with the provided configurations.
+
+30. Set up Heroku with the required environment variables.
+
+31. `heroku config:set DISABLE_COLLECTSTATIC=1`
+
+32. Add `HEROKU_HOSTNAME` to Heroku's config vars.
+
+33. Create a `Procfile` for Heroku:
+    ```
+    echo "web: gunicorn django_plexosoft.wsgi:application" > Procfile
+    ```
+
+34. Deploy your project to Heroku.
