@@ -1,22 +1,83 @@
-## Set up Django Admin
+## Set Up Django Admin with Summernote
 
-Make sure you have some models installed, if not test later.
+Ensure you have some models in your project. If you don't, you can test these steps later.
 
-1. pip3 install django-summernote
-use `pip3 freeze > requirements.txt `after installation
-2. Add 'django_summernote' to the settings.py 'INSTALLED_APPS'
-3. Add on main project's urls: 
-    path('summernote/'), include('django_summernote.urls'),
-4. Add on admin.py:
+### Step 1: Installation
+```bash
+pip3 install django-summernote
+pip3 freeze > requirements.txt
+```
+This will install django-summernote and then update your project's requirements.txt file.
+
+### Step 2: Update Django Settings
+Add `'django_summernote'` to the `INSTALLED_APPS` list in `settings.py`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'django_summernote',
+    ...
+]
+```
+
+### Step 3: Configure URLs
+In your main project's `urls.py`, include the django_summernote URLs:
+
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    ...
+    path('summernote/', include('django_summernote.urls')),
+    ...
+]
+```
+
+### Step 4: Update Admin Configuration
+In your `admin.py`, integrate the Summernote editor for the desired model. For this example, we're using the `Post` model:
+
+```python
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Post
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
-    summernote_fields = ('content')
+    summernote_fields = ('content',)
+```
 
-instead of:
-from .models import.
+**Note:** You can remove any older registrations of the model that look like:
+```python
+from .models import Product
 admin.site.register(Product)
-5. Make migrations database was modified if not just run migrate:
-`python3 manage.py makemigrations`
-`python3 manage.py migrate`
+```
+OR 
+```python
+admin.site.register(Product, ProductAdmin)
+```
+
+### Step 5: Database Migrations
+If you've made changes to your models, you need to update the database schema. Run:
+
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+### Step 6: Enhance Admin Features
+Enhance your admin view with additional features for better usability:
+
+```python
+from django_summernote.admin import SummernoteModelAdmin
+from .models import Post
+
+@admin.register(Post)
+class PostAdmin(SummernoteModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+    list_filter = ('status', 'created_on')
+    search_fields = ['title', 'content']
+    list_display = ('title', 'slug', 'status', 'created_on')
+    summernote_fields = ('content')
+    ordering = ('-created_on',)
+```
+
+With these steps, you'll have Summernote integrated into your Django Admin for the `Post` model, and you've enhanced the admin features for better usability.

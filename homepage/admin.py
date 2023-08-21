@@ -10,3 +10,5 @@ from django_summernote.admin import SummernoteModelAdmin
 #     search_fields = ['title', 'content']
 #     list_display = ('title', 'slug', 'status', 'created_on')
 #     summernote_fields = ('content')
+
+#     ordering = ('-created_on',)
