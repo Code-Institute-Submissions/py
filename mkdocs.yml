@@ -37,7 +37,9 @@ nav:
   - Snack:
       - Developer's Snack: developer-snack/developer_snack.md
       - Make Documentation: developer-snack/mkdoc/mkdoc.md
-  - About: mkdocs_deploy.md
+  - About:
+      - About: about.md
+      - License: LICENSE.md
 
 # THEME
 theme:

@@ -1,4 +1,4 @@
-## Setup & Deployment
+## Extended Version
 
 **1. Initial Setup:**
 
