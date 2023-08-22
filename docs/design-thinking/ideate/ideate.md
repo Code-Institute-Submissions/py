@@ -1,49 +1,109 @@
 # Ideate
 
 ## Let’s go green
+- In the first iteration, our approach will be a B2C e-commerce, starting with one-time payment methods.
 
-1. **Transparency:** Event creators must be verified - a badge of verification is essential. In addition, they need to offer an open and transparent profile on the app. Official support could play a role in ensuring this. We should also provide a specific page for system status updates.
-2. **Presentation:** The use of Materialize can enhance the display, layout, description, and metadata of candidates, thereby providing comprehensive information to voters. Considerations for color contrast, auditory feedback, and appropriate user response should also be made.
-3. **Device Compatibility:** The advantage of using a website is that it is accessible by default on various devices. Implementing PWA functionality could further enhance this.
-4. **Low Data Consumption:** Image compression when uploading from the user’s side is crucial to reduce data usage. As administrators, we should also implement this. We should aim to reduce the amount of data loaded by utilizing proper caching and DNS infrastructure, like Cloudflare.
-5. **Motivation for Participation:** The faster users can access important data, the less likely they are to give up midway. Progress bars, colors, shapes, interactivity, news, and key information are critical. Show users through keywords and phrases that they are about to change the world. Consider accumulating exchangeable points for participating (optional).
-6. **Reduce External Influences:** The presented information should not be persuasive; it cannot unintentionally favor a particular candidate or decision. Displaying how many people have voted compared to the expected turnout, and presenting this as a progress bar, might be effective. Comments and reactions should not compromise the event.
-7. **KYC (Know Your Customer):** Both voters and creators should verify their accounts. The backend system should be robust enough to prevent duplicates or deceased individuals from voting. We could also rely on a third-party system for this.
-8. **Security:** Prioritize user security with measures such as two-factor authentication, Google verification, SMS, email verification, security questions, and extra codes for actions. The backend should incorporate security measures like SiteLock. Connect the database to the blockchain, submitting only relevant data, to protect user privacy. Ensure both databases always match.
-9. **Anonymity:** Users should have the option to display only one name or remain completely anonymous.
-10. **Assistance System:** Incorporate FAQs and videos. Company staff or a third-party organization could provide online assistance.
-11. **Legality:** Obtain necessary authorization before running legal events. Special verification for the user and the event should be in place. Follow imposed regulations.
-12. **Paper-based and Electronic Options:** We might need to expand as a company to handle this ourselves. Initially, we could rely on a third-party, while also improving our systems.
-13. **Blockchain:** Blockchain could utilize an oracle blockchain (Chainlink), its own smart contract for automation, and centralized systems combined. Consider including MetaMask real login method for the next iteration.
-14. **Inclusivity:** Pay attention to accessibility. Include a library for reading aloud the event or recommend apps, choose the right font size and style. Always display an assistance button. An AI chatbot could help resolve questions.
-15. **Internet Connection:** Use our own or a third-party service to display nearby Internet Connectivity, or if the event offers internet connection using Starlink to provide the data. Offer different working methods of our own or others.
-16. **Transportation System:** Same as the last one. Include it in the voting card.
-17. **Fast System:** Use the best technology, servers, and clean code that runs the system. Pass all different performance tests.
+- **Software Design**: 
+    - Utilize colors that represent the project's intentions, philosophy, and skills:
+        - #3498db: Calmness and Serenity, Trustworthiness, Strength and Stability, Technology and Modernity, Depth and Wisdom, Communication.
+        - #ecf0f1: Neutrality and Balance, Cleanliness and Modernity, Sophistication, Calmness, Versatility, Background or Secondary.
+    - As the project grows, introduce relevant physical devices to foster a deeper connection and enhance interactivity.
+    - Ensure the homepage is neat with ample spacing, prioritizing the most relevant products.
+    - Implement Bootstrap to structure product cards, ensuring consistency throughout.
+    - Clearly label products based on software type: ownership or licensing.
+    - Add a note to each product highlighting its customization possibilities, whether self-driven or through our extended services.
+    - On the homepage, display key product metrics like current sales, review counts, and comment counts.
+    - Structure the homepage layout with rows dedicated to mixed products, and separate ones for Licensing and Ownership.
+    - Incorporate a search bar in or below the header for easier user searches.
+    - The menu should feature a dropdown for product categories.
+    - Include a direct link to the service's proprietary social media platform within the menu.
+    - Add a "Request" button in the menu, streamlining user project requests or inquiries.
+    - Incorporate a Support section in the menu, with dropdown options for a contact form or FAQ section.
+    - The footer should encompass an about section, useful links, and social media icons.
+    - Prioritize concise software descriptions over exhaustive feature listings.
+    - Engagement, keywords, colors, shapes, interactivity (they are about to change the world): Lottie files, illustrations.
+
+- **Transparency Advocate**:
+    - Emphasize the distinction between software ownership and licensing across the homepage, menu, product sections, and user dashboard.
+    - Launch a dedicated section on the differences between software ownership and licensing.
+    - Address how privacy & security are maintained.
+    - Feature our plans to bolster small businesses and innovative ideas.
+    - Enable review and comment features for products and services.
+    - Detail third-party technologies used, leveraging product documentation.
+    - Educate users about their product’s components, operations, and expectations.
+    - Implement email verification and offer social media login options.
+
+- **Financial gateways**:
+    - Uphold financial inclusivity by supporting payment methods such as Visa, Mastercard, manual payments, Western Union, and cryptocurrencies.
+
+- **Community Building**:
+    - Introduce a proprietary social media account for the project, facilitating interactions beyond mere entertainment.
+    - In the second phase, integrate a third-party software for social media platform creation under a licensing model.
+    - Incorporate a newsletter system for marketing and enhanced user engagement.
+
+- **Guardian of Trust**:
+    - Adopt algorithms ensuring transparent and ethical data handling while safeguarding user privacy.
+    - Execute thorough testing and integrate features ensuring utmost security, including the incorporation of Blockchain and IPFS.
+
+- **Challenge-ready**:
+    - Continuously gather insightful data beneficial in the long run: tracking user clicks, page visits, best-selling products, etc.
+    - Persistently engage in market research to stay updated with industry shifts.
+    - Regularly refine our marketing, SEO strategies, design thinking, and agile development methodologies.
+
+- **Affordability & Community**:
+    - Champion initiatives supporting promising yet underfunded ideas, through free developments or fairly-priced productions.
+    - Promote community competitions and challenges.
+    - Organize activities promising tangible results for end-users, doubling as opportunities to gather testimonials and bolster reputation.
+    - Endeavor to provide the most competitive prices and discounts, ensuring our sustainability.
+    - Offer services assisting users in collating their ideas: design thinking, user-centric design, database modeling, and marketing and market research strategies.
+
+- **Support is queen**:
+    - Strive for clear and effective communication, possibly leveraging tools like GPT or Bard for assistance. Prioritize robust support systems.
+    - Regularly update users about software and organizational developments.
+    - Cultivate a dedicated team to address daily queries, contribute to development, and understand the value of delegation.
+    - Streamline the contact form with categorized issue listings for efficient backend processing.
+    - Utilize our proprietary social media platform, along with traditional platforms, for updates, advertisements, and event announcements.
+    - Propose a structured format for users submitting ideas, bug fixes, or service requests.
+    - Introduce an academy section educating users about the technologies we employ, especially when rolling out advanced or novel concepts.
+    - Organize workshops, tutorials, and offer bundled deals, enhancing platform offerings and user experience.
+    - Develop an RSS feed showcasing high-quality articles on cutting-edge technology trends.
+
+- **Extended services**:
+    - Ensure capabilities to address bug fixes, hosting & domain setups, DNS, SEO, Google services, API integrations, customizations, and more.
+    - Offer design thinking, user-centric planning, and marketing along with SEO as distinct services.
+
+- **User & Admin Dashboard**:
+    - Incorporate a comprehensive User Profile, gathering essential data. User roles and admin roles will influence the dashboard's appearance.
+    - After payment completion, users should be able to immediately download their purchased product and access it from their dashboard, along with pertinent license or service details.
+    - In subsequent iterations, consider implementing a ticketing support system to enhance issue resolution.
+    - The user's dashboard should feature sections like: settings, my products, my services, my reviews, and comments.
+    - The admin dashboard should encompass: site general settings, product & service creation tools, listings of published products & services, product & service CRUD (Create, Read, Update, Delete) functionalities, an SEO section, and more.
+
+- **Technologies to Employ**:
+    - Utilize Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, among others.
+    - Image compression, lazy loading, caching, DNS, Cloudflare.
 
 ## Let’s go red
 
 **Must-haves:**
-- **Front-end:** Verification badge, Comprehensive User Profile, System Status Page, Materialize, JQuery, continuous user feedback, vote counting and progress bar (no persuasive data) on homepage, FAQs, video tutorials, contact form, accessibility, user dashboard (Event creation, CRUD where needed), Sign up/in.
-- **Back-end:** Image compression, lazy loading, caching, DNS, Cloudflare, KYC, Anonymity option, clean code and tests, admin dashboard (CRUD).
-- **Databases:** Database model, user and admin roles.
-- **Culture:** Engagement, keywords, colors, progress bars, shapes, interactivity (they are about to change the world): Lottie files, illustrations.
+- **Front-end:** 
+- **Back-end:** 
+- **Databases:**
+- **Culture:** 
 
-**Considerations:** PWA, two-factor authentication, Email Verification, Internet and transportation map.
+**Considerations:**
 
 **Must-have prototype:** Proof-of-concept, Database model.
 
 **Next steps:** Proof-of-concept, Database model.
 
-**Questions:** Template examples and video learning about databases models? RDBMS.
+**Questions:**
 
-**Session name:** Musa Attack.
+**Session name:**
 
 **Reminder:** Always refer back to these documents for more detailed explanations.
 
 **Notes:**
-- This decision was made based on the two-week timeframe for the MVP creation. Keep document and more sessions for next iterations.
-- Yellow highlighting represents a large number of features in the current block.
-- Guerrilla Test not possible for this iteration.
 
 **Final word on this session:**
 We believe, using Darek Cabrera's measure of difficulty, that the product complexity can range from Complicated to Complex. As we can't control how users handle their variables, we need to consider:
