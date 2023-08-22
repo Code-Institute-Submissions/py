@@ -3,10 +3,10 @@
 ## Let’s go green
 - In the first iteration, our approach will be a B2C e-commerce, starting with one-time payment methods.
 
-- **Software Design**: 
-    - Utilize colors that represent the project's intentions, philosophy, and skills:
-        - #3498db: Calmness and Serenity, Trustworthiness, Strength and Stability, Technology and Modernity, Depth and Wisdom, Communication.
-        - #ecf0f1: Neutrality and Balance, Cleanliness and Modernity, Sophistication, Calmness, Versatility, Background or Secondary.
+### Software Design: 
+    - Utilize colors that represent the project's intentions, philosophy, and skills.
+    - #3498db: Calmness and Serenity, Trustworthiness, Strength and Stability, Technology and Modernity, Depth and Wisdom, Communication.
+    - #ecf0f1: Neutrality and Balance, Cleanliness and Modernity, Sophistication, Calmness, Versatility, Background or Secondary.
     - As the project grows, introduce relevant physical devices to foster a deeper connection and enhance interactivity.
     - Ensure the homepage is neat with ample spacing, prioritizing the most relevant products.
     - Implement Bootstrap to structure product cards, ensuring consistency throughout.
@@ -23,7 +23,7 @@
     - Prioritize concise software descriptions over exhaustive feature listings.
     - Engagement, keywords, colors, shapes, interactivity (they are about to change the world): Lottie files, illustrations.
 
-- **Transparency Advocate**:
+### Transparency Advocate:
     - Emphasize the distinction between software ownership and licensing across the homepage, menu, product sections, and user dashboard.
     - Launch a dedicated section on the differences between software ownership and licensing.
     - Address how privacy & security are maintained.
@@ -33,31 +33,31 @@
     - Educate users about their product’s components, operations, and expectations.
     - Implement email verification and offer social media login options.
 
-- **Financial gateways**:
+### Financial gateways:
     - Uphold financial inclusivity by supporting payment methods such as Visa, Mastercard, manual payments, Western Union, and cryptocurrencies.
 
-- **Community Building**:
+### Community Building:
     - Introduce a proprietary social media account for the project, facilitating interactions beyond mere entertainment.
     - In the second phase, integrate a third-party software for social media platform creation under a licensing model.
     - Incorporate a newsletter system for marketing and enhanced user engagement.
 
-- **Guardian of Trust**:
+### Guardian of Trust:
     - Adopt algorithms ensuring transparent and ethical data handling while safeguarding user privacy.
     - Execute thorough testing and integrate features ensuring utmost security, including the incorporation of Blockchain and IPFS.
 
-- **Challenge-ready**:
+### Challenge-ready:
     - Continuously gather insightful data beneficial in the long run: tracking user clicks, page visits, best-selling products, etc.
     - Persistently engage in market research to stay updated with industry shifts.
     - Regularly refine our marketing, SEO strategies, design thinking, and agile development methodologies.
 
-- **Affordability & Community**:
+### Affordability & Community:
     - Champion initiatives supporting promising yet underfunded ideas, through free developments or fairly-priced productions.
     - Promote community competitions and challenges.
     - Organize activities promising tangible results for end-users, doubling as opportunities to gather testimonials and bolster reputation.
     - Endeavor to provide the most competitive prices and discounts, ensuring our sustainability.
     - Offer services assisting users in collating their ideas: design thinking, user-centric design, database modeling, and marketing and market research strategies.
 
-- **Support is queen**:
+### Support is queen:
     - Strive for clear and effective communication, possibly leveraging tools like GPT or Bard for assistance. Prioritize robust support systems.
     - Regularly update users about software and organizational developments.
     - Cultivate a dedicated team to address daily queries, contribute to development, and understand the value of delegation.
@@ -68,30 +68,35 @@
     - Organize workshops, tutorials, and offer bundled deals, enhancing platform offerings and user experience.
     - Develop an RSS feed showcasing high-quality articles on cutting-edge technology trends.
 
-- **Extended services**:
+### Extended services:
     - Ensure capabilities to address bug fixes, hosting & domain setups, DNS, SEO, Google services, API integrations, customizations, and more.
     - Offer design thinking, user-centric planning, and marketing along with SEO as distinct services.
 
-- **User & Admin Dashboard**:
+### User & Admin Dashboard:
     - Incorporate a comprehensive User Profile, gathering essential data. User roles and admin roles will influence the dashboard's appearance.
     - After payment completion, users should be able to immediately download their purchased product and access it from their dashboard, along with pertinent license or service details.
     - In subsequent iterations, consider implementing a ticketing support system to enhance issue resolution.
     - The user's dashboard should feature sections like: settings, my products, my services, my reviews, and comments.
     - The admin dashboard should encompass: site general settings, product & service creation tools, listings of published products & services, product & service CRUD (Create, Read, Update, Delete) functionalities, an SEO section, and more.
 
-- **Technologies to Employ**:
+### Technologies to Employ:
     - Utilize Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, among others.
     - Image compression, lazy loading, caching, DNS, Cloudflare.
 
 ## Let’s go red
+- Not all may be applied in the first MVP iteration.
 
-**Must-haves:**
+### Must-haves
+
 - **Front-end:** 
+
 - **Back-end:** 
+
 - **Databases:**
+
 - **Culture:** 
 
-**Considerations:**
+### Considerations
 
 **Must-have prototype:** Proof-of-concept, Database model.
 
@@ -105,7 +110,7 @@
 
 **Notes:**
 
-**Final word on this session:**
+### Final word on this session
 We believe, using Darek Cabrera's measure of difficulty, that the product complexity can range from Complicated to Complex. As we can't control how users handle their variables, we need to consider:
 
 1. **Option to make it worldwide or local:** The product should offer flexibility to cater both global and local needs, providing features that can be customized or adapted based on specific cultural contexts.
