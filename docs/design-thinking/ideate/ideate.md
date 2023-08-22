@@ -5,8 +5,8 @@
 
 ### Software Design
 - Utilize colors that represent the project's intentions, philosophy, and skills.
-- #3498db: Calmness and Serenity, Trustworthiness, Strength and Stability, Technology and Modernity, Depth and Wisdom, Communication.
-- #ecf0f1: Neutrality and Balance, Cleanliness and Modernity, Sophistication, Calmness, Versatility, Background or Secondary.
+- `#3498db`: Calmness and Serenity, Trustworthiness, Strength and Stability, Technology and Modernity, Depth and Wisdom, Communication.
+- `#ecf0f1`: Neutrality and Balance, Cleanliness and Modernity, Sophistication, Calmness, Versatility, Background or Secondary.
 - As the project grows, introduce relevant physical devices to foster a deeper connection and enhance interactivity.
 - Ensure the homepage is neat with ample spacing, prioritizing the most relevant products.
 - Implement Bootstrap to structure product cards, ensuring consistency throughout.
@@ -82,6 +82,9 @@
 ### Technologies to Employ
 - Utilize Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, among others.
 - Image compression, lazy loading, caching, DNS, Cloudflare.
+
+### Database
+- Product, Category, Abstract User, Transaction, Download, Review, Newsletter
 
 ## Let’s go red
 - Not all may be applied in the first MVP iteration.
