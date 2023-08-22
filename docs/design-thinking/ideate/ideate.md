@@ -35,6 +35,7 @@
 
 ### Financial gateways
 - Uphold financial inclusivity by supporting payment methods such as Visa, Mastercard, manual payments, Western Union, and cryptocurrencies.
+- Implement shopping cart.
 
 ### Community Building
 - Introduce a proprietary social media account for the project, facilitating interactions beyond mere entertainment.
@@ -91,10 +92,13 @@
 
 ### Must-haves
 
+- B2C e-commerce, starting with one-time payment methods.
+
 - **Front-end:** 
+`#3498db` & `#ecf0f1 (Colors)`, homepage spacing, cards for layout, rows for mixed products, and separate ones for Licensing and Ownership (bootstrap), label for products (ownership or licensing), product notes(customization possibilities, whether self-driven or through our extended service), display key product metrics (current sales, review counts, and comment counts), search bar, menu & dropdowns (Category, Service, Support, Request button), footer (about section, useful links, and social media icons), Product description (dedicated page), Engagement, keywords, colors, shapes, interactivity (they are about to change the world): Lottie files, illustrations, product shoping cart, review and commenting,
 
-- **Back-end:** 
-
+- **Back-end:**
+- Implement email verification and offer social media login options, stripe,
 - **Databases:**
 
 - **Culture:** 
@@ -110,6 +114,13 @@
 **Session name:**
 
 **Reminder:** Always refer back to these documents for more detailed explanations.
+- Emphasize the distinction between software ownership and licensing across the homepage, menu, product sections, and user dashboard.
+- Launch a dedicated section on the differences between software ownership and licensing.
+- Address how privacy & security are maintained.
+- Detail third-party technologies used, leveraging product documentation.
+- Educate users about their product’s components, operations, and expectations.
+- Implement email verification and offer social media login options.
+- Uphold financial inclusivity by supporting payment methods such as Visa, Mastercard, manual payments, Western Union, and cryptocurrencies.
 
 **Notes:**
 
