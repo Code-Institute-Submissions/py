@@ -93,7 +93,6 @@
 ### Must-haves
 
 - **Front-end:** 
-  - B2C e-commerce with one-time payment methods.
   - Colors: `#3498db` & `#ecf0f1`.
   - Homepage spacing, Bootstrap for layout with cards for mixed and specific products (Licensing and Ownership).
   - Product labeling (ownership or licensing).
@@ -105,7 +104,7 @@
   - Engagement elements: Lottie files, illustrations, shopping cart, review and comment functionality, newsletter and RSS feed sections, contact form, request formats, download functionality, user dashboard (settings, products, services, reviews, comments), and admin dashboard.
 
 - **Back-end:** 
-  - Features: email verification, social media login options, Stripe for payment, newsletter system, tracking (user clicks, page visits).
+  - Features: email verification, social media login options, Stripe for payment, newsletter system, tracking (user clicks, page visits), B2C e-commerce with one-time payment methods.
   - Databases: Product, Category, Abstract User, Transaction, Download, Review, Newsletter.
   - Technologies: Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, etc.
 

@@ -1,43 +1,30 @@
-# 7. Conclusion
-The development team has finalized the must-have features for both the front-end and back-end of the voting system. These include:
+## Conclusion of the Design Thinking Session:
 
-**Front-End:**
-- Verification badge
-- Comprehensive User Profile
-- System Status Page
-- Materialize
-- JQuery
-- Continuous user feedback
-- Vote counting and progress bar (no persuasive data) on homepage
-- FAQs
-- Video tutorials
-- Contact form
-- Accessibility
-- User dashboard (Event creation, CRUD where needed)
-- Sign up/in
+**Empathize:**
+We started with understanding the target audience: global users who value clear distinctions between software ownership and licensing, transparency, financial inclusivity, and culturally relevant designs.
 
-**Back-End:**
-- Image compression
-- Lazy loading
-- Caching
-- DNS management
-- Cloudflare integration
-- KYC
-- Anonymity option
-- Clean code practices and tests
-- Admin dashboard (CRUD)
+**Define:**
+The core challenges identified included ensuring clarity between software ownership and licensing, maintaining user privacy and security, offering diverse payment options, and creating a design that resonates with users globally.
 
-The team will also design a database model for user and admin roles and highlights the importance of culture, engagement, and visual elements in shaping the user experience. This includes keywords, colors, progress bars, shapes, interactivity, Lottie files, and illustrations.
+**Ideate:**
+Our discussions led to a multitude of ideas for the front-end and back-end aspects of the product. We considered various elements from dynamic presentation tools like Lottie files to robust back-end solutions using Django and AWS.
 
-PWA features, two-factor authentication, email verification, and internet and transportation map integrations will be considered.
+**Prototype:**
+While a physical prototype hasn't been built in this session, a blueprint was proposed. This blueprint encompasses essential features, cultural considerations, potential tech stacks, and user engagement strategies. It's a foundation from which to develop an MVP and further refine the product based on user feedback.
 
-By using Darek Cabrera's measure of difficulty, the product can be considered to evolve from being Complicated to Complex due to its multiple functionalities. Important factors to consider are making the platform global or local based on user preferences, providing users with filtering options for content customization, and making the product more user-friendly and less bureaucratic. All of these considerations aim to provide a more inclusive and user-friendly experience. 
-Next Steps:
--	Start with proof-of-concept and database model
--	Consider using template examples and video learning resources for RDBMS
--	Progress with the proof-of-concept and database model for future development
-Session Reminder:
--	The session name "Musa Attack" serves as a reminder for future reference.
--	Return to the relevant documents for more details and explanations.
--	Due to a two-week timeframe for the MVP creation, some features will be deferred to future iterations. 
--	A guerrilla test is not possible for this iteration.
+**Test:**
+Future iterations of the product should involve user testing to validate design choices, functionality, and the overall user experience.
+
+### Key Takeaways:
+
+1. **User-Centricity:** The entire product blueprint revolves around user needs. From the design elements to the back-end functionalities, the focus has been on creating an intuitive, user-friendly experience.
+
+2. **Flexibility:** Recognizing that not all features may make it to the first MVP iteration, the plan allows for scalability and adaptability based on user feedback and technological advancements.
+
+3. **Global Outlook:** The emphasis on financial inclusivity, cultural relevance, and a broad payment methodology shows foresight in catering to a global audience.
+
+4. **Transparency and Education:** By dedicating sections to explain the differences between software ownership and licensing and ensuring clarity in data handling and third-party technologies, the product aims to build user trust and knowledge.
+
+5. **Holistic Approach:** The design thinking process was not limited to just technical or design aspects. It encompassed broader implications, including legal, cultural, and financial considerations.
+
+In conclusion, this Design Thinking session has paved the way for a product that promises a balanced fusion of functionality, aesthetics, user education, and inclusivity. The next steps would involve bringing this blueprint to life, starting with a proof-of-concept and iterative testing to ensure the final product aligns with user needs and expectations. The foundation is robust and informed; the journey ahead is one of refinement and execution.
