@@ -92,43 +92,45 @@
 
 ### Must-haves
 
-- B2C e-commerce, starting with one-time payment methods.
-
 - **Front-end:** 
-`#3498db` & `#ecf0f1 (Colors)`, homepage spacing, cards for layout, rows for mixed products, and separate ones for Licensing and Ownership (bootstrap), label for products (ownership or licensing), product notes(customization possibilities, whether self-driven or through our extended service), display key product metrics (current sales, review counts, and comment counts), search bar, menu & dropdowns (Category, Service, Support, Request button), footer (about section, useful links, and social media icons), Product description (dedicated page), Engagement, keywords, colors, shapes, interactivity (they are about to change the world): Lottie files, illustrations, product shoping cart, review and commenting,
+  - B2C e-commerce with one-time payment methods.
+  - Colors: `#3498db` & `#ecf0f1`.
+  - Homepage spacing, Bootstrap for layout with cards for mixed and specific products (Licensing and Ownership).
+  - Product labeling (ownership or licensing).
+  - Notes on products regarding customization options.
+  - Display key metrics: current sales, review counts, comment counts.
+  - Search bar, menu with dropdowns: Category, Service, Support, Request button.
+  - Footer details: about section, useful links, social media icons.
+  - Dedicated product description page.
+  - Engagement elements: Lottie files, illustrations, shopping cart, review and comment functionality, newsletter and RSS feed sections, contact form, request formats, download functionality, user dashboard (settings, products, services, reviews, comments), and admin dashboard.
 
-- **Back-end:**
-- Implement email verification and offer social media login options, stripe,
-- **Databases:**
+- **Back-end:** 
+  - Features: email verification, social media login options, Stripe for payment, newsletter system, tracking (user clicks, page visits).
+  - Databases: Product, Category, Abstract User, Transaction, Download, Review, Newsletter.
+  - Technologies: Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, etc.
 
-- **Culture:** 
+- **Culture:** Emphasizing ease of use, quality, affordability, robust support, clear communication, transparency, financial inclusion, and inclusivity of services.
 
 ### Considerations
 
-**Must-have prototype:** Proof-of-concept, Database model.
-
-**Next steps:** Proof-of-concept, Database model.
-
-**Questions:**
-
-**Session name:**
-
-**Reminder:** Always refer back to these documents for more detailed explanations.
-- Emphasize the distinction between software ownership and licensing across the homepage, menu, product sections, and user dashboard.
-- Launch a dedicated section on the differences between software ownership and licensing.
-- Address how privacy & security are maintained.
-- Detail third-party technologies used, leveraging product documentation.
-- Educate users about their product’s components, operations, and expectations.
-- Implement email verification and offer social media login options.
-- Uphold financial inclusivity by supporting payment methods such as Visa, Mastercard, manual payments, Western Union, and cryptocurrencies.
-
-**Notes:**
+- **Must-have prototype:** Proof-of-concept, Database model.
+- **Next steps:** Develop the proof-of-concept, refine the database model.
+- **Questions:** Which features will be included in our MVP's first iteration/release?
+- **Session name:** Internet Authority
+- **Reminder:** Revisit detailed documents for:
+  - Distinctions between software ownership and licensing.
+  - Privacy & security measures.
+  - Documentation of third-party technologies.
+  - User education on product components and operations.
+  - Financial inclusivity with diverse payment methods.
+  - Algorithms for data transparency, ethical handling, and privacy.
+  - Extended service capabilities and distinct offerings.
 
 ### Final word on this session
-We believe, using Darek Cabrera's measure of difficulty, that the product complexity can range from Complicated to Complex. As we can't control how users handle their variables, we need to consider:
+Using Darek Cabrera's measure of difficulty, our product complexity lies between Complicated and Complex. User variables can be unpredictable, thus:
 
-1. **Option to make it worldwide or local:** The product should offer flexibility to cater both global and local needs, providing features that can be customized or adapted based on specific cultural contexts.
-2. **Filtering options:** Implementing filtering options can allow users to tailor their experience according to their preferences and cultural sensitivities. This empowers users to control the content they engage with, ensuring a more personalized and relevant experience.
-3. **Making things look more familiar, approachable, and less bureaucratic:** To instill a sense of purpose and pride among users, it is vital to design the product in a way that resonates with their cultural values and aesthetics. This can be achieved by using familiar concepts, language, and design elements.
+1. **Financial Inclusion Matters:** To be globally accessible, especially in regions with internet connectivity.
+2. **Filtering options:** Allow users to tailor their experiences for a more personalized and relevant journey.
+3. **Cultural resonance:** The product should resonate with users' cultural values and aesthetics for a sense of purpose and pride.
 
-Finding solutions goes beyond coding and technical aspects. It requires understanding the underlying concepts, applying logical thinking, making good design decisions, and considering the cultural implications of those choices. By incorporating these elements, the product can better address the needs and preferences of its users, promoting a more inclusive and user-friendly experience.
+Addressing challenges extends beyond just the technical. Understanding underlying concepts, logical thinking, sound design decisions, and considering legal and cultural ramifications are crucial. By integrating these facets, the product can better cater to its users, fostering an inclusive and user-centric atmosphere.
