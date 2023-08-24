@@ -35,7 +35,7 @@ nav:
   - Initialize:
       - Set Up & Deployment: setup-and-deployment/setup_and_deployment.md
   - Snack:
-      - Developer's Snack: developer-snack/developer_snack.md
+      - Overview: developer-snack/developer_snack.md
       - Make Documentation: developer-snack/mkdoc/mkdoc.md
       - Developer Reminder: developer-snack/development_reminder.md
   - About:
