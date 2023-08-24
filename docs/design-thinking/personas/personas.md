@@ -33,25 +33,25 @@
 10. **Do you have any suggestions for the founder to improve this initiative?**  
    I'd recommend ample patience and thorough market research. Instead of creating another social media platform, the focus should be on differentiating oneself. Maintaining motivation is vital. Engaging users through both digital and physical interactions—where emotions and sensations are more pronounced (like IoT)—can be beneficial. Integrating the latest technologies, like AI, can further enhance the experience.
 
-## Key Insights from Orlando's Interview
+??? abstract "Key Insights from Orlando's Interview"
 
-- Prioritizes improved UI/UX in software platforms.
-- Strongly values mobile application accessibility and the convenience of Google Play payments.
-- Desires clear distinctions between software ownership and licensing, especially when third-party services are involved.
-- Highly values convenience in services, including fingerprint authentication and minimal data re-entry.
-- Dislikes information-overloaded platforms.
-- Is open to the adoption of cutting-edge technologies like AI and Blockchain.
-- Does not see the need for new social media platforms but acknowledges potential improvements in current ones.
-- Emphasizes the importance of extended services, especially those enhancing security and privacy.
-- Considers protection of digital identity crucial.
-- Encounters challenges with marketing, stakeholder engagement, and capital acquisition.
-- Prioritizes feeling secure with a service that meets his needs intuitively.
-- Values streamlined processes and clear software descriptions.
-- Favors platforms offering a blend of digital and physical interactions for a richer user experience.
-- Prefers dedicated platforms, like blogs or forums, for updates and desires ease of use in engagement platforms.
-- Advocates for differentiating services rather than emulating existing platforms.
-- Recognizes the potential of integrating advanced technologies with traditional methods for enhanced user engagement.
-- Emphasizes the importance of thorough market research, patience, and keep in mind the continuous user's motivation in business endeavors.
+      - Prioritizes improved UI/UX in software platforms.
+      - Strongly values mobile application accessibility and the convenience of Google Play payments.
+      - Desires clear distinctions between software ownership and licensing, especially when third-party services are involved.
+      - Highly values convenience in services, including fingerprint authentication and minimal data re-entry.
+      - Dislikes information-overloaded platforms.
+      - Is open to the adoption of cutting-edge technologies like AI and Blockchain.
+      - Does not see the need for new social media platforms but acknowledges potential improvements in current ones.
+      - Emphasizes the importance of extended services, especially those enhancing security and privacy.
+      - Considers protection of digital identity crucial.
+      - Encounters challenges with marketing, stakeholder engagement, and capital acquisition.
+      - Prioritizes feeling secure with a service that meets his needs intuitively.
+      - Values streamlined processes and clear software descriptions.
+      - Favors platforms offering a blend of digital and physical interactions for a richer user experience.
+      - Prefers dedicated platforms, like blogs or forums, for updates and desires ease of use in engagement platforms.
+      - Advocates for differentiating services rather than emulating existing platforms.
+      - Recognizes the potential of integrating advanced technologies with traditional methods for enhanced user engagement.
+      - Emphasizes the importance of thorough market research, patience, and keep in mind the continuous user's motivation in business endeavors.
 
 ## Persona 2: Anna
 - **Age:** 24 
@@ -88,26 +88,26 @@
 10. **Do you have any suggestions for the founder to improve this initiative?**  
    Consider supporting multiple languages, not just English. Help those with limited funds but innovative ideas by showing interest or organizing events that reward top concepts. If these concepts thrive, the company could also benefit. Employ experts proficient in various languages. It's also advisable to establish a robust legal foundation, possibly by engaging lawyers, contract managers, financial managers, and the like.
 
-## Key Insights from Anna's Interview
+??? abstract "Key Insights from Anna's Interview"
 
-- Values software tailored to her needs.
-- Seeks time-saving solutions that reduce stress.
-- Prioritizes understanding software ownership vs. licensing.
-- Places a high emphasis on transparency and clear delineation of rights.
-- Desires comprehensive software development to minimize reliance on third parties.
-- Considers prompt service delivery important.
-- Shows a keen interest in advanced tech like AI & Blockchain.
-- Is not currently prioritizing the creation of her own social media platform but remains open to it based on future needs.
-- Highly values extended services (bug fixes, feature enhancements, etc.).
-- Has trust concerns, especially when dealing with unknown entities.
-- Worries about communication barriers and misunderstandings in her requirements.
-- Is cautious about unforeseen expenses and sticking to a budget.
-- Influenced by factors like popularity, user reviews, design, and overall user experience when choosing a service.
-- Values staying updated through a service's social media platform.
-- Advocates for multilingual support.
-- Emphasizes supporting those with budgetary constraints but valuable ideas.
-- Recognizes the potential of rewarding innovative concepts.
-- Stresses the importance of having a solid legal foundation and diverse expertise in the company.
+      - Values software tailored to her needs.
+      - Seeks time-saving solutions that reduce stress.
+      - Prioritizes understanding software ownership vs. licensing.
+      - Places a high emphasis on transparency and clear delineation of rights.
+      - Desires comprehensive software development to minimize reliance on third parties.
+      - Considers prompt service delivery important.
+      - Shows a keen interest in advanced tech like AI & Blockchain.
+      - Is not currently prioritizing the creation of her own social media platform but remains open to it based on future needs.
+      - Highly values extended services (bug fixes, feature enhancements, etc.).
+      - Has trust concerns, especially when dealing with unknown entities.
+      - Worries about communication barriers and misunderstandings in her requirements.
+      - Is cautious about unforeseen expenses and sticking to a budget.
+      - Influenced by factors like popularity, user reviews, design, and overall user experience when choosing a service.
+      - Values staying updated through a service's social media platform.
+      - Advocates for multilingual support.
+      - Emphasizes supporting those with budgetary constraints but valuable ideas.
+      - Recognizes the potential of rewarding innovative concepts.
+      - Stresses the importance of having a solid legal foundation and diverse expertise in the company.
 
 ## Persona 3: Robinson
 - **Age:** 32
@@ -144,18 +144,18 @@
 10. **Do you have any suggestions for the founder to improve this initiative?**  
    Offering tutorials or workshops focusing on the needs of musicians could be beneficial. Additionally, partnering with music platforms or offering bundle deals with music distribution services would be enticing.
 
-## Key Insights from Robinson's Interview
+??? abstract "Key Insights from Robinson's Interview"
 
-- Robinson sees immense value in a one-stop solution tailored to his needs as a musician.
-- Clear differentiation between software ownership and licensing is crucial for trust-building.
-- He expects software that's user-friendly, responsive to musician-specific needs, and economically accessible.
-- Robinson is open to advanced tech services like AI & Blockchain if they benefit his music career.
-- A dedicated social media platform for direct fan engagement is highly appealing.
-- Extended services from the platform, especially technical ones, offer peace of mind and are valuable.
-- Technical challenges and cost are major hurdles for Robinson in adopting digital tools.
-- Recommendations from peers, affordability, and musician-specific features are primary motivators.
-- Robinson would appreciate a social platform that shares insights and success stories.
-- He suggests workshops, tutorials, and bundling deals with music platforms to further enhance the service.
+      - Robinson sees immense value in a one-stop solution tailored to his needs as a musician.
+      - Clear differentiation between software ownership and licensing is crucial for trust-building.
+      - He expects software that's user-friendly, responsive to musician-specific needs, and economically accessible.
+      - Robinson is open to advanced tech services like AI & Blockchain if they benefit his music career.
+      - A dedicated social media platform for direct fan engagement is highly appealing.
+      - Extended services from the platform, especially technical ones, offer peace of mind and are valuable.
+      - Technical challenges and cost are major hurdles for Robinson in adopting digital tools.
+      - Recommendations from peers, affordability, and musician-specific features are primary motivators.
+      - Robinson would appreciate a social platform that shares insights and success stories.
+      - He suggests workshops, tutorials, and bundling deals with music platforms to further enhance the service.
 
 ## Persona 4: Frank
 - **Age:** 28
@@ -202,15 +202,15 @@
 
    Effective communication is crucial. Users want to be heard and expect timely responses to their inquiries. They're seeking functional, secure and bug-free software and would appreciate this being highlighted in the documentation, especially for more professional endeavors. Regular updates indicating business growth and evolution are essential. Lastly, it would be reassuring to know that a dedicated team, rather than just an individual, supports the project.
 
-## Key Insights from Frank's Interview
+??? abstract "Key Insights from Frank's Interview"
 
-- Values ease of access to tailored software solutions.
-- Was previously unaware of the difference between software ownership and licensing, stressing the importance of clear communication.
-- Prioritizes high-quality user interfaces with clear navigation, transparency, and strong support.
-- Sees the value in integrating advanced technologies such as AI and Blockchain into projects.
-- Shows interest in a platform that can combine blog, forum, and social media features for managing a dedicated community.
-- Appreciates the option of purchasing extended services from a single platform for a streamlined, trustworthy experience.
-- Often faces challenges in design, planning, and organization due to a lack of understanding and knowledge gaps in marketing, design thinking, and SEO.
-- Motivated by genuine value for money and tangible results rather than just appearances.
-- Values community engagement and networking opportunities that a dedicated social media platform for the service would provide.
-- Emphasizes the importance of effective communication, bug-free software, consistent updates, and the reassurance of a dedicated team behind the service.
+      - Values ease of access to tailored software solutions.
+      - Was previously unaware of the difference between software ownership and licensing, stressing the importance of clear communication.
+      - Prioritizes high-quality user interfaces with clear navigation, transparency, and strong support.
+      - Sees the value in integrating advanced technologies such as AI and Blockchain into projects.
+      - Shows interest in a platform that can combine blog, forum, and social media features for managing a dedicated community.
+      - Appreciates the option of purchasing extended services from a single platform for a streamlined, trustworthy experience.
+      - Often faces challenges in design, planning, and organization due to a lack of understanding and knowledge gaps in marketing, design thinking, and SEO.
+      - Motivated by genuine value for money and tangible results rather than just appearances.
+      - Values community engagement and networking opportunities that a dedicated social media platform for the service would provide.
+      - Emphasizes the importance of effective communication, bug-free software, consistent updates, and the reassurance of a dedicated team behind the service.

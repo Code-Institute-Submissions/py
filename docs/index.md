@@ -1,8 +1,6 @@
 # Welcome to Plexosoft Documentation
-[![GitHub Repository](https://img.shields.io/badge/View-Repository_on_Github-blue)](https://github.com/plexoio/py) [![No License](https://img.shields.io/badge/License-No_License-red)](LICENSE.md) 
 
-> You cannot reproduce, distribute, or create derivative works from this project.
-
+[GitHub Repository](https://github.com/plexoio/py){ .md-button .md-button--primary }
 
 ## Index
 1. Design
@@ -24,11 +22,7 @@
 7. About
     - [Vendor](vendor/vendor.md)
 
----
+[![No License](https://img.shields.io/badge/License-No_License-red)](LICENSE.md) 
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+??? danger "No License"
+    You cannot reproduce, distribute, or create derivative works from this project.

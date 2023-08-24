@@ -66,7 +66,7 @@
   
 - **Blockchain Hub**: Feature a dedicated section for Blockchain products and services, with immediate payment options where applicable.
 
-### Feedback & Iteration: The Continuous Cycle of Improvement
+## Feedback & Iteration: The Continuous Cycle of Improvement
 
 - **User Testing**: Before any major roll-out, conduct user testing sessions to gain firsthand insights into the usability and desirability of our products and services.
 
