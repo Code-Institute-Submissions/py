@@ -1,4 +1,4 @@
-## Conclusion of the Design Thinking Session:
+## Conclusion of the Design Thinking Session
 
 **Empathize:**
 We started with understanding the target audience: global users who value clear distinctions between software ownership and licensing, transparency, financial inclusivity, and culturally relevant designs.
@@ -15,7 +15,7 @@ While a physical prototype hasn't been built in this session, a blueprint was pr
 **Test:**
 Future iterations of the product should involve user testing to validate design choices, functionality, and the overall user experience.
 
-### Key Takeaways:
+### Key Takeaways
 
 1. **User-Centricity:** The entire product blueprint revolves around user needs. From the design elements to the back-end functionalities, the focus has been on creating an intuitive, user-friendly experience.
 
