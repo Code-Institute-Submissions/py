@@ -43,9 +43,9 @@ nav:
       - Plexosoft Docs: about.md
       - License: LICENSE.md
 
-# PLUGINS
-plugins:
-  - glightbox
+# PLUGINS (bug present as not installed)
+# plugins:
+#   - glightbox
 
 # THEME
 theme:
