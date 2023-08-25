@@ -103,38 +103,56 @@ We should highlight that achieving most of the features described above doesn't 
 
 ## E-commerce App Blueprint
 
-1. **Target Audience** - Who:
+| # | Category                       | Details                                                                                             |
+|---|--------------------------------|-----------------------------------------------------------------------------------------------------|
+| 1 | **Target Audience - Who**      | - Primarily B2C (Business to Consumer) <br> - B2B (Business to Business) - Possible with further expansion and customization |
+| 2 | **Offerings - What**           | - Digital Products <br> - Services                                                                  |
+| 3 | **Payment Methods - How**      | - One-time Payment                                                                                  |
+| 4 | **Key Features & Information Display** | - Refer to the above section for details.                                                        |
+| 5 | **Essential Data Tables**      | - Product <br> - Category <br> - Abstract User <br> - Transaction <br> - Download <br> - Review <br> - Newsletter            |
 
-    - Primarily B2C (Business to Consumer)
-    - B2B (Business to Business) - Possible with further expansion and customization
-
-2. **Offerings** - What:
-
-    - Digital Products
-    - Services
-
-3. **Payment Methods** - How:
-
-    - One-time Payment
-
-4. **Key Features & Information Display**:
-
-    - Refer to the above section for details.
-
-5. **Essential Data Tables**:
-
-    - Product
-    - Category
-    - Abstract User
-    - Transaction
-    - Download
-    - Review
-    - Newsletter
 
 ## SEO Plan
 
-### Keywords Selection
-The right keywords for out application
+### STEP 1: Identification of Relevant Topics
+Based on our existing knowledge of our business, we've compiled a list of general topics. This will help us rank prominently in search results. To understand our target keywords better, consider the personas: what topics or keywords would our potential customers likely search for?
+
+- Software Marketplace
+
+- Buy Your Own Software to Create a Website
+
+- Buy Software with License and Support
+
+- Buy Customizable Software
+
+### STEP 2: Brain Dump Possible Keywords for each of the Relevant Topics
+
+Below is a table that breaks down the main titles and their associated long-tail (LT) and short-tail (ST) keywords:
+
+| Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
+|--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
+| **Software Marketplace**                               | User-friendly software, fix bug website, python websites, Software Licensing, Software ownership | Best software marketplace, software marketplace with good support services, where to find websites made with python, buy software with licenses, Buy software for Ownership, Support Software Idea |
+| **Buy Your Own Software to Create a Website**         | Software AI, Software Blockchain, Software Community, Software Academy, Powerful Software, multilingual website | I need a website with AI, I need a software or website with Blockchain, Software Service with Community, Software Marketplace and academy to learn, powerful software for websites |
+| **Buy Software with License and Support**              | Software and license, website and license, support for website, fix bug website, expert team website, python expert website, multilingual software website | Where to buy software with license, where to buy a website with license, best support with software or website marketplace, developer to fix bug website, developer team for websites, find python expert for website creation |
+| **Buy Customizable Software**                          | Customizable Software, Customizable Marketplace Website, Ideas software, Ideas website, Affordable Software, Idea Support Website | Create website based on my idea, buy website in a marketplace, best software ideas for websites, affordable website to buy marketplace, best support for website creation, maintenance for website and software |
+
+### STEP 3: Try Out On Google
+
+We have added and removed keywords based on the results obtained from the following Google features:
+
+- Autocomplete Feature
+- People Also Ask
+- Related Searches
+- Titles from Similar Websites
+- Descriptions from Similar Websites
+
+| Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
+|--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
+| **Software Marketplace**                               | second hand software, fix website bug, fix website bug online, python made websites, software licensing service, licensing as a service, software ownership service | saas software for sale, websites developed by using Python, best software marketplace for business, best marketplace to sell software, marketplace for software products, software marketplace with good support services saas, buy websites made with python+django, buy software with license online, best place to buy software with license, buy software for ownership online, who can help me build my website?, support for my website idea email, software ideas for project, how do I fix a bug on my website? |
+| **Buy Your Own Software to Create a Website**         | blockchain software download, software ai engineer, software ai tools, software blockchain projects, ai website design, community software group, software academy online, software university, best website software download, multilingual website service | make my website multilingual, software for blockchain development, can I create a website with AI?, how do I create a blockchain web application?, how can blockchain be used in business, community software platforms, what is a community software?, online community software platforms, software marketplace platform, b2b software marketplace, b2c software marketplace, powerful software for websites |
+| **Buy Software with License and Support**              | Software and license, website and license, support for website, fix bug website, expert team website, python expert website, multilingual software website | Where to buy software with license, where to buy a website with license, best support with software or website marketplace, developer to fix bug website, developer team for websites, find python expert for website creation |
+| **Buy Customizable Software**                          | Customizable Software, Customizable Marketplace Website, Ideas software, Ideas website, Affordable Software, Idea Support Website | Create website based on my idea, buy website in a marketplace, best software ideas for websites, affordable website to buy marketplace, best support for website creation, maintenance for website and software |
+
 ### Tech Implementations
 To implement within our code
 ### Content Creation
