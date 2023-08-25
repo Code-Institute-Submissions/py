@@ -3,6 +3,7 @@ site_name: Plexosoft Docs
 nav:
   - Home: index.md
   - Design:
+      - Design Overview: design-overview.md
       - Design Thinking:
           - Overview: design-thinking/overview.md
           - Idea Outline: design-thinking/idea-outline/idea_outline.md
@@ -39,8 +40,12 @@ nav:
       - Make Documentation: developer-snack/mkdoc/mkdoc.md
       - Developer Reminder: developer-snack/development_reminder.md
   - About:
-      - About: about.md
+      - Plexosoft Docs: about.md
       - License: LICENSE.md
+
+# PLUGINS
+plugins:
+  - glightbox
 
 # THEME
 theme:
@@ -62,7 +67,7 @@ theme:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
       primary: light blue
-      accent: teal
+      accent: green
     - scheme: default
       toggle:
         icon: material/toggle-switch
@@ -82,6 +87,7 @@ extra:
 
 # EXTENSIONS
 markdown_extensions:
+  - tables
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -94,6 +100,12 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg # COPYRIGHT

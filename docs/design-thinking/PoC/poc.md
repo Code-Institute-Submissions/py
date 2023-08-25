@@ -15,5 +15,5 @@ Dive into our online preview and detailed outline via the links provided below:
 - [Online Outline](https://gitmind.com/app/docs/m4rlgel3?view=outline)
 
 Get an insight into our PoC by viewing the image below:
-
-![PoC Prototype](../../assets/img/poc.png)
+=== "PoC"
+    ![PoC Prototype](../../assets/img/poc.png)
