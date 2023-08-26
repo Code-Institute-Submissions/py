@@ -13,7 +13,7 @@ Based on our findings from the **Design Thinking** process, we have reached the 
     - Transparency, Trust-enhancing, Privacy & Security.
     - Solutions, Customization,  Distinct Offerings & Extended Services.
     - Affordability, Presentation, Accessibility & Performance.
-    - Education, Inclusion, Opportunities, Peers Endorsement & User Reviews. 
+    - Education, Inclusion, Opportunities, Peers Endorsement & User Reviews (Likes & Comments). 
 
 To address these issues, we will tackle specific problems and fulfill their desires, enabling them to thrive within the ecosystem. For this iteration, we have identified the following core technologies to utilize:
 
@@ -62,7 +62,7 @@ Our insights are grounded in sufficient research, supported by the accompanying 
     | Abstract User (roles, etc.)                   | 5               | 5               | 1              |
     | User Feedback                                 | 5               | 5               | 1              |
     | Metrics                                       | 5               | 5               | 1              |
-    | Reviews & Comments                            | 5               | 4               | 1              |
+    | Likes & Comments                              | 5               | 4               | 1              |
     | Cart, Purchase & Download                     | 5               | 4               | 1              |
     | User & Admin Dashboard                        | 5               | 4               | 1              |
     | Support Button                                | 5               | 4               | 1              |

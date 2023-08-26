@@ -102,7 +102,7 @@
       - Has trust concerns, especially when dealing with unknown entities.
       - Worries about communication barriers and misunderstandings in her requirements.
       - Is cautious about unforeseen expenses and sticking to a budget.
-      - Influenced by factors like popularity, user reviews, design, and overall user experience when choosing a service.
+      - Influenced by factors like popularity, user reviews (likes & comments), design, and overall user experience when choosing a service.
       - Values staying updated through a service's social media platform.
       - Advocates for multilingual support.
       - Emphasizes supporting those with budgetary constraints but valuable ideas.

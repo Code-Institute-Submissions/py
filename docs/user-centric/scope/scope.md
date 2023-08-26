@@ -16,7 +16,7 @@ For this iteration, our decisions on features and functionalities are guided by 
 
     | Condition                     | Iteration                                                          | Goals                         |
     |------------------------------|--------------------------------------------------------------------|-------------------------------|
-    | MVP Version                  | Display digital products & services on the homepage<br>Sign in/up option<br>Purchase Product page<br>User Profile (roles)<br>Metrics for products<br>Search Bar & Filtering<br>Menu & Dropdowns<br>Social Media Login<br>Email Verification<br>User Feedback<br>Reviews & Comments<br>Cart, Purchase & Download<br>User & Admin Dashboard<br>Support Button<br>Contact Form<br>Request Formats<br>FAQ<br>Newsletter<br>RSS | Culture Acquisition & Tech Showcase            |
+    | MVP Version                  | Display digital products & services on the homepage<br>Sign in/up option<br>Purchase Product page<br>User Profile (roles)<br>Metrics for products<br>Search Bar & Filtering<br>Menu & Dropdowns<br>Social Media Login<br>Email Verification<br>User Feedback<br>Likes & Comments<br>Cart, Purchase & Download<br>User & Admin Dashboard<br>Support Button<br>Contact Form<br>Request Formats<br>FAQ<br>Newsletter<br>RSS | Culture Acquisition & Tech Showcase            |
     | Simple design                | Contact Form<br>User/Admin Dashboard<br>FAQ<br>User Feedback<br>Previous features* |                 |
     | Low leading rates<br>& Non-functional | Social Media Login, Request Formats, Lottie Files                              | Long-term Investment<br>& Future Implementation |
 
@@ -68,7 +68,7 @@ The following table is a well-equipped draft designed to facilitate the developm
     | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu to streamline my search for products & services. | **2** |
     | | Incorporate Search Bar | As a user, I want a search engine to pinpoint specific products or services. | **4** |
     | | Integrate Filter Function | As a user, I want a filter section on the same page, allowing me to sort by categories, price, license, ownership, etc. | **4** |
-    | Reviews & Comments | Implement Reviews & Comments | As a user, after a purchase, I want to like and comment on my product or service, sharing my thoughts and contributing to the community. | **4** |
+    | Likes & Comments | Implement Likes & Comments | As a user, after a purchase, I want to like and comment on my product or service, sharing my thoughts and contributing to the community. | **4** |
     | Accountability | Construct Contact Form | As a user, I desire a well-crafted contact page to reach the support team. | **4** |
     | | Implement Request Formats in Contact Form | As a user, I want predefined request formats in the contact form, ensuring effective communication of my ideas. | **2** |
     | | Assemble FAQ Section | As a user, I seek a FAQ section on the support page, offering videos or articles for troubleshooting or answering Plexosoft Marketplace-related questions. | **4** |

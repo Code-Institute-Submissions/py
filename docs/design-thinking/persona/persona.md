@@ -28,7 +28,7 @@ Jordan understands the digital landscape's dynamics and intricacies, prioritizin
 - Overcoming trust barriers with new or unfamiliar users, especially when introducing advanced technologies or novel platform concepts.
 
 ### Influences
-- Peers, user reviews, design aesthetics, overall user experience, and affordability play a crucial role in shaping Jordan's decision-making process.
+- Peers, user reviews (likes & comments), design aesthetics, overall user experience, and affordability play a crucial role in shaping Jordan's decision-making process.
 
 ### Preferred Engagement Channels
 - Dedicated platforms that blend features of blogs, forums, and social media for community engagement and updates.

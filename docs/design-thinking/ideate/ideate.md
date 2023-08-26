@@ -85,7 +85,7 @@
 - Image compression, lazy loading, caching, DNS, Cloudflare.
 
 ### Database
-- Product, Category, Abstract User, Transaction, Download, Review, Newsletter
+- Product, Service, Category, Abstract User, Transaction, Download, Review, Newsletter
 
 ## Let’s go red
 - Not all may be applied in the first MVP iteration.
@@ -101,11 +101,11 @@
   - Search bar, menu with dropdowns: Category, Service, Support, Request button.
   - Footer details: about section, useful links, social media icons.
   - Dedicated product description page.
-  - Engagement elements: Lottie files, illustrations, shopping cart, review and comment functionality, newsletter and RSS feed sections, contact form, request formats, download functionality, user dashboard (settings, products, services, reviews, comments), and admin dashboard.
+  - Engagement elements: Lottie files, illustrations, shopping cart, review and comment functionality, newsletter and RSS feed sections, contact form, request formats, download functionality, user dashboard (settings, products, services, reviews(likes), comments), and admin dashboard.
 
 - **Back-end:** 
   - Features: email verification, social media login options, Stripe for payment, newsletter system, tracking (user clicks, page visits), B2C e-commerce with one-time payment methods.
-  - Databases: Product, Category, Abstract User, Transaction, Download, Review, Newsletter.
+  - Databases: Product, Service, Category, Abstract User, Transaction, Download, Review, Newsletter.
   - Technologies: Django, Bootstrap, jQuery, RSS, Allauth, AWS S3, EmailJS, PostgreSQL, Psycopg2, ElephantSQL, vendor-specific templates, Lottie files, etc.
 
 - **Culture:** Emphasizing ease of use, quality, affordability, robust support, clear communication, transparency, financial inclusion, and inclusivity of services.
