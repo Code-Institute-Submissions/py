@@ -173,7 +173,7 @@ We've adjusted our keywords according to RAV/C:
 
 The table has been rearranged to put the most relevant keywords up front for each topic. This enhances clarity and aligns the keywords more closely with their associated main topic. It is ready for the **final result** process.
 
-??? abstract "Keyword Selection Based on RAV/C"
+??? abstract "Keyword Selection Based on RAV/C (Rearranged)"
 
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
@@ -182,12 +182,13 @@ The table has been rearranged to put the most relevant keywords up front for eac
     | **Buy Software with License and Support**              | software license and service agreement, website support services, fix website issues, expert web developers, python expert website developers, multilingual software website | where to buy a website with license, does NASA use Python?, is Python good for web development?, website support and maintenance services, do you need a software license?, marketplace for software products, best developer to fix bug website, web developer roles and responsibilities, find python expert for website creation online, how do I find and hire expert Python developers? |
     | **Buy Customizable Software**                          | customizable software applications, custom software development, customizable marketplace website template, best marketplace website builder, ideas software development, ideas website design, cheap software licenses, buy website marketplace | best website to buy software online, affordable software for business, how do I create a custom marketplace?, how do you develop software ideas?, where to get programming ideas?, how do I get ideas for a website design?, software project ideas for students, software engineering projects ideas, create website based on my idea online, create website based on my idea app, how much does it cost to build a marketplace website, local buy and sell websites, where to buy an established website?, how much does it cost to set up a marketplace?, online software marketplace germany, web application ideas for students, best online software marketplace platform, online buying and selling sites, website design services near me, best website builder software |
 
-### STEP 5: Final Results
+
+#### Keywords on wordtracker.com
 
 We have chosen 3 keywords from the rearranged table and used them on wordtracker.com. Thanks to that tool we were able to collect better long-tail & short-tail keywords and they were added to the **final table**; the others were added arbitrarily for future research.
 
-#### Keywords on wordtracker.com
-Results after using this tool.
+- Results after using this tool:
+
 ??? abstract "Relevant Topic: Software Marketplace"
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
@@ -225,6 +226,7 @@ Results after using this tool.
     ![Wordtracker 2](../../assets/img/row4.2.png)
     ![Wordtracker 3](../../assets/img/row4.3.png)
 
+### STEP 5: Final Results
 #### Final Table
 Final table incorporating all results for this iteration. Words used & sourced from wordtracker.com are highlighted.
 
