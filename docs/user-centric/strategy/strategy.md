@@ -48,44 +48,46 @@ Our insights are grounded in sufficient research, supported by the accompanying 
 
 ### Research Table
 
-| Goals                                         | Relevancy (0-5) | Viability (0-5) | N. Items (0-~) |
-| --------------------------------------------- | --------------- | --------------- | -------------- |
-| Display Products & Labels on Homepage         | 5               | 5               | 1              |
-| Search Bar & Filtering                        | 5               | 4               | 1              |
-| Menu & Dropdowns                              | 5               | 5               | 1              |
-| Product & Service Page                        | 5               | 5               | 1              |
-| Sign in/up option                             | 5               | 5               | 1              |
-| Social Media Login                            | 5               | 3               | 1              |
-| Email Verification                            | 5               | 4               | 1              |
-| Abstract User (roles, etc.)                   | 5               | 5               | 1              |
-| User Feedback                                 | 5               | 5               | 1              |
-| Metrics                                       | 5               | 5               | 1              |
-| Reviews & Comments                            | 5               | 4               | 1              |
-| Cart, Purchase & Download                     | 5               | 4               | 1              |
-| User & Admin Dashboard                        | 5               | 4               | 1              |
-| Support Button                                | 5               | 4               | 1              |
-| Contact Form                                  | 5               | 4               | 1              |
-| Request Formats                               | 3               | 4               | 1              |
-| FAQ                                           | 4               | 4               | 1              |
-| Newsletter                                    | 5               | 4               | 1              |
-| RSS                                           | 3               | 4               | 1              |
-| Caching                                       | 5               | 4               | 1              |
-| Google Analytics                              | 4               | 4               | 1              |
-| AWS S3                                        | 5               | 4               | 1              |
-| EmailJS                                       | 4               | 4               | 1              |
-| Lottie Files                                  | 3               | 5               | 1              |
-| Terms of Service & Privacy Policy (GDPR)      | 5               | 4               | 1              |
-| Database Model                                | 5               | 5               | 1              |
-| N. Items                                      |                 |                 | 26             |
-| Max. Points                                   |                 |                 | 130            |
-| Results                                       | 121             | 112             |                |
-| Percentage                                    | 93.07% (Strategy) | 86.15% (Scope) |               |
+??? abstract "Open Research Table" 
+
+    | Goals                                         | Relevancy (0-5) | Viability (0-5) | N. Items (0-~) |
+    | --------------------------------------------- | --------------- | --------------- | -------------- |
+    | Display Products & Labels on Homepage         | 5               | 5               | 1              |
+    | Search Bar & Filtering                        | 5               | 4               | 1              |
+    | Menu & Dropdowns                              | 5               | 5               | 1              |
+    | Product & Service Page                        | 5               | 5               | 1              |
+    | Sign in/up option                             | 5               | 5               | 1              |
+    | Social Media Login                            | 5               | 3               | 1              |
+    | Email Verification                            | 5               | 4               | 1              |
+    | Abstract User (roles, etc.)                   | 5               | 5               | 1              |
+    | User Feedback                                 | 5               | 5               | 1              |
+    | Metrics                                       | 5               | 5               | 1              |
+    | Reviews & Comments                            | 5               | 4               | 1              |
+    | Cart, Purchase & Download                     | 5               | 4               | 1              |
+    | User & Admin Dashboard                        | 5               | 4               | 1              |
+    | Support Button                                | 5               | 4               | 1              |
+    | Contact Form                                  | 5               | 4               | 1              |
+    | Request Formats                               | 3               | 4               | 1              |
+    | FAQ                                           | 4               | 4               | 1              |
+    | Newsletter                                    | 5               | 4               | 1              |
+    | RSS                                           | 3               | 4               | 1              |
+    | Caching                                       | 5               | 4               | 1              |
+    | Google Analytics                              | 4               | 4               | 1              |
+    | AWS S3                                        | 5               | 4               | 1              |
+    | EmailJS                                       | 4               | 4               | 1              |
+    | Lottie Files                                  | 3               | 5               | 1              |
+    | Terms of Service & Privacy Policy (GDPR)      | 5               | 4               | 1              |
+    | Database Model                                | 5               | 5               | 1              |
+    | N. Items                                      |                 |                 | 26             |
+    | Max. Points                                   |                 |                 | 130            |
+    | Results                                       | 121             | 112             |                |
+    | Percentage                                    | 93.07% (Strategy) | 86.15% (Scope) |               |
 
 We've conducted an estimation based on our experience, and we are pleasantly surprised by the `design thinking` results. The decisions about which features to implement felt grounded in real factors and user needs, rather than personal assumptions or ideas:
 
-- As indicated in the table and the graphic, most of the features have high relevancy for this iteration. An exception is the {==Request Formats==} feature, which received a '3' for relevancy and '4' for viability. the same for {==RSS==} and {==Lottie Files==} with '3' and '5' respectevely. These features could take various forms, and its style and functionality is subject to continuous changes to improve the user experience.
+- As indicated in the table and the graphic, most of the features have high relevancy for this iteration. An exception is the **Request Formats** feature, which received a '3' for relevancy and '4' for viability. the same for **RSS** and **Lottie Files** with '3' and '5' respectevely. These features could take various forms, and its style and functionality is subject to continuous changes to improve the user experience.
 
-- Looking at the viability column, the most important features range from 4 to 5, which isn't a significant difference. This slight variation represents our ability to fulfill potential requirements within our time and resource constraints. The lowest score was {==Social Media Login==} with '3' due to the fact that this is an MVP and to be accepted by Google or Facebook may require extra features and formalities.
+- Looking at the viability column, the most important features range from 4 to 5, which isn't a significant difference. This slight variation represents our ability to fulfill potential requirements within our time and resource constraints. The lowest score was **Social Media Login** with '3' due to the fact that this is an MVP and to be accepted by Google or Facebook may require extra features and formalities.
 
 - Despite being powerful features, their full implementation might be constrained by our limited resources and time. However, we will strive to add functional aspects for each to meet the Minimum Viable Product (MVP) requirements.
 
@@ -103,13 +105,15 @@ We should highlight that achieving most of the features described above doesn't 
 
 ## E-commerce App Blueprint
 
-| # | Category                       | Details                                                                                             |
-|---|--------------------------------|-----------------------------------------------------------------------------------------------------|
-| 1 | **Target Audience - Who**      | - Primarily B2C (Business to Consumer) <br> - B2B (Business to Business) - Possible with further expansion and customization |
-| 2 | **Offerings - What**           | - Digital Products <br> - Services                                                                  |
-| 3 | **Payment Methods - How**      | - One-time Payment                                                                                  |
-| 4 | **Key Features & Information Display** | - Refer to the above section for details.                                                        |
-| 5 | **Essential Data Tables**      | - Product <br> - Category <br> - Abstract User <br> - Transaction <br> - Download <br> - Review <br> - Newsletter            |
+??? abstract "Open E-commerce App Blueprint"
+
+    | # | Category                       | Details                                                                                             |
+    |---|--------------------------------|-----------------------------------------------------------------------------------------------------|
+    | 1 | **Target Audience - Who**      | Primarily B2C (Business to Consumer)<br>B2B (Business to Business): possible with further expansion and customization |
+    | 2 | **Offerings - What**           | Digital Products <br> Services                                                                  |
+    | 3 | **Payment Methods - How**      | One-time Payment                                                                                  |
+    | 4 | **Key Features & Information Display** | Refer to the above section for details.                                                        |
+    | 5 | **Essential Data Tables**      | Product<br>Category<br>Abstract User<br>Transaction<br>Download<br>Review<br>Newsletter            |
 
 
 ## SEO Plan
