@@ -1,6 +1,6 @@
 # User-Centric Design
 
-This is the second step in building our MVP for Plexosoft's software marketplace. The first step, {==Design Thinking==}, helped identify and prioritize the real problems our application aims to solve. Now, we're shifting our focus to the journey of solving those issues, always keeping the principles of {==Agile Development==} at the forefront.
+This is the second step in building our MVP for Plexosoft's software marketplace. The first step, **Design Thinking**, helped identify and prioritize the real problems our application aims to solve. Now, we're shifting our focus to the journey of solving those issues, always keeping the principles of **Agile Development** at the forefront.
 
 Please review each section to fully grasp how an idea evolved into a functional and problem-solving product.
 
