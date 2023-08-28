@@ -219,7 +219,6 @@ We have chosen 3 keywords from the rearranged table and used them on wordtracker
     ![Wordtracker 1](../../assets/img/row3.1.png)
     ![Wordtracker 2](../../assets/img/row3.2.png)
     ![Wordtracker 3](../../assets/img/row3.3.png)
-    ![Wordtracker 3](../../assets/img/row3.4.png)
 
 ??? abstract "Relevant Topic: Buy Customizable Software"
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |

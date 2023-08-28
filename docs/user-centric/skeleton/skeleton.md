@@ -12,25 +12,49 @@ In this stage, all **features**, **functionalities**, **interactive elements**, 
 
 For this plane, we've chosen to use **Adobe XD**, a tool with which the author is intimately familiar. It provides an exhaustive **wireframe** that streamlines our process, fostering efficient collaboration.
 
-## Prototype Images
-![Skeleton Gif image](gif-plexosoft.gif)
+## Prototype GIF & Images
+
+Although we didn't create a prototype for every feature due to the project's extensive scope, we've outlined the most critical features and layouts that will be extended throughout the project. Our design, intentions, and ideas are accurately reflected in this prototype, crafted using **AdobeXD**.
+
+??? example "Prototype GIF"
+    ![Skeleton Gif Image](../../assets/img/skeleton.gif)
 
 ??? example "Homepage"
-    ![Homepage](homepage.png)
-    ![Homepage 2](homepage-2.png)
-    ![Homepage 3](homepage-3.png)
+    ![Homepage 1](../../assets/img/skeleton-1.png)
+    ![Homepage 2](../../assets/img/skeleton-2.png)
+    ![Homepage 3](../../assets/img/skeleton-3.png)
+    ![Homepage 4](../../assets/img/skeleton-4.png)
+    ![Homepage 5](../../assets/img/skeleton-5.png)
+
+??? example "Dedicated Page"
+    ![Dedicated Page 1](../../assets/img/skeleton-6.png)
+    ![Dedicated Page 2](../../assets/img/skeleton-7.png)
+
+??? example "Login & Register"
+    ![Login & Register 1](../../assets/img/skeleton-8.png)
+    ![Login & Register 2](../../assets/img/skeleton-9.png)
+    ![Login & Register 3](../../assets/img/skeleton-10.png)
+
+??? example "FAQ & Contact"
+    ![FAQ & Contact 1](../../assets/img/skeleton-11.png)
+    ![FAQ & Contact 2](../../assets/img/skeleton-12.png)
+
+??? example "See More Page"
+    ![FAQ & Contact 1](../../assets/img/skeleton-13.png)
 
 ## Conclusion
-- The user-friendly design coupled with straightforward navigation is immediately evident, placing every essential feature just a few clicks away from the user's objective. 
+- The design is user-friendly and features straightforward navigation. This approach ensures that all essential functions are within a few clicks from the user's goal.
 
-- `The hierarchy of content and functionalities is crystal clear: the Homepage comes first, complete with voting cards and supplementary information. Next, we have the dedicated Voting page, as anticipated. Subsequently, users have the option to either Login/Register or delve into the Support dropdown section.`
+- In the header, there's a search button activated upon clicking. As illustrated in the images, the menu boasts several dropdown options for enhanced navigation and precise searches.
 
-- `There's a deliberate flow from basic to more intricate/complex functionalities and layouts. As users journey through the website, they're given opportunities to learn naturally. We are deeply committed to ensuring users aren't overwhelmed. Our adherence to the principle of **progressive disclosure** ensures that while vital information is showcased, there's no subliminal persuasion nudging users to favor a particular cause.`
+- The content and functionality hierarchy is well-defined: The Homepage is prioritized, showcasing Product & Service cards along with additional information. Following this, there's the specific product/service page as expected. Then, users can choose to either Login/Register or explore the Support dropdown section.
 
-- Considerable time and resources were channeled into this plane before any coding began, all in the pursuit of meticulous planning.
+- We've designed a logical progression from basic to more intricate functionalities and layouts. As users navigate the website, they are guided, allowing them to learn organically. We prioritize not overwhelming our users, adhering firmly to the principle of **progressive disclosure**.
 
-- Our design decisions lean towards familiarity; everything is crafted intuitively, with a keen eye on user behaviors, standards, and conventions.
+- Significant time and resources were invested in this phase, all before initiating coding, emphasizing detailed planning.
 
-- We gave undivided attention to aspects such as keywords, unseen metadata, content hierarchies, and the organization of lists and forms. These elements shine through in our **desktop-based prototype/demo**.
+- Our design approach emphasizes familiarity. Every element is intuitively designed, reflecting our understanding of user behaviors, established standards, and conventions.
 
-Our overarching aim was simplicity, intuition, and consistency. Concurrently, we set the stage for our last plane by outlining core design attributes such as colors, shapes, and other pivotal design facets. We now pivot towards the **Surface plane**.
+- We meticulously addressed elements such as keywords, hidden metadata, content hierarchies, and the layout of lists and forms. These components are prominently showcased in our **desktop-based prototype/demo**.
+
+Throughout the design process, our primary objectives were simplicity, intuition, and consistency. Simultaneously, we prepared for our final stage, defining essential design elements like colors and shapes. Our next focus is the **Surface plane**.
