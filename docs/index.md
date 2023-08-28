@@ -2,6 +2,21 @@
 
 [GitHub Repository](https://github.com/plexoio/py){ .md-button .md-button--primary }
 
+???+ info "Project Life Cycle"
+
+    - **Start Date:** Aug 13, 2023 📅
+    - **Finish Date:** Sep 12, 2023 📅
+
+    For a deeper dive into our progress, check out our [Github Commits](https://github.com/plexoio/py/commits/main?after=d40aa15cae7f956277a2c9de73eb659c5a2a151a+34&branch=main&qualified_name=refs%2Fheads%2Fmain).
+
+???+ danger "Watchout"
+    - Save commands used for MkDocs & the project in general
+    - Update ERD, Design Thinkin & User-centric design if needed after completion
+    - Surface colors
+    - This page details
+    - Update finish Date if needed
+    - Update Main Readme
+
 ## Index
 1. Design
     - [Design Thinking](design-thinking/overview.md)
