@@ -1,14 +1,19 @@
-## Surface Plane - Color, Typography, Effect and Images
+## Surface Plane - Color, Typography, Effect, and Images
 
-After extensive research, strategy formulation, and brainstorming, we've crafted a solid project skeleton. With our groundwork in place, we're poised to initiate the next phase: building the surface plane. While this foundational work is crucial, it's in the actual creation and coding stages that we anticipate uncovering any potential challenges or nuances. Now is the ideal time to transform our ideas into reality and refine them as we progress. We eagerly anticipate witnessing our project evolve.
+Having diligently conducted extensive research, strategy formulation, and brainstorming sessions, we've meticulously sculpted a robust project blueprint. With this foundational layer established, we stand on the cusp of delving into the next phase: curating the surface plane. While this preparatory work is indispensable, it's during the tangible creation and coding phases that we expect to discern any potential intricacies or challenges. The moment has arrived to breathe life into our conceptions and refine them with every step forward. We're filled with eager anticipation as we watch our project flourish.
 
 **Approach:**
 
-We model our project strategy after the wisdom of Nikola Tesla, who once remarked, `"My method is different. I do not rush into actual work. When I get a new idea, I start at once building it up in my imagination, making improvements, and operating the device in my mind. When I have gone so far as to embody everything in my invention, every possible improvement I can think of, and when I see no fault anywhere, I put into concrete form the final product of my brain."` Just as Tesla painstakingly refined his ideas mentally before realization, we meticulously plan and polish our project prior to the actual programming phase.
+Our project ethos draws inspiration from the insightful words of Nikola Tesla, who once articulated:
 
-At this juncture, our primary attention is on the surface plane. This encompasses not just the design of the interface but also the user's entire interaction journey. Our aim is to establish a coherent visual language that shapes each step and touchpoint, ensuring a fluid and intuitive user experience.
+???+ quote "Power of Imagination and Saving Resources"
+    My method is different. I do not rush into actual work. When I get a new idea, I start at once building it up in my imagination, making improvements, and operating the device in my mind. When I have gone so far as to embody everything in my invention, every possible improvement I can think of, and when I see no fault anywhere, I put into concrete form the final product of my brain.
+ 
+Mirroring Tesla's practice of thorough mental refinement before actualization, we commit to rigorously orchestrating and refining our project ahead of its programming stage.
 
-Every nuance matters for the project's success, and we are unyieldingly committed to perfecting them.
+Currently, our focal point lies on the surface plane. This domain extends beyond mere interface design; it encapsulates the entirety of the user's interaction journey. We're driven by the ambition to instate a unified visual lexicon that orchestrates every interaction and touchpoint, ensuring a seamless and instinctual user experience.
+
+Every detail, every nuance is pivotal to the project's triumph, and we are unwavering in our dedication to their perfection.
 
 ### Color
 
@@ -31,89 +36,115 @@ The following color palette was used as a reference throughout the project:
 
 - [My Color Space](https://mycolor.space/?hex=%2334495E&sub=1)
 
-
 ### Layout
 
 #### Technologies Used
 
-- Vendor templates (as seen in [Technologies Used](../../tech-used/tech_used.md))
+- Vendor templates (as referenced in [Technologies Used](../../tech-used/tech_used.md))
 - Bootstrap
 - Custom Code
 
 #### Homepage
 
-- Upon entry, users are greeted with an intuitive header with dropdowns and a search engine. Below it is a call-to-action section featuring an video/image and text on the right side, along with a button prompting users to learn more about Plexosoft Marketplace.
-- Following the call-to-action section, Products & Services are displayed sequentially: Product & Service (mixed cards), Product (Product cards), Service (Service cards).
-- Product & Service sections are organized into rows, each containing 3 columns that showcase 3 cards (styled using Bootstrap), replete with pertinent information and associated call-to-action directives.
-- Notably, these cards comprise subparts: card, card header, card body, and card footer, each demarcated by their unique borders.
-- The footer consists of a row split into three columns, designated for: About, Useful Links, Newsletter and Contact Information. Situated above this is a discreet row of social media icons.
-- All aforementioned elements are responsive, catering to a variety of screen dimensions.
+- On entry, users encounter an intuitive header with dropdowns and a search function. This is followed by a call-to-action section showcasing a video/image on the left, complemented by text on the right. An accompanying button invites users to explore Plexosoft Marketplace further.
+  
+- The Products & Services are sequentially displayed as: Product & Service (mixed cards), Product (Product cards), and Service (Service cards).
+
+- Product & Service sections feature rows with 3 columns, each housing 3 cards (styled using Bootstrap). These cards provide key details and specific call-to-action instructions.
+
+- Each card is subdivided into: card header, card body, and card footer, distinctively separated by unique borders.
+
+- The footer is divided into three columns: About, Useful Links, Newsletter, and Contact Information. Preceding this is a subtle row of social media icons.
+
+- All elements are responsively designed, adaptable to different screen sizes.
 
 #### Login
 
-- The login page employs columns and rows to maintain layout uniformity, replicating established patterns using Bootstrap's card system wherever feasible.
-- Input fields and buttons are provided.
-- Social Media login is possible.
-- Feedback/messages functionality included.
+- The login page uses a column and row layout for consistency, employing Bootstrap's card system where suitable.
+  
+- Fields for input and buttons are integrated.
+  
+- Social Media login is facilitated.
+  
+- Feedback/messages functionality is included.
 
 #### Sign Up
 
-- The sign-up page echoes the aesthetic of the login page, leveraging Bootstrap's card style.
-- Input fields and a button are integrated.
-- Social Media register is possible
-- Feedback/messages functionality included.
+- The sign-up page mirrors the login page in aesthetics, utilizing Bootstrap's card design.
+  
+- There are dedicated input fields and a registration button.
+
+- Registration via Social Media is available.
+
+- Feedback/messages functionality is present.
 
 #### Product & Service Dedicated Page
 
-- Presented on its dedicated page, the Product & Service offers an in-depth rendition of the primary card observed on the homepage, complete with extensive details and E-commerce functionalities.
-- A harmonious style is sustained throughout.
-- Feedback/messages functionality included.
+- The dedicated page offers a detailed view of the primary card from the homepage, enriched with in-depth descriptions and e-commerce features.
+
+- Consistent styling pervades.
+
+- Feedback/messages functionality is incorporated.
 
 #### User & Admin Dashboard
 
-- The admin dashboard, adapted from another vendor template, meshes perfectly with Plexosoft Marketplace.
-- We've made minor stylistic tweaks to this template to ensure coherence with the overarching software design.
-- Each card's presentation mirrors the ubiquitous Product & Service card format, reinforcing consistency.
+- The admin dashboard, sourced from a vendor template, integrates seamlessly with Plexosoft Marketplace.
+
+- We applied minimal design alterations to ensure congruence with the predominant software aesthetic.
+
+- Card designs are reminiscent of the standard Product & Service card layout, upholding uniformity.
 
 #### Contact Page
 
-- The contact page harnesses Bootstrap's card design to encapsulate the form element.
-- Input fields and a button are present.
-- Topic select option is available.
-- The familiar design reassures users of their continuity within Plexosoft.
-- Fast access to the conctact page is visible.
+- The contact page employs Bootstrap's card layout to frame the form.
+
+- Input fields and a button are provided.
+
+- A topic selection option is available.
+
+- The consistent design assures users of their journey within Plexosoft.
+
+- Quick access to the contact page is highlighted.
 
 #### FAQ
 
-- The FAQ page, while intriguing, remains true to established design and stylistic conventions.
-- It features collapsible buttons for each query, whether textual or video-based.
-- Authentic content has been embedded, and just like the rest of Plexopost Marketplace, this page is fully responsive.
-- Fast access to the FAQ page is visible.
+- The FAQ page, while distinctive, aligns with established design norms.
+
+- Questions are addressed via collapsible buttons, both textually and visually.
+
+- Authentic content is embedded, ensuring the page remains responsive across devices.
+
+- Quick access to the FAQ page is evident.
 
 ### Fonts
 
-- Our primary font is `Roboto`, except where specified.
-- `Fairplay Display` is employed for select titles and subtitles.
+- Our mainstay font is **Roboto**, barring specific exceptions.
+
+- **Fairplay Display** is chosen for select titles and subtitles.
 
 ### Images
 
-- Key images are found in the call-to-action section, favicon, and placeholders for Products & Services.
-- Independent images for Products & Services are stored on AWS3.
+- Central images include those in the call-to-action section, favicon, and placeholders for Products & Services.
 
-### Page Order
+- Individual images for Products & Services are hosted on AWS3.
 
-- The sequence of main pages is as follows: Homepage > Single VoteCards > Active > Completed > Signup > Login > Dashboard > FAQ > Contact.
-- The navbar and footer are consistent across all pages.
-- At all times, we've incorporated the principle of progressive disclosure.
+### Pages Order
+
+- Header > Product & Service > Product section > Service section > Dedicated Product & Service > Login/Register > User/Admin Dashboard > FAQ & Contact
+
+- The navbar and footer remain consistent across pages.
+
+- We've seamlessly integrated the principle of progressive disclosure.
 
 ### Navigation Flow
 
-- Adhering to `progressive disclosure` enabled a seamless application experience. Users initially land on the `Homepage`. From there, they can choose to `Sign Up` or `Login`. Post login, they're seamlessly redirected to their dashboard. Queries can be addressed via the `Contact` page or the `FAQ`.
-- VoteCards are accessible from the `Homepage`, user's `Dashboard`, `Active` page, `Completed` page, and directly via their specific URLs.
+- Our commitment to **progressive disclosure** guarantees a fluid user journey. Users commence at the **Homepage** and can opt to **Sign Up** or **Login**. Post-login, they're directed to their dashboard. Concerns can be resolved via the **Contact** page or the **FAQ**.
 
-Throughout the design, we emphasized simplicity, ensuring that crucial elements stand out. Recognizable patterns in layout and interactions enhance user familiarity. The design ensures readability, with contrasting colors and varied fonts employed judiciously.
+- Products & Services can be accessed from the Homepage, Dashboard, Menu, or their specific URLs.
 
-Navigational clarity is paramount. We've ensured value is perceivable throughout the platform.
+Emphasizing simplicity throughout the design, we ensured key elements are salient. Familiar layout patterns enhance user orientation. The design prioritizes readability, utilizing contrasting colors and diverse fonts discerningly.
+
+Key factors are navigational clarity, ease of use, and consistent feedback. Value perception is a constant across the platform.
 
 **Key Design Principles:**
 
@@ -125,6 +156,7 @@ Navigational clarity is paramount. We've ensured value is perceivable throughout
 - Accessibility
 - Interaction
 - Visual Engagement
-- User-Friendly Experience
+- User-Centric Experience
+- Feedback
 
-Our goal was straightforwardness. We aimed to present users with fewer, more impactful choices, accentuating specific features and content. This design philosophy facilitated a smoother transition from design to code. The development process was not only streamlined but also more engaging. This efficient approach conserved time, effort, and resources. It minimized human intervention and errors, leading to a refined end product.
+Our ambition was to be direct, presenting users with essential, impactful options while highlighting core features. This design ethos smoothed the transition to coding. The coding phase was not just streamlined but also immersive. This efficient strategy saved time, minimized errors, and culminated in a superior end product.
