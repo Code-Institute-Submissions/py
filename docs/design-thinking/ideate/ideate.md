@@ -85,7 +85,7 @@
 - Image compression, lazy loading, caching, DNS, Cloudflare.
 
 ### Database
-- Product, Service, Category, Abstract User, Transaction, Download, Review, Newsletter
+- Product, Service, Category, Abstract User, Transaction, Download, Like, Comment, Newsletter
 
 ## Let’s go red
 - Not all may be applied in the first MVP iteration.
