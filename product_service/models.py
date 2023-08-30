@@ -21,6 +21,13 @@ class Category(models.Model):
     category_name = models.CharField(max_length=64, unique=True)
     alt_name = models.CharField(max_length=64, unique=True)
 
+    class Meta:
+        ordering = ['category_name']
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.category_name
+
 
 class Product(models.Model):
     '''Product model for product instances, independent from Service model'''
@@ -101,6 +108,12 @@ class Service(models.Model):
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
 
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
 
 class Download(models.Model):
     product = models.ForeignKey(
@@ -110,6 +123,13 @@ class Download(models.Model):
         Service, related_name='service_downloads', on_delete=models.CASCADE, null=True, blank=True)
     file_url = models.URLField(max_length=1024, null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
+
+    class Meta:
+        ordering = ['product', 'service']
+
+    def __str__(self):
+        download_settings = 'Download Details'
+        return download_settings
 
 
 class Transaction(models.Model):
@@ -142,3 +162,10 @@ class Transaction(models.Model):
             if download_urls.exists():
                 self.item_url = download_urls.first().file_url
         super(Transaction, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['product', 'service']
+
+    def __str__(self):
+        transaction_settings = 'Transaction Details'
+        return transaction_settings

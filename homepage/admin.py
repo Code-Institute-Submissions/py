@@ -1,5 +1,8 @@
+# Django Imports
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
+
+# Local Imports
 from .models import (UserProfile,
                      Comment,
                      Like,
@@ -144,11 +147,13 @@ class TransactionAdmin(admin.ModelAdmin):
     ordering = ('-timestamp',)
 
 
+# User Related
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(NewsLetter, NewsLetterAdmin)
 
+# Product & Service related
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Download, DownloadAdmin)
