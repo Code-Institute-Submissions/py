@@ -1,10 +1,10 @@
 ---
-name: Custom issue template
+name: " User Story"
 about: Describe this issue template's purpose here.
 title: ''
 labels: ''
-assignees: ''
+assignees: plexoio
 
 ---
 
-
+sdasd
