@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-# from .models import Post
-
+from .models import UserProfile, Comment, Like, NewsLetter
+from product_service.models import Category, Product, Service, Download, Transaction
 
 # @admin.register(Post)
 # class PostAdmin(SummernoteModelAdmin):
@@ -12,3 +12,10 @@ from django_summernote.admin import SummernoteModelAdmin
 #     summernote_fields = ('content')
 
 #     ordering = ('-created_on',)
+
+admin.site.register(UserProfile)
+admin.site.register(Comment)
+admin.site.register(Like)
+admin.site.register(NewsLetter)
+admin.site.register(Product)
+admin.site.register(Transaction)

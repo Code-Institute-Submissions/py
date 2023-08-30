@@ -13,7 +13,7 @@ USER_TYPE = (
 )
 
 STATUS = (
-    (0, 'draft')
+    (0, 'draft'),
     (1, 'suspended'),
     (2, 'active'),
 )
@@ -26,8 +26,8 @@ class UserProfile(AbstractUser):
     status = models.IntegerField(choices=STATUS, default=2)
     user_transactions = models.ManyToManyField(
         'product_service.Product',
-        through='product.Transaction',
-        related_name='user_transactions')
+        through='product_service.Transaction',
+        related_name='user_profiles')
 
 
 class Comment(models.Model):
@@ -35,7 +35,7 @@ class Comment(models.Model):
                                related_name='user_comments')
     comment = models.TextField(max_length=256, unique=True)
     product = models.ForeignKey('product_service.Product', on_delete=models.CASCADE,
-                                related_name='comment_products',
+                                related_name='commented_products',
                                 null=True, blank=True)
     service = models.ForeignKey('product_service.Service', on_delete=models.CASCADE,
                                 related_name='comment_services',
@@ -47,10 +47,10 @@ class Like(models.Model):
     liker = models.ForeignKey(
         UserProfile, on_delete=models.CASCADE, related_name='user_likes')
     product = models.ForeignKey('product_service.Product', on_delete=models.CASCADE,
-                                related_name='comment_products',
+                                related_name='liked_products',
                                 null=True, blank=True)
     service = models.ForeignKey('product_service.Service', on_delete=models.CASCADE,
-                                related_name='comment_services',
+                                related_name='liked_services',
                                 null=True, blank=True)
     created_on = models.DateField(auto_now_add=True)
 
