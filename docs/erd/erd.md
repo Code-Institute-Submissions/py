@@ -41,7 +41,7 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | comment       | TextField(256)    | Yes     | -             | -                              |
     | product       | **ForeignKey**    | -       | Many to one   | Product Model                  |
     | service       | **ForeignKey**    | -       | Many to one   | Service Model                  |
-    | created_on    | DateField         | -       | -             | -                              |
+    | created_on    | DateTimeField         | -       | -             | -                              |
 
 ### Like Model
 ??? abstract "Like Model"
@@ -51,7 +51,7 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | liker         | **ForeignKey**    | -       | Many to one   | UserProfile Model               |
     | product       | **ForeignKey**    | -       | Many to one   | Product Model                  |
     | service       | **ForeignKey**    | -       | Many to one   | Service Model                  |
-    | created_on    | DateField         | -       | -             | -                              |
+    | created_on    | DateTimeField         | -       | -             | -                              |
 
 ### NewsLetter Model
 ??? abstract "NewsLetter Model"
@@ -60,7 +60,7 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     |---------------|-------------------|---------|---------------|--------------------------------|
     | email         | EmailField        | Yes     | -             | -                              |
     | excerpt       | CharField(128)    | -       | -             | -                              |
-    | created_on    | DateField         | -       | -             | -                              |
+    | created_on    | DateTimeField         | -       | -             | -                              |
 
 ### Category Model
 ??? abstract "Category Model"
@@ -87,7 +87,7 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | image           | ImageField             | -       | -                 | -                                        |
     | image_url       | URLField(1024)         | -       | -                 | -                                        |
     | author          | **ForeignKey**         | -       | Many to one       | UserProfile Model                        |
-    | created_on      | DateField              | -       | -                 | -                                        |
+    | created_on      | DateTimeField              | -       | -                 | -                                        |
     | likes           | **ManyToManyField**    | -       | Many to many      | Like Model                               |
     | comments        | **ManyToManyField**    | -       | Many to many      | Comment Model                            |
     | transactions    | **ManyToManyField**    | -       | Many to many      | UserProfile Model through Transaction Model |
