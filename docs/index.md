@@ -20,6 +20,8 @@
     - Robots.txt
     - Facebook page
     - Marketing Research
+    - Update Agile Development section to end
+    - Duplicate at the end to align to Code Institute if needed
 
 ## Index
 1. Design
