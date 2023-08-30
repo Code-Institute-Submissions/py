@@ -45,7 +45,7 @@ class Product(models.Model):
     author = models.ForeignKey(
         'homepage.UserProfile', on_delete=models.CASCADE,
         related_name='product_authors')
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(
         'homepage.Like', related_name='product_likes', blank=True)
     comments = models.ManyToManyField(
@@ -82,7 +82,7 @@ class Service(models.Model):
     author = models.ForeignKey(
         'homepage.UserProfile', on_delete=models.CASCADE,
         related_name='service_authors')
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(
         'homepage.Like', related_name='service_likes', blank=True)
     comments = models.ManyToManyField(

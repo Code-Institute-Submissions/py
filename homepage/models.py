@@ -40,7 +40,7 @@ class Comment(models.Model):
     service = models.ForeignKey('product_service.Service', on_delete=models.CASCADE,
                                 related_name='comment_services',
                                 null=True, blank=True)
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
 
 class Like(models.Model):
@@ -52,10 +52,10 @@ class Like(models.Model):
     service = models.ForeignKey('product_service.Service', on_delete=models.CASCADE,
                                 related_name='liked_services',
                                 null=True, blank=True)
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
 
 class NewsLetter(models.Model):
     email = models.EmailField(unique=True)
     excerpt = models.CharField(max_length=128)
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)

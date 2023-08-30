@@ -16,6 +16,10 @@
     - This page details
     - Update finish Date if needed
     - Update Main Readme
+    - Sitemaps
+    - Robots.txt
+    - Facebook page
+    - Marketing Research
 
 ## Index
 1. Design
