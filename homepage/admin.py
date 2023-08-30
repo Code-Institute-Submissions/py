@@ -51,6 +51,11 @@ class LikeAdmin(admin.ModelAdmin):
         'created_on',
     )
 
+    list_filter = ('product', 'service', 'created_on')
+    search_fields = ['created_on']
+
+    ordering = ('liker',)
+
 
 class NewsLetterAdmin(admin.ModelAdmin):
     list_display = (
@@ -58,6 +63,9 @@ class NewsLetterAdmin(admin.ModelAdmin):
         'excerpt',
         'created_on',
     )
+    list_filter = ('created_on',)
+
+    ordering = ('-created_on',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -113,6 +121,11 @@ class DownloadAdmin(admin.ModelAdmin):
         'status',
     )
 
+    list_filter = ('product', 'service', 'status')
+    search_fields = ['file_url', 'status']
+
+    ordering = ('product',)
+
 
 class TransactionAdmin(admin.ModelAdmin):
     list_display = (
@@ -125,6 +138,10 @@ class TransactionAdmin(admin.ModelAdmin):
         'gateway',
         'timestamp'
     )
+    list_filter = ('product', 'service', 'gateway')
+    search_fields = ['gateway', 'timestamp']
+
+    ordering = ('-timestamp',)
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
@@ -136,13 +153,3 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Download, DownloadAdmin)
 admin.site.register(Transaction, TransactionAdmin)
-
-# @admin.register(Product)
-# class ProductAdmin(SummernoteModelAdmin):
-#     prepopulated_fields = {'slug': ('title',)}
-#     list_filter = ('status', 'created_on')
-#     search_fields = ['title', 'content']
-#     list_display = ('title', 'slug', 'status', 'created_on')
-#     summernote_fields = ('content')
-
-#     ordering = ('-created_on',)
