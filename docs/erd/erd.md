@@ -17,6 +17,11 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
 
 ## Diagram
 
+- [Live Version](https://www.edrawmax.com/online/share.html?code=de920716472111ee8de00a951ba8b83d)
+
+??? abstract "Diagram Image"
+    ![Plexosoft ERD image](../assets/img/plexosoft-erd.png)
+
 ## Table Model
 
 ## Developer Experience
