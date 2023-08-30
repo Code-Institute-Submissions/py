@@ -128,8 +128,7 @@ class Download(models.Model):
         ordering = ['product', 'service']
 
     def __str__(self):
-        download_settings = 'Download Details'
-        return download_settings
+        return f'{self.file_url}'
 
 
 class Transaction(models.Model):
@@ -167,5 +166,4 @@ class Transaction(models.Model):
         ordering = ['product', 'service']
 
     def __str__(self):
-        transaction_settings = 'Transaction Details'
-        return transaction_settings
+        return f'{self.buyer.username}'

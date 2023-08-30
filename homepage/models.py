@@ -29,10 +29,16 @@ class UserProfile(AbstractUser):
         through='product_service.Transaction',
         related_name='user_profiles')
 
+    class Meta:
+        ordering = ['username']
+
+    def __str__(self):
+        return f'{self.username}'
+
 
 class Comment(models.Model):
     writer = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
-                               related_name='user_comments')
+                               related_name='user_comments', null=True, blank=True)
     comment = models.TextField(max_length=256, unique=True)
     product = models.ForeignKey('product_service.Product', on_delete=models.CASCADE,
                                 related_name='commented_products',
@@ -41,6 +47,12 @@ class Comment(models.Model):
                                 related_name='comment_services',
                                 null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return f'Commented by {self.writer.username}'
 
 
 class Like(models.Model):
@@ -54,8 +66,21 @@ class Like(models.Model):
                                 null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return f'Liked by {self.liker.username}'
+
 
 class NewsLetter(models.Model):
     email = models.EmailField(unique=True)
     excerpt = models.CharField(max_length=128)
     created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+        verbose_name_plural = "Newsletters"
+
+    def __str__(self):
+        return f'{self.email}'

@@ -156,5 +156,6 @@ admin.site.register(NewsLetter, NewsLetterAdmin)
 # Product & Service related
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(Download, DownloadAdmin)
 admin.site.register(Transaction, TransactionAdmin)
