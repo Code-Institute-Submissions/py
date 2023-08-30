@@ -118,9 +118,9 @@ class Service(models.Model):
 class Download(models.Model):
     product = models.ForeignKey(
         Product, related_name='product_downloads',
-        on_delete=models.CASCADE, null=True, blank=True)
+        on_delete=models.SET_NULL, null=True, blank=True)
     service = models.ForeignKey(
-        Service, related_name='service_downloads', on_delete=models.CASCADE, null=True, blank=True)
+        Service, related_name='service_downloads', on_delete=models.SET_NULL, null=True, blank=True)
     file_url = models.URLField(max_length=1024, null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
 
@@ -136,9 +136,9 @@ class Transaction(models.Model):
                               on_delete=models.CASCADE,
                               related_name='buyer_transactions')
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, null=True, blank=True)
+        Product, on_delete=models.SET_NULL, null=True, blank=True)
     service = models.ForeignKey(
-        Service, on_delete=models.CASCADE, null=True, blank=True)
+        Service, on_delete=models.SET_NULL, null=True, blank=True)
     sku = models.CharField(max_length=64, null=True, blank=True)
     price = models.DecimalField(
         max_digits=6, decimal_places=2, null=True, blank=True)
