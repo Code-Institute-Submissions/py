@@ -3,16 +3,16 @@ from django.db import models
 from homepage.models import STATUS
 
 ITEM_TYPE = (
-    (0, 'pending'),
-    (1, 'ownership'),
-    (2, 'license'),
+    (0, 'Pending'),
+    (1, 'Ownership'),
+    (2, 'License'),
 )
 
 GATEWAY_TYPE = (
-    (0, 'pending'),
-    (1, 'stripe'),
-    (2, 'manual'),
-    (3, 'crypto'),
+    (0, 'Pending'),
+    (1, 'Stripe'),
+    (2, 'Manual'),
+    (3, 'Crypto'),
 )
 
 
@@ -58,6 +58,12 @@ class Product(models.Model):
     download_url = models.ManyToManyField(
         'Download', related_name='product_downloads', blank=True)
 
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
 
 class Service(models.Model):
     '''Service model for service instances, independent from Product model'''
@@ -99,9 +105,9 @@ class Service(models.Model):
 class Download(models.Model):
     product = models.ForeignKey(
         Product, related_name='product_downloads',
-        on_delete=models.CASCADE, blank=True)
+        on_delete=models.CASCADE, null=True, blank=True)
     service = models.ForeignKey(
-        Product, related_name='service_downloads' , on_delete=models.CASCADE, blank=True)
+        Service, related_name='service_downloads', on_delete=models.CASCADE, null=True, blank=True)
     file_url = models.URLField(max_length=1024, null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
 

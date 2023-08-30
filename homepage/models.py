@@ -2,20 +2,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 ROLES = (
-    (0, 'buyer'),
-    (1, 'admin'),
+    (0, 'Buyer'),
+    (1, 'Admin'),
 )
 
 USER_TYPE = (
-    (0, 'individual'),
-    (1, 'busisess'),
-    (2, 'developer'),
+    (0, 'Individual'),
+    (1, 'Busisess'),
+    (2, 'Developer'),
 )
 
 STATUS = (
-    (0, 'draft'),
-    (1, 'suspended'),
-    (2, 'active'),
+    (0, 'Draft'),
+    (1, 'Suspended'),
+    (2, 'Active'),
 )
 
 
