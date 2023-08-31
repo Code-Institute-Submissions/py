@@ -8,7 +8,7 @@ ROLES = (
 
 USER_TYPE = (
     (0, 'Individual'),
-    (1, 'Busisess'),
+    (1, 'Business'),
     (2, 'Developer'),
 )
 
