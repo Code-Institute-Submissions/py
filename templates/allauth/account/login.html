@@ -11,28 +11,6 @@
 
 {% get_providers as socialaccount_providers %}
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-  <a href="{{ signup_url }}">sign up</a> FRANK first.{% endblocktrans %}</p>
-{% endif %}
-
 <div id="layoutAuthentication">
   <div id="layoutAuthentication_content">
     <main>
@@ -40,15 +18,36 @@
         <div class="row justify-content-center">
           <div class="col-lg-5">
             <div class="card mb-5 shadow-lg border-0 rounded-lg mt-5">
-              <div class="card-header">
-                <h5 class="text-center font-weight-light my-1">{% trans "Social Media" %}</h5>
-              </div>
-              <div class="card-header">
-                <h5 class="text-center font-weight-light my-1">{% trans "Register" %}</h5>
-              </div>
-              <div class="card-header">
+              {% if socialaccount_providers %}
+              <a href="{{ signup_url }}" class="card-header">
+                <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+                <div class="socialaccount_ballot">
+
+                  <ul class="socialaccount_providers">
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                  </ul>
+
+                  <div class="login-or">{% trans 'or' %}</div>
+
+                </div>
+              </a>
+
+              {% include "socialaccount/snippets/login_extra.html" %}
+              {% endif %}
+
+              <a href="{{ signup_url }}" class="card-header btn">
+                <h5 class="text-center font-weight-light my-1">
+                  {% blocktrans %}
+                  Sign up
+                  {% endblocktrans %}</h5>
+              </a>
+
+              <a href="{% url 'account_login' %}" class="card-header btn">
                 <h5 class="text-center font-weight-light my-1">{% trans "Sign In" %}</h5>
-              </div>
+              </a>
 
               <!-- Messages -->
               {% if messages %}
@@ -129,7 +128,8 @@
                     </div>
                   </div>
                   <div class="text-center card-footer-margin">
-                    <button class="card-footer py-2 btn btn-primary-main fs-4" type="submit">{% trans "Enter" %}</button>
+                    <button class="card-footer py-2 btn btn-primary-main fs-5 fw-normal"
+                      type="submit">{% trans "Enter" %}</button>
                   </div>
                 </form>
               </div>
