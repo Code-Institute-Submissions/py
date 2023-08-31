@@ -9,38 +9,23 @@ from allauth.account.forms import LoginForm, SignupForm
 
 # Local Imports
 
-from .models import UserProfile
+from .models import UserProfile, USER_TYPE
 
 
-class CustomSignupForm(SignupForm, forms.ModelForm):
+class CustomSignupForm(SignupForm):
     first_name = forms.CharField(
         max_length=30, label='First Name', required=True)
     last_name = forms.CharField(
         max_length=30, label='Last Name', required=True)
+    type = forms.ChoiceField(choices=USER_TYPE, label='Account Type')
 
-    def save(self, request, commit=True):
+    def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.type = self.cleaned_data['type']
-        if commit:
-            user.save()
+        user.save()
         return user
-
-    class Meta:
-        model = UserProfile
-        fields = [
-            'type'
-        ]
-
-        labels = {
-            'type': 'Account Type',
-
-        }
-
-        help_texts = {
-            'type': 'Select Account Type',
-        }
 
 
 CustomLoginForm = LoginForm
