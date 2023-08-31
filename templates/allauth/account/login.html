@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -13,8 +13,8 @@
 
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
@@ -30,17 +30,115 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 {% else %}
 <p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+  <a href="{{ signup_url }}">sign up</a> FRANK first.{% endblocktrans %}</p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+<div id="layoutAuthentication">
+  <div id="layoutAuthentication_content">
+    <main>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="card mb-5 shadow-lg border-0 rounded-lg mt-5">
+              <div class="card-header">
+                <h5 class="text-center font-weight-light my-1">{% trans "Social Media" %}</h5>
+              </div>
+              <div class="card-header">
+                <h5 class="text-center font-weight-light my-1">{% trans "Register" %}</h5>
+              </div>
+              <div class="card-header">
+                <h5 class="text-center font-weight-light my-1">{% trans "Sign In" %}</h5>
+              </div>
+
+              <!-- Messages -->
+              {% if messages %}
+              <div class="alert m-3 card card-header-green py-1 text-center text-white alert-dismissible" role="alert">
+                <div class="col-12 card-body">
+                  {% for message in messages %}
+                  <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}
+                  </p>
+                  {% endfor %}
+                </div>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endif %}
+
+              <div class="card-body">
+
+                <form method="POST" action="{% url 'account_login' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+
+                  <!-- Custom username field -->
+                  {% with login_field=form.login %}
+                  <div class="form-floating mb-3">
+                    <input type="text" name="{{ login_field.name }}" placeholder="{{ login_field.label }}"
+                      autocomplete="username" maxlength="{{ login_field.field.max_length }}" required
+                      id="{{ login_field.auto_id }}"
+                      class="form-control {% if form.non_field_errors %}is-invalid{% endif %}"
+                      {% if login_field.value %} value="{{ login_field.value }}" {% endif %}>
+                    <label for="{{ login_field.auto_id }}">{{ login_field.label }} <small>(case
+                        sensitive)</small></label>
+                    {% if form.non_field_errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.non_field_errors %}
+                      {{ error }}
+                      {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="valid-feedback">
+                      {% trans "Looks good!" %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  {% endwith %}
+
+
+                  <!-- Custom password field -->
+                  {% with password_field=form.password %}
+                  <div class="form-floating mb-3">
+                    <input type="password" name="{{ password_field.name }}" placeholder="{{ password_field.label }}"
+                      autocomplete="current-password" maxlength="{{ password_field.field.max_length }}" required
+                      id="{{ password_field.auto_id }}" class="form-control" {% if password_field.value %}
+                      value="{{ password_field.value }}" {% endif %}>
+                    <label for="{{ password_field.auto_id }}">{{ password_field.label }}</label>
+                  </div>
+                  {% endwith %}
+
+
+                  <!-- Remember password checkbox -->
+                  {% with remember_field=form.remember%}
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" id="{{ remember_fieldauto_id }}" type="checkbox"
+                      name="{{ remember_field.name }}" {% if remember_field.value %} checked {% endif %}>
+                    <label class="form-check-label"
+                      for="{{ remember_field.auto_id }}">{{ remember_field.label }}</label>
+                  </div>
+                  {% endwith %}
+
+                  <!-- Submit button -->
+                  <div class="col-12 text-center">
+                    forgot password & terms & GDPR
+                    <div class="small">
+                      <p class="mb-0">{% blocktrans %}Not a member yet? Then please
+                        <a class="text-decoration-none fw-semibold text-warning" href="{{ signup_url }}">sign up
+                          now</a>{% endblocktrans %}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="text-center card-footer-margin">
+                    <button class="card-footer py-2 btn btn-primary-main fs-4" type="submit">{% trans "Enter" %}</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
 
 {% endblock %}

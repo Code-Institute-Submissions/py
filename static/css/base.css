@@ -1,3 +1,11 @@
 h1{
     color:green;
 }
+
+.card-footer-margin {
+    margin: 10px -16px -16px;
+}
+
+.btn-primary-main {
+    width: 100%;
+}
