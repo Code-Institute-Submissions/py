@@ -10,9 +10,9 @@ An agile approach was used before, during and after development. We have used:
 
 The user stories have undergone some modifications since their initial conception during the **user-centric design** phase at the **scope plane**. What follows is the finalized user story that guided our development process.
 
-- In total there are **34** user stories.
-- Only **24 must-have** user stories 
-- Only **10 won't have** user stories 
+- In total there are **34** user stories and **167** Story Points.
+<!-- - Only **24 must-have** user stories  -->
+<!-- - Only **10 won't have** user stories  -->
 
 #### Must-have
 
@@ -20,7 +20,7 @@ The user stories have undergone some modifications since their initial conceptio
 
     | Theme | Epics | User Stories | Story Point |
     |-------|-------|--------------|-------------|
-    | Homepage | Design Header | As a user, I want a clean, user-friendly header at the top of the page, so I can navigate easily and access the system's key features through the menu and dropdowns. | **2** |
+    | Homepage | Design Header | As a user, I want a clean, user-friendly header at the top of the page, so I can navigate easily and access the system's key features through the menu and dropdowns. | **4** |
     | | Arrange Mixed Products & Service Cards in Rows | As a user, I want a prominent 'Product & Service' section under the header, displaying a mix of 'products' and 'services' so I can quickly overview current entries. | **4** |
     | | | As a user, I want each card to display key product information, so I can click on what interests me. | **2** |
     | | | As a user, I want a 'see more' button under the 'Product & Service' section, so I can view expanded results on a separate page. | **1** |
@@ -31,8 +31,8 @@ The user stories have undergone some modifications since their initial conceptio
     | | | As a user, I want each card to display key 'Service' information, so I understand what I'm selecting. | **2** |
     | | | As a user, I want a 'see more' button under the 'Service' section, so I can access further results on a different page. | **1** |
     | | Construct Footer | As a user, I want to see a footer at the page's end, granting me access to additional vital information, social media links, useful links, newsletter and legal data, etc. | **2** |
-    | Sign in/up & Dashboard | Link to Header | As a user or admin, I want a header link to 'sign in or sign up', allowing me to validate my login details on a separate page and access my dashboard. | **2** |
-    | | Social Media Login | As a user or admin, I want the option to log in or sign up using a social media account, ensuring a secure and smooth interaction with the system. | **7** |
+    | Sign in/up & Dashboard | Link to Header | As a user or admin, I want a header link to 'sign in and  sign up', so that I can validate my login details on a separate page and access my dashboard. | **2** |
+    | | Social Media Login | As a user or admin, I want the option to log in or sign up using a social media account, so that I have a secure and smooth interaction with the system. | **7** |
     | | Create User & Admin Dashboard | As a user or admin, after logging in or signing up, I want a useful dashboard with key stats & menu options relevant to my role, enabling secure and efficient system interaction. | **7** |
     | | Build User & Admin Profile Management | As a user or admin, I want a section on the dashboard where I can edit and manage my profile, maintaining control over my data and safeguarding my privacy. | **7** |
     | | Implement Verification System & Badge | As a user or admin, I want to verify my account via email to access the software marketplace. | **4** |
