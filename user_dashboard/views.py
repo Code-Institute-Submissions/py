@@ -23,7 +23,7 @@ class UserRequiredMixin(UserPassesTestMixin):
 
 
 class UserDashboard(UserRequiredMixin, generic.DetailView):
-    """Display the dashboard for users."""
+    """Display the dashboard for users with 'role 0'."""
     model = UserProfile
     template_name = 'user-dashboard/dashboard.html'
     context_object_name = 'user_dashboard'

@@ -23,7 +23,7 @@ class AdminRequiredMixin(UserPassesTestMixin):
 
 
 class AdminDashboard(AdminRequiredMixin, generic.DetailView):
-    """Display the dashboard for admins."""
+    """Display the dashboard for users with 'role 1'."""
     model = UserProfile
     template_name = 'admin-dashboard/dashboard.html'
     context_object_name = 'admin_dashboard'

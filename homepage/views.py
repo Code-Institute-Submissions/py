@@ -12,7 +12,7 @@ from .forms import CustomLoginForm, CustomSignupForm
 
 
 class CustomLoginView(LoginView):
-    """Custom login view that redirects users to dashboard after login."""
+    """This view renders our custom login form"""
     form_class = CustomLoginForm
     template_name = 'account/login.html'
 
@@ -22,7 +22,7 @@ class CustomLoginView(LoginView):
 
 
 class CustomSignupView(SignupView):
-    """Custom signup view ready for adjustments."""
+    """This view renders our custom signup form"""
     form_class = CustomSignupForm
     template_name = 'account/signup.html'
 
