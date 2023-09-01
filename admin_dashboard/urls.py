@@ -1,9 +1,9 @@
 from django.urls import path, include
 
-# from .views import
+from .views import AdminDashboard
 
 
 urlpatterns = [
-    # path('login/', CustomLoginView.as_view(),
-    #      name='account_login'),
+    path('account/admin/', AdminDashboard.as_view(),
+         name='admin_dashboard'),
 ]
