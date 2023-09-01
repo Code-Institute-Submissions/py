@@ -15,7 +15,7 @@ from homepage.models import UserProfile
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
-    """Mixin to check for admin role (role 2) for access control."""
+    """Mixin to check for admin role (role 1) for access control."""
 
     def test_func(self):
         user_profile = self.request.user
@@ -25,7 +25,7 @@ class AdminRequiredMixin(UserPassesTestMixin):
 class AdminDashboard(AdminRequiredMixin, generic.DetailView):
     """Display the dashboard for admins."""
     model = UserProfile
-    template_name = 'dashboard/dashboard.html'
+    template_name = 'admin-dashboard/dashboard.html'
     context_object_name = 'admin_dashboard'
 
     def get_object(self, queryset=None):
