@@ -123,9 +123,11 @@ If you encounter an Error 400, scrutinize the error message from Google Auth. Up
 
 By following these steps meticulously, you should be well on your way to integrating Google OAuth 2.0 into your Django application.
 
-### STEP 4: Login button:
+### STEP 4: Login Button
 
-We have created the following button
+We have created the following Google Login button:
+
+- [Logo Images](https://developers.google.com/identity/branding-guidelines)
 
 === "HTML"
 
