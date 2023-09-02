@@ -1,0 +1,107 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid p-5">
+            <h1 class="mt-4">Admin Settings</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Update your information or delete your account</li>
+            </ol>
+
+            <!-- Messages -->
+            {% if messages %}
+            <div class="row my-3 alert card card-header-green py-1 text-center text-white alert-dismissible"
+                role="alert">
+                <div class="col-12 card-body">
+                    {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            <form class="row g-3 needs-validation" method="POST" action="{% url 'admin_settings' %}" novalidate>
+                {% csrf_token %}
+                {% if admin_settings.role == 1 %}
+
+                <!-- Firstname -->
+                <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="validationCustom01"
+                        value="{{ admin_settings.first_name}}" name="first_name" required>
+                </div>
+
+                <!-- Lastname -->
+                <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="validationCustom02"
+                        value="{{ admin_settings.last_name}}" name="last_name" required>
+                </div>
+                {% endif %}
+
+                <!-- Username -->
+                <div class="col-md-4">
+                    <label for="validationCustomUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" value="{{ admin_settings.username}}"
+                            class="form-control {% if form.errors.username %}is-invalid{% endif %} bg-light bg-gradient"
+                            id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required
+                            readonly>
+                        {% if form.errors.username %}
+                        <div class="invalid-feedback">
+                            {% for error in form.errors.username %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">Email</label>
+                    <input type="email" value="{{ admin_settings.email}}"
+                        class="form-control {% if form.errors.email %}is-invalid{% endif %}" id="validationCustom03"
+                        name="email" required>
+                    {% if form.errors.email %}
+                    <div class="invalid-feedback">
+                        {% for error in form.errors.email %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Role -->
+                <div class="col-md-3">
+                    <label for="validationCustom04" class="form-label">Role</label>
+                    <input type="text" value="{{ admin_settings.get_role_display}}" name="role"
+                        class="form-control bg-light bg-gradient" id="validationCustom04" required readonly>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Status</label>
+                    <input type="text" value="{{ admin_settings.get_status_display }}" name="status"
+                        class="form-control bg-light bg-gradient" id="validationCustom05" required readonly>
+                </div>
+
+                <!-- Update Account -->
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary-blue" type="submit">Update Account</button>
+                </div>
+
+                <!-- Change Password -->
+                <div class="col-12 text-center">
+                    <a class="btn btn-primary-blue" href="">Change Password</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

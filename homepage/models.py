@@ -21,6 +21,8 @@ STATUS = (
 
 class UserProfile(AbstractUser):
     """Extended user profile with custom attributes."""
+    email = models.EmailField(
+        unique=True)
     role = models.IntegerField(choices=ROLES, default=0)
     type = models.IntegerField(choices=USER_TYPE, default=0)
     status = models.IntegerField(choices=STATUS, default=2)
