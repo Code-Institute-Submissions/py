@@ -45,7 +45,7 @@
 
               <!-- Messages -->
               {% if messages %}
-              <div class="alert m-3 card card-header-green py-1 text-center text-white alert-dismissible" role="alert">
+              <div class="alert m-3 card card-header alert-success py-1 text-center text-black alert-dismissible" role="alert">
                 <div class="col-12 card-body">
                   {% for message in messages %}
                   <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}
