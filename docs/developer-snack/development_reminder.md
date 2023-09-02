@@ -78,6 +78,42 @@ class PostAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug', 'status', 'created_on')
     summernote_fields = ('content')
     ordering = ('-created_on',)
+
+# OR
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'username',
+        'email',
+        'role',
+        'type',
+        'status',
+    )
+
+    list_filter = ('role', 'type', 'status')
+    search_fields = ['username', 'email', 'role', 'type', 'status']
+
+    ordering = ('username',)
+
+
+class CommentAdmin(SummernoteModelAdmin):
+    list_display = (
+        'writer',
+        'product',
+        'service',
+        'comment',
+        'created_on',
+    )
+
+    list_filter = ('created_on', 'product', 'service')
+    search_fields = ['comment', 'created_on']
+
+    summernote_fields = ('comment')
+
+    ordering = ('-created_on',)
+
+admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Comment, CommentAdmin)
 ```
 
 With these steps, you'll have Summernote integrated into your Django Admin for the `Post` model, and you've enhanced the admin features for better usability.

@@ -40,6 +40,7 @@ else:
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'allauth.socialaccount.providers.google',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -96,7 +97,10 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1  # for social media callback
+if IN_DEVELOPMENT:
+    SITE_ID = 2  # ID for development domain
+else:
+    SITE_ID = 1  # ID for production domain
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -112,6 +116,16 @@ LOGOUT_REDIRECT_URL = '/login/'
 ACCOUNT_LOGIN_REDIRECT_URL = 'role_redirect'
 
 WSGI_APPLICATION = 'django_plexosoft.wsgi.application'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': os.environ.get('GOOGLE_CLIENT_ID'),
+            'secret': os.environ.get('GOOGLE_SECRET'),
+            'key': ''
+        }
+    }
+}
 
 
 # Database
