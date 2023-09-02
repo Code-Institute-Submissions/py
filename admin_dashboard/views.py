@@ -45,7 +45,7 @@ class AdminSettingsForm(forms.ModelForm):
         model = UserProfile
         fields = ['first_name', 'last_name', 'email', 'username']
 
-# UPDATE
+# UPDATE settings
 
 
 class AdminSettingsView(AdminRequiredMixin, UpdateView):

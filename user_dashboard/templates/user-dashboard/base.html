@@ -11,19 +11,19 @@
     <meta name="description" content="User Dashboard" />
     <meta name="author" content="Frank Arellano" />
     <title>{% block title %}User Dashboard - Plexosoft{% endblock %}</title>
-    
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static 'frontend/assets/favicon.ico' %}" />
 
     <!-- Tables SB Admin (https://startbootstrap.com/template/sb-admin) -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    
+
     <!-- Dashboard SB Admin (https://startbootstrap.com/template/sb-admin)-->
     <link href="{% static 'backend/css/styles.css' %}" rel="stylesheet" />
 
     <!-- Fontawesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'custom/css/style.css' %}">
 </head>
@@ -31,7 +31,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="{% url 'user_dashboard' %}">My Dashboard</a>
+        <a class="navbar-brand ps-3" href="{% url 'buyer_dashboard' %}">My Dashboard</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -43,12 +43,13 @@
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">Homepage</a></li>
-                        <li><a class="dropdown-item" href="">Settings</a></li>
+                        <li><a class="dropdown-item" href="{% url 'buyer_settings' %}">Settings</a></li>
 
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="">Logout</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -60,7 +61,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="{% url 'user_dashboard' %}">
+                        <a class="nav-link" href="{% url 'buyer_dashboard' %}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -149,6 +150,29 @@
                 </div>
             </nav>
         </div>
+        <!-- LOGOUT Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="modal-content" method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to sign out?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Logout</button>
+                        <button type="button" class="btn btn-success m-2" data-bs-dismiss="modal"
+                            aria-label="Close">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         {% block content %}
 
         {% endblock content %}
@@ -156,7 +180,7 @@
     <footer class="py-4 bg-light mt-4">
         <div class="container-fluid p-5">
             <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">        © {{ copyright }} Copyright
+                <div class="text-muted"> © {{ copyright }} Copyright
                     <a class="text-reset fw-bold" href="https://github.com/plexoio/py">Plexosoft</a></div>
                 <div>
                     <a href="" target="_blank">Privacy Policy</a>

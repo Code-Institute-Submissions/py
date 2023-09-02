@@ -109,10 +109,8 @@
                             <li><a class="dropdown-item" href="{% url 'account_login' %}">Dashboard</a></li>
 
                             {% if request.user.role == 0 %}
-                            <li><a class="dropdown-item" href="{% url 'admin_settings' %}">Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'buyer_settings' %}">Settings</a></li>
                             {% elif request.user.role == 1  %}
-                            <li><a class="dropdown-item" href="{% url 'admin_settings' %}">Settings</a></li>
-                            {% elif request.user.role == 2  %}
                             <li><a class="dropdown-item" href="{% url 'admin_settings' %}">Settings</a></li>
                             {%endif%}
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"

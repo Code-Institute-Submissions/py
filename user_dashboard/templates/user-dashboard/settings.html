@@ -1,11 +1,11 @@
-{% extends "admin-dashboard/base.html" %}
+{% extends "user-dashboard/base.html" %}
 {% load i18n %}
 
 {% block content%}
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid p-5">
-            <h1 class="mt-4">Admin Settings</h1>
+            <h1 class="mt-4">My Settings</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Update your information or delete your account</li>
             </ol>
@@ -19,19 +19,19 @@
                     <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}</p>
                     {% endfor %}
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close text-black" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endif %}
 
-            <form class="row g-3 needs-validation" method="POST" action="{% url 'admin_settings' %}" novalidate>
+            <form class="row g-3 needs-validation" method="POST" action="{% url 'buyer_settings' %}" novalidate>
                 {% csrf_token %}
-                {% if admin_settings.role == 1 %}
+                {% if buyer_settings.role == 0 %}
 
                 <!-- Firstname -->
                 <div class="col-md-4">
                     <label for="validationCustom01" class="form-label">First name</label>
                     <input type="text" class="form-control {% if form.errors.first_name %}is-invalid{% endif %}"
-                        id="validationCustom01" value="{{ admin_settings.first_name}}" name="first_name" required>
+                        id="validationCustom01" value="{{ buyer_settings.first_name }}" name="first_name" required>
                     {% if form.errors.first_name %}
                     <div class="invalid-feedback">
                         {% for error in form.errors.first_name %}
@@ -45,7 +45,7 @@
                 <div class="col-md-4">
                     <label for="validationCustom02" class="form-label">Last name</label>
                     <input type="text" class="form-control {% if form.errors.last_name %}is-invalid{% endif %}"
-                        id="validationCustom02" value="{{ admin_settings.last_name}}" name="last_name" required>
+                        id="validationCustom02" value="{{ buyer_settings.last_name }}" name="last_name" required>
                     {% if form.errors.last_name %}
                     <div class="invalid-feedback">
                         {% for error in form.errors.last_name %}
@@ -61,7 +61,7 @@
                     <label for="validationCustomUsername" class="form-label">Username</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" value="{{ admin_settings.username}}"
+                        <input type="text" value="{{ buyer_settings.username }}"
                             class="form-control {% if form.errors.username %}is-invalid{% endif %} bg-light bg-gradient"
                             id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required
                             readonly>
@@ -78,7 +78,7 @@
                 <!-- Email -->
                 <div class="col-md-6">
                     <label for="validationCustom03" class="form-label">Email</label>
-                    <input type="email" value="{{ admin_settings.email}}"
+                    <input type="email" value="{{ buyer_settings.email}}"
                         class="form-control {% if form.errors.email %}is-invalid{% endif %}" id="validationCustom03"
                         name="email" required>
                     {% if form.errors.email %}
@@ -93,7 +93,7 @@
                 <!-- Role -->
                 <div class="col-md-3">
                     <label for="validationCustom04" class="form-label">Role</label>
-                    <input type="text" value="{{ admin_settings.get_role_display}}" name="role"
+                    <input type="text" value="{{ buyer_settings.get_role_display}}" name="role"
                         class="form-control {% if form.errors.role %}is-invalid{% endif %} bg-light bg-gradient"
                         id="validationCustom04" required readonly>
                     {% if form.errors.role %}
@@ -108,7 +108,7 @@
                 <!-- Status -->
                 <div class="col-md-3">
                     <label for="validationCustom05" class="form-label">Status</label>
-                    <input type="text" value="{{ admin_settings.get_status_display }}" name="status"
+                    <input type="text" value="{{ buyer_settings.get_status_display }}" name="status"
                         class="form-control {% if form.errors.status %}is-invalid{% endif %} bg-light bg-gradient"
                         id="validationCustom05" required readonly>
                     {% if form.errors.status %}
