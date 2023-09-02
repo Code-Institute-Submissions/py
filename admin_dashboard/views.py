@@ -30,3 +30,8 @@ class AdminDashboard(AdminRequiredMixin, generic.DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(UserProfile, pk=self.request.user.pk)
+
+    def get_success_url(self):
+        messages.success(
+            self.request, 'You have been logged in successfully!')
+        return self.request.path
