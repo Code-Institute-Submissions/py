@@ -17,20 +17,10 @@
           <div class="col-lg-5">
             <div class="card mb-5 shadow-lg border-0 rounded-lg mt-5">
               {% if socialaccount_providers %}
-              <a href="{{ signup_url }}" class="card-header">
-                <p>{% blocktrans with site.name as site_name %}Please sign in with one
-                  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-                <div class="socialaccount_ballot">
-
-                  <ul class="socialaccount_providers">
-                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                  </ul>
-
-                  <div class="login-or">{% trans 'or' %}</div>
-
-                </div>
+              <!-- Google Login Button -->
+              <a href="{% provider_login_url 'google' method='oauth2' %}" class="btn google-button">
+                <span class="google-icon"></span>
+                <span class="btn-text text-center">Sign in with Google</span>
               </a>
 
               {% include "socialaccount/snippets/login_extra.html" %}
@@ -45,7 +35,8 @@
 
               <!-- Messages -->
               {% if messages %}
-              <div class="alert m-3 card card-header alert-success py-1 text-center text-black alert-dismissible" role="alert">
+              <div class="alert m-3 card card-header alert-success py-1 text-center text-black alert-dismissible"
+                role="alert">
                 <div class="col-12 card-body">
                   {% for message in messages %}
                   <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}
@@ -121,7 +112,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="text-center card-footer-margin">
+                  <div class="text-center card-margin-footer">
                     <button class="card-footer py-2 btn btn-primary-main fs-5 fw-normal"
                       type="submit">{% trans "Enter" %}</button>
                   </div>
@@ -134,5 +125,6 @@
     </main>
   </div>
 </div>
+
 
 {% endblock %}

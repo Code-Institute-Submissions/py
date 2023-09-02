@@ -122,3 +122,58 @@ else:
 If you encounter an Error 400, scrutinize the error message from Google Auth. Update the 'Authorized Redirect URIs' and 'Authorized JavaScript Origins' in the Google Cloud Console to match the URI provided in the error message. For example, you might need to add a Heroku-specific domain like `https://your-app-name.herokuapp.com`.
 
 By following these steps meticulously, you should be well on your way to integrating Google OAuth 2.0 into your Django application.
+
+### STEP 4: Login button:
+
+We have created the following button
+
+=== "HTML"
+
+    ``` html
+    ...
+    {% get_providers as socialaccount_providers %}
+        {% if socialaccount_providers %}
+
+        <!-- Google Login Button -->
+        <a href="{% provider_login_url 'google' method='oauth2' %}" class="btn google-button">
+            <span class="google-icon"></span>
+            <span class="btn-text text-center">Sign in with Google</span>
+        </a>
+
+        {% include "socialaccount/snippets/login_extra.html" %}
+        {% endif %}
+    ...
+    ```
+
+=== "CSS"
+
+    ``` css
+    /* Google Button Login */
+    .google-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #4285F4;
+        color: white;
+        border-radius: 5px 5px 0px 0px;
+        /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25); */
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+
+    .google-icon {
+        background: url('/static/frontend/assets/btn_google_light_normal_ios.svg') transparent 5px 50% no-repeat;
+        display: inline-block;
+        vertical-align: middle;
+        width: 60px;
+        height: 42px;
+    }
+
+    .btn-text {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    ```

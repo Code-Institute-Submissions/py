@@ -1,15 +1,56 @@
+@font-face {
+    font-family: "Roboto";
+    src: url('../../font/roboto/Roboto-Regular.ttf');
+    font-display: swap;
+}
+
 a {
     text-decoration: none !important;
 }
 
-h1{
-    color:green;
+h1 {
+    color: green;
 }
 
-.card-footer-margin {
+.card-header {
+    border-radius: 0px;
+}
+
+.card-margin-footer {
     margin: 10px -16px -16px;
 }
 
+
 .btn-primary-main {
     width: 100%;
+}
+
+
+/* Google Button Login */
+.google-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4285F4;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
+    /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25); */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.google-icon {
+    background: url('/static/frontend/assets/btn_google_light_normal_ios.svg') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+    height: 42px;
+}
+
+.btn-text {
+    font-size: 14px;
+    font-weight: 500;
 }
