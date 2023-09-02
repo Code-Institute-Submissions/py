@@ -40,6 +40,7 @@ nav:
       - Make Documentation: developer-snack/mkdoc/mkdoc.md
       - Developer Reminder: developer-snack/development_reminder.md
       - Google Auth Installation: developer-snack/google_auth.md
+      - Common Bugs: developer-snack/common_bugs.md
   - About:
       - Plexosoft Docs: about.md
       - License: LICENSE.md
