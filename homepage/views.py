@@ -27,9 +27,9 @@ class CustomSignupView(SignupView):
     template_name = 'account/signup.html'
 
 
-# class CustomLogoutView(LogoutView):
-#     """Custom logout view ready for adjustments."""
-#     template_name = 'account/logout.html'
+class CustomLogoutView(LogoutView):
+    """This view renders our logout page."""
+    template_name = 'account/logout.html'
 
 
 class homepage(generic.TemplateView):
