@@ -62,7 +62,7 @@ class Product(models.Model):
     # Metadata and ManyToManyField Relationship
     author = models.ForeignKey(
         'homepage.UserProfile', on_delete=models.SET_NULL,
-        related_name='product_authors')
+        related_name='product_authors', null=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -119,7 +119,7 @@ class Service(models.Model):
     # Metadata and ManyToManyField Relationship
     author = models.ForeignKey(
         'homepage.UserProfile', on_delete=models.SET_NULL,
-        related_name='service_authors')
+        related_name='service_authors', null=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -167,7 +167,8 @@ class Download(models.Model):
 class Transaction(models.Model):
     buyer = models.ForeignKey('homepage.UserProfile',
                               on_delete=models.SET_NULL,
-                              related_name='buyer_transactions')
+                              related_name='buyer_transactions',
+                              null=True)
 
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, null=True, blank=True)
