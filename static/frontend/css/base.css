@@ -13,6 +13,22 @@ a {
     border-radius: 0px;
     background-color: #2980B9;
     color: white;
+    border-bottom: 1px solid #dadada;
+}
+
+.card-header:hover {
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+
+.card-footer {
+    border-radius: 0px;
+    background-color: #2980B9;
+    color: white;
+}
+
+.card-footer:hover {
+    border-top: 1px solid #dadada;
 }
 
 .card-margin-footer {
@@ -24,14 +40,32 @@ a {
     width: 100%;
 }
 
+.alert-plexosoft {
+    background-color: #297fb938 !important;
+    border: 1px solid #dadada;
+}
+
+.bg-white-border {
+    background-color: #fff;
+    border: 1px solid #dadada;
+    color: #333333 !important;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.bg-white-border:hover {
+    background-color:#2980B9;
+    color: #fff !important;
+    transition: 0.3s;
+}
 
 /* Google Button Login */
 .google-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #4285F4;
-    color: white;
+    background-color: #fff;
+    color: #000;
     border-radius: 5px 5px 0px 0px;
     /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25); */
     font-family: 'Roboto', sans-serif;
@@ -39,6 +73,14 @@ a {
     font-size: 14px;
     display: flex;
     align-items: center;
+    transition: 0.3s;
+}
+
+.google-button:hover {
+    border-bottom: 1px solid #dadada;
+    background-color: #2980B9;
+    color: #fff;
+    transition: 0.3s;
 }
 
 .google-icon {
@@ -128,12 +170,12 @@ i {
     transition: 0.3s;
 }
 
-.fa-user{
+.fa-user {
     color: #ffffff !important;
     transition: 0.3s;
 }
 
-.fa-user:hover{
+.fa-user:hover {
     color: #dadada !important;
     transition: 0.3s;
 }
