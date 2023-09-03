@@ -43,8 +43,9 @@
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">Homepage</a></li>
+                        {% if request.user.role == 0 %}
                         <li><a class="dropdown-item" href="{% url 'buyer_settings' %}">Settings</a></li>
-
+                        {% endif %}
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
