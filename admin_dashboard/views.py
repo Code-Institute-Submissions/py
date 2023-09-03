@@ -23,7 +23,7 @@ class AdminRequiredMixin(UserPassesTestMixin):
 
 
 class AdminDashboard(AdminRequiredMixin, generic.DetailView):
-    """Display the dashboard for users with 'role 1'."""
+    """Display the dashboard for users with 'role 1'. Redirect to the same page."""
     model = UserProfile
     template_name = 'admin-dashboard/dashboard.html'
     context_object_name = 'admin_dashboard'
@@ -49,7 +49,7 @@ class AdminSettingsForm(forms.ModelForm):
 
 
 class AdminSettingsView(AdminRequiredMixin, UpdateView):
-    """Handle Admin Data Update in settings"""
+    """Handle Admin Data Update in settings. Redirect to the same page."""
     model = UserProfile
     form_class = AdminSettingsForm
     template_name = 'admin-dashboard/settings.html'

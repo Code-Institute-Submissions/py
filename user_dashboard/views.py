@@ -45,7 +45,7 @@ class BuyerProfileForm(forms.ModelForm):
 
 
 class BuyerSettings(BuyerRequiredMixin, UpdateView):
-    """View for updating buyer's settings."""
+    """View for updating buyer's settings. Redirect to the same page."""
     model = UserProfile
     form_class = BuyerProfileForm
     template_name = 'user-dashboard/settings.html'
@@ -79,3 +79,23 @@ class BuyerDelete(BuyerRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Your account has been deleted!')
         return reverse_lazy('account_login')
+
+# PASSWORD Change
+
+
+class BuyerPasswordChangeForm(PasswordChangeForm):
+    """Form for changing the buyer's password."""
+
+    class Meta:
+        fields = ['old_password', 'new_password1', 'new_password2']
+
+
+class BuyerPasswordChange(BuyerRequiredMixin, PasswordChangeView):
+    """View for changing the buyer's password. Redirect to the same page."""
+    template_name = 'user-dashboard/password_change.html'
+    form_class = BuyerPasswordChangeForm
+    context_object_name = 'buyer_change_password'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your password has changed!')
+        return self.request.path
