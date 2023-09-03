@@ -77,7 +77,10 @@
 
                 <!-- Email -->
                 <div class="col-md-6">
-                    <label for="validationCustom03" class="form-label">Email</label>
+                    <label for="validationCustom03"
+                        class="form-label">Email {% if get_verified_email.verified %}<small>(Verified)</small>{% else %}<small>(Not
+                            verified)</small>{% endif %}
+                    </label>
                     <input type="email" value="{{ buyer_settings.email}}"
                         class="form-control {% if form.errors.email %}is-invalid{% endif %}" id="validationCustom03"
                         name="email" required>
