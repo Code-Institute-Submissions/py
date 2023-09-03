@@ -35,9 +35,11 @@
 </head>
 
 <body class="sb-nav-fixed">
+
+    <!-- Navbar -->
     <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="{% url 'admin_dashboard' %}">My Dashboard</a>
+        <a class="navbar-brand ps-3" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -61,6 +63,8 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Sidenav -->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
@@ -73,56 +77,56 @@
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <!-- User Management -->
+                        <!-- Product & Services Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            User Management
+                            Placeholder
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Verification Requests (pending)</a>
+                                <a class="nav-link" href="#">Placeholder</a>
                             </nav>
                         </div>
 
-                        <!--  Event Management -->
+                        <!--  Product Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Event Management
+                            Placeholder
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
 
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="">Created</a>
-                                <a class="nav-link" href="">Pending</a>
+                                <a class="nav-link" href="">Placeholder</a>
+                                <a class="nav-link" href="">Placeholder</a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                     data-bs-target="#pagesCollapseEvent" aria-expanded="false"
                                     aria-controls="pagesCollapseEvent">
-                                    Admin
+                                    Placeholder
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="pagesCollapseEvent" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Create</a>
+                                        <a class="nav-link" href="">Placeholder</a>
                                     </nav>
                                 </div>
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                     data-bs-target="#pagesCollapseAuth" aria-expanded="false"
                                     aria-controls="pagesCollapseAuth">
-                                    User
+                                    Placeholder
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Vote History</a>
+                                        <a class="nav-link" href="">Placeholder</a>
                                     </nav>
                                 </div>
                             </nav>
@@ -132,20 +136,22 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRoles"
                             aria-expanded="false" aria-controls="collapseRoles">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Role Management
+                            Placeholder
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseRoles" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="">My Role</a>
+                                <a class="nav-link" href="">Placeholder</a>
                             </nav>
                         </div>
 
                     </div>
                 </div>
+
+                <!-- Sidenav Footer -->
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:
+                    <div class="small">Online as:
                         <span class="px-1"><strong>{{ request.user.username }}
                                 {% if request.user.role == 1 %}
                                 <i class="fa-solid fa-staff-snake px-1 fs-4 text"></i>
@@ -174,16 +180,19 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Logout</button>
-                        <button type="button" class="btn btn-success m-2" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                        <button type="button" class="btn btn-success m-2" data-bs-dismiss="modal"
+                            aria-label="Close">Close</button>
                     </div>
                 </form>
             </div>
         </div>
-        
+
         {% block content %}
 
         {% endblock content %}
     </div>
+
+    <!-- Template Footer -->
     <footer class="py-4 bg-light mt-4">
         <div class="container-fluid p-5">
             <div class="d-flex align-items-center justify-content-between small">
