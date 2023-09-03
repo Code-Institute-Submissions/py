@@ -2,146 +2,131 @@
 {% load i18n %}
 
 {% block content%}
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container-fluid p-5">
-            <h1 class="mt-4">My Settings</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Update your information or delete your account</li>
-            </ol>
+<main>
+    <div class="container-fluid mt-4 px-5">
+        <h1>My Settings</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Update your information or delete your account</li>
+        </ol>
 
-            <!-- Messages -->
-            {% if messages %}
-            <div class="row my-3 alert card card-header alert-success py-1 text-center text-black alert-dismissible"
-                role="alert">
-                <div class="col-12 card-body">
-                    {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}</p>
+        <form class="row g-3 needs-validation" method="POST" action="{% url 'buyer_settings' %}" novalidate>
+            {% csrf_token %}
+            {% if buyer_settings.role == 0 %}
+
+            <!-- Firstname -->
+            <div class="col-md-4">
+                <label for="validationCustom01" class="form-label">First name</label>
+                <input type="text" class="form-control {% if form.errors.first_name %}is-invalid{% endif %}"
+                    id="validationCustom01" value="{{ buyer_settings.first_name }}" name="first_name" required>
+                {% if form.errors.first_name %}
+                <div class="invalid-feedback">
+                    {% for error in form.errors.first_name %}
+                    {{ error }}
                     {% endfor %}
                 </div>
-                <button type="button" class="btn-close text-black" data-bs-dismiss="alert" aria-label="Close"></button>
+                {% endif %}
+            </div>
+
+            <!-- Lastname -->
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">Last name</label>
+                <input type="text" class="form-control {% if form.errors.last_name %}is-invalid{% endif %}"
+                    id="validationCustom02" value="{{ buyer_settings.last_name }}" name="last_name" required>
+                {% if form.errors.last_name %}
+                <div class="invalid-feedback">
+                    {% for error in form.errors.last_name %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             {% endif %}
 
-            <form class="row g-3 needs-validation" method="POST" action="{% url 'buyer_settings' %}" novalidate>
-                {% csrf_token %}
-                {% if buyer_settings.role == 0 %}
-
-                <!-- Firstname -->
-                <div class="col-md-4">
-                    <label for="validationCustom01" class="form-label">First name</label>
-                    <input type="text" class="form-control {% if form.errors.first_name %}is-invalid{% endif %}"
-                        id="validationCustom01" value="{{ buyer_settings.first_name }}" name="first_name" required>
-                    {% if form.errors.first_name %}
+            <!-- Username -->
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Username</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" value="{{ buyer_settings.username }}"
+                        class="form-control {% if form.errors.username %}is-invalid{% endif %} bg-light bg-gradient"
+                        id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required
+                        readonly>
+                    {% if form.errors.username %}
                     <div class="invalid-feedback">
-                        {% for error in form.errors.first_name %}
+                        {% for error in form.errors.username %}
                         {{ error }}
                         {% endfor %}
                     </div>
                     {% endif %}
                 </div>
+            </div>
 
-                <!-- Lastname -->
-                <div class="col-md-4">
-                    <label for="validationCustom02" class="form-label">Last name</label>
-                    <input type="text" class="form-control {% if form.errors.last_name %}is-invalid{% endif %}"
-                        id="validationCustom02" value="{{ buyer_settings.last_name }}" name="last_name" required>
-                    {% if form.errors.last_name %}
-                    <div class="invalid-feedback">
-                        {% for error in form.errors.last_name %}
-                        {{ error }}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+            <!-- Email -->
+            <div class="col-md-6">
+                <label for="validationCustom03" class="form-label">Email
+                    {% if get_verified_email.verified %}<small>(Verified)</small>{% else %}<small>(Not
+                        verified)</small>{% endif %}
+                </label>
+                <input type="email" value="{{ buyer_settings.email}}"
+                    class="form-control {% if form.errors.email %}is-invalid{% endif %}" id="validationCustom03"
+                    name="email" required>
+                {% if form.errors.email %}
+                <div class="invalid-feedback">
+                    {% for error in form.errors.email %}
+                    {{ error }}
+                    {% endfor %}
                 </div>
                 {% endif %}
+            </div>
 
-                <!-- Username -->
-                <div class="col-md-4">
-                    <label for="validationCustomUsername" class="form-label">Username</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" value="{{ buyer_settings.username }}"
-                            class="form-control {% if form.errors.username %}is-invalid{% endif %} bg-light bg-gradient"
-                            id="validationCustomUsername" name="username" aria-describedby="inputGroupPrepend" required
-                            readonly>
-                        {% if form.errors.username %}
-                        <div class="invalid-feedback">
-                            {% for error in form.errors.username %}
-                            {{ error }}
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="col-md-6">
-                    <label for="validationCustom03"
-                        class="form-label">Email {% if get_verified_email.verified %}<small>(Verified)</small>{% else %}<small>(Not
-                            verified)</small>{% endif %}
-                    </label>
-                    <input type="email" value="{{ buyer_settings.email}}"
-                        class="form-control {% if form.errors.email %}is-invalid{% endif %}" id="validationCustom03"
-                        name="email" required>
-                    {% if form.errors.email %}
-                    <div class="invalid-feedback">
-                        {% for error in form.errors.email %}
-                        {{ error }}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-
-                <!-- Role -->
-                <div class="col-md-3">
-                    <label for="validationCustom04" class="form-label">Role</label>
-                    <input type="text" value="{{ buyer_settings.get_role_display}}" name="role"
-                        class="form-control {% if form.errors.role %}is-invalid{% endif %} bg-light bg-gradient"
-                        id="validationCustom04" required readonly>
-                    {% if form.errors.role %}
-                    <div class="invalid-feedback">
-                        {% for error in form.errors.role %}
-                        {{ error }}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-
-                <!-- Status -->
-                <div class="col-md-3">
-                    <label for="validationCustom05" class="form-label">Status</label>
-                    <input type="text" value="{{ buyer_settings.get_status_display }}" name="status"
-                        class="form-control {% if form.errors.status %}is-invalid{% endif %} bg-light bg-gradient"
-                        id="validationCustom05" required readonly>
-                    {% if form.errors.status %}
-                    <div class="invalid-feedback">
-                        {% for error in form.errors.status %}
-                        {{ error }}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-
-                <!-- Update Account -->
-                <div class="col-12 text-center">
-                    <button class="btn btn-primary-blue" type="submit">Update Account</button>
-                </div>
-
-                <!-- Change Password -->
-                <div class="col-12 text-center">
-                    <a class="btn btn-primary-blue" href="{% url 'buyer_change_password' %}">Change Password</a>
-                </div>
-
-                <!-- Delete Account -->
-                {% if buyer_settings.role == 0 %}
-                <div class="col-12 text-center">
-                    <a class="btn btn-danger" href="{% url 'buyer_delete' %}">Delete Account</a>
+            <!-- Role -->
+            <div class="col-md-3">
+                <label for="validationCustom04" class="form-label">Role</label>
+                <input type="text" value="{{ buyer_settings.get_role_display}}" name="role"
+                    class="form-control {% if form.errors.role %}is-invalid{% endif %} bg-light bg-gradient"
+                    id="validationCustom04" required readonly>
+                {% if form.errors.role %}
+                <div class="invalid-feedback">
+                    {% for error in form.errors.role %}
+                    {{ error }}
+                    {% endfor %}
                 </div>
                 {% endif %}
-            </form>
-        </div>
-    </main>
-</div>
+            </div>
+
+            <!-- Status -->
+            <div class="col-md-3">
+                <label for="validationCustom05" class="form-label">Status</label>
+                <input type="text" value="{{ buyer_settings.get_status_display }}" name="status"
+                    class="form-control {% if form.errors.status %}is-invalid{% endif %} bg-light bg-gradient"
+                    id="validationCustom05" required readonly>
+                {% if form.errors.status %}
+                <div class="invalid-feedback">
+                    {% for error in form.errors.status %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Update Account -->
+            <div class="col-12 text-center">
+                <button class="btn btn-primary-blue" type="submit">Update Account</button>
+            </div>
+
+            <!-- Change Password -->
+            <div class="col-12 text-center">
+                <a class="btn btn-primary-blue" href="{% url 'buyer_change_password' %}">Change Password</a>
+            </div>
+
+            <!-- Delete Account -->
+            {% if buyer_settings.role == 0 %}
+            <div class="col-12 text-center">
+                <a class="btn btn-danger" href="{% url 'buyer_delete' %}">Delete Account</a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</main>
 
 {% endblock %}

@@ -2,38 +2,38 @@
 {% load i18n %}
 
 {% block content%}
-<div id="layoutSidenav_content">
-    <main>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header">
-                            <h4 class="text-center font-weight-light my-4">{% trans "Delete Account" %}</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-                            <ul class="list-group my-3 rounded">
-                                <li class="list-group-item text-center text-white bg-danger" aria-current="true">
-                                    IMPORTANT</li>
-                                <li class="list-group-item">Only your username, first name, last name, email & password, etc. will be deleted</li>
-                                <li class="list-group-item">Likes will not be deleted</li>
-                                <li class="list-group-item">Comments will not be deleted</li>
-                                <li class="list-group-item">Newsletter email will not be deleted from this point</li>
-                                <li class="list-group-item">Transactions will not be deleted for legal reasons</li>
-                            </ul>
-                            <form method="post">
-                                {% csrf_token %}
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    <a href="{% url 'buyer_settings' %}" class="btn btn-primary-blue">Go back</a>
-                                </div>
-                            </form>
-                        </div>
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-4">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">{% trans "Delete Account" %}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+                        <ul class="list-group my-3 rounded">
+                            <li class="list-group-item text-center text-white bg-danger" aria-current="true">
+                                IMPORTANT</li>
+                            <li class="list-group-item">Only your username, first name, last name, email & password,
+                                etc. will be deleted</li>
+                            <li class="list-group-item">Likes will not be deleted</li>
+                            <li class="list-group-item">Comments will not be deleted</li>
+                            <li class="list-group-item">Newsletter email will not be deleted from this point</li>
+                            <li class="list-group-item">Transactions will not be deleted for legal reasons</li>
+                        </ul>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <a href="{% url 'buyer_settings' %}" class="btn btn-primary-blue">Go back</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-</div>
+    </div>
+</main>
+
 {% endblock %}
