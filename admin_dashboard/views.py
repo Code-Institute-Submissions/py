@@ -70,3 +70,23 @@ class AdminSettingsView(AdminRequiredMixin, UpdateView):
             return self.form_invalid(form)
         else:
             return super().form_valid(form)
+
+# PASSWORD Change
+
+
+class AdminPasswordChangeForm(PasswordChangeForm):
+    """Form for changing the admin's password."""
+
+    class Meta:
+        fields = ['old_password', 'new_password1', 'new_password2']
+
+
+class AdminPasswordChange(AdminRequiredMixin, PasswordChangeView):
+    """View for changing the admin's password. Redirect to the same page."""
+    template_name = 'admin-dashboard/password_change.html'
+    form_class = AdminPasswordChangeForm
+    context_object_name = 'admin_change_password'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your password has changed!')
+        return self.request.path
