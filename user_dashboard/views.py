@@ -57,3 +57,25 @@ class BuyerSettings(BuyerRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request, 'Your settings has been updated!')
         return self.request.path
+
+# DELETE Buyer/User Account
+
+
+class BuyerDelete(BuyerRequiredMixin, DeleteView):
+    """View for deleting the buyer/user profile."""
+    model = UserProfile
+    template_name = 'user-dashboard/user_delete.html'
+
+    allowed_roles = [0]
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        logout(request)
+        return response
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your account has been deleted!')
+        return reverse_lazy('account_login')

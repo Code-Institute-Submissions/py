@@ -129,6 +129,13 @@
                 <div class="col-12 text-center">
                     <a class="btn btn-primary-blue" href="">Change Password</a>
                 </div>
+
+                <!-- Delete Account -->
+                {% if buyer_settings.role == 0 %}
+                <div class="col-12 text-center">
+                    <a class="btn btn-danger" href="{% url 'buyer_delete' %}">Delete Account</a>
+                </div>
+                {% endif %}
             </form>
         </div>
     </main>

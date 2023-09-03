@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import BuyerDashboard, BuyerSettings
+from .views import BuyerDashboard, BuyerSettings, BuyerDelete
 
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
          name='buyer_dashboard'),
     path('account/user/settings/', BuyerSettings.as_view(),
          name='buyer_settings'),
+    path('account/user/delete/', BuyerDelete.as_view(), name='buyer_delete'),
 ]

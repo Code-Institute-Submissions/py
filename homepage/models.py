@@ -40,14 +40,21 @@ class UserProfile(AbstractUser):
 
 class Comment(models.Model):
     writer = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                               related_name='user_comments', null=True, blank=True)
+                               related_name='user_comments',
+                               null=True, blank=True)
+
     comment = models.TextField(max_length=256, unique=True)
-    product = models.ForeignKey('product_service.Product', on_delete=models.SET_NULL,
+
+    product = models.ForeignKey('product_service.Product',
+                                on_delete=models.SET_NULL,
                                 related_name='commented_products',
                                 null=True, blank=True)
-    service = models.ForeignKey('product_service.Service', on_delete=models.SET_NULL,
+
+    service = models.ForeignKey('product_service.Service',
+                                on_delete=models.SET_NULL,
                                 related_name='comment_services',
                                 null=True, blank=True)
+
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -58,14 +65,20 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    liker = models.ForeignKey(
-        UserProfile, on_delete=models.CASCADE, related_name='user_likes')
-    product = models.ForeignKey('product_service.Product', on_delete=models.SET_NULL,
+    liker = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                              related_name='user_likes',
+                              null=True, blank=True)
+
+    product = models.ForeignKey('product_service.Product',
+                                on_delete=models.SET_NULL,
                                 related_name='liked_products',
                                 null=True, blank=True)
-    service = models.ForeignKey('product_service.Service', on_delete=models.SET_NULL,
+
+    service = models.ForeignKey('product_service.Service',
+                                on_delete=models.SET_NULL,
                                 related_name='liked_services',
                                 null=True, blank=True)
+
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
