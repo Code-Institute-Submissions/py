@@ -1,6 +1,10 @@
 from django.urls import path, include
 
-from .views import BuyerDashboard, BuyerSettings, BuyerDelete, BuyerPasswordChange
+from .views import (BuyerDashboard,
+                    BuyerSettings,
+                    BuyerDelete,
+                    BuyerPasswordChange,
+                    BuyerRole)
 
 
 urlpatterns = [
@@ -11,4 +15,6 @@ urlpatterns = [
     path('account/user/delete/', BuyerDelete.as_view(), name='buyer_delete'),
     path('account/user/password/', BuyerPasswordChange.as_view(),
          name='buyer_change_password'),
+    path('account/user/role/', BuyerRole.as_view(),
+         name='buyer_role'),
 ]

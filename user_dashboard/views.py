@@ -99,3 +99,8 @@ class BuyerPasswordChange(BuyerRequiredMixin, PasswordChangeView):
     def get_success_url(self):
         messages.success(self.request, 'Your password has changed!')
         return self.request.path
+
+
+class BuyerRole(BuyerDashboard):
+    """Redender view for role info display"""
+    template_name = 'user-dashboard/role.html'

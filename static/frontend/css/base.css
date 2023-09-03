@@ -16,19 +16,30 @@ a {
     border-bottom: 1px solid #dadada;
 }
 
-.card-header:hover {
+.card-header-hover {
+    border-radius: 0px;
+    background-color: #2980B9;
+    color: white;
+    border-bottom: 1px solid #dadada;
+    transition: 0.3s;
+}
+
+.card-header-hover:hover {
     border-top: 1px solid #dadada;
     border-bottom: 1px solid #dadada;
+    transition: 0.3s;
 }
 
 .card-footer {
     border-radius: 0px;
     background-color: #2980B9;
     color: white;
+    transition: 0.3s;
 }
 
 .card-footer:hover {
     border-top: 1px solid #dadada;
+    transition: 0.3s;
 }
 
 .card-margin-footer {
@@ -54,7 +65,7 @@ a {
 }
 
 .bg-white-border:hover {
-    background-color:#2980B9;
+    background-color: #2980B9;
     color: #fff !important;
     transition: 0.3s;
 }
