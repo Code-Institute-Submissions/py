@@ -80,7 +80,9 @@
 
             <!-- Role -->
             <div class="col-md-3">
-                <label for="validationCustom04" class="form-label">Role</label>
+                <label for="validationCustom04" class="form-label">Role
+                    <small><a href="{% url 'admin_role' %}">Learn
+                            more</a></small></label>
                 <input type="text" value="{{ admin_settings.get_role_display}}" name="role"
                     class="form-control {% if form.errors.role %}is-invalid{% endif %} bg-light bg-gradient"
                     id="validationCustom04" required readonly>

@@ -90,3 +90,8 @@ class AdminPasswordChange(AdminRequiredMixin, PasswordChangeView):
     def get_success_url(self):
         messages.success(self.request, 'Your password has changed!')
         return self.request.path
+
+
+class AdminRole(AdminDashboard):
+    """Redender view for role info display"""
+    template_name = 'admin-dashboard/role.html'
