@@ -51,7 +51,7 @@ a {
 }
 
 .card-footer {
-    background-color: #34495e;
+    background-color: #2980b9;
     color: #ffffff;
     text-decoration: none;
     transition: 0.3s;
@@ -64,7 +64,7 @@ a {
 }
 
 .quote {
-    background-color: #34495e;
+    background-color: #2980b9;
 }
 
 .see-more {
@@ -78,7 +78,7 @@ a {
 }
 
 .progress-bar {
-    background-color: #34495E;
+    background-color: #2980b9;
 }
 
 .progress-container {
@@ -88,24 +88,6 @@ a {
 /* Single Card for Product & Service*/
 
 
-/* Base Color */
-.card-header-blue {
-    background-color: #34495e;
-    color: #ffffff;
-}
-
-/* Secundary color */
-.card-header-green {
-    background-color: #2D4F2F;
-    color: #ffffff;
-}
-
-/* Secundary color */
-.card-header-red {
-    background-color: #763135;
-    color: #ffffff;
-}
-
 input {
     border: none;
 }
@@ -114,56 +96,4 @@ input {
     border-radius: 0;
 }
 
-/* Buttons */
-
-.btn-main-blue {
-    background-color: #34495e;
-    border: 1px solid #dadada;
-    color: #ffffff;
-    transition: 0.3s;
-}
-
-.btn-main-blue:hover {
-    border: 1px solid #dadada;
-    color: #333333;
-    transition: 0.3s;
-}
-
-.btn-primary-blue {
-    background-color: #34495e;
-    color: #ffffff;
-    transition: 0.3s;
-
-}
-
-.btn-primary-blue:hover {
-    transition: 0.3s;
-    border: 1px solid #dadada;
-}
-
-/* FAQ */
-
-.btn-primary-blue-faq {
-    border-radius: 5px 5px 0 0;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dadada;
-    text-align: left;
-}
-
-.btn-primary-blue-faq:hover {
-    background-color: #34495e;
-    color: #ffffff;
-}
-
-
-/* User & Admin Dashboard colors */
-
-/* Footer */
-i {
-    color: #34495e;
-}
-
-.footer-bg {
-    background-color: #0000000d;
-}
 

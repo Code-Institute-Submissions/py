@@ -10,7 +10,7 @@ An agile approach was used before, during and after development. We have used:
 
 The user stories have undergone some modifications since their initial conception during the **user-centric design** phase at the **scope plane**. What follows is the finalized user story that guided our development process.
 
-- In total there are **34** user stories and **167** Story Points.
+- In total there are **34** user stories and **173** Story Points.
 <!-- - Only **24 must-have** user stories  -->
 <!-- - Only **10 won't have** user stories  -->
 
@@ -33,15 +33,15 @@ The user stories have undergone some modifications since their initial conceptio
     | | Construct Footer | As a user, I want to see a footer at the page's end, granting me access to additional vital information, social media links, useful links, newsletter and legal data, etc. | **2** |
     | Sign in/up & Dashboard | Link to Header | As a user or admin, I want a header link to 'sign in and  sign up', so that I can validate my login details on a separate page and access my dashboard. | **2** |
     | | Social Media Login | As a user or admin, I want the option to log in or sign up using a social media account, so that I have a secure and smooth interaction with the system. | **7** |
-    | | Create User & Admin Dashboard | As a user or admin, after logging in or signing up, I want a useful dashboard with key stats & menu options relevant to my role, enabling secure and efficient system interaction. | **7** |
+    | | Create User & Admin Dashboard | As a user or admin, after logging in or signing up, I want a useful dashboard with key stats & menu options relevant to my role so that  I can enable secure and efficient system interaction.  | **7** |
     | | Build User & Admin Profile Management | As a user or admin, I want a section on the dashboard where I can edit and manage my profile, maintaining control over my data and safeguarding my privacy. | **7** |
     | | Implement Verification System & Badge | As a user or admin, I want to verify my account via email to access the software marketplace. | **4** |
-    | | Delete Account Option | As a user, I want the option to delete my account from the dashboard, preserving my privacy. | **4** |
-    | Product & Service Management | Establish Admin 'Product & Service' Creation | As an admin, I want to create digital products & services from my dashboard and showcase them on the homepage, leveraging the software marketplace's potential. | **7** |
+    | | Delete Account Option | As a user, I want the option to delete my account from the dashboard so that I can preserve my privacy. | **4** |
+    | Product & Service Management | Establish Admin 'Product & Service' Creation | As an admin, I want to create, update & delete digital products & services from my dashboard and showcase them on the homepage so that I can leverage the software marketplace's potential. | **13** |
     | | Design Product & Service Page | As a user, I want a separate page detailing the product or service I click on 'Buy Now', enabling me to initiate the purchase process and access more detailed information not present on the homepage. | **7** |
     | | Enable System Feedback | As a user or admin, I want to receive success alerts or messages after certain system actions, like account creation or product purchase, enhancing my awareness of the actions taken. | **7** |
     | | Develop Product & Service Metrics | As a user or admin, I want visibility on product or service metrics, such as purchase counts, likes, and comments, both on the homepage and dedicated pages. This provides insight into the product's popularity and additional data. | **13** |
-    | | Configure Role Visualization | As a user, visitor, or admin, I want a visual representation of my privileges based on my role, helping me realize the website's full potential. | **7** |
+    | | Configure Role Visualization | As a user, visitor, or admin, I want a visual representation of my privileges based on my role so that it helps me realize the website's full potential | **7** |
     | | Integrate Cart, Purchase & Download | As a user, I want to add products to my cart, experience a smooth payment process, and download the digital product immediately after payment, minimizing friction in my purchasing journey. | **13** |
     | | Develop Support Button | As a user, I want a support button on the product & service page that redirects me to a contact form with pre-filled information based on my prior selection, reducing repetitive input. | **4** |
     | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu to streamline my search for products & services. | **4** |

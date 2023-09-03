@@ -9,12 +9,12 @@
                 <div class="col-lg-5">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">{% trans "Delete Account" %}</h3>
+                            <h4 class="text-center font-weight-light my-4">{% trans "Delete Account" %}</h4>
                         </div>
                         <div class="card-body">
                             <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-                            <ul class="list-group my-4">
-                                <li class="list-group-item text-center text-white bg-dark" aria-current="true">
+                            <ul class="list-group my-3 rounded">
+                                <li class="list-group-item text-center text-white bg-danger" aria-current="true">
                                     IMPORTANT</li>
                                 <li class="list-group-item">Only your username, first name, last name, email & password, etc. will be deleted</li>
                                 <li class="list-group-item">Likes will not be deleted</li>
@@ -26,7 +26,7 @@
                                 {% csrf_token %}
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                    <a href="{% url 'buyer_settings' %}" class="btn btn-success">Go back</a>
+                                    <a href="{% url 'buyer_settings' %}" class="btn btn-primary-blue">Go back</a>
                                 </div>
                             </form>
                         </div>

@@ -4,16 +4,15 @@
     font-display: swap;
 }
 
+/* General Styling */
 a {
     text-decoration: none !important;
 }
 
-h1 {
-    color: green;
-}
-
 .card-header {
     border-radius: 0px;
+    background-color: #2980B9;
+    color: white;
 }
 
 .card-margin-footer {
@@ -53,4 +52,126 @@ h1 {
 .btn-text {
     font-size: 14px;
     font-weight: 500;
+}
+
+/* Buttons */
+
+.btn-primary-blue {
+    background-color: #2980b9;
+    color: #ffffff;
+    transition: 0.3s;
+
+}
+
+.btn-primary-blue:hover {
+    transition: 0.3s;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+}
+
+.btn-secundary-blue {
+    border: 1px solid #2980b9;
+    color: #2980b9;
+    transition: 0.3s;
+}
+
+.btn-secundary-blue:hover {
+    background-color: #2980b9;
+    color: #fff;
+    transition: 0.3s;
+}
+
+/* FAQ */
+
+.btn-primary-blue-faq {
+    border-radius: 5px 5px 0 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dadada;
+    text-align: left;
+}
+
+.btn-primary-blue-faq:hover {
+    background-color: #2980b9;
+    color: #ffffff;
+}
+
+
+/* User & Admin Dashboard colors */
+
+/* Footer */
+i {
+    color: #2980b9;
+}
+
+.footer-bg {
+    background-color: #0000000d;
+}
+
+/* SB-Dashboard Template Override */
+
+.navbar-light {
+    background-color: #2980B9 !important;
+    color: #ffffff !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.fa-bars {
+    color: #ffffff !important;
+    transition: 0.3s;
+}
+
+.fa-bars:hover {
+    color: #dadada !important;
+    transition: 0.3s;
+}
+
+.fa-user{
+    color: #ffffff !important;
+    transition: 0.3s;
+}
+
+.fa-user:hover{
+    color: #dadada !important;
+    transition: 0.3s;
+}
+
+.dropdown-toggle::after {
+    color: #ffffff !important;
+    transition: 0.3s;
+}
+
+.dropdown-toggle:hover::after {
+    color: #dadada !important;
+    transition: 0.3s;
+}
+
+
+.nav-link {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sb-nav-link-icon,
+.sb-sidenav-collapse-arrow {
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #297fb938 !important;
+    color: #333333 !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover .sb-nav-link-icon,
+.nav-link:hover .sb-sidenav-collapse-arrow {
+    color: #333333 !important;
+    transition: 0.3s;
+}
+
+
+.sb-sidenav-light .sb-sidenav-footer {
+    background-color: #2980b9;
+    color: #fff;
 }
