@@ -1,3 +1,8 @@
+# Django Imports
+from django import forms
+from django.utils.text import slugify
+
+# Local Imports
 from .models import Product
 
 # Product Creation
@@ -21,8 +26,8 @@ class AdminProductCreationForm(forms.ModelForm):
         ]
 
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
-            'excerpt': forms.Textarea(attrs={'rows': 3}),
+            'description': forms.Textarea(attrs={'rows': 4, 'maxlength': 256}),
+            'excerpt': forms.Textarea(attrs={'rows': 3, 'maxlength': 128}),
         }
 
         labels = {
@@ -51,7 +56,7 @@ class AdminProductCreationForm(forms.ModelForm):
             'excerpt': 'Excerpt',
             'type': 'Type',
             'slug': 'Slug',
-            'image': 'Image',
+            'image': 'File size cannot exceed 500 KB',
             'image_url': 'Image URL',
             'author': 'Author',
         }

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View, generic
 
 # Local imports
-from ..admin_dashboard.views import AdminRequiredMixin
+from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm
 from .models import Product
 
@@ -18,6 +18,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         form = AdminProductCreationForm(initial={'author': request.user})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = AdminProductCreationForm(request.POST, request.FILES)
