@@ -108,7 +108,7 @@ class Product(models.Model):
         'homepage.UserProfile', through='Transaction',
         related_name='product_transactions', blank=True)
 
-    # Download Feature
+    # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='product_downloads', blank=True)
 
@@ -142,7 +142,18 @@ class Service(models.Model):
 
     type = models.IntegerField(choices=ITEM_TYPE, default=1)
 
-    slug = models.SlugField(max_length=200, unique=True)
+    code = models.ManyToManyField(CodeType, related_name="code_type_service")
+
+    service = models.ManyToManyField(
+        ServiceType, related_name="on_service_type")
+
+    preview = models.URLField(
+        max_length=1024, null=True, blank=True, unique=True)
+
+    docs = models.URLField(
+        max_length=1024, null=True, blank=True, unique=True)
+
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
 
     image = models.ImageField(null=True, blank=True)
 
@@ -165,7 +176,7 @@ class Service(models.Model):
         'homepage.UserProfile', through='Transaction',
         related_name='service_transactions', blank=True)
 
-    # Download Feature
+    # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
 
