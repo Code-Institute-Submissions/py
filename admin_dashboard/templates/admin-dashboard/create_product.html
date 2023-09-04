@@ -47,6 +47,19 @@
                         <div class="form-text">{{ form.title.help_text }}</div>
                     </div>
 
+                    
+                    <!-- SKU Number  -->
+                    <div class="mb-3">
+                        <label for="{{ form.sku.id_for_label }}"
+                            class="form-label"><strong>{{ form.sku.label }}</strong></label>
+                        <input type="text" name="{{ form.sku.name }}" class="form-control"
+                            id="{{ form.sku.id_for_label }}" value="{{ form.sku.value|default:'' }}" required>
+                        {% if form.sku.errors %}
+                        <div class="errors">{{ form.sku.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.sku.help_text }}</div>
+                    </div>
+
 
                     <!-- Category -->
                     <div class="mb-3">
@@ -113,6 +126,17 @@
                         <div class="errors">{{ form.preview.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.preview.help_text }}</div>
+                    </div>
+
+                    <!-- Docs Link -->
+                    <div class="mb-3">
+                        <label for="{{ form.type.id_for_label }}"
+                            class="form-label"><strong>{{ form.docs.label }}</strong></label>
+                        {{ form.docs }}
+                        {% if form.docs.errors %}
+                        <div class="errors">{{ form.docs.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.docs.help_text }}</div>
                     </div>
 
                     <!-- Description -->

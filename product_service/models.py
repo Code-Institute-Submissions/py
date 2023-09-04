@@ -82,6 +82,9 @@ class Product(models.Model):
     preview = models.URLField(
         max_length=1024, null=True, blank=True, unique=True)
 
+    docs = models.URLField(
+        max_length=1024, null=True, blank=True, unique=True)
+
     slug = models.SlugField(max_length=200, unique=True)
 
     image = models.ImageField(null=True, blank=True)

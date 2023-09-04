@@ -104,6 +104,8 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     -                                        |
     | preview         | URLField(1024)       | -         | -                 | 
     -                                        |
+    | docs            | URLField(1024)       | -         | -                 | 
+    -                                        |
     | slug            | SlugField(200)         | Yes     | -                 | -                                        |
     | image           | ImageField             | -       | -                 | -                                        |
     | image_url       | URLField(1024)         | -       | -                 | -                                        |
