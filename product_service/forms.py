@@ -9,6 +9,8 @@ from .models import Product
 
 
 class AdminProductCreationForm(forms.ModelForm):
+    title = forms.CharField(required=True)
+    price = forms.DecimalField(required=True)
 
     def save(self, commit=True):
         instance = super(AdminProductCreationForm, self).save(commit=False)
