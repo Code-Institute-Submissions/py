@@ -9,14 +9,22 @@ from .models import Product
 
 
 class AdminProductCreationForm(forms.ModelForm):
-    title = forms.CharField(required=True)
-    price = forms.DecimalField(required=True)
+    title = forms.CharField(
+        required=True, help_text='Title')
+    price = forms.DecimalField(
+        required=True, help_text='Price')
 
     def save(self, commit=True):
         instance = super(AdminProductCreationForm, self).save(commit=False)
         instance.slug = slugify(instance.title)
         if commit:
             instance.save()
+            instance.code.set(self.cleaned_data['code'])
+            instance.service.set(self.cleaned_data['service'])
+        else:
+            self.save_m2m = lambda: (
+                instance.code.set(self.cleaned_data['code']),
+                instance.service.set(self.cleaned_data['service']))
         return instance
 
     class Meta:

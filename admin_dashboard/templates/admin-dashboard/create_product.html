@@ -8,6 +8,18 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Create a Product</li>
         </ol>
+        <!-- Form Errors Handling (Feedback) -->
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         {% if request.user.role == 0 %}
         <div class="alert alert-warning text-center" role="alert">
             In order to create a Product you need to be an admin.
@@ -110,7 +122,7 @@
 
                     <!-- Code Type -->
                     <div class="mb-3">
-                        <label for="{{ form.type.id_for_label }}"
+                        <label for="{{ form.code.id_for_label }}"
                             class="form-label"><strong>{{ form.code.label }}</strong></label>
                         {{ form.code }}
                         {% if form.code.errors %}
@@ -121,7 +133,7 @@
 
                     <!-- Service Type -->
                     <div class="mb-3">
-                        <label for="{{ form.type.id_for_label }}"
+                        <label for="{{ form.service.id_for_label }}"
                             class="form-label"><strong>{{ form.service.label }}</strong></label>
                         {{ form.service }}
                         {% if form.service.errors %}
@@ -133,7 +145,7 @@
 
                     <!-- Preview Link -->
                     <div class="mb-3">
-                        <label for="{{ form.type.id_for_label }}"
+                        <label for="{{ form.preview.id_for_label }}"
                             class="form-label"><strong>{{ form.preview.label }}</strong></label>
                         {{ form.preview }}
                         {% if form.preview.errors %}
@@ -144,7 +156,7 @@
 
                     <!-- Docs Link -->
                     <div class="mb-3">
-                        <label for="{{ form.type.id_for_label }}"
+                        <label for="{{ form.docs.id_for_label }}"
                             class="form-label"><strong>{{ form.docs.label }}</strong></label>
                         {{ form.docs }}
                         {% if form.docs.errors %}
@@ -168,6 +180,18 @@
                         <div class="form-text">{{ form.description.help_text }}</div>
                     </div>
 
+                    <!-- Excerpt  -->
+                    <div class="mb-3">
+                        <label for="{{ form.excerpt.id_for_label }}"
+                            class="form-label"><strong>{{ form.excerpt.label }}</strong></label>
+                        <input type="text" name="{{ form.excerpt.name }}" class="form-control"
+                            id="{{ form.excerpt.id_for_label }}" value="{{ form.excerpt.value|default:'' }}" required>
+                        {% if form.excerpt.errors %}
+                        <div class="errors">{{ form.excerpt.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.excerpt.help_text }}</div>
+                    </div>
+
                     <!-- Image -->
                     <div class="mb-3">
                         <label for="{{ form.image.id_for_label }}"
@@ -177,6 +201,17 @@
                         <div class="errors">{{ form.image.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.image.help_text }}</div>
+                    </div>
+
+                    <!-- Image URL -->
+                    <div class="mb-3">
+                        <label for="{{ form.image_url.id_for_label }}"
+                            class="form-label"><strong>{{ form.image_url.label }}</strong></label>
+                        {{ form.image_url }}
+                        {% if form.image_url.errors %}
+                        <div class="errors">{{ form.image_url.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.image_url.help_text }}</div>
                     </div>
 
                     <hr />

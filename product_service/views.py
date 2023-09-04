@@ -1,7 +1,7 @@
 # Django Imports
 from django.shortcuts import render
 from django.views import View, generic
-
+from django.shortcuts import get_object_or_404, redirect
 # Local imports
 from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm
@@ -35,8 +35,9 @@ class AdminProductCreation(AdminRequiredMixin, View):
             product_instance = form.save(commit=False)
             product_instance.author = request.user
             product_instance.save()
+            form.save_m2m()  # This will save the many-to-many data
 
-            return redirect('account_login')
+            return redirect('admin_creation')
         else:
             return render(
                 request, self.template_name,

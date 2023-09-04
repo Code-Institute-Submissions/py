@@ -85,7 +85,7 @@ class Product(models.Model):
     docs = models.URLField(
         max_length=1024, null=True, blank=True, unique=True)
 
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
 
     image = models.ImageField(null=True, blank=True)
 
