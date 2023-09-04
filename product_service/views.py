@@ -14,7 +14,7 @@ from .models import Product
 
 class AdminProductCreation(AdminRequiredMixin, View):
     """Create product instances for the marketplace """
-    template_name = 'admin-dashboard/create.html'
+    template_name = 'admin-dashboard/create_product.html'
 
     def get(self, request, *args, **kwargs):
         form = AdminProductCreationForm(initial={'author': request.user})
