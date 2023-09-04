@@ -62,6 +62,20 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | excerpt       | CharField(128)    | -       | -             | -                              |
     | created_on    | DateTimeField         | -       | -             | -                              |
 
+### CodeType Model
+??? abstract "CodeType Model"
+
+    | Attribute      | Type            | Unique | Relationship | Model Linked To |
+    |----------------|-----------------|--------|--------------|-----------------|
+    | code           | CharField(64)   | Yes    | -            | -               |
+
+### ServiceType Model
+??? abstract "ServiceType Model"
+
+    | Attribute      | Type            | Unique | Relationship | Model Linked To |
+    |----------------|-----------------|--------|--------------|-----------------|
+    | service        | CharField(64)   | Yes    | -            | -               |
+
 ### Category Model
 ??? abstract "Category Model"
 
@@ -82,7 +96,14 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | status          | IntegerField           | -       | -                 | -                                        |
     | category        | **ForeignKey**         | -       | Many to one       | Category Model                           |
     | excerpt         | CharField(128)         | -       | -                 | -                                        |
-    | type            | IntegerField           | -       | -                 | -                                        |
+    | type            | IntegerField           | -       | -                 | 
+    -                                        |
+    | code            | **ManyToManyField**    | -     | Many to many    | CodeType
+    -                                        |
+    | service         | **ManyToManyField**    | -     | Many to many    | CodeType
+    -                                        |
+    | preview         | URLField(1024)       | -         | -                 | 
+    -                                        |
     | slug            | SlugField(200)         | Yes     | -                 | -                                        |
     | image           | ImageField             | -       | -                 | -                                        |
     | image_url       | URLField(1024)         | -       | -                 | -                                        |

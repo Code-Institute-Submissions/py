@@ -16,6 +16,28 @@ GATEWAY_TYPE = (
 )
 
 
+class CodeType(models.Model):
+    code = models.CharField(max_length=64, unique=True)
+
+    class Meta:
+        ordering = ['code']
+        verbose_name_plural = "CodeTypes"
+
+    def __str__(self):
+        return self.code
+
+
+class ServiceType(models.Model):
+    service = models.CharField(max_length=64, unique=True)
+
+    class Meta:
+        ordering = ['service']
+        verbose_name_plural = "ServiceTypes"
+
+    def __str__(self):
+        return self.service
+
+
 class Category(models.Model):
     '''Category model for Product & Service models'''
     category_name = models.CharField(max_length=64, unique=True)
@@ -52,6 +74,13 @@ class Product(models.Model):
     excerpt = models.CharField(max_length=128)
 
     type = models.IntegerField(choices=ITEM_TYPE, default=1)
+
+    code = models.ManyToManyField(CodeType, related_name="code_type")
+
+    service = models.ManyToManyField(ServiceType, related_name="service_type")
+
+    preview = models.URLField(
+        max_length=1024, null=True, blank=True, unique=True)
 
     slug = models.SlugField(max_length=200, unique=True)
 

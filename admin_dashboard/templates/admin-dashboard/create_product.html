@@ -70,7 +70,7 @@
                         <div class="form-text">{{ form.status.help_text }}</div>
                     </div>
 
-                    <!-- Type -->
+                    <!-- Product Type -->
                     <div class="mb-3">
                         <label for="{{ form.type.id_for_label }}"
                             class="form-label"><strong>{{ form.type.label }}</strong></label>
@@ -81,6 +81,39 @@
                         <div class="form-text">{{ form.type.help_text }}</div>
                     </div>
 
+                    <!-- Code Type -->
+                    <div class="mb-3">
+                        <label for="{{ form.type.id_for_label }}"
+                            class="form-label"><strong>{{ form.code.label }}</strong></label>
+                        {{ form.code }}
+                        {% if form.code.errors %}
+                        <div class="errors">{{ form.code.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.code.help_text }}</div>
+                    </div>
+
+                    <!-- Service Type -->
+                    <div class="mb-3">
+                        <label for="{{ form.type.id_for_label }}"
+                            class="form-label"><strong>{{ form.service.label }}</strong></label>
+                        {{ form.service }}
+                        {% if form.service.errors %}
+                        <div class="errors">{{ form.service.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.service.help_text }}</div>
+                    </div>
+
+
+                    <!-- Preview Link -->
+                    <div class="mb-3">
+                        <label for="{{ form.type.id_for_label }}"
+                            class="form-label"><strong>{{ form.preview.label }}</strong></label>
+                        {{ form.preview }}
+                        {% if form.preview.errors %}
+                        <div class="errors">{{ form.preview.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">{{ form.preview.help_text }}</div>
+                    </div>
 
                     <!-- Description -->
                     <div class="mb-3">

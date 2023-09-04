@@ -7,7 +7,9 @@ from .models import (UserProfile,
                      Comment,
                      Like,
                      NewsLetter)
-from product_service.models import (Category,
+from product_service.models import (CodeType,
+                                    ServiceType,
+                                    Category,
                                     Product,
                                     Service,
                                     Download,
@@ -154,6 +156,8 @@ admin.site.register(Like, LikeAdmin)
 admin.site.register(NewsLetter, NewsLetterAdmin)
 
 # Product & Service related
+admin.site.register(CodeType)
+admin.site.register(ServiceType)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Service, ServiceAdmin)

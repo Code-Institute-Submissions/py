@@ -21,8 +21,8 @@ class AdminProductCreationForm(forms.ModelForm):
         model = Product
         fields = [
             'title', 'sku', 'price', 'description', 'status',
-            'category', 'excerpt', 'type',
-            'slug', 'image', 'image_url', 'author',
+            'category', 'excerpt', 'type', 'code', 'service',
+            'preview', 'slug', 'image', 'image_url', 'author',
         ]
 
         widgets = {
@@ -39,6 +39,9 @@ class AdminProductCreationForm(forms.ModelForm):
             'category': 'Category',
             'excerpt': 'Excerpt',
             'type': 'Type',
+            'code': 'Code Type',
+            'service': 'Service Type',
+            'preview': 'Preview Link',
             'slug': 'Slug',
             'image': 'Image',
             'image_url': 'Image URL',
@@ -55,6 +58,9 @@ class AdminProductCreationForm(forms.ModelForm):
             'category': 'Category',
             'excerpt': 'Excerpt',
             'type': 'Type',
+            'code': 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
+            'service': 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
+            'preview': 'Preview Link',
             'slug': 'Slug',
             'image': 'File size cannot exceed 500 KB',
             'image_url': 'Image URL',
