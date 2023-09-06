@@ -23,7 +23,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         form = AdminProductCreationForm(request.POST, request.FILES)
 
-        # Check the image size here
+        # Validating Image KB
         uploaded_image = request.FILES.get('image')
         if uploaded_image:
             max_upload_size = 500000
@@ -35,7 +35,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
             product_instance = form.save(commit=False)
             product_instance.author = request.user
             product_instance.save()
-            form.save_m2m()  # This will save the many-to-many data
+            form.save_m2m()
 
             return redirect('admin_creation')
         else:

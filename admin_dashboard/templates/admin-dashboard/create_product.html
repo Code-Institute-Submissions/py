@@ -89,9 +89,17 @@
 
                     <!-- Category -->
                     <div class="mb-3">
-                        <label for="{{ form.category.id_for_label }}"
-                            class="form-label"><strong>{{ form.category.label }}</strong></label>
-                        {{ form.category }}
+                        <label for="{{ form.category.id_for_label }}" class="form-label">
+                            <strong>{{ form.category.label }}</strong>
+                        </label>
+                        <select name="{{ form.category.name }}" class="form-control"
+                            id="{{ form.category.id_for_label }}" required>
+                            {% for value, display_text in form.category.field.choices %}
+                            <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>
+                                {{ display_text }}
+                            </option>
+                            {% endfor %}
+                        </select>
                         {% if form.category.errors %}
                         <div class="errors">{{ form.category.errors }}</div>
                         {% endif %}
@@ -100,9 +108,17 @@
 
                     <!-- Status -->
                     <div class="mb-3">
-                        <label for="{{ form.status.id_for_label }}"
-                            class="form-label"><strong>{{ form.status.label }}</strong></label>
-                        {{ form.status }}
+                        <label for="{{ form.status.id_for_label }}" class="form-label">
+                            <strong>{{ form.status.label }}</strong>
+                        </label>
+                        <select name="{{ form.status.name }}" class="form-control" id="{{ form.status.id_for_label }}"
+                            required>
+                            {% for value, display_text in form.status.field.choices %}
+                            <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>
+                                {{ display_text }}
+                            </option>
+                            {% endfor %}
+                        </select>
                         {% if form.status.errors %}
                         <div class="errors">{{ form.status.errors }}</div>
                         {% endif %}

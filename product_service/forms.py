@@ -3,7 +3,7 @@ from django import forms
 from django.utils.text import slugify
 
 # Local Imports
-from .models import Product
+from .models import Product, Category
 
 # Product Creation
 
@@ -13,6 +13,11 @@ class AdminProductCreationForm(forms.ModelForm):
         required=True, help_text='Title')
     price = forms.DecimalField(
         required=True, help_text='Price')
+
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        empty_label="Select a Category"
+    )
 
     def save(self, commit=True):
         instance = super(AdminProductCreationForm, self).save(commit=False)
