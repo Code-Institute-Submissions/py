@@ -125,22 +125,40 @@
                         <div class="form-text">{{ form.status.help_text }}</div>
                     </div>
 
+
                     <!-- Product Type -->
                     <div class="mb-3">
-                        <label for="{{ form.type.id_for_label }}"
-                            class="form-label"><strong>{{ form.type.label }}</strong></label>
-                        {{ form.type }}
+                        <label for="{{ form.type.id_for_label }}" class="form-label">
+                            <strong>{{ form.type.label }}</strong>
+                        </label>
+                        <select name="{{ form.type.name }}" class="form-control" id="{{ form.type.id_for_label }}"
+                            required>
+                            {% for value, display_text in form.type.field.choices %}
+                            <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>
+                                {{ display_text }}
+                            </option>
+                            {% endfor %}
+                        </select>
                         {% if form.type.errors %}
                         <div class="errors">{{ form.type.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.type.help_text }}</div>
                     </div>
 
+
                     <!-- Code Type -->
                     <div class="mb-3">
-                        <label for="{{ form.code.id_for_label }}"
-                            class="form-label"><strong>{{ form.code.label }}</strong></label>
-                        {{ form.code }}
+                        <label for="{{ form.code.id_for_label }}" class="form-label">
+                            <strong>{{ form.code.label }}</strong>
+                        </label>
+                        <select name="{{ form.code.name }}" class="form-control" multiple="multiple"
+                            id="{{ form.code.id_for_label }}" required>
+                            {% for value, display_text in form.code.field.choices %}
+                            <option value="{{ value }}" {% if form.code.value == value %}selected{% endif %}>
+                                {{ display_text }}
+                            </option>
+                            {% endfor %}
+                        </select>
                         {% if form.code.errors %}
                         <div class="errors">{{ form.code.errors }}</div>
                         {% endif %}
@@ -149,26 +167,36 @@
 
                     <!-- Service Type -->
                     <div class="mb-3">
-                        <label for="{{ form.service.id_for_label }}"
-                            class="form-label"><strong>{{ form.service.label }}</strong></label>
-                        {{ form.service }}
+                        <label for="{{ form.service.id_for_label }}" class="form-label">
+                            <strong>{{ form.service.label }}</strong>
+                        </label>
+                        <select name="{{ form.service.name }}" class="form-control" multiple="multiple"
+                            id="{{ form.service.id_for_label }}" required>
+                            {% for value, display_text in form.service.field.choices %}
+                            <option value="{{ value }}" {% if form.service.value == value %}selected{% endif %}>
+                                {{ display_text }}
+                            </option>
+                            {% endfor %}
+                        </select>
                         {% if form.service.errors %}
                         <div class="errors">{{ form.service.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.service.help_text }}</div>
                     </div>
 
-
                     <!-- Preview Link -->
                     <div class="mb-3">
-                        <label for="{{ form.preview.id_for_label }}"
-                            class="form-label"><strong>{{ form.preview.label }}</strong></label>
-                        {{ form.preview }}
+                        <label for="{{ form.preview.id_for_label }}" class="form-label">
+                            <strong>{{ form.preview.label }}</strong>
+                        </label>
+                        <input type="text" name="{{ form.preview.name }}" class="form-control"
+                            id="{{ form.preview.id_for_label }}" value="{{ form.preview.value|default:'' }}" required>
                         {% if form.preview.errors %}
                         <div class="errors">{{ form.preview.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.preview.help_text }}</div>
                     </div>
+
 
                     <!-- Docs Link -->
                     <div class="mb-3">
