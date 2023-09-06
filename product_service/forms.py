@@ -10,13 +10,14 @@ from .models import Product, Category
 
 class AdminProductCreationForm(forms.ModelForm):
     title = forms.CharField(
-        required=True, help_text='Title')
+        required=True, help_text='Insert a descriptive title')
     price = forms.DecimalField(
-        required=True, help_text='Price')
+        required=True, help_text='Insert a fair price for the product')
 
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
-        empty_label="Select a Category"
+        empty_label="Select a Category",
+        help_text='Select a proper category for this product'
     )
 
     def save(self, commit=True):
@@ -58,7 +59,6 @@ class AdminProductCreationForm(forms.ModelForm):
             'service': 'Service Type',
             'preview': 'Preview Link',
             'docs': 'Docs Link',
-            'slug': 'Slug',
             'image': 'Image',
             'image_url': 'Image URL',
             'author': 'Author',
@@ -66,20 +66,16 @@ class AdminProductCreationForm(forms.ModelForm):
         }
 
         help_texts = {
-            'title': 'Title',
-            'sku': 'Sku',
-            'price': 'Price',
-            'description': 'Description',
-            'status': 'Status',
-            'category': 'Category',
-            'excerpt': 'Excerpt',
-            'type': 'Type',
+            'sku': 'Insert your unique SKU number',
+            'description': 'Insert a clear description of the product',
+            'status': 'Select a proper status for this product',
+            'excerpt': 'Insert a short excerpt about this product',
+            'type': 'Select the type of product',
             'code': 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
             'service': 'Hold down “Control”, or “Command” on a Mac, to select more than one.',
-            'preview': 'Preview Link',
-            'docs': 'Docs Link',
-            'slug': 'Slug',
+            'preview': 'Insert the preview link of the live product',
+            'docs': 'Insert the docs link of the product',
             'image': 'File size cannot exceed 500 KB',
-            'image_url': 'Image URL',
-            'author': 'Author',
+            'image_url': 'Insert an external or local Image URL',
+            'author': 'The author has been automatically selected',
         }

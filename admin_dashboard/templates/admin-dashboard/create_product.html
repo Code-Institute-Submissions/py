@@ -32,7 +32,7 @@
                     {% if form.non_field_errors %}
                     <div class="errors">{{ form.non_field_errors }}</div>
                     {% endif %}
-                    <hr />
+
                     <!-- Author -->
                     <div class="mb-3">
                         <label class="form-label"><strong>{{ form.author.label }} ID</strong></label>
@@ -46,7 +46,7 @@
                         {% endif %}
                         <div class="form-text">{{ form.author.help_text }}</div>
                     </div>
-                    <hr />
+
                     <!-- Title  -->
                     <div class="mb-3">
                         <label for="{{ form.title.id_for_label }}"
@@ -261,9 +261,6 @@
                         {% endif %}
                         <div class="form-text">{{ form.image_url.help_text }}</div>
                     </div>
-
-
-                    <hr />
 
                     <div class="row my-4 text-center">
                         <div class="col-12 d-inline-block">
