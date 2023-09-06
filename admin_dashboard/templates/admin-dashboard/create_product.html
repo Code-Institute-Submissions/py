@@ -189,7 +189,7 @@
                         <label for="{{ form.preview.id_for_label }}" class="form-label">
                             <strong>{{ form.preview.label }}</strong>
                         </label>
-                        <input type="text" name="{{ form.preview.name }}" class="form-control"
+                        <input type="url" name="{{ form.preview.name }}" class="form-control"
                             id="{{ form.preview.id_for_label }}" value="{{ form.preview.value|default:'' }}" required>
                         {% if form.preview.errors %}
                         <div class="errors">{{ form.preview.errors }}</div>
@@ -200,9 +200,11 @@
 
                     <!-- Docs Link -->
                     <div class="mb-3">
-                        <label for="{{ form.docs.id_for_label }}"
-                            class="form-label"><strong>{{ form.docs.label }}</strong></label>
-                        {{ form.docs }}
+                        <label for="{{ form.docs.id_for_label }}" class="form-label">
+                            <strong>{{ form.docs.label }}</strong>
+                        </label>
+                        <input type="url" name="{{ form.docs.name }}" class="form-control"
+                            id="{{ form.docs.id_for_label }}" value="{{ form.docs.value|default:'' }}" required>
                         {% if form.docs.errors %}
                         <div class="errors">{{ form.docs.errors }}</div>
                         {% endif %}
@@ -246,17 +248,20 @@
                         {% endif %}
                         <div class="form-text">{{ form.image.help_text }}</div>
                     </div>
-
                     <!-- Image URL -->
                     <div class="mb-3">
-                        <label for="{{ form.image_url.id_for_label }}"
-                            class="form-label"><strong>{{ form.image_url.label }}</strong></label>
-                        {{ form.image_url }}
+                        <label for="{{ form.image_url.id_for_label }}" class="form-label">
+                            <strong>{{ form.image_url.label }}</strong>
+                        </label>
+                        <input type="url" name="{{ form.image_url.name }}" class="form-control"
+                            id="{{ form.image_url.id_for_label }}" value="{{ form.image_url.value|default:'' }}"
+                            required>
                         {% if form.image_url.errors %}
                         <div class="errors">{{ form.image_url.errors }}</div>
                         {% endif %}
                         <div class="form-text">{{ form.image_url.help_text }}</div>
                     </div>
+
 
                     <hr />
 
