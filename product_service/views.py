@@ -145,20 +145,39 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
         service = get_object_or_404(Service, slug=slug)
 
         service.title = request.POST.get('title')
+        service.sku = request.POST.get('sku')
+        service.price = request.POST.get('price')
+
+        service.category = Category.objects.get(
+            pk=request.POST.get('category'))
 
         status = request.POST.get('status')
         service.status = int(status)
 
+        type = request.POST.get('type')
+        service.type = int(type)
+
+        code = request.POST.getlist('code')
+        service.code.set(code)
+
+        services = request.POST.getlist('service')
+        service.service.set(services)
+
+        service.preview = request.POST.get('preview')
+
+        service.docs = request.POST.get('docs')
+
         description = request.POST.get('description')
         service.description = description[:264]
 
-        # service.mission = request.POST.get('mission')
-        # service.location = request.POST.get('location')
+        service.excerpt = request.POST.get('excerpt')
 
         image = request.FILES.get(
             'image')
         if image and validate_image_size(request, image):
             service.image = image
+
+        service.image_url = request.POST.get('image_url')
 
         service.save()
 

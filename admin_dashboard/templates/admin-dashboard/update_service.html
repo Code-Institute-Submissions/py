@@ -10,13 +10,13 @@
         <hr>
         <h1 class="mt-4">Service Update</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Limited Update</li>
+            <li class="breadcrumb-item active">You can update fully this service instance</li>
         </ol>
 
         <!-- Role Alert -->
         {% if request.user.role == 0 %}
         <div class="alert alert-warning text-center" role="alert">
-            In order to update aservice instance you need to be an admin.
+            In order to update a service instance you need to be an admin.
         </div>
         {% elif request.user.role == 1%}
 
@@ -111,8 +111,8 @@
 
                             <!-- Scope Type -->
                             <div class="mb-3">
-                                <label for="scope" class="form-label"><strong>Scope</strong></label>
-                                <select id="scope" name="scope" class="form-select">
+                                <label for="type" class="form-label"><strong>Scope</strong></label>
+                                <select id="type" name="type" class="form-select">
                                     <option value="{{ service.type }}" selected> {{ service.get_type_display }}</option>
                                     {% for scope_int, scope_str in scope %}
                                     {% if scope_int != service.type %}
@@ -127,14 +127,13 @@
 
                             <!-- Code Type -->
                             <div class="mb-3">
-                                <label for="code" class="form-label"><strong>Code Type</strong></label>
+                                <label for="code" class="form-label"><strong>Code Type
+                                    </strong></label>
                                 <select name="code" class="form-control" id="code" multiple="multiple" required>
-                                    <option value="{{ code.code.id }}" selected>
-                                        {{ offer_code.first }}</option>
-                                    {% for code in codes %}
-                                    {% if offer_code.first.id != code.id %}
-                                    <option value="{{ code.id }}">{{ code }}</option>
-                                    {% endif %}
+                                    {% for code_list in codes %}
+                                    <option value="{{ code_list.id }}"
+                                        {% for c_offer in offer_code %}{% if c_offer == code_list %} selected
+                                        {% endif %}{% endfor %}>{{ code_list }}</option>
                                     {% endfor %}
                                 </select>
                                 {% if code.code.errors %}
@@ -147,12 +146,10 @@
                             <div class="mb-3">
                                 <label for="service" class="form-label"><strong>Service Type</strong></label>
                                 <select name="service" class="form-control" id="service" multiple="multiple" required>
-                                    <option value="{{ service.service.id }}" selected>
-                                        {{ offer_service.first }}</option>
-                                    {% for service in services %}
-                                    {% if offer_service.first.id != service.id %}
-                                    <option value="{{ service.id }}">{{ service }}</option>
-                                    {% endif %}
+                                    {% for service_list in services %}
+                                    <option value="{{ service_list.id }}"
+                                        {% for s_offer in offer_service %}{% if s_offer == service_list %} selected
+                                        {% endif %}{% endfor %}>{{ service_list }}</option>
                                     {% endfor %}
                                 </select>
                                 {% if service.service.errors %}
@@ -204,16 +201,15 @@
 
                             <!-- Image -->
                             <div class="mb-3">
-                                <label for="service_image" class="form-label"><strong>Image</strong></label>
-                                {% if service.service_image %}
+                                <label for="image" class="form-label"><strong>Image</strong></label>
+                                {% if service.image %}
                                 <div class="mb-2 text-center">
-                                    <img src="{{ service.service_image.url }}" alt="Current Image"
-                                        style="max-width: 200px;">
+                                    <img src="{{ service.image.url }}" alt="Current Image" style="max-width: 200px;">
                                 </div>
                                 {% endif %}
-                                <input type="file" name="service_image" id="service_image" class="form-control">
-                                {% if service.service_image.errors %}
-                                <div class="errors">{{ service.service_image.errors }}</div>
+                                <input type="file" name="image" id="image" class="form-control">
+                                {% if service.image.errors %}
+                                <div class="errors">{{ service.image.errors }}</div>
                                 {% endif %}
                             </div>
 
