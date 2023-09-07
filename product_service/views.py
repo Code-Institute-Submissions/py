@@ -85,11 +85,11 @@ class ServiceBaseListView(AdminRequiredMixin, generic.ListView):
     model = Service
 
     def get_queryset(self):
-        """ Return Product instances ordered by creation date."""
+        """ Return service instances ordered by creation date."""
         return Service.objects.order_by('-created_on')
 
 
 class ServiceList(ServiceBaseListView):
-    """ Read all created Vote Cards on Admin's Dashboard"""
+    """ Read all created service instances ftempalte"""
     template_name = 'admin-dashboard/all_services.html'
     context_object_name = 'admin_all_services'
