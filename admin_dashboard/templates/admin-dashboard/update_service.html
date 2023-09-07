@@ -1,0 +1,163 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-4 pb-5">
+        <div class="my-3">
+            <a class="my-0" href="{% url 'admin_all_services' %}">Return</a>
+        </div>
+        <hr>
+        <h1 class="mt-4">Service Update</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Limited Update</li>
+        </ol>
+
+        <!-- Role Alert -->
+        {% if request.user.role == 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In order to update aservice instance you need to be an admin.
+        </div>
+        {% elif request.user.role == 1%}
+
+        <!-- Form Container -->
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 col-md-12 d-inline-block">
+                <form method="POST" class="card p-5" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if service.non_field_errors %}
+                    <div class="errors">{{ service.non_field_errors }}</div>
+                    {% endif %}
+
+                    <!-- Author -->
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Author ID</strong></label>
+                        <input type="text" class="form-control bg-light bg-gradient" value="{{ request.user.username }}"
+                            readonly>
+                        <input type="hidden" name="{{ service.author.name }}" class="form-control bg-light bg-gradient"
+                            value="{{ service.author.value }}" id="{{ service.author.id_for_label }}" readonly>
+                        {% if service.author.errors %}
+                        <div class="errors">{{ service.author.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label"><strong>Title</strong></label>
+                        <input type="text" name="title" class="form-control" id="title" maxlength="20"
+                            value="{{ service.title }}" required>
+                        {% if service.title.errors %}
+                        <div class="errors">{{ service.title.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- SKU Number -->
+                    <div class="mb-3">
+                        <label for="sku" class="form-label"><strong>SKU</strong></label>
+                        <input type="text" name="sku" class="form-control" id="sku" value="{{ service.sku }}" required>
+                        {% if service.sku.errors %}
+                        <div class="errors">{{ service.sku.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <label for="price" class="form-label"><strong>Price</strong></label>
+                        <input type="number" name="price" class="form-control" id="price" value="{{ service.price }}"
+                            step="0.01" min="0" required>
+                        {% if service.price.errors %}
+                        <div class="errors">{{ service.price.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label"><strong>Category</strong></label>
+                        <select name="category" class="form-control" id="category" required>
+                            <option value="{{ service.category.id }}" selected>{{ service.category }}</option>
+                            {% for category in categories %}
+                            {% if category.id != service.category.id %}
+                            <option value="{{ category.id }}">{{ category }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if service.category.errors %}
+                        <div class="errors">{{ service.category.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Service Type -->
+                    <div class="mb-3">
+                        <label for="service" class="form-label"><strong>Service Type</strong></label>
+                        <select name="service" class="form-control" id="service" multiple="multiple" required>
+                            <option value="{{ service.service.id }}" selected>
+                                {{ offer_service.first }}</option>
+                            {% for service in services %}
+                            {% if offer_service.first.id != service.id %}
+                            <option value="{{ service.id }}">{{ service }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if service.service.errors %}
+                        <div class="errors">{{ service.service.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Code Type -->
+                    <div class="mb-3">
+                        <label for="code" class="form-label"><strong>Code Type</strong></label>
+                        <select name="code" class="form-control" id="code" multiple="multiple" required>
+                            <option value="{{ code.code.id }}" selected>
+                                {{ offer_code.first }}</option>
+                            {% for code in codes %}
+                            {% if offer_code.first.id != code.id %}
+                            <option value="{{ code.id }}">{{ code }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if code.code.errors %}
+                        <div class="errors">{{ code.code.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label"><strong>Description</strong><small>(264
+                                characters)</small></label>
+                        <textarea name="description" class="form-control" id="description" maxlength="258" rows="4"
+                            required>{{ service.description }}</textarea>
+                        {% if service.description.errors %}
+                        <div class="errors">{{ service.description.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label for="service_image" class="form-label"><strong>Image</strong></label>
+                        {% if service.service_image %}
+                        <div class="mb-2 text-center">
+                            <img src="{{ service.service_image.url }}" alt="Current Image" style="max-width: 200px;">
+                        </div>
+                        {% endif %}
+                        <input type="file" name="service_image" id="service_image" class="form-control">
+                        {% if service.service_image.errors %}
+                        <div class="errors">{{ service.service_image.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row my-4 text-center">
+                        <div class="col-12 d-inline-block">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

@@ -2,10 +2,12 @@
 from django.shortcuts import render
 from django.views import View, generic
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+
 # Local imports
 from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
-from .models import Product, Service
+from .models import Product, Service, Category, ServiceType, CodeType
 from homepage.models import STATUS
 from .validate_image import validate_image_size
 
@@ -101,7 +103,6 @@ class ServiceList(ServiceBaseListView):
 
 class BaseUpdateServiceView(AdminRequiredMixin, View):
     """Base class for service list view."""
-
     template_name = None
 
     def get(self, request, slug, *args, **kwargs):
@@ -109,16 +110,24 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def get_context_data(self, slug):
+        categories = Category.objects.all()
+        services = ServiceType.objects.all()
+        codes = CodeType.objects.all()
+
         queryset = Service.objects.order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
         status = STATUS
-        code = service.code.all()
+        offer_code = service.code.all()
         offer_service = service.service.all()
 
         return {
+            "categories": categories,
+            "services": services,
+            "codes": codes,
+
             "service": service,
             "status": status,
-            "code": code,
+            "offer_code": offer_code,
             "offer_service": offer_service,
             "user_authenticated": self.request.user.is_authenticated
         }
