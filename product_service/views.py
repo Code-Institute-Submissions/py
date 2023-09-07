@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.views import View, generic
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
+from django.views.generic.edit import DeleteView
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse, reverse_lazy
 
 # Local imports
 from admin_dashboard.views import AdminRequiredMixin
@@ -48,7 +51,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
                 request, self.template_name,
                 {'form': form})
 
-# Service Creation
+# CREATE Service instance
 
 
 class AdminServiceCreation(AdminRequiredMixin, View):
@@ -82,7 +85,7 @@ class AdminServiceCreation(AdminRequiredMixin, View):
                 request, self.template_name,
                 {'form': form})
 
-# Service Management List
+# READ Service Instances
 
 
 class ServiceBaseListView(AdminRequiredMixin, generic.ListView):
@@ -184,3 +187,34 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
         messages.success(
             request, "Congratulations! The service instance has been updated!")
         return redirect('admin_service_update', slug=service.slug)
+
+# DELETE Service
+
+
+class ServiceDelete(AdminRequiredMixin, DeleteView):
+    """View for deleting service instances."""
+    model = Service
+    template_name = None
+    allowed_roles = [1]
+
+    def dispatch(self, request, *args, **kwargs):
+        service = self.get_object()
+        if service.status == 2:
+            messages.error(
+                request, "Error: service's status must be suspended or draft.")
+            return redirect('admin_all_services')
+
+        if self.request.user.role not in self.allowed_roles:
+            messages.error(
+                request, "Error: User does not have the required role")
+            return redirect('admin_all_services')
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Service, slug=slug)
+
+    def get_success_url(self):
+        messages.success(self.request, 'Service Instance has been deleted!')
+        return reverse_lazy('admin_all_services')
