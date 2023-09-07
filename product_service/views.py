@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404, redirect
 from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
 from .models import Product, Service
+from homepage.models import STATUS
+from .validate_image import validate_image_size
 
 # ADMIN CREATE Product & Service
 
@@ -24,10 +26,10 @@ class AdminProductCreation(AdminRequiredMixin, View):
         form = AdminProductCreationForm(request.POST, request.FILES)
 
         # Validating Image KB
-        uploaded_image = request.FILES.get('image')
-        if uploaded_image:
+        image = request.FILES.get('image')
+        if image:
             max_upload_size = 500000
-            if uploaded_image.size > max_upload_size:
+            if image.size > max_upload_size:
                 form.add_error('image',
                                "File size must not exceed 500KB.")
 
@@ -57,11 +59,11 @@ class AdminServiceCreation(AdminRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         form = AdminServiceCreationForm(request.POST, request.FILES)
 
-        # Validating Image in KB
-        uploaded_image = request.FILES.get('image')
-        if uploaded_image:
+        # Validating Image KB
+        image = request.FILES.get('image')
+        if image:
             max_upload_size = 500000
-            if uploaded_image.size > max_upload_size:
+            if image.size > max_upload_size:
                 form.add_error('image',
                                "File size must not exceed 500KB.")
 
@@ -93,3 +95,61 @@ class ServiceList(ServiceBaseListView):
     """ Read all created service instances ftempalte"""
     template_name = 'admin-dashboard/all_services.html'
     context_object_name = 'admin_all_services'
+
+# UPDATE Service Instance
+
+
+class BaseUpdateServiceView(AdminRequiredMixin, View):
+    """Base class for service list view."""
+
+    template_name = None
+
+    def get(self, request, slug, *args, **kwargs):
+        context = self.get_context_data(slug)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, slug):
+        queryset = Service.objects.order_by('-created_on')
+        service = get_object_or_404(queryset, slug=slug)
+        status = STATUS
+        code = service.code.all()
+        offer_service = service.service.all()
+
+        return {
+            "service": service,
+            "status": status,
+            "code": code,
+            "offer_service": offer_service,
+            "user_authenticated": self.request.user.is_authenticated
+        }
+
+
+class AdminUpdateServiceView(BaseUpdateServiceView):
+    """View to update service instance"""
+    template_name = 'admin-dashboard/update_service.html'
+
+    def post(self, request, slug, *args, **kwargs):
+
+        service = get_object_or_404(Service, slug=slug)
+
+        service.title = request.POST.get('title')
+
+        status = request.POST.get('status')
+        service.status = int(status)
+
+        description = request.POST.get('description')
+        service.description = description[:264]
+
+        # service.mission = request.POST.get('mission')
+        # service.location = request.POST.get('location')
+
+        image = request.FILES.get(
+            'image')
+        if image and validate_image_size(request, image):
+            service.image = image
+
+        service.save()
+
+        messages.success(
+            request, "Congratulations! The service instance has been updated!")
+        return redirect('admin_service_update', slug=service.slug)
