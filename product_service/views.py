@@ -8,8 +8,9 @@ from django.contrib import messages
 from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
 from .models import Product, Service, Category, ServiceType, CodeType
-from homepage.models import STATUS, SCOPE_TYPE
+from homepage.models import STATUS
 from .validate_image import validate_image_size
+from .models import SCOPE_TYPE
 
 # ADMIN CREATE Product & Service
 
@@ -117,6 +118,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         queryset = Service.objects.order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
         status = STATUS
+        scope = SCOPE_TYPE
         offer_code = service.code.all()
         offer_service = service.service.all()
 
@@ -127,6 +129,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
 
             "service": service,
             "status": status,
+            "scope": scope,
             "offer_code": offer_code,
             "offer_service": offer_service,
             "user_authenticated": self.request.user.is_authenticated

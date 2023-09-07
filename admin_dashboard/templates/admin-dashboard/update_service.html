@@ -73,7 +73,7 @@
                     <!-- Category -->
                     <div class="mb-3">
                         <label for="category" class="form-label"><strong>Category</strong></label>
-                        <select name="category" class="form-control" id="category" required>
+                        <select name="category" class="form-select" id="category" required>
                             <option value="{{ service.category.id }}" selected>{{ service.category }}</option>
                             {% for category in categories %}
                             {% if category.id != service.category.id %}
@@ -104,18 +104,17 @@
 
                     <!-- Scope Type -->
                     <div class="mb-3">
-                        <label for="code" class="form-label"><strong>Scope Type</strong></label>
-                        <select name="code" class="form-control" id="code" multiple="multiple" required>
-                            <option value="{{ code.code.id }}" selected>
-                                {{ offer_code.first }}</option>
-                            {% for code in codes %}
-                            {% if offer_code.first.id != code.id %}
-                            <option value="{{ code.id }}">{{ code }}</option>
+                        <label for="scope" class="form-label"><strong>Scope</strong></label>
+                        <select id="scope" name="scope" class="form-select">
+                            <option value="{{ service.type }}" selected> {{ service.get_type_display }}</option>
+                            {% for scope_int, scope_str in scope %}
+                            {% if scope_int != service.type %}
+                            <option value="{{ scope_int }}">{{ scope_str }}</option>
                             {% endif %}
                             {% endfor %}
                         </select>
-                        {% if code.code.errors %}
-                        <div class="errors">{{ code.code.errors }}</div>
+                        {% if service.scope.errors %}
+                        <div class="errors">{{ service.scope.errors }}</div>
                         {% endif %}
                     </div>
 
