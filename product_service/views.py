@@ -8,7 +8,7 @@ from django.contrib import messages
 from admin_dashboard.views import AdminRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
 from .models import Product, Service, Category, ServiceType, CodeType
-from homepage.models import STATUS
+from homepage.models import STATUS, SCOPE_TYPE
 from .validate_image import validate_image_size
 
 # ADMIN CREATE Product & Service

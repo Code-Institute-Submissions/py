@@ -2,7 +2,7 @@ from django.db import models
 
 from homepage.models import STATUS
 
-ITEM_TYPE = (
+SCOPE_TYPE = (
     (0, 'Pending'),
     (1, 'Ownership'),
     (2, 'License'),
@@ -73,7 +73,7 @@ class Product(models.Model):
 
     excerpt = models.CharField(max_length=128)
 
-    type = models.IntegerField(choices=ITEM_TYPE, default=1)
+    type = models.IntegerField(choices=SCOPE_TYPE, default=1)
 
     code = models.ManyToManyField(CodeType, related_name="code_type")
 
@@ -140,7 +140,7 @@ class Service(models.Model):
 
     excerpt = models.CharField(max_length=128)
 
-    type = models.IntegerField(choices=ITEM_TYPE, default=1)
+    type = models.IntegerField(choices=SCOPE_TYPE, default=1)
 
     code = models.ManyToManyField(CodeType, related_name="code_type_service")
 

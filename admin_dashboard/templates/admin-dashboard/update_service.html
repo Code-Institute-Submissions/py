@@ -86,24 +86,38 @@
                         {% endif %}
                     </div>
 
-
-                    <!-- Service Type -->
+                    <!-- Status -->
                     <div class="mb-3">
-                        <label for="service" class="form-label"><strong>Service Type</strong></label>
-                        <select name="service" class="form-control" id="service" multiple="multiple" required>
-                            <option value="{{ service.service.id }}" selected>
-                                {{ offer_service.first }}</option>
-                            {% for service in services %}
-                            {% if offer_service.first.id != service.id %}
-                            <option value="{{ service.id }}">{{ service }}</option>
+                        <label for="status" class="form-label"><strong>Status</strong></label>
+                        <select id="status" name="status" class="form-select">
+                            <option value="{{ service.status }}" selected> {{ service.get_status_display }}</option>
+                            {% for status_int, status_str in status %}
+                            {% if status_int != service.status %}
+                            <option value="{{ status_int }}">{{ status_str }}</option>
                             {% endif %}
                             {% endfor %}
                         </select>
-                        {% if service.service.errors %}
-                        <div class="errors">{{ service.service.errors }}</div>
+                        {% if service.status.errors %}
+                        <div class="errors">{{ service.status.errors }}</div>
                         {% endif %}
                     </div>
 
+                    <!-- Scope Type -->
+                    <div class="mb-3">
+                        <label for="code" class="form-label"><strong>Scope Type</strong></label>
+                        <select name="code" class="form-control" id="code" multiple="multiple" required>
+                            <option value="{{ code.code.id }}" selected>
+                                {{ offer_code.first }}</option>
+                            {% for code in codes %}
+                            {% if offer_code.first.id != code.id %}
+                            <option value="{{ code.id }}">{{ code }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if code.code.errors %}
+                        <div class="errors">{{ code.code.errors }}</div>
+                        {% endif %}
+                    </div>
 
                     <!-- Code Type -->
                     <div class="mb-3">
@@ -119,6 +133,24 @@
                         </select>
                         {% if code.code.errors %}
                         <div class="errors">{{ code.code.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Service Type -->
+                    <div class="mb-3">
+                        <label for="service" class="form-label"><strong>Service Type</strong></label>
+                        <select name="service" class="form-control" id="service" multiple="multiple" required>
+                            <option value="{{ service.service.id }}" selected>
+                                {{ offer_service.first }}</option>
+                            {% for service in services %}
+                            {% if offer_service.first.id != service.id %}
+                            <option value="{{ service.id }}">{{ service }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        {% if service.service.errors %}
+                        <div class="errors">{{ service.service.errors }}</div>
                         {% endif %}
                     </div>
 
