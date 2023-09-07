@@ -1,0 +1,290 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-5 pb-5">
+        <h1 class="mt-4">Service Creation</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Create a service on this page</li>
+        </ol>
+        <!-- Form Errors Handling (Feedback) -->
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if request.user.role == 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In order to create a Service you need to be an admin.
+        </div>
+        {% elif request.user.role == 1%}
+        <!-- Editing Card -->
+        <div class="card shadow-lg border-0 rounded-lg mt-4">
+            <div class="card-header">
+                <h4 class="text-center font-weight-light my-2">{% trans "Service Form" %}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-xl-6 col-md-12 d-inline-block">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if form.non_field_errors %}
+                            <div class="errors">{{ form.non_field_errors }}</div>
+                            {% endif %}
+
+                            <!-- Author -->
+                            <div class="mb-3">
+                                <label class="form-label"><strong>{{ form.author.label }} ID</strong></label>
+                                <input type="text" class="form-control bg-light bg-gradient"
+                                    value="{{ request.user.username }}" readonly>
+                                <input type="hidden" name="{{ form.author.name }}"
+                                    class="form-control bg-light bg-gradient" value="{{ form.author.value }}"
+                                    id="{{ form.author.id_for_label }}" readonly>
+
+                                {% if form.author.errors %}
+                                <div class="errors">{{ form.author.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.author.help_text }}</div>
+                            </div>
+
+                            <!-- Title  -->
+                            <div class="mb-3">
+                                <label for="{{ form.title.id_for_label }}"
+                                    class="form-label"><strong>{{ form.title.label }}</strong></label>
+                                <input type="text" name="{{ form.title.name }}" class="form-control"
+                                    id="{{ form.title.id_for_label }}" value="{{ form.title.value|default:'' }}"
+                                    required>
+                                {% if form.title.errors %}
+                                <div class="errors">{{ form.title.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.title.help_text }}</div>
+                            </div>
+
+
+                            <!-- SKU Number  -->
+                            <div class="mb-3">
+                                <label for="{{ form.sku.id_for_label }}"
+                                    class="form-label"><strong>{{ form.sku.label }}</strong></label>
+                                <input type="text" name="{{ form.sku.name }}" class="form-control"
+                                    id="{{ form.sku.id_for_label }}" value="{{ form.sku.value|default:'' }}" required>
+                                {% if form.sku.errors %}
+                                <div class="errors">{{ form.sku.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.sku.help_text }}</div>
+                            </div>
+
+                            <!-- Price Number -->
+                            <div class="mb-3">
+                                <label for="{{ form.price.id_for_label }}" class="form-label">
+                                    <strong>{{ form.price.label }}</strong>
+                                </label>
+                                <input type="number" name="{{ form.price.name }}" class="form-control"
+                                    id="{{ form.price.id_for_label }}" value="{{ form.price.value|default:'' }}"
+                                    step="0.01" min="0" required>
+                                {% if form.price.errors %}
+                                <div class="errors">{{ form.price.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.price.help_text }}</div>
+                            </div>
+
+
+                            <!-- Category -->
+                            <div class="mb-3">
+                                <label for="{{ form.category.id_for_label }}" class="form-label">
+                                    <strong>{{ form.category.label }}</strong>
+                                </label>
+                                <select name="{{ form.category.name }}" class="form-control"
+                                    id="{{ form.category.id_for_label }}" required>
+                                    {% for value, display_text in form.category.field.choices %}
+                                    <option value="{{ value }}"
+                                        {% if form.category.value == value %}selected{% endif %}>
+                                        {{ display_text }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.category.errors %}
+                                <div class="errors">{{ form.category.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.category.help_text }}</div>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-3">
+                                <label for="{{ form.status.id_for_label }}" class="form-label">
+                                    <strong>{{ form.status.label }}</strong>
+                                </label>
+                                <select name="{{ form.status.name }}" class="form-control"
+                                    id="{{ form.status.id_for_label }}" required>
+                                    {% for value, display_text in form.status.field.choices %}
+                                    <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>
+                                        {{ display_text }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.status.errors %}
+                                <div class="errors">{{ form.status.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.status.help_text }}</div>
+                            </div>
+
+
+                            <!-- Service Type -->
+                            <div class="mb-3">
+                                <label for="{{ form.type.id_for_label }}" class="form-label">
+                                    <strong>{{ form.type.label }}</strong>
+                                </label>
+                                <select name="{{ form.type.name }}" class="form-control"
+                                    id="{{ form.type.id_for_label }}" required>
+                                    {% for value, display_text in form.type.field.choices %}
+                                    <option value="{{ value }}" {% if form.type.value == value %}selected{% endif %}>
+                                        {{ display_text }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.type.errors %}
+                                <div class="errors">{{ form.type.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.type.help_text }}</div>
+                            </div>
+
+
+                            <!-- Code Type -->
+                            <div class="mb-3">
+                                <label for="{{ form.code.id_for_label }}" class="form-label">
+                                    <strong>{{ form.code.label }}</strong>
+                                </label>
+                                <select name="{{ form.code.name }}" class="form-control" multiple="multiple"
+                                    id="{{ form.code.id_for_label }}" required>
+                                    {% for value, display_text in form.code.field.choices %}
+                                    <option value="{{ value }}" {% if form.code.value == value %}selected{% endif %}>
+                                        {{ display_text }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.code.errors %}
+                                <div class="errors">{{ form.code.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.code.help_text }}</div>
+                            </div>
+
+                            <!-- Service Type -->
+                            <div class="mb-3">
+                                <label for="{{ form.service.id_for_label }}" class="form-label">
+                                    <strong>{{ form.service.label }}</strong>
+                                </label>
+                                <select name="{{ form.service.name }}" class="form-control" multiple="multiple"
+                                    id="{{ form.service.id_for_label }}" required>
+                                    {% for value, display_text in form.service.field.choices %}
+                                    <option value="{{ value }}" {% if form.service.value == value %}selected{% endif %}>
+                                        {{ display_text }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.service.errors %}
+                                <div class="errors">{{ form.service.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.service.help_text }}</div>
+                            </div>
+
+                            <!-- Preview Link -->
+                            <div class="mb-3">
+                                <label for="{{ form.preview.id_for_label }}" class="form-label">
+                                    <strong>{{ form.preview.label }}</strong>
+                                </label>
+                                <input type="url" name="{{ form.preview.name }}" class="form-control"
+                                    id="{{ form.preview.id_for_label }}" value="{{ form.preview.value|default:'' }}"
+                                    required>
+                                {% if form.preview.errors %}
+                                <div class="errors">{{ form.preview.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.preview.help_text }}</div>
+                            </div>
+
+
+                            <!-- Docs Link -->
+                            <div class="mb-3">
+                                <label for="{{ form.docs.id_for_label }}" class="form-label">
+                                    <strong>{{ form.docs.label }}</strong>
+                                </label>
+                                <input type="url" name="{{ form.docs.name }}" class="form-control"
+                                    id="{{ form.docs.id_for_label }}" value="{{ form.docs.value|default:'' }}" required>
+                                {% if form.docs.errors %}
+                                <div class="errors">{{ form.docs.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.docs.help_text }}</div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="{{ form.description.id_for_label }}"
+                                    class="form-label"><strong>{{ form.description.label }}</strong>
+                                    <small>(256 characters)</small>
+                                </label>
+                                <textarea name="{{ form.description.name }}" class="form-control"
+                                    id="{{ form.description.id_for_label }}" rows="4"
+                                    required>{{ form.description.value|default:'' }}</textarea>
+                                {% if form.description.errors %}
+                                <div class="errors">{{ form.description.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.description.help_text }}</div>
+                            </div>
+
+                            <!-- Excerpt  -->
+                            <div class="mb-3">
+                                <label for="{{ form.excerpt.id_for_label }}"
+                                    class="form-label"><strong>{{ form.excerpt.label }}</strong></label>
+                                <input type="text" name="{{ form.excerpt.name }}" class="form-control"
+                                    id="{{ form.excerpt.id_for_label }}" value="{{ form.excerpt.value|default:'' }}"
+                                    required>
+                                {% if form.excerpt.errors %}
+                                <div class="errors">{{ form.excerpt.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.excerpt.help_text }}</div>
+                            </div>
+
+                            <!-- Image -->
+                            <div class="mb-3">
+                                <label for="{{ form.image.id_for_label }}"
+                                    class="form-label"><strong>{{ form.image.label }}</strong></label>
+                                {{ form.image }}
+                                {% if form.image.errors %}
+                                <div class="errors">{{ form.image.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.image.help_text }}</div>
+                            </div>
+                            <!-- Image URL -->
+                            <div class="mb-3">
+                                <label for="{{ form.image_url.id_for_label }}" class="form-label">
+                                    <strong>{{ form.image_url.label }}</strong>
+                                </label>
+                                <input type="url" name="{{ form.image_url.name }}" class="form-control"
+                                    id="{{ form.image_url.id_for_label }}" value="{{ form.image_url.value|default:'' }}"
+                                    required>
+                                {% if form.image_url.errors %}
+                                <div class="errors">{{ form.image_url.errors }}</div>
+                                {% endif %}
+                                <div class="form-text">{{ form.image_url.help_text }}</div>
+                            </div>
+
+                            <div class="row my-4 text-center">
+                                <div class="col-12 d-inline-block">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

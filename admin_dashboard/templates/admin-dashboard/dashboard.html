@@ -45,12 +45,11 @@
             </div>
         </div>
 
-        <!-- Tables -->
+        <!-- Product Table -->
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <i class="fas fa-table me-1"></i>
-                Event Overview
-                <small> (Admin Created)</small>
+                Product & Service Overview
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -60,9 +59,9 @@
                             <th>Author</th>
                             <th>Category</th>
                             <th>Status</th>
-                            <th>Location</th>
+                            <th>Type</th>
+                            <th>Price</th>
                             <th>Created On</th>
-                            <th>Expire On</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -71,13 +70,34 @@
                             <th>Author</th>
                             <th>Category</th>
                             <th>Status</th>
-                            <th>Location</th>
+                            <th>Type</th>
+                            <th>Price</th>
                             <th>Created On</th>
-                            <th>Expire On</th>
                         </tr>
                     </tfoot>
                     <tbody>
-
+                        {% for product in admin_dashboard.product_authors.all %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.author }}</td>
+                            <td>{{ product.category.category_name }}</td>
+                            <td>{{ product.get_status_display }}</td>
+                            <td>{{ product.get_type_display }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.created_on }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for service in admin_dashboard.service_authors.all %}
+                        <tr>
+                            <td>{{ service.title }}</td>
+                            <td>{{ service.author }}</td>
+                            <td>{{ service.category.category_name }}</td>
+                            <td>{{ service.get_status_display }}</td>
+                            <td>{{ service.get_type_display }}</td>
+                            <td>{{ service.price }}</td>
+                            <td>{{ service.created_on }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

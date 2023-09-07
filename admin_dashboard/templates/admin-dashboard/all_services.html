@@ -1,0 +1,57 @@
+{% extends "admin-dashboard/base.html" %}
+
+{% block content%}
+<main>
+    <div class="container-fluid p-4 pt-0">
+        <h1 class="mt-4">All services</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">All created services in Plexosoft's marketplace</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Admin Created services
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Created On</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Created On</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for service in admin_all_services.all %}
+                        <tr>
+                            <td>{{ service.title }}</td>
+                            <td>{{ service.author }}</td>
+                            <td>{{ service.category.category_name }}</td>
+                            <td>{{ service.get_status_display }}</td>
+                            <td>{{ service.get_type_display }}</td>
+                            <td>{{ service.price }}</td>
+                            <td>{{ service.created_on }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,9 +1,15 @@
 from django.urls import path, include
 
-from .views import (AdminProductCreation)
+from .views import (AdminProductCreation,
+                    AdminServiceCreation,
+                    ServiceList)
 
 
 urlpatterns = [
-    path('account/admin/create/', AdminProductCreation.as_view(),
-         name='admin_creation'),
+    path('account/admin/create/product/', AdminProductCreation.as_view(),
+         name='admin_product_creation'),
+    path('account/admin/create/service/', AdminServiceCreation.as_view(),
+         name='admin_service_creation'),
+    path('account/admin/all_service/', ServiceList.as_view(),
+         name='admin_all_services'),
 ]
