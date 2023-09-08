@@ -5,18 +5,18 @@
 <main class="pb-5 mb-5">
     <div class="container-fluid px-4 pb-5">
         <div class="my-3">
-            <a class="my-0" href="{% url 'admin_all_services' %}">Return</a>
+            <a class="my-0" href="{% url 'admin_all_products' %}">Return</a>
         </div>
         <hr>
-        <h1 class="mt-4">Service Update</h1>
+        <h1 class="mt-4">Product Update</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">You can update fully this service instance</li>
+            <li class="breadcrumb-item active">You can update fully this product instance</li>
         </ol>
 
         <!-- Role Alert -->
         {% if request.user.role == 0 %}
         <div class="alert alert-warning text-center" role="alert">
-            In order to update a service instance you need to be an admin.
+            In order to update a product instance you need to be an admin.
         </div>
         {% elif request.user.role == 1%}
 
@@ -25,8 +25,8 @@
             <div class="col-xl-6 col-md-12 d-inline-block">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% if service.non_field_errors %}
-                    <div class="errors">{{ service.non_field_errors }}</div>
+                    {% if product.non_field_errors %}
+                    <div class="errors">{{ product.non_field_errors }}</div>
                     {% endif %}
                     <div class="card">
                         <div class="card-header">
@@ -38,11 +38,11 @@
                                 <label class="form-label"><strong>Author ID</strong></label>
                                 <input type="text" class="form-control bg-light bg-gradient"
                                     value="{{ request.user.username }}" readonly>
-                                <input type="hidden" name="{{ service.author.name }}"
-                                    class="form-control bg-light bg-gradient" value="{{ service.author.value }}"
-                                    id="{{ service.author.id_for_label }}" readonly>
-                                {% if service.author.errors %}
-                                <div class="errors">{{ service.author.errors }}</div>
+                                <input type="hidden" name="{{ product.author.name }}"
+                                    class="form-control bg-light bg-gradient" value="{{ product.author.value }}"
+                                    id="{{ product.author.id_for_label }}" readonly>
+                                {% if product.author.errors %}
+                                <div class="errors">{{ product.author.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -50,19 +50,19 @@
                             <div class="mb-3">
                                 <label for="title" class="form-label"><strong>Title</strong></label>
                                 <input type="text" name="title" class="form-control" id="title" maxlength="20"
-                                    value="{{ service.title }}" required>
-                                {% if service.title.errors %}
-                                <div class="errors">{{ service.title.errors }}</div>
+                                    value="{{ product.title }}" required>
+                                {% if product.title.errors %}
+                                <div class="errors">{{ product.title.errors }}</div>
                                 {% endif %}
                             </div>
 
                             <!-- SKU Number -->
                             <div class="mb-3">
                                 <label for="sku" class="form-label"><strong>SKU</strong></label>
-                                <input type="text" name="sku" class="form-control" id="sku" value="{{ service.sku }}"
+                                <input type="text" name="sku" class="form-control" id="sku" value="{{ product.sku }}"
                                     required>
-                                {% if service.sku.errors %}
-                                <div class="errors">{{ service.sku.errors }}</div>
+                                {% if product.sku.errors %}
+                                <div class="errors">{{ product.sku.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -70,9 +70,9 @@
                             <div class="mb-3">
                                 <label for="price" class="form-label"><strong>Price</strong></label>
                                 <input type="number" name="price" class="form-control" id="price"
-                                    value="{{ service.price }}" step="0.01" min="0" required>
-                                {% if service.price.errors %}
-                                <div class="errors">{{ service.price.errors }}</div>
+                                    value="{{ product.price }}" step="0.01" min="0" required>
+                                {% if product.price.errors %}
+                                <div class="errors">{{ product.price.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -80,15 +80,15 @@
                             <div class="mb-3">
                                 <label for="category" class="form-label"><strong>Category</strong></label>
                                 <select name="category" class="form-select" id="category" required>
-                                    <option value="{{ service.category.id }}" selected>{{ service.category }}</option>
+                                    <option value="{{ product.category.id }}" selected>{{ product.category }}</option>
                                     {% for category in categories %}
-                                    {% if category.id != service.category.id %}
+                                    {% if category.id != product.category.id %}
                                     <option value="{{ category.id }}">{{ category }}</option>
                                     {% endif %}
                                     {% endfor %}
                                 </select>
-                                {% if service.category.errors %}
-                                <div class="errors">{{ service.category.errors }}</div>
+                                {% if product.category.errors %}
+                                <div class="errors">{{ product.category.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -96,16 +96,16 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label"><strong>Status</strong></label>
                                 <select id="status" name="status" class="form-select">
-                                    <option value="{{ service.status }}" selected> {{ service.get_status_display }}
+                                    <option value="{{ product.status }}" selected> {{ product.get_status_display }}
                                     </option>
                                     {% for status_int, status_str in status %}
-                                    {% if status_int != service.status %}
+                                    {% if status_int != product.status %}
                                     <option value="{{ status_int }}">{{ status_str }}</option>
                                     {% endif %}
                                     {% endfor %}
                                 </select>
-                                {% if service.status.errors %}
-                                <div class="errors">{{ service.status.errors }}</div>
+                                {% if product.status.errors %}
+                                <div class="errors">{{ product.status.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -113,15 +113,15 @@
                             <div class="mb-3">
                                 <label for="type" class="form-label"><strong>Scope</strong></label>
                                 <select id="type" name="type" class="form-select">
-                                    <option value="{{ service.type }}" selected> {{ service.get_type_display }}</option>
+                                    <option value="{{ product.type }}" selected> {{ product.get_type_display }}</option>
                                     {% for scope_int, scope_str in scope %}
-                                    {% if scope_int != service.type %}
+                                    {% if scope_int != product.type %}
                                     <option value="{{ scope_int }}">{{ scope_str }}</option>
                                     {% endif %}
                                     {% endfor %}
                                 </select>
-                                {% if service.scope.errors %}
-                                <div class="errors">{{ service.scope.errors }}</div>
+                                {% if product.scope.errors %}
+                                <div class="errors">{{ product.scope.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -152,8 +152,8 @@
                                         {% endif %}{% endfor %}>{{ service_list }}</option>
                                     {% endfor %}
                                 </select>
-                                {% if service.service.errors %}
-                                <div class="errors">{{ service.service.errors }}</div>
+                                {% if product.service.errors %}
+                                <div class="errors">{{ product.service.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -161,19 +161,19 @@
                             <div class="mb-3">
                                 <label for="preview" class="form-label"><strong>Preview Link</strong></label>
                                 <input type="link" name="preview" class="form-control" id="preview"
-                                    value="{{ service.preview }}" required>
-                                {% if service.preview.errors %}
-                                <div class="errors">{{ service.preview.errors }}</div>
+                                    value="{{ product.preview }}" required>
+                                {% if product.preview.errors %}
+                                <div class="errors">{{ product.preview.errors }}</div>
                                 {% endif %}
                             </div>
 
                             <!-- Docs Link -->
                             <div class="mb-3">
                                 <label for="docs" class="form-label"><strong>Docs Link</strong></label>
-                                <input type="link" name="docs" class="form-control" id="docs" value="{{ service.docs }}"
+                                <input type="link" name="docs" class="form-control" id="docs" value="{{ product.docs }}"
                                     required>
-                                {% if service.docs.errors %}
-                                <div class="errors">{{ service.docs.errors }}</div>
+                                {% if product.docs.errors %}
+                                <div class="errors">{{ product.docs.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -183,9 +183,9 @@
                                 <label for="description" class="form-label"><strong>Description</strong><small>(264
                                         characters)</small></label>
                                 <textarea name="description" class="form-control" id="description" maxlength="258"
-                                    rows="4" required>{{ service.description }}</textarea>
-                                {% if service.description.errors %}
-                                <div class="errors">{{ service.description.errors }}</div>
+                                    rows="4" required>{{ product.description }}</textarea>
+                                {% if product.description.errors %}
+                                <div class="errors">{{ product.description.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -193,23 +193,23 @@
                             <div class="mb-3">
                                 <label for="excerpt" class="form-label"><strong>Excerpt Text</strong></label>
                                 <input type="text" name="excerpt" class="form-control" id="excerpt" maxlength="20"
-                                    value="{{ service.excerpt }}" required>
-                                {% if service.excerpt.errors %}
-                                <div class="errors">{{ service.excerpt.errors }}</div>
+                                    value="{{ product.excerpt }}" required>
+                                {% if product.excerpt.errors %}
+                                <div class="errors">{{ product.excerpt.errors }}</div>
                                 {% endif %}
                             </div>
 
                             <!-- Image -->
                             <div class="mb-3">
                                 <label for="image" class="form-label"><strong>Image</strong></label>
-                                {% if service.image %}
+                                {% if product.image %}
                                 <div class="mb-2 text-center">
-                                    <img src="{{ service.image.url }}" alt="Current Image" style="max-width: 200px;">
+                                    <img src="{{ product.image.url }}" alt="Current Image" style="max-width: 200px;">
                                 </div>
                                 {% endif %}
                                 <input type="file" name="image" id="image" class="form-control">
-                                {% if service.image.errors %}
-                                <div class="errors">{{ service.image.errors }}</div>
+                                {% if product.image.errors %}
+                                <div class="errors">{{ product.image.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -217,9 +217,9 @@
                             <div class="mb-3">
                                 <label for="image_url" class="form-label"><strong>Image URL</strong></label>
                                 <input type="link" name="image_url" class="form-control" id="image_url"
-                                    value="{{ service.image_url }}" required>
-                                {% if service.image_url.errors %}
-                                <div class="errors">{{ service.image_url.errors }}</div>
+                                    value="{{ product.image_url }}" required>
+                                {% if product.image_url.errors %}
+                                <div class="errors">{{ product.image_url.errors }}</div>
                                 {% endif %}
                             </div>
 
@@ -243,14 +243,14 @@
 <!-- Deleete Modal -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="modal-content" method="post" action="{% url 'delete_service' service.slug %}">
+        <form class="modal-content" method="post" action="{% url 'delete_product' product.slug %}">
             {% csrf_token %}
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Service</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this service instance?
+                Are you sure you want to delete this product instance?
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-secondary">Delete</button>
