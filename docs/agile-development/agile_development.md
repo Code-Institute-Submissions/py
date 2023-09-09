@@ -10,7 +10,7 @@ An agile approach was used before, during and after development. We have used:
 
 The user stories have undergone some modifications since their initial conception during the **user-centric design** phase at the **scope plane**. What follows is the finalized user story that guided our development process.
 
-- In total there are **34** user stories and **175** Story Points.
+- In total there are **34** user stories and **176** Story Points.
 <!-- - Only **24 must-have** user stories  -->
 <!-- - Only **10 won't have** user stories  -->
 
@@ -23,7 +23,7 @@ The user stories have undergone some modifications since their initial conceptio
     | Homepage | Design Header | As a user, I want a clean, user-friendly header at the top of the page, so I can navigate easily and access the system's key features through the menu and dropdowns. | **4** |
     | | Arrange Mixed Products & Service Cards in Rows | As a user, I want a prominent 'Product & Service' section under the header, displaying a mix of 'products' and 'services' so I can quickly overview current entries. | **4** |
     | | | As a user, I want each card to display key product information so that I can click on what interests me. | **4** |
-    | | | As a user, I want a 'see more' button under the 'Product & Service' section, so I can view expanded results on a separate page. | **1** |
+    | | | As a user, I want a 'see more' button under the 'Product & Service' section so that I can view expanded results on a separate page. | **2** |
     | | Present Product Cards in Rows | As a user, I want a 'Product' section below the 'Product & Service' row that showcases only products, enabling me to preview them. | **4** |
     | | | As a user, I want each card to display key 'Product' information, so I know what I'm clicking on. | **2** |
     | | | As a user, I want a 'see more' button under the 'Product' section, so I can view additional results on another page. | **1** |

@@ -1,3 +1,4 @@
+/* Fonts */
 @font-face {
     font-family: "Roboto";
     src: url('../../font/roboto/Roboto-Regular.ttf');
@@ -9,31 +10,28 @@ a {
     text-decoration: none !important;
 }
 
-.card-header {
+/* Cards */
+.card-header,
+.card-header-hover {
     border-radius: 0px;
     background-color: #2980B9;
-    color: white;
+    color: #fff;
     border-bottom: 1px solid #dadada;
 }
 
 .card-header-hover {
-    border-radius: 0px;
-    background-color: #2980B9;
-    color: white;
-    border-bottom: 1px solid #dadada;
     transition: 0.3s;
 }
 
 .card-header-hover:hover {
     border-top: 1px solid #dadada;
-    border-bottom: 1px solid #dadada;
     transition: 0.3s;
 }
 
 .card-footer {
     border-radius: 0px;
     background-color: #2980B9;
-    color: white;
+    color: #fff;
     transition: 0.3s;
 }
 
@@ -46,7 +44,7 @@ a {
     margin: 10px -16px -16px;
 }
 
-
+/* Buttons */
 .btn-primary-main {
     width: 100%;
 }
@@ -70,6 +68,58 @@ a {
     transition: 0.3s;
 }
 
+.btn-primary-blue,
+.btn-secundary-blue {
+    transition: 0.3s;
+}
+
+.btn-primary-blue {
+    background-color: #2980b9;
+    color: #ffffff;
+}
+
+.btn-primary-blue:hover {
+    color: #2980b9;
+    border: 1px solid #2980b9;
+}
+
+.btn-secundary-blue {
+    border: 1px solid #2980b9;
+    color: #2980b9;
+}
+
+.btn-secundary-blue:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+.btn-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-light-blue {
+    background-color: #4f8eb8;
+}
+
+.btn-outline-dark {
+    color: #fff;
+    border-color: #2980B9;
+    transition: 0.3s;
+}
+
+.btn-outline-dark:hover {
+    background-color: #4f8eb8;
+    border-color: #4f8eb8;
+    color: #fff;
+}
+
+.btn:first-child:active {
+    background-color: #4f8eb8;
+    border-color: #fff;
+    transition: 0.3s;
+}
+
 /* Google Button Login */
 .google-button {
     display: flex;
@@ -78,12 +128,9 @@ a {
     background-color: #fff;
     color: #000;
     border-radius: 5px 5px 0px 0px;
-    /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25); */
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 14px;
-    display: flex;
-    align-items: center;
     transition: 0.3s;
 }
 
@@ -91,7 +138,6 @@ a {
     border-bottom: 1px solid #dadada;
     background-color: #2980B9;
     color: #fff;
-    transition: 0.3s;
 }
 
 .google-icon {
@@ -102,40 +148,7 @@ a {
     height: 42px;
 }
 
-.btn-text {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-/* Buttons */
-
-.btn-primary-blue {
-    background-color: #2980b9;
-    color: #ffffff;
-    transition: 0.3s;
-
-}
-
-.btn-primary-blue:hover {
-    transition: 0.3s;
-    color: #2980b9;
-    border: 1px solid #2980b9;
-}
-
-.btn-secundary-blue {
-    border: 1px solid #2980b9;
-    color: #2980b9;
-    transition: 0.3s;
-}
-
-.btn-secundary-blue:hover {
-    background-color: #2980b9;
-    color: #fff;
-    transition: 0.3s;
-}
-
 /* FAQ */
-
 .btn-primary-blue-faq {
     border-radius: 5px 5px 0 0;
     background-color: #f8f9fa;
@@ -148,10 +161,7 @@ a {
     color: #ffffff;
 }
 
-
-/* User & Admin Dashboard colors */
-
-/* Footer */
+/* User & Admin Dashboard Colors */
 i {
     color: #2980b9;
 }
@@ -160,69 +170,51 @@ i {
     background-color: #2980b9;
 }
 
-/* SB-Dashboard Template Override */
-
 .navbar-light {
     background-color: #2980B9 !important;
     color: #ffffff !important;
 }
 
-.navbar-brand {
-    color: #ffffff !important;
-}
-
-.fa-bars {
-    color: #ffffff !important;
-    transition: 0.3s;
-}
-
-.fa-bars:hover {
-    color: #dadada !important;
-    transition: 0.3s;
-}
-
-.fa-user {
-    color: #ffffff !important;
-    transition: 0.3s;
-}
-
-.fa-user:hover {
-    color: #dadada !important;
-    transition: 0.3s;
-}
-
+.navbar-brand,
+.fa-bars,
+.fa-user,
 .dropdown-toggle::after {
     color: #ffffff !important;
     transition: 0.3s;
 }
 
+.fa-bars:hover,
+.fa-user:hover,
 .dropdown-toggle:hover::after {
     color: #dadada !important;
-    transition: 0.3s;
 }
 
+/* Links */
+.nav-link:focus {
+    color: #fff;
+}
 
 .nav-link {
     transition: background-color 0.3s, color 0.3s;
+    color: #ffffff;
+}
+
+.nav-link:hover,
+.nav-link:hover .sb-nav-link-icon,
+.nav-link:hover .sb-sidenav-collapse-arrow {
+    color: #fff !important;
+    border-color: #fff;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #297fb938 !important;
 }
 
 .sb-nav-link-icon,
 .sb-sidenav-collapse-arrow {
     transition: color 0.3s;
 }
-
-.nav-link:hover {
-    background-color: #297fb938 !important;
-    color: #333333 !important;
-    transition: 0.3s;
-}
-
-.nav-link:hover .sb-nav-link-icon,
-.nav-link:hover .sb-sidenav-collapse-arrow {
-    color: #333333 !important;
-    transition: 0.3s;
-}
-
 
 .sb-sidenav-light .sb-sidenav-footer {
     background-color: #2980b9;

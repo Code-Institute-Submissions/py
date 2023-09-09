@@ -69,11 +69,11 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                     <!-- Home -->
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item m-1"><a class="nav-link" aria-current="page" href="/">Home</a></li>
 
                     <!-- Products -->
-                    <li class="nav-item dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown m-1">
+                        <button class="btn btn-light-blue dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Product
                         </button>
@@ -83,8 +83,8 @@
                         </ul>
                     </li>
                     <!-- Services -->
-                    <li class="nav-item dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown m-1">
+                        <button class="btn btn-light-blue dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Service
                         </button>
@@ -95,8 +95,8 @@
                     </li>
 
                     <!-- Account -->
-                    <li class="nav-item dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown m-1">
+                        <button class="btn btn-light-blue dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {% if user.is_authenticated %}
                             Account: <strong>{{ request.user.username }}</strong>
@@ -122,8 +122,8 @@
                         </ul>
                     </li>
                     <!-- Academy -->
-                    <li class="nav-item dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown m-1">
+                        <button class="btn btn-light-blue dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Academy
                         </button>
@@ -133,8 +133,8 @@
                         </ul>
                     </li>
                     <!-- Support -->
-                    <li class="nav-item dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
+                    <li class="nav-item dropdown m-1">
+                        <button class="btn btn-light-blue dropdown-toggle nav-link px-2" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Support
                         </button>
@@ -146,9 +146,9 @@
                 </ul>
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
+                        <i class="bi-cart-fill me-1 text-white"></i>
                         Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        <span class="badge bg-light text-black ms-1 rounded-pil">0</span>
                     </button>
                 </form>
                 <!-- END Menu -->
