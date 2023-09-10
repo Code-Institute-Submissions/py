@@ -10,6 +10,12 @@ a {
     text-decoration: none !important;
 }
 
+/* Homepage CTA */
+
+.bg-main {
+    background-color: #2980B9;
+}
+
 /* Cards */
 .card-header,
 .card-header-hover {
@@ -45,9 +51,36 @@ a {
 }
 
 /* Buttons */
-.btn-primary-main {
+
+.btn-primary {
     width: 100%;
+    background-color: #2980B9;
+    --bs-btn-bg: #2980B9;
+    --bs-btn-border-color: #2980B9;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #4f8eb8;
+    --bs-btn-hover-border-color: #2980B9;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2980B9;
+    --bs-btn-active-border-color: #2980B9;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #2980B9;
+    --bs-btn-disabled-border-color: #2980B9;
 }
+
+/* .btn-primary:hover {
+    background-color: #4f8eb8;
+}
+
+.btn-primary:focus {
+    background-color: #2980B9;
+}
+
+.btn-primary:active {
+    background-color: #2980B9;
+} */
 
 .alert-plexosoft {
     background-color: #297fb938 !important;
@@ -195,7 +228,7 @@ i {
     line-height: 2.5;
 }
 
-.navbar-toggler{
+.navbar-toggler {
     background-color: #fff;
     border-color: #4f8eb8;
     color: white;
