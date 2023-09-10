@@ -189,7 +189,18 @@ i {
     color: #dadada !important;
 }
 
-/* Links */
+/* Navbar Links */
+.search-pointer {
+    cursor: pointer;
+    line-height: 2.5;
+}
+
+.navbar-toggler{
+    background-color: #fff;
+    border-color: #4f8eb8;
+    color: white;
+}
+
 .nav-link:focus {
     color: #fff;
 }
