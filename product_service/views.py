@@ -47,7 +47,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
             messages.success(
                 request,
                 "Congratulations! The product instance has been created!")
-            return redirect('admin_product_creatio')  # REMEMBER TO CHANGE
+            return redirect('admin_product_creation')  # REMEMBER TO CHANGE
         else:
             return render(
                 request, self.template_name,

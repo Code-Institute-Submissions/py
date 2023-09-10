@@ -20,8 +20,54 @@
     <!-- Call to Action-->
     <div class="card text-white quote my-4 py-2 text-center bg-main">
         <div class="card-body">
-            <p class="text-white m-0">Dive into a Sea of Software Solutions: For You, Your Business, and Your Next Big Project!</p>
+            <p class="text-white m-0">Dive into a Sea of Software Solutions: For You, Your Business, and Your Next Big
+                Project!</p>
         </div>
+    </div>
+
+    <!-- Product & Service Row-->
+    <div class="row gx-4 gx-lg-5">
+        <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
+
+        <!-- Records not found -->
+        {% if not products and services %}
+        <p class="text-center">No records found so far </p>
+        {% endif %}
+
+        <!-- Records found -->
+        {% for product in combined_items %}
+        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+            <div class="card h-100">
+                <!-- In case different colors needed -->
+                {% if product.type == 0%}
+                <div class="card-header card-header-blue text-center h4">{{ product.get_type_display}}</div>
+                {% else %}
+                <div class="card-header card-header-blue text-center h4">{{ product.get_type_display}}</div>
+                {% endif %}
+                <div class="card-body mt-3 mb-4 card-body-height">
+
+                    <!-- Card image & Related Data -->
+                    <div class="row mt-2">
+                        <div class="col-8 d-inline-block">
+                            <div>
+                                <p class="card-title h5">{{ product.title }}</p>
+                                <p class="mission my-0 fs-6"> {{ product.status }}</p>
+                                <p class="mission my-0 fs-6"> {{ product.category }}</p>
+                                <small class="location my-0"> {{ product.code }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+        <div class="col-12 text-center">
+            <a href="" class="btn btn-light see-more fs-5">See more</a>
+        </div>
+    </div>
+    <div class="row">
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}

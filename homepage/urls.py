@@ -2,7 +2,10 @@
 from django.urls import path, include
 
 # Local Imports
-from .views import homepage, CustomLoginView, CustomSignupView, CustomLogoutView
+from .views import (HomepageProductServiceView,
+                    CustomLoginView,
+                    CustomSignupView,
+                    CustomLogoutView)
 from . import role_redirect
 
 
@@ -17,7 +20,8 @@ urlpatterns = [
          name='account_logout'),
 
     # HOMEPAGE
-    path('', homepage.as_view(), name='homepage'),
+    path('', HomepageProductServiceView.as_view(),
+         name='product_service_instance'),
 
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),
