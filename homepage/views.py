@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import View, generic
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse
+
 
 # Authentication app imports
 from allauth.account.views import LoginView, SignupView, LogoutView
@@ -77,3 +80,54 @@ class HomepageProductServiceView(ProductBaseListView):
 
         context['combined_items'] = combined_list
         return context
+
+
+class AllProductServiceListView(generic.ListView):
+    """Dedicated page for displaying list of ALL products & services."""
+    model = Product
+    template_name = 'all_product_service/all_product_service.html'
+    paginate_by = 6
+
+    def get_queryset(self):
+        try:
+            products = list(Product.objects.filter(
+                status=2).order_by('-created_on'))
+            services = list(Service.objects.filter(
+                status=2).order_by('-created_on'))
+
+            combined_list = self.combine_products_and_services(
+                products, services)
+            return combined_list
+        except Exception as e:
+            print(e)
+            return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        combined_list = self.get_queryset()
+
+        paginator = Paginator(combined_list, self.paginate_by)
+        page_number = self.request.GET.get('page', 1)
+
+        try:
+            page_obj = paginator.page(page_number)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+
+        context['page_obj'] = page_obj
+        context['is_paginated'] = len(combined_list) > self.paginate_by
+        return context
+
+    def combine_products_and_services(self, products, services):
+        combined_list = []
+        while products or services:
+            if products:
+                combined_list.append(products.pop(0))
+            if services:
+                combined_list.append(services.pop(0))
+            if products:
+                combined_list.append(products.pop(0))
+        return combined_list
