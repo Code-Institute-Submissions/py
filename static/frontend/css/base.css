@@ -10,7 +10,7 @@ a {
     text-decoration: none !important;
 }
 
-.text-justify{
+.text-justify {
     text-align: justify;
 }
 
@@ -34,6 +34,7 @@ a {
     background-position: center;
     height: 200px;
     padding: 0;
+    border-bottom: 1px solid #dadada;
 }
 
 .thumbnail-tags-left {
@@ -56,7 +57,7 @@ a {
 
 .likes-tags-left {
     background-color: white;
-    padding: 5px 5px 5px 15px ;
+    padding: 5px 5px 5px 15px;
     border-radius: 0 5px 0 0;
     margin: 0;
     /* border-right: 1px solid #dadada;
@@ -65,7 +66,7 @@ a {
 
 .purchases-tags-right {
     background-color: white;
-    padding: 5px 15px 5px 5px ;
+    padding: 5px 15px 5px 5px;
     border-radius: 5px 0 0 0;
     margin: 0;
     /* border-left: 1px solid #dadada;
@@ -86,6 +87,26 @@ a {
 
 .card-header-hover:hover {
     border-top: 1px solid #dadada;
+    transition: 0.3s;
+}
+
+.item-tags {
+    border: 1px solid #dadada;
+    border-radius: 15px;
+    background-color: #2980B9;
+    color: white;
+    padding-left: 13px;
+    padding-right:13px;
+}
+
+.read-more {
+    color: #333333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.read-more:hover {
+    color: #2980B9;
     transition: 0.3s;
 }
 
@@ -124,18 +145,6 @@ a {
     --bs-btn-disabled-bg: #2980B9;
     --bs-btn-disabled-border-color: #2980B9;
 }
-
-/* .btn-primary:hover {
-    background-color: #4f8eb8;
-}
-
-.btn-primary:focus {
-    background-color: #2980B9;
-}
-
-.btn-primary:active {
-    background-color: #2980B9;
-} */
 
 .alert-plexosoft {
     background-color: #297fb938 !important;
@@ -298,6 +307,11 @@ i {
     color: #ffffff;
 }
 
+.nav-link:hover {
+    color: #333333;
+}
+
+
 .nav-link:hover,
 .nav-link:hover .sb-nav-link-icon,
 .nav-link:hover .sb-sidenav-collapse-arrow {
@@ -307,7 +321,7 @@ i {
 }
 
 .nav-link:hover {
-    background-color: #297fb938 !important;
+    background-color: #297fb9 !important;
 }
 
 .sb-nav-link-icon,

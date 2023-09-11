@@ -61,11 +61,16 @@
                                 <small>by {{ item.author }}</small>
                                 <p class="my-0 fs-6">
                                     {% for code in item.code.all %}
-                                    {{ code}}
+                                    <span class="item-tags d-inline-block m-0 mt-2">
+                                        {{ code }}
+                                    </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify"> {{ item.description|safe }}... <a href="">Read
-                                        More</a></p>
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.description|safe }}...
+                                    <a class="read-more" href="">
+                                            Read More
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -74,8 +79,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
-                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i> {{ item.get_likes_count }}</span>
-                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i> {{ item.get_transactions_count }} </span>
+                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
+                                {{ item.get_likes_count }}</span>
+                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                {{ item.get_transactions_count }} </span>
                         </div>
                     </div>
                 </div>
@@ -85,7 +92,7 @@
         </div>
         {% if forloop.counter|divisibleby:3 %}
         <div class="col-12 text-center">
-            <a href="" class="btn btn-light see-more fs-5">See more</a>
+            <a href="" class="btn btn-primary w-auto see-more fs-5">See more</a>
         </div>
     </div>
     <div class="row">
