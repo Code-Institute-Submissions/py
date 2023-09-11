@@ -69,8 +69,11 @@ class HomepageProductServiceView(ProductBaseListView):
         # 1 product, 1 services, 1 product INTENTION
         if products and services:
             combined_list.extend(products[:1])
+            products = products[1:]
             combined_list.extend(services[:1])
+            services = services[1:]
             combined_list.extend(products[:1])
+            products = products[1:]
 
         context['combined_items'] = combined_list
         return context

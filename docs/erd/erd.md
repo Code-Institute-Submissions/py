@@ -98,6 +98,8 @@ The principle of separation of concerns might seem self-explanatory, but ensurin
     | excerpt         | CharField(128)         | -       | -                 | -                                        |
     | type            | IntegerField           | -       | -                 | 
     -                                        |
+    | instance        | IntegerField           | -       | -                 | 
+    -                                        |
     | code            | **ManyToManyField**    | -     | Many to many    | CodeType
     -                                        |
     | service         | **ManyToManyField**    | -     | Many to many    | CodeType

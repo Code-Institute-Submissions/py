@@ -15,6 +15,11 @@ GATEWAY_TYPE = (
     (3, 'Crypto'),
 )
 
+INSTANCE_TYPE = (
+    (0, 'Product'),
+    (1, 'Service'),
+)
+
 
 class CodeType(models.Model):
     code = models.CharField(max_length=64, unique=True)
@@ -75,6 +80,8 @@ class Product(models.Model):
 
     type = models.IntegerField(choices=SCOPE_TYPE, default=1)
 
+    instance = models.IntegerField(choices=INSTANCE_TYPE, default=0)
+
     code = models.ManyToManyField(CodeType, related_name="code_type")
 
     service = models.ManyToManyField(ServiceType, related_name="service_type")
@@ -112,6 +119,12 @@ class Product(models.Model):
     download_url = models.ManyToManyField(
         'Download', related_name='product_downloads', blank=True)
 
+    def get_likes_count(self):
+        return self.likes.count()
+
+    def get_transactions_count(self):
+        return self.transactions.count()
+
     class Meta:
         ordering = ['title']
 
@@ -141,6 +154,8 @@ class Service(models.Model):
     excerpt = models.CharField(max_length=128)
 
     type = models.IntegerField(choices=SCOPE_TYPE, default=1)
+
+    instance = models.IntegerField(choices=INSTANCE_TYPE, default=1)
 
     code = models.ManyToManyField(CodeType, related_name="code_type_service")
 
@@ -179,6 +194,12 @@ class Service(models.Model):
     # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
+
+    def get_likes_count(self):
+        return self.likes.count()
+
+    def get_transactions_count(self):
+        return self.transactions.count()
 
     class Meta:
         ordering = ['title']

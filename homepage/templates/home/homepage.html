@@ -2,6 +2,13 @@
 {% load static %}
 {% block content %}
 <div class="container px-4 px-lg-0">
+    <!-- Call to Action-->
+    <div class="card text-white quote my-4 py-2 text-center bg-main">
+        <div class="card-body">
+            <p class="text-white m-0">Dive into a Sea of Software Solutions: For You, Your Business, and Your Next Big
+                Project!</p>
+        </div>
+    </div>
     <div class="row gx-4 gx-lg-5 align-items-center my-4">
         <div class="col-lg-6"><iframe class="rounded" width="100%" height="315"
                 src="https://www.youtube.com/embed/rfscVS0vtbw?si=Y0e1xHEOp3z_4Tfi" title="YouTube video player"
@@ -17,14 +24,6 @@
         </div>
     </div>
 
-    <!-- Call to Action-->
-    <div class="card text-white quote my-4 py-2 text-center bg-main">
-        <div class="card-body">
-            <p class="text-white m-0">Dive into a Sea of Software Solutions: For You, Your Business, and Your Next Big
-                Project!</p>
-        </div>
-    </div>
-
     <!-- Product & Service Row-->
     <div class="row gx-4 gx-lg-5">
         <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
@@ -35,29 +34,53 @@
         {% endif %}
 
         <!-- Records found -->
-        {% for product in combined_items %}
+        {% for item in combined_items %}
         <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
-                <!-- In case different colors needed -->
-                {% if product.type == 0%}
-                <div class="card-header card-header-blue text-center h4">{{ product.get_type_display}}</div>
+                <!-- Card Header -->
+                {% if item.type %}
+                <div class="card-header text-center h4">{{ item.get_type_display}}</div>
                 {% else %}
-                <div class="card-header card-header-blue text-center h4">{{ product.get_type_display}}</div>
+                <div class="card-header text-center h4">UNKNOWN</div>
                 {% endif %}
-                <div class="card-body mt-3 mb-4 card-body-height">
-
-                    <!-- Card image & Related Data -->
-                    <div class="row mt-2">
-                        <div class="col-8 d-inline-block">
-                            <div>
-                                <p class="card-title h5">{{ product.title }}</p>
-                                <p class="mission my-0 fs-6"> {{ product.status }}</p>
-                                <p class="mission my-0 fs-6"> {{ product.category }}</p>
-                                <small class="location my-0"> {{ product.code }}</small>
+                <!-- Card Thumbnail -->
+                <div class="row bg-thumbnail">
+                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
+                        <div class="d-flex justify-content-between">
+                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
+                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body pt-1 px-2 pb-1">
+                    <div class="row">
+                        <div class="col-12 d-inline-block">
+                            <div class="p-1">
+                                <p class="h5 pb-0 mb-0">{{ item.title }}</p>
+                                <small>by {{ item.author }}</small>
+                                <p class="my-0 fs-6">
+                                    {% for code in item.code.all %}
+                                    {{ code}}
+                                    {% endfor %}
+                                </p>
+                                <p class="my-0 fs-6 text-justify"> {{ item.description|safe }}... <a href="">Read
+                                        More</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Likes and Purchases -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i> {{ item.get_likes_count }}</span>
+                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i> {{ item.get_transactions_count }} </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Footer -->
+                <a class="card-footer text-center fs-5 btn" href="">BUY NOW</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}

@@ -10,6 +10,10 @@ a {
     text-decoration: none !important;
 }
 
+.text-justify{
+    text-align: justify;
+}
+
 /* Homepage CTA */
 
 .bg-main {
@@ -17,6 +21,57 @@ a {
 }
 
 /* Cards */
+.card {
+    overflow: hidden;
+}
+
+.bg-thumbnail {
+    margin: 0;
+}
+
+.bg-thumbnail-image {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    padding: 0;
+}
+
+.thumbnail-tags-left {
+    background-color: white;
+    padding: 5px;
+    border-radius: 0 0 5px 0;
+    margin: 0;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+
+.thumbnail-tags-right {
+    background-color: white;
+    padding: 5px;
+    border-radius: 0 0 0 5px;
+    margin: 0;
+    border-left: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+
+.likes-tags-left {
+    background-color: white;
+    padding: 5px 5px 5px 15px ;
+    border-radius: 0 5px 0 0;
+    margin: 0;
+    /* border-right: 1px solid #dadada;
+    border-top: 1px solid #dadada; */
+}
+
+.purchases-tags-right {
+    background-color: white;
+    padding: 5px 15px 5px 5px ;
+    border-radius: 5px 0 0 0;
+    margin: 0;
+    /* border-left: 1px solid #dadada;
+    border-top: 1px solid #dadada; */
+}
+
 .card-header,
 .card-header-hover {
     border-radius: 0px;
