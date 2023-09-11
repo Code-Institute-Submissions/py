@@ -24,9 +24,9 @@ The user stories have undergone some modifications since their initial conceptio
     | | Arrange Mixed Products & Service Cards in Rows | As a user, I want a prominent 'Product & Service' section under the header, displaying a mix of 'products' and 'services' so I can quickly overview current entries. | **4** |
     | | | As a user, I want each card to display key product information so that I can click on what interests me. | **4** |
     | | | As a user, I want a 'see more' button under the 'Product & Service' section so that I can view expanded results on a separate page. | **2** |
-    | | Present Product Cards in Rows | As a user, I want a 'Product' section below the 'Product & Service' row that showcases only products, enabling me to preview them. | **4** |
-    | | | As a user, I want each card to display key 'Product' information, so I know what I'm clicking on. | **2** |
-    | | | As a user, I want a 'see more' button under the 'Product' section, so I can view additional results on another page. | **1** |
+    | | Present Product Cards in Rows | As a user, I want a 'Product' section below the 'Product & Service' row that showcases only products, so that I can preview them. | **4** |
+    | | | As a user, I want each card to display key 'Product' information, so that I know what I'm clicking on. | **2** |
+    | | | As a user, I want a 'see more' button under the 'Product' section so that I can view additional results on another page. | **2** |
     | | Display Service Cards in Rows | As a user, I want a 'Service' section below the 'Product' row, focusing exclusively on services, allowing me to preview them. | **4** |
     | | | As a user, I want each card to display key 'Service' information, so I understand what I'm selecting. | **2** |
     | | | As a user, I want a 'see more' button under the 'Service' section, so I can access further results on a different page. | **1** |

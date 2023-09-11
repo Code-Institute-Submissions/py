@@ -63,22 +63,32 @@ class HomepageProductServiceView(ProductBaseListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        products = list(context['products'][:2])
+        products = list(context['products'][:3])
         services = list(Service.objects.filter(
-            status=2).order_by('-created_on')[:1])
+            status=2).order_by('-created_on')[:3])
+
+        product_single = []
+        service_single = []
 
         combined_list = []
 
         # 1 product, 1 services, 1 product INTENTION
         if products and services:
+            product_single.extend(products[:3])
+            service_single.extend(services[:3])
+
             combined_list.extend(products[:1])
-            products = products[1:]
+            products = products[2:]
+
             combined_list.extend(services[:1])
-            services = services[1:]
+            services = services[3:]
+
             combined_list.extend(products[:1])
             products = products[1:]
 
         context['combined_items'] = combined_list
+        context['product_single'] = product_single
+        context['service_single'] = service_single
         return context
 
 
