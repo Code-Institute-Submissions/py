@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container px-4 px-lg-0">
+
+    <!-- Service Row-->
+    <div class="row gx-4 gx-lg-5 mt-5">
+        <p class="h1 fairplay-font text-center mb-5">Service</p>
+
+        <!-- Records not found -->
+        {% if not service_all %}
+        <p class="text-center">No records found so far </p>
+        {% endif %}
+
+        <!-- Records found -->
+        {% for service in service_all %}
+        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+            <div class="card h-100">
+                <!-- Card Header -->
+                {% if service.type %}
+                <div class="card-header text-center h4">{{ service.get_type_display}}</div>
+                {% else %}
+                <div class="card-header text-center h4">UNKNOWN</div>
+                {% endif %}
+                <!-- Card Thumbnail -->
+                <div class="row bg-thumbnail">
+                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
+                        <div class="d-flex justify-content-between">
+                            <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
+                            <span class="thumbnail-tags-right">{{ service.price }} $</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body pt-1 px-2 pb-1">
+                    <div class="row">
+                        <div class="col-12 d-inline-block">
+                            <div class="p-1">
+                                <p class="h5 pb-0 mb-0">{{ service.title }}</p>
+                                <small>by {{ service.author }}</small>
+                                <p class="my-0 fs-6">
+                                    {% for codes in service.code.all %}
+                                    <span class="item-tags d-inline-block m-0 mt-2">
+                                        {{ codes }}
+                                    </span>
+                                    {% endfor %}
+                                </p>
+                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.description|safe }}...
+                                    <a class="read-more" href="">
+                                        Read More
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Likes and Purchases -->
+                <div class="row mb-1">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
+                                {{ service.get_likes_count }}</span>
+                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                {{ service.get_transactions_count }} </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Footer -->
+                <a class="card-footer text-center fs-5 btn" href="">BUY NOW</a>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock content %}

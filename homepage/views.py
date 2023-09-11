@@ -20,10 +20,6 @@ class CustomLoginView(LoginView):
     form_class = CustomLoginForm
     template_name = 'account/login.html'
 
-#     def get_success_url(self):
-#         user_id = self.request.user.id
-#         return reverse_lazy('user_dashboard', kwargs={'pk': user_id})
-
 
 class CustomSignupView(SignupView):
     """This view renders our custom signup form"""
@@ -35,13 +31,9 @@ class CustomLogoutView(LogoutView):
     """This view renders our logout page."""
     template_name = 'account/logout.html'
 
-
-# class homepage(generic.TemplateView):
-#     template_name = 'home/homepage.html'
-
 # Cards Display
 
-# Product
+# Product & Services
 
 
 class ProductBaseListView(generic.ListView):
@@ -90,6 +82,8 @@ class HomepageProductServiceView(ProductBaseListView):
         context['product_single'] = product_single
         context['service_single'] = service_single
         return context
+
+# All Product & Services
 
 
 class AllProductServiceListView(generic.ListView):
@@ -141,3 +135,41 @@ class AllProductServiceListView(generic.ListView):
             if products:
                 combined_list.append(products.pop(0))
         return combined_list
+
+# All Product
+
+
+class AllProductListView(generic.ListView):
+    """Dedicated page for displaying list of all product instances."""
+    model = Product
+    template_name = 'all_product_service/all_product.html'
+    paginate_by = 6
+    context_object_name = 'product_all'
+
+    def get_queryset(self):
+        try:
+            products = list(Product.objects.filter(
+                status=2).order_by('-created_on'))
+            return products
+        except Exception as e:
+            print(e)
+            return []
+
+# All Services
+
+
+class AllServiceListView(generic.ListView):
+    """Dedicated page for displaying list of all service instances."""
+    model = Service
+    template_name = 'all_product_service/all_service.html'
+    paginate_by = 6
+    context_object_name = 'service_all'
+
+    def get_queryset(self):
+        try:
+            services = list(Service.objects.filter(
+                status=2).order_by('-created_on'))
+            return services
+        except Exception as e:
+            print(e)
+            return []

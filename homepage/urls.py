@@ -4,6 +4,8 @@ from django.urls import path, include
 # Local Imports
 from .views import (HomepageProductServiceView,
                     AllProductServiceListView,
+                    AllProductListView,
+                    AllServiceListView,
                     CustomLoginView,
                     CustomSignupView,
                     CustomLogoutView)
@@ -25,6 +27,10 @@ urlpatterns = [
          name='product_service_instance'),
     path('all/', AllProductServiceListView.as_view(),
          name='combined_items_all'),
+    path('all/product/', AllProductListView.as_view(),
+         name='product_all'),
+    path('all/service/', AllServiceListView.as_view(),
+         name='service_all'),
 
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),

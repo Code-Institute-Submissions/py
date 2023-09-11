@@ -21,6 +21,14 @@ a {
 }
 
 /* Cards */
+
+.cta-card {
+    border: 1px solid #dadada;
+    padding: 15px 5px;
+    border-radius: 5px;
+    background-color: #297fb918;
+}
+
 .card {
     overflow: hidden;
 }
@@ -93,10 +101,10 @@ a {
 .item-tags {
     border: 1px solid #dadada;
     border-radius: 15px;
-    background-color: #2980B9;
-    color: white;
+    background-color: #297fb918;
+    color: #333333;
     padding-left: 13px;
-    padding-right:13px;
+    padding-right: 13px;
 }
 
 .read-more {
