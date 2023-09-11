@@ -184,7 +184,7 @@ class SingleProductView(View):
         queryset = Product.objects.order_by('-created_on')
         product = get_object_or_404(queryset, slug=slug)
 
-        # Check if user voted or not
+        # Check if user purchased or not
         if request.user.is_authenticated:
             has_purchased = Transaction.objects.filter(
                 buyer=request.user, product=product).exists()
@@ -194,6 +194,28 @@ class SingleProductView(View):
         return render(request, "single_product_service/single_product.html",
                       {
                           "product": product,
+                          "has_purchased": has_purchased,
+                          "user_authenticated": request.user.is_authenticated
+                      })
+
+
+class SingleServiceView(View):
+    """View for listing SINGLE service instances."""
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Service.objects.order_by('-created_on')
+        service = get_object_or_404(queryset, slug=slug)
+
+        # Check if user purchased or not
+        if request.user.is_authenticated:
+            has_purchased = Transaction.objects.filter(
+                buyer=request.user, service=service).exists()
+        else:
+            has_purchased = False
+
+        return render(request, "single_product_service/single_service.html",
+                      {
+                          "service": service,
                           "has_purchased": has_purchased,
                           "user_authenticated": request.user.is_authenticated
                       })

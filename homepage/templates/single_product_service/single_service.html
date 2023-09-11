@@ -4,17 +4,15 @@
 <div class="container px-4 px-lg-0">
 
     <!-- Service Row-->
-    <div class="row gx-4 gx-lg-5 mt-5">
-        <p class="h1 fairplay-font text-center mb-5">Service</p>
+    <div class="row gx-4 gx-lg-5 mt-5 justify-content-center">
 
         <!-- Records not found -->
-        {% if not service_all %}
+        {% if not service %}
         <p class="text-center">No records found so far </p>
         {% endif %}
 
         <!-- Records found -->
-        {% for service in service_all %}
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+        <div class="col-lg-8 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
                 <!-- Card Header -->
                 {% if service.type %}
@@ -26,16 +24,30 @@
                 <div class="row bg-thumbnail">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
                         <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
+                            <span class="thumbnail-tags-left">{{ service.category }}</span>
                             <span class="thumbnail-tags-right">{{ service.price }} $</span>
                         </div>
                     </div>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <div class="d-flex justify-content-between">
+                    <a class="single-item-button w-100 text-center" href="{{ service.docs }}" rel="noopener noreferrer"
+                        target="_blank">
+                        Docs
+                    </a>
+                    <a class="single-item-button w-100 text-center" href="{{ service.support }}"
+                        rel="noopener noreferrer" target="_blank">
+                        Support
+                    </a>
+                    <a class="single-item-button-right w-100 text-center" href="{{ service.preview }}"
+                        rel="noopener noreferrer" target="_blank">
+                        Live Preview
+                    </a>
+                </div>
+                <div class="card-body pt-2 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
-                            <div class="p-1">
+                            <div class="px-1 pb-1 pt-0">
                                 <p class="h5 pb-0 mb-0">{{ service.title }}</p>
                                 <small>by {{ service.author }}</small>
                                 <p class="my-0 fs-6">
@@ -45,10 +57,18 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.excerpt|safe }}...
-                                    <a class="read-more" href="">
-                                        Read More
-                                    </a>
+                                <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
+                                    {{ service.description|safe }}
+                                </p>
+                                <p class="my-0 fs-6">
+                                    {% for services in service.service.all %}
+                                    <span class="item-tags d-inline-block m-0 mt-2">
+                                        {{ services }}
+                                    </span>
+                                    {% endfor %}
+                                </p>
+                                <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
+                                    Note: here it goes
                                 </p>
                             </div>
                         </div>
@@ -66,27 +86,9 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' service.slug %}">HIRE NOW</a>
+                <a class="card-footer text-center fs-5 btn" href="">HIRE NOW</a>
             </div>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
     </div>
-    <div class="row">
-        {% endif %}
-        {% endfor %}
-    </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
 </div>
 {% endblock content %}

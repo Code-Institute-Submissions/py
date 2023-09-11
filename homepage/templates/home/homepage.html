@@ -96,7 +96,15 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}service{% endif%}">BUY NOW</a>
+                {% if item.instance == 0 %}
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' item.slug %}">
+                    BUY NOW
+                </a>
+                {% else %}
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' item.slug %}">
+                    HIRE NOW
+                </a>
+                {% endif%}
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
@@ -172,7 +180,7 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="">BUY NOW</a>
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY NOW</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
@@ -248,7 +256,7 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="">BUY NOW</a>
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' service.slug %}">HIRE NOW</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
