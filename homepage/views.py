@@ -3,14 +3,14 @@ from django.views import View, generic
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
-
+from django.shortcuts import get_object_or_404, redirect
 
 # Authentication app imports
 from allauth.account.views import LoginView, SignupView, LogoutView
 
 # Local Imports
 from .forms import CustomLoginForm, CustomSignupForm
-from product_service.models import Product, Service
+from product_service.models import Product, Service, Transaction
 
 # LOGIN, SIGUNUP & LOGOUT
 
@@ -173,3 +173,27 @@ class AllServiceListView(generic.ListView):
         except Exception as e:
             print(e)
             return []
+
+# Single Product
+
+
+class SingleProductView(View):
+    """View for listing SINGLE product instances."""
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Product.objects.order_by('-created_on')
+        product = get_object_or_404(queryset, slug=slug)
+
+        # Check if user voted or not
+        if request.user.is_authenticated:
+            has_purchased = Transaction.objects.filter(
+                buyer=request.user, product=product).exists()
+        else:
+            has_purchased = False
+
+        return render(request, "single_product_service/single_product.html",
+                      {
+                          "product": product,
+                          "has_purchased": has_purchased,
+                          "user_authenticated": request.user.is_authenticated
+                      })

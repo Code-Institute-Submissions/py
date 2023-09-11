@@ -27,10 +27,10 @@ The user stories have undergone some modifications since their initial conceptio
     | | Present Product Cards in Rows | As a user, I want a 'Product' section below the 'Product & Service' row that showcases only products, so that I can preview them. | **4** |
     | | | As a user, I want each card to display key 'Product' information, so that I know what I'm clicking on. | **2** |
     | | | As a user, I want a 'see more' button under the 'Product' section so that I can view additional results on another page. | **2** |
-    | | Display Service Cards in Rows | As a user, I want a 'Service' section below the 'Product' row, focusing exclusively on services, allowing me to preview them. | **4** |
-    | | | As a user, I want each card to display key 'Service' information, so I understand what I'm selecting. | **2** |
-    | | | As a user, I want a 'see more' button under the 'Service' section, so I can access further results on a different page. | **1** |
-    | | Construct Footer | As a user, I want to see a footer at the page's end, granting me access to additional vital information, social media links, useful links, newsletter and legal data, etc. | **2** |
+    | | Display Service Cards in Rows | As a user, I want a 'Service' section below the 'Product' row, focusing exclusively on services so that I can preview them. | **4** |
+    | | | As a user, I want each card to display key 'Service' information so that I understand what I'm selecting. | **2** |
+    | | | As a user, I want a 'see more' button under the 'Service' section so that I can access further results on a different page. | **1** |
+    | | Construct Footer | As a user, I want to see a footer at the page's end so that I get access to additional vital information, social media links, useful links, newsletter and legal data, etc. | **2** |
     | Sign in/up & Dashboard | Link to Header | As a user or admin, I want a header link to 'sign in and  sign up', so that I can validate my login details on a separate page and access my dashboard. | **2** |
     | | Social Media Login | As a user or admin, I want the option to log in or sign up using a social media account, so that I have a secure and smooth interaction with the system. | **7** |
     | | Create User & Admin Dashboard | As a user or admin, after logging in or signing up, I want a useful dashboard with key stats & menu options relevant to my role so that  I can enable secure and efficient system interaction.  | **7** |

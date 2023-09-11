@@ -49,7 +49,7 @@
                             <!-- Title -->
                             <div class="mb-3">
                                 <label for="title" class="form-label"><strong>Title</strong></label>
-                                <input type="text" name="title" class="form-control" id="title" maxlength="20"
+                                <input type="text" name="title" class="form-control" id="title" maxlength="64"
                                     value="{{ product.title }}" required>
                                 {% if product.title.errors %}
                                 <div class="errors">{{ product.title.errors }}</div>
@@ -180,9 +180,9 @@
 
                             <!-- Description -->
                             <div class="mb-3">
-                                <label for="description" class="form-label"><strong>Description</strong><small>(264
+                                <label for="description" class="form-label"><strong>Description</strong><small>(528
                                         characters)</small></label>
-                                <textarea name="description" class="form-control" id="description" maxlength="258"
+                                <textarea name="description" class="form-control" id="description" maxlength="528"
                                     rows="4" required>{{ product.description }}</textarea>
                                 {% if product.description.errors %}
                                 <div class="errors">{{ product.description.errors }}</div>
@@ -192,8 +192,8 @@
                             <!-- Excerpt -->
                             <div class="mb-3">
                                 <label for="excerpt" class="form-label"><strong>Excerpt Text</strong></label>
-                                <input type="text" name="excerpt" class="form-control" id="excerpt" maxlength="20"
-                                    value="{{ product.excerpt }}" required>
+                                <textarea name="excerpt" class="form-control" id="excerpt" maxlength="264" rows="4"
+                                    required>{{ product.excerpt }}</textarea>
                                 {% if product.excerpt.errors %}
                                 <div class="errors">{{ product.excerpt.errors }}</div>
                                 {% endif %}

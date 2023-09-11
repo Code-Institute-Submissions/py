@@ -6,6 +6,7 @@ from .views import (HomepageProductServiceView,
                     AllProductServiceListView,
                     AllProductListView,
                     AllServiceListView,
+                    SingleProductView,
                     CustomLoginView,
                     CustomSignupView,
                     CustomLogoutView)
@@ -31,6 +32,8 @@ urlpatterns = [
          name='product_all'),
     path('all/service/', AllServiceListView.as_view(),
          name='service_all'),
+    path('<slug:slug>', SingleProductView.as_view(),
+         name='single_product'),
 
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),

@@ -140,7 +140,7 @@ class AdminUpdateProductView(BaseUpdateProductView):
         product.docs = request.POST.get('docs')
 
         description = request.POST.get('description')
-        product.description = description[:264]
+        product.description = description[:528]
 
         product.excerpt = request.POST.get('excerpt')
 
@@ -311,7 +311,7 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
         service.docs = request.POST.get('docs')
 
         description = request.POST.get('description')
-        service.description = description[:264]
+        service.description = description[:528]
 
         service.excerpt = request.POST.get('excerpt')
 

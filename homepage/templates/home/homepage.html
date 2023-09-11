@@ -75,7 +75,7 @@
                                     {% endfor %}
                                     {% endif %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ item.description|safe }}...
+                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="">
                                         Read More
                                     </a>
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="">BUY NOW</a>
+                <a class="card-footer text-center fs-5 btn" href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}service{% endif%}">BUY NOW</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
@@ -151,7 +151,7 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ product.description|safe }}...
+                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ product.excerpt|safe }}...
                                     <a class="read-more" href="">
                                         Read More
                                     </a>
@@ -227,7 +227,7 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.description|safe }}...
+                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.excerpt|safe }}...
                                     <a class="read-more" href="">
                                         Read More
                                     </a>

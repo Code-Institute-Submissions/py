@@ -136,6 +136,36 @@ a {
 
 /* Buttons */
 
+.single-item-button {
+    background-color: #297fb9;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+    border-right: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    transition: 0.3s;
+}
+
+.single-item-button:hover {
+    background-color: #4f8eb8;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.single-item-button-right {
+    background-color: #297fb9;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+    border-bottom: 1px solid #dadada;
+}
+
+.single-item-button-right:hover {
+    background-color: #4f8eb8;
+    color: #fff;
+    transition: 0.3s;
+}
+
 .btn-primary {
     width: 100%;
     background-color: #2980B9;

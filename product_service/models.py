@@ -67,7 +67,7 @@ class Product(models.Model):
 
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
-    description = models.TextField(max_length=256)
+    description = models.TextField(max_length=528)
 
     status = models.IntegerField(choices=STATUS, default=0)
 
@@ -76,7 +76,7 @@ class Product(models.Model):
         Category, on_delete=models.SET_NULL,
         related_name='product_categories', null=True, blank=True)
 
-    excerpt = models.CharField(max_length=128)
+    excerpt = models.CharField(max_length=264)
 
     type = models.IntegerField(choices=SCOPE_TYPE, default=1)
 
@@ -142,7 +142,7 @@ class Service(models.Model):
 
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
-    description = models.TextField(max_length=256)
+    description = models.TextField(max_length=528)
 
     status = models.IntegerField(choices=STATUS, default=0)
 
@@ -151,7 +151,7 @@ class Service(models.Model):
         Category, on_delete=models.SET_NULL,
         related_name='service_categories', null=True, blank=True)
 
-    excerpt = models.CharField(max_length=128)
+    excerpt = models.CharField(max_length=264)
 
     type = models.IntegerField(choices=SCOPE_TYPE, default=1)
 
