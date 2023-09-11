@@ -1,4 +1,5 @@
 {% load static %}
+{% now "Y" as copyright %}
 <!doctype html>
 <html lang="en">
 
@@ -236,6 +237,87 @@
     {% block content %}
     {% endblock content %}
 
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted mt-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center p-4 border-bottom">
+            <div>
+                <ul class="list-unstyled d-flex mb-0">
+                    <li class="me-4"><a href="https://github.com/plexoio/musa" target="_blank" rel="noopener noreferrer"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+                    <li class="me-4"><a href="https://facebook.com/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="me-4"><a href="https://x.com/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                    <li class="me-4"><a href="https://google.com/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Google"><i class="fab fa-google"></i></a></li>
+                    <li class="me-4"><a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                    <li class="me-4"><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- About  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Plexosoft
+                        </h6>
+                        <p>
+                            Designed for...
+                        </p>
+                    </div>
+
+                    <!-- Useful Links -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="" class="text-reset">Contact</a>
+                        </p>
+                        <p>
+                            <a href="" class="text-reset">FAQ</a>
+                        </p>
+                        <p>
+                            <a href="" class="text-reset">Active Event</a>
+                        </p>
+                        <p>
+                            <a href="" class="text-reset">Completed Event</a>
+                        </p>
+                        <p>
+                            <a href="" class="text-reset">Terms & Conditions</a>
+                        </p>
+                        <p>
+                            <a href="" class="text-reset">Privacy Policy</a>
+                        </p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3"></i>Leipzig, 04315, DE</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            frankarellano13@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> + 49 234 567 89</p>
+                        <p><i class="fas fa-print me-3"></i> + 49 234 567 89</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Copyright -->
+        <div class="text-center p-4 footer-bg text-white">
+            © {{ copyright }} Copyright
+            <a class="text-reset fw-bold" href="https://github.com/plexoio/py">Plexosoft</a>
+        </div>
+    </footer>
     <!-- Custom JavaScript-->
     {% block postloadjs %}
 
