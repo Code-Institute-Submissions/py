@@ -86,7 +86,13 @@
                     </div>
                 </div>
                 <!-- Card Footer -->
+                {% if service.status == 2 %}
                 <a class="card-footer text-center fs-5 btn" href="">HIRE NOW</a>
+                {% elif service.status == 1 %}
+                <button class="card-footer text-center fs-5 btn">SUSPENDED SERVICE</button>
+                {% elif service.status == 0 %}
+                <button class="card-footer text-center fs-5 btn">DRAFT SERVICE</button>
+                {% endif %}
             </div>
         </div>
         <!-- Newsletter -->
