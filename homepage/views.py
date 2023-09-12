@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib import messages
 
+# Python
+import logging
+
 # Authentication app imports
 from allauth.account.views import LoginView, SignupView, LogoutView
 
@@ -14,6 +17,7 @@ from allauth.account.views import LoginView, SignupView, LogoutView
 from .forms import CustomLoginForm, CustomSignupForm
 from product_service.models import Product, Service, Transaction
 
+logger = logging.getLogger(__name__)
 # LOGIN, SIGUNUP & LOGOUT
 
 
@@ -100,24 +104,31 @@ class AllProductServiceListView(generic.ListView):
     searched_items = None
 
     def get(self, request, *args, **kwargs):
-        self.search = request.GET.get('q')
-        if self.search:
-            if not self.search:
-                messages.error(
-                    request, 'Search ERROR: Enter a keyword to start searching!')
-                return redirect('combined_items_all')
+        # .strip() to remove any accidental whitespace
+        self.search = request.GET.get('q', '').strip()
 
-            # Get the combined list
-            combined_list = self.combine_products_and_services(
-                list(Product.objects.filter(status=2).order_by('-created_on')),
-                list(Service.objects.filter(status=2).order_by('-created_on'))
-            )
+        # Check if search keyword is empty or only consists of whitespace
+        if not self.search:
+            messages.error(
+                request, 'The search bar cannot be empty!')
+            return super().get(request, *args, **kwargs)
 
-            # Filter the combined list
-            self.searched_items = [
-                item for item in combined_list if self.search.lower(
-                ) in item.title.lower(
-                ) or self.search.lower() in item.description.lower()]
+        # If search keyword exists, proceed with the search logic
+        combined_list = self.combine_products_and_services(
+            list(Product.objects.filter(status=2).order_by('-created_on')),
+            list(Service.objects.filter(status=2).order_by('-created_on'))
+        )
+
+        # Filter the combined list based on the search keyword
+        self.searched_items = [
+            item for item in combined_list if self.search.lower(
+            ) in item.title.lower() or self.search.lower(
+            ) in item.description.lower()
+        ]
+
+        # Check if searched_items was filled with results
+        if not self.searched_items:
+            messages.info(request, 'No results found for your search.')
 
         return super().get(request, *args, **kwargs)
 
@@ -137,7 +148,7 @@ class AllProductServiceListView(generic.ListView):
                 products, services)
             return combined_list
         except Exception as e:
-            print(e)
+            logger.error(f"Error fetching products and services: {e}")
             return []
 
     def get_context_data(self, **kwargs):
@@ -158,20 +169,37 @@ class AllProductServiceListView(generic.ListView):
 
         context['page_obj'] = page_obj
         context['is_paginated'] = len(combined_list) > self.paginate_by
-        context['search_keyword'] = self.search
         return context
 
     def combine_products_and_services(self, products, services):
-        # This can run for the get() & get_queryset()
+        # No rearranging of the list is necessary with this approach
+
         combined_list = []
-        while products or services:
-            if products:
-                combined_list.append(products.pop(0))
-            if services:
-                combined_list.append(services.pop(0))
-            if products:
-                combined_list.append(products.pop(0))
+
+        # Convert lists to iterators
+        product_iter = iter(products)
+        service_iter = iter(services)
+
+        # Flags to check if iterators have more items
+        has_more_products = True
+        has_more_services = True
+
+        # Combine products and services
+        while has_more_products or has_more_services:
+            if has_more_products:
+                try:
+                    combined_list.append(next(product_iter))
+                except StopIteration:
+                    has_more_products = False
+
+            if has_more_services:
+                try:
+                    combined_list.append(next(service_iter))
+                except StopIteration:
+                    has_more_services = False
+
         return combined_list
+
 
 # All Product
 

@@ -203,15 +203,17 @@
 
             <!-- Messages -->
             {% if messages %}
-            <div class="row mt-4 mb-0 mx-3 alert card alert-success py-1 text-center text-black alert-dismissible"
+            {% for message in messages %}
+            <div class="row mt-4 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-center text-black alert-dismissible"
                 role="alert">
                 <div class="col-12 card-body">
-                    {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}</p>
-                    {% endfor %}
+
+                    <p {% if message.tags %} class="mb-0" {% endif %}> {{ message }}</p>
+
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            {% endfor %}
             {% endif %}
 
             {% block content %}

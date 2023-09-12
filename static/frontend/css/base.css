@@ -387,3 +387,48 @@ i {
     background-color: #2980b9;
     color: #fff;
 }
+
+/* Messages */
+
+/* Basic styling for the messages container */
+.messages {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Styles for specific message types */
+.alert-info {
+    background-color: #e7f3fe;
+    border: 1px solid #b3d4fc;
+    color: #2a5db0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    color: #842029;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffecb5;
+    color: #856404;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
