@@ -94,7 +94,7 @@ class HomepageProductServiceView(ProductBaseListView):
 
 class AllProductServiceListView(generic.ListView):
     """Dedicated page for displaying list of all products & services and
-    instances from the search engine implementation."""
+    instances from the search engine & category implementation."""
     model = Product
     template_name = 'all_product_service/all_product_service.html'
     paginate_by = 6
@@ -124,9 +124,12 @@ class AllProductServiceListView(generic.ListView):
 
         # Filter the combined list based on the searched keyword
         self.searched_items = [
-            item for item in combined_list if self.search.lower(
-            ) in item.title.lower() or self.search.lower(
-            ) in item.description.lower()
+            item for item in combined_list
+            if self.search.lower() in item.title.lower()
+            or (item.category and self.search.lower(
+            ) in item.category.alt_name.lower())
+            or self.search.lower() in item.get_type_display().lower()
+            or self.search.lower() in item.description.lower()
         ]
 
         # Check if searched_items was filled with results

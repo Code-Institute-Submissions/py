@@ -86,8 +86,14 @@
                             Product
                         </button>
                         <ul class="dropdown-menu dropdown-menu-light mt-2">
-                            <li><a class="dropdown-item" href="">Placeholder</a></li>
-                            <li><a class="dropdown-item" href="">Placeholder</a></li>
+                            <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=website_product">All
+                                    Software</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=license">License</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{% url 'combined_items_all' %}/?q=ownership">Ownership</a>
+                            </li>
                         </ul>
                     </li>
                     <!-- Services -->
@@ -97,8 +103,20 @@
                             Service
                         </button>
                         <ul class="dropdown-menu dropdown-menu-light mt-2">
-                            <li><a class="dropdown-item" href="">Placeholder</a></li>
-                            <li><a class="dropdown-item" href="">Placeholder</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{% url 'combined_items_all' %}/?q=design_thinking_service">Design Thinking</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{% url 'combined_items_all' %}/?q=user_centric_service">User Centric
+                                    Design</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{% url 'combined_items_all' %}/?q=marketing_service">Marketing</a></li>
+                            <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=seo_service">SEO</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=agile_service">Agile Development</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{% url 'combined_items_all' %}/?q=support_service">Technical Support</a></li>
                         </ul>
                     </li>
 

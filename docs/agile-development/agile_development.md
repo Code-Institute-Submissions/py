@@ -44,7 +44,7 @@ The user stories have undergone some modifications since their initial conceptio
     | | Configure Role Visualization | As a user, visitor, or admin, I want a visual representation of my privileges based on my role so that it helps me realize the website's full potential | **7** |
     | | Integrate Cart, Purchase & Download | As a user, I want to add products to my cart, experience a smooth payment process, and download the digital product immediately after payment, minimizing friction in my purchasing journey. | **13** |
     | | Develop Support Button | As a user, I want a support button on the product & service page that redirects me to a contact form with pre-filled information based on my prior selection, reducing repetitive input. | **4** |
-    | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu to streamline my search for products & services. | **4** |
+    | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu so that it streamlines my search for products & services. | **4** |
     | | Incorporate Search Bar | As a user, I want a search engine so I that I can find specific products or services. | **7** |
     | | Integrate Filter Function | As a user, I want a filter section on the same page, allowing me to sort by categories, price, license, ownership, etc. | **4** |
     | Likes & Comments | Implement Likes & Comments | As a user, after a purchase, I want to like and comment on my product or service, share my thoughts, and contribute to the community. | **4** |
