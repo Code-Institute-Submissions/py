@@ -8,6 +8,7 @@
 /* General Styling */
 a {
     text-decoration: none !important;
+    color: #2980B9;
 }
 
 .text-justify {
@@ -252,6 +253,21 @@ a {
 .btn:first-child:active {
     background-color: #4f8eb8;
     border-color: #fff;
+    transition: 0.3s;
+}
+
+.newsletter-btn {
+    background-color: #2980B9;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    padding: 10px;
+    border: none;
+    transition: 0.3s;
+}
+
+.newsletter-btn:hover {
+    background-color: #4f8eb8;
+    color: white;
     transition: 0.3s;
 }
 
