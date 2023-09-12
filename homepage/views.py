@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Q
+from django.contrib import messages
 
 # Authentication app imports
 from allauth.account.views import LoginView, SignupView, LogoutView
@@ -87,12 +89,44 @@ class HomepageProductServiceView(ProductBaseListView):
 
 
 class AllProductServiceListView(generic.ListView):
-    """Dedicated page for displaying list of ALL products & services."""
+    """Dedicated page for displaying list of all products & services and
+    instances from the search engine implementation."""
     model = Product
     template_name = 'all_product_service/all_product_service.html'
     paginate_by = 6
 
+    # Search Engine logic starts here
+    search = None
+    searched_items = None
+
+    def get(self, request, *args, **kwargs):
+        self.search = request.GET.get('q')
+        if self.search:
+            if not self.search:
+                messages.error(
+                    request, 'Search ERROR: Enter a keyword to start searching!')
+                return redirect('combined_items_all')
+
+            # Get the combined list
+            combined_list = self.combine_products_and_services(
+                list(Product.objects.filter(status=2).order_by('-created_on')),
+                list(Service.objects.filter(status=2).order_by('-created_on'))
+            )
+
+            # Filter the combined list
+            self.searched_items = [
+                item for item in combined_list if self.search.lower(
+                ) in item.title.lower(
+                ) or self.search.lower() in item.description.lower()]
+
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
+        # If searched_items run this
+        if self.searched_items is not None:
+            return self.searched_items
+
+        # If NOT searched_items run this
         try:
             products = list(Product.objects.filter(
                 status=2).order_by('-created_on'))
@@ -107,6 +141,7 @@ class AllProductServiceListView(generic.ListView):
             return []
 
     def get_context_data(self, **kwargs):
+        # From here on the code will run based on get_queryset results
         context = super().get_context_data(**kwargs)
 
         combined_list = self.get_queryset()
@@ -123,9 +158,11 @@ class AllProductServiceListView(generic.ListView):
 
         context['page_obj'] = page_obj
         context['is_paginated'] = len(combined_list) > self.paginate_by
+        context['search_keyword'] = self.search
         return context
 
     def combine_products_and_services(self, products, services):
+        # This can run for the get() & get_queryset()
         combined_list = []
         while products or services:
             if products:
