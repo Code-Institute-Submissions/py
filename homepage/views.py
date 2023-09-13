@@ -358,6 +358,17 @@ class SortedProductServiceListView(generic.ListView):
 
         return combined_list
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        combined_list = self.get_queryset()
+
+        unique_categories = list(
+            set([item.category for item in combined_list]))
+
+        context['categories'] = unique_categories
+        return context
+
     def combine_products_and_services(self, products, services):
         combined_list = []
         product_iter = iter(products)

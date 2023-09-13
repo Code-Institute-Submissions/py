@@ -30,8 +30,8 @@
                 <!-- Card Header -->
                 {% if product.type %}
                 <div class="card-header text-center h4">{{ product.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif product.instance %}
+                <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">

@@ -7,6 +7,17 @@
     <div class="row gx-4 gx-lg-5 mt-5">
         <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
 
+        <div class="row mb-4">
+            <div class="col text-center">
+                {% for c in categories %}
+                <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">
+                    <span class="p-2 mx-1 mt-2 badge badge-white text-muted rounded border border-muted">{{ c }}
+                    </span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
         <!-- Records not found -->
         {% if not combined_items %}
         <p class="text-center">No records found so far </p>
@@ -19,8 +30,8 @@
                 <!-- Card Header -->
                 {% if item.type %}
                 <div class="card-header text-center h4">{{ item.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif item.instance %}
+                <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
@@ -38,6 +49,16 @@
                             <div class="p-1">
                                 <p class="h5 pb-0 mb-0">{{ item.title }}</p>
                                 <small>by {{ item.author }}</small>
+
+                                {% if item.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{item.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ item.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
+
                                 <p class="my-0 fs-6">
                                     {% for code in item.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">

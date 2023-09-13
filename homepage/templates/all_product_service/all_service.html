@@ -30,8 +30,8 @@
                 <!-- Card Header -->
                 {% if service.type %}
                 <div class="card-header text-center h4">{{ service.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif service.instance %}
+                <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">

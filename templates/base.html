@@ -16,9 +16,12 @@
 
     <!-- Core JS-->
     {% block corejs %}
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     {% endblock corejs %}
 
     {% block extra_corejs %}
+    <script src="{% static 'frontend/js/script.js' %}"></script>
     {% endblock extra_corejs %}
 
     {% block corecss %}
@@ -86,8 +89,7 @@
                             Product
                         </button>
                         <ul class="dropdown-menu dropdown-menu-light mt-2">
-                            <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=website_product">All
-                                    Software</a>
+                            <li><a class="dropdown-item" href="{% url 'product_all' %}/">All Products</a>
                             </li>
                             <li><a class="dropdown-item" href="{% url 'combined_items_all' %}/?q=license">License</a>
                             </li>
@@ -103,6 +105,8 @@
                             Service
                         </button>
                         <ul class="dropdown-menu dropdown-menu-light mt-2">
+                            <li><a class="dropdown-item" href="{% url 'service_all' %}/">All Services</a>
+
                             <li><a class="dropdown-item"
                                     href="{% url 'combined_items_all' %}/?q=design_thinking_service">Design Thinking</a>
                             </li>
@@ -118,8 +122,6 @@
                             </li>
                             <li><a class="dropdown-item"
                                     href="{% url 'combined_items_all' %}/?q=support_service">Technical Support</a></li>
-                            <li><a class="dropdown-item" href="{% url 'sorted' %}?sort=price&direction=asc">By
-                                    Price</a></li>
                         </ul>
                     </li>
 

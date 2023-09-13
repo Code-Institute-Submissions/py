@@ -38,7 +38,7 @@ urlpatterns = [
          name='single_product'),
     path('service/<slug:slug>', SingleServiceView.as_view(),
          name='single_service'),
-    path('sorted_products_services/', SortedProductServiceListView.as_view(),
+    path('sort/', SortedProductServiceListView.as_view(),
          name='sorted'),
 
 
