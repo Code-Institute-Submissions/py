@@ -356,19 +356,24 @@ class SortedProductServiceListView(generic.ListView):
 
     def get_queryset(self):
         sortkey = self.request.GET.get('sort', 'created_on')
+        try:
 
-        if sortkey == 'title':
-            products = Product.objects.annotate(
-                lower_title=Lower('title')).order_by('lower_title')
-            services = Service.objects.annotate(
-                lower_title=Lower('title')).order_by('lower_title')
-        else:
-            products = Product.objects.all().annotate(
-                likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by(sortkey)
-            services = Service.objects.all().annotate(
-                likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by(sortkey)
+            if sortkey == 'title':
+                products = Product.objects.annotate(
+                    lower_title=Lower('title')).order_by('lower_title')
+                services = Service.objects.annotate(
+                    lower_title=Lower('title')).order_by('lower_title')
+            else:
+                products = Product.objects.all().annotate(
+                    likescount=Count('likes'),
+                    transactionscount=Count('transactions')).order_by(sortkey)
+                services = Service.objects.all().annotate(
+                    likescount=Count('likes'),
+                    transactionscount=Count('transactions')).order_by(sortkey)
+        except Exception as e:
+            logger.error(f"Error while sorting products and services: {e}")
+            messages.error(self.request, 'That was not a valid sorting value.')
+            return []
 
         products = products.filter(status=2)
         services = services.filter(status=2)
@@ -386,7 +391,7 @@ class SortedProductServiceListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        combined_list = self.get_queryset()
+        combined_list = context['combined_items']
 
         unique_categories = list(
             set([item.category for item in combined_list]))

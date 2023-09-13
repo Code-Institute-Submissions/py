@@ -18,6 +18,61 @@
             </div>
         </div>
 
+        <!-- Sorting Element -->
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center mb-4">
+                <div class="sort-select-wrapper">
+                    <select id="sort-selector"
+                        class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
+                        <option value="reset">
+                            Sort items by...
+                        </option>
+
+                        <option value="{% url 'sorted' %}_price_asc">
+                            Price (low to high)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_price_desc">
+                            Price (high to low)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_likescount_asc">
+                            Rating (low to high)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_likescount_desc">
+                            Rating (high to low)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_transactionscount_asc">
+                            Purchase (low to high)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_transactionscount_desc">
+                            Purchase (high to low)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_title_asc">
+                            Title (A-Z)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_title_desc">
+                            Title (Z-A)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_category_desc">
+                            Category
+                            (A-Z)
+                        </option>
+
+                        <option value="{% url 'sorted' %}_category_asc">
+                            Category (Z-A)
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <!-- Records not found -->
         {% if not product_all %}
         <p class="text-center">No records found so far </p>
@@ -43,7 +98,7 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
