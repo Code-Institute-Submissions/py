@@ -25,11 +25,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12 order-md-last">
-            <div class="sort-select-wrapper w-50">
+        <div class="col-12 d-flex justify-content-center align-items-center mt-4">
+            <div class="sort-select-wrapper">
                 <select id="sort-selector"
-                    class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
-                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...
+                    class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
+                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort items by...
                     </option>
                     <option value="{% url 'sorted' %}_price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low
                         to
@@ -57,7 +57,7 @@
     </div>
 
     <!-- PRODUCT & SERVICE Row-->
-    <div class="row gx-4 gx-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 mt-4">
         <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
 
         <!-- Records not found -->

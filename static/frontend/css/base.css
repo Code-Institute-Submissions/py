@@ -6,6 +6,18 @@
 }
 
 /* General Styling */
+.border-primary {
+    border-color: #dadada !important;
+    color: #333333;
+    transition: 0.3s;
+}
+
+.border-primary:hover {
+    border-color: #4f8eb8 !important;
+    color: #297fb9;
+    transition: 0.3s;
+}
+
 a {
     text-decoration: none !important;
     color: #2980B9;
