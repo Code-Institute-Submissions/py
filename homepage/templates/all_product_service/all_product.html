@@ -33,21 +33,27 @@
                 {% elif product.instance %}
                 <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
+
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                <a href="{% url 'single_product' product.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ product.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ product.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+                
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ product.title }}</p>
+                                <div>
+                                    <a href="{% url 'single_product' product.slug %}"
+                                        class="h5 pb-0 mb-0">{{ product.title }}
+                                    </a>
+                                </div>
                                 <small>by {{ product.author }}</small>
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">

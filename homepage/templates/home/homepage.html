@@ -27,11 +27,11 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-center align-items-center mt-4">
             <div class="sort-select-wrapper">
-                <select id="sort-selector"
-                    class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
+                <select id="sort-selector" class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
                     <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort items by...
                     </option>
-                    <option value="{% url 'sorted' %}_price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low
+                    <option value="{% url 'sorted' %}_price_asc"
+                        {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low
                         to
                         high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price
@@ -76,20 +76,43 @@
                 <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                {% if item.instance == 0 %}
+                <a href="{% url 'single_product' item.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ item.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+                {% else %}
+
+                <a href="{% url 'single_service' item.slug %}" class="row bg-thumbnail d-block">
+                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
+                        <div class="d-flex justify-content-between">
+                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
+                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
+                        </div>
+                    </div>
+                </a>
+
+                {% endif%}
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ item.title }}</p>
+                                <div>
+                                    {% if item.instance == 0 %}
+                                    <a class="h5 pb-0 mb-0" href="{% url 'single_product' item.slug %}">
+                                        {{ item.title }}
+                                    </a>
+                                    {% else %}
+                                    <a class="h5 pb-0 mb-0" href="{% url 'single_service' item.slug %}">
+                                        {{ item.title }}
+                                    </a>
+                                    {% endif%}
+                                </div>
                                 <small>by {{ item.author }}</small>
                                 {% if item.category %}
                                 <p class="small mt-1 mb-0">
@@ -177,20 +200,25 @@
                 <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                <a href="{% url 'single_product' product.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ product.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ product.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ product.title }}</p>
+                                <div>
+                                    <a href="{% url 'single_product' product.slug %}"
+                                        class="h5 pb-0 mb-0">{{ product.title }}
+                                    </a>
+                                </div>
                                 <small>by {{ product.author }}</small>
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">
@@ -260,21 +288,27 @@
                 {% elif service.instance %}
                 <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
                 {% endif %}
+
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                <a href="{% url 'single_service' service.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ service.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+                
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ service.title }}</p>
+                                <div>
+                                    <a href="{% url 'single_service' service.slug %}"
+                                        class="h5 pb-0 mb-0">{{ service.title }}
+                                    </a>
+                                </div>
                                 <small>by {{ service.author }}</small>
                                 {% if service.category %}
                                 <p class="small mt-1 mb-0">

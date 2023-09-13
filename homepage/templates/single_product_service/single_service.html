@@ -20,15 +20,17 @@
                 {% elif service.instance %}
                 <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
                 {% endif %}
+
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                <a href="{% url 'single_service' service.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
                         <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ service.category }}</span>
+                            <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ service.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+
                 <!-- Card Body -->
                 <div class="d-flex justify-content-between">
                     <a class="single-item-button w-100 text-center" href="{{ service.docs }}" rel="noopener noreferrer"
@@ -48,7 +50,11 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="px-1 pb-1 pt-0">
-                                <p class="h5 pb-0 mb-0">{{ service.title }}</p>
+                                <div>
+                                    <a href="{% url 'single_service' service.slug %}"
+                                        class="h5 pb-0 mb-0">{{ service.title }}
+                                    </a>
+                                </div>
                                 <small>by {{ service.author }}</small>
                                 <p class="my-0 fs-6">
                                     {% for codes in service.code.all %}

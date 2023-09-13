@@ -21,14 +21,14 @@
                 <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                <a href="{% url 'single_product' product.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
                         <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ product.category }}</span>
+                            <span class="thumbnail-tags-left">{{ product.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ product.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 <!-- Card Body -->
                 <div class="d-flex justify-content-between">
                     <a class="single-item-button w-100 text-center" href="{{ product.docs }}" rel="noopener noreferrer"
@@ -48,7 +48,11 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="px-1 pb-1 pt-0">
-                                <p class="h5 pb-0 mb-0">{{ product.title }}</p>
+                                <div>
+                                    <a href="{% url 'single_product' product.slug %}"
+                                        class="h5 pb-0 mb-0">{{ product.title }}
+                                    </a>
+                                </div>
                                 <small>by {{ product.author }}</small>
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">

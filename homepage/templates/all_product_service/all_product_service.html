@@ -33,21 +33,46 @@
                 {% elif item.instance %}
                 <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
                 {% endif %}
+
                 <!-- Card Thumbnail -->
-                <div class="row bg-thumbnail">
+                {% if item.instance == 0 %}
+                <a href="{% url 'single_product' item.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
                             <span class="thumbnail-tags-right">{{ item.price }} $</span>
                         </div>
                     </div>
-                </div>
+                </a>
+                {% else %}
+
+                <a href="{% url 'single_service' item.slug %}" class="row bg-thumbnail d-block">
+                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
+                        <div class="d-flex justify-content-between">
+                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
+                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
+                        </div>
+                    </div>
+                </a>
+
+                {% endif%}
+
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ item.title }}</p>
+                                <div>
+                                    {% if item.instance == 0 %}
+                                    <a class="h5 pb-0 mb-0" href="{% url 'single_product' item.slug %}">
+                                        {{ item.title }}
+                                    </a>
+                                    {% else %}
+                                    <a class="h5 pb-0 mb-0" href="{% url 'single_service' item.slug %}">
+                                        {{ item.title }}
+                                    </a>
+                                    {% endif%}
+                                </div>
                                 <small>by {{ item.author }}</small>
 
                                 {% if item.category %}
