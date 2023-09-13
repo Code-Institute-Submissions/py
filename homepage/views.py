@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
+from django.db.models import Count
 
 # Python
 import logging
@@ -49,7 +50,8 @@ class ProductBaseListView(generic.ListView):
 
     def get_queryset(self):
         """Return products with a status of 2, ordered by creation date."""
-        products = Product.objects.filter(status=2).order_by('-created_on')[:3]
+        products = Product.objects.filter(status=2).annotate(
+            mylikes=Count('likes')).order_by('-created_on')[:3]
 
         return products
 
@@ -64,7 +66,8 @@ class HomepageProductServiceView(ProductBaseListView):
 
         products = list(context['products'][:3])
         services = list(Service.objects.filter(
-            status=2).order_by('-created_on')[:3])
+            status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on')[:3])
 
         product_single = []
         service_single = []
@@ -119,8 +122,10 @@ class AllProductServiceListView(generic.ListView):
 
         # If search keyword exists, proceed with the search logic
         combined_list = self.combine_products_and_services(
-            list(Product.objects.filter(status=2).order_by('-created_on')),
-            list(Service.objects.filter(status=2).order_by('-created_on'))
+            list(Product.objects.filter(status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on')),
+            list(Service.objects.filter(status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on'))
         )
 
         # Filter the combined list based on the searched keyword
@@ -150,9 +155,11 @@ class AllProductServiceListView(generic.ListView):
         # If NOT searched_items run this
         try:
             products = list(Product.objects.filter(
-                status=2).order_by('-created_on'))
+                status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on'))
             services = list(Service.objects.filter(
-                status=2).order_by('-created_on'))
+                status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on'))
 
             combined_list = self.combine_products_and_services(
                 products, services)
@@ -233,7 +240,8 @@ class AllProductListView(generic.ListView):
 
     def get_queryset(self):
         try:
-            return Product.objects.filter(status=2).order_by('-created_on')
+            return Product.objects.filter(status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on')
         except Exception as e:
             print(e)
             return []
@@ -261,7 +269,8 @@ class AllServiceListView(generic.ListView):
 
     def get_queryset(self):
         try:
-            return Service.objects.filter(status=2).order_by('-created_on')
+            return Service.objects.filter(status=2).annotate(
+                mylikes=Count('likes')).order_by('-created_on')
         except Exception as e:
             print(e)
             return []
@@ -284,7 +293,8 @@ class SingleProductView(View):
     """View for listing SINGLE product instances."""
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Product.objects.order_by('-created_on')
+        queryset = Product.objects.annotate(
+            mylikes=Count('likes')).order_by('-created_on')
         product = get_object_or_404(queryset, slug=slug)
 
         # Check if user purchased or not
@@ -306,7 +316,8 @@ class SingleServiceView(View):
     """View for listing SINGLE service instances."""
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Service.objects.order_by('-created_on')
+        queryset = Service.objects.annotate(
+            mylikes=Count('likes')).order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
 
         # Check if user purchased or not
@@ -342,8 +353,10 @@ class SortedProductServiceListView(generic.ListView):
             services = Service.objects.annotate(
                 lower_title=Lower('title')).order_by('lower_title')
         else:
-            products = Product.objects.all().order_by(sortkey)
-            services = Service.objects.all().order_by(sortkey)
+            products = Product.objects.all().annotate(
+                mylikes=Count('likes')).order_by(sortkey)
+            services = Service.objects.all().annotate(
+                mylikes=Count('likes')).order_by(sortkey)
 
         if self.request.GET.get('direction') == 'desc':
             products = products.reverse()
@@ -351,6 +364,7 @@ class SortedProductServiceListView(generic.ListView):
 
         products = products.filter(status=2)
         services = services.filter(status=2)
+
         combined_list = self.combine_products_and_services(
             list(products),
             list(services)

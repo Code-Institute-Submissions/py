@@ -34,13 +34,14 @@
                         {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low
                         to
                         high)</option>
-                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price
+                    <option value="{% url 'sorted' %}_price_desc"
+                        {% if current_sorting == 'price_desc' %}selected{% endif %}>Price
                         (high
                         to low)</option>
-                    <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating
+                    <option value="{% url 'sorted' %}_mylikes_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating
                         (low
                         to high)</option>
-                    <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating
+                    <option value="{% url 'sorted' %}_mylikes_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating
                         (high to low)</option>
                     <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)
                     </option>
@@ -138,8 +139,10 @@
                                     {% endfor %}
                                     {% endif %}
                                 </p>
+                                
                                 <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="">
+                                        {{ item.mylikes }}
                                         Read More
                                     </a>
                                 </p>
@@ -152,7 +155,7 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ item.get_likes_count }}</span>
+                                {{ item.mylikes }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                 {{ item.get_transactions_count }} </span>
                         </div>
@@ -249,7 +252,7 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ product.get_likes_count }}</span>
+                                {{ product.mylikes }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                 {{ product.get_transactions_count }} </span>
                         </div>
@@ -298,7 +301,7 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Card Body -->
                 <div class="card-body pt-1 px-2 pb-1">
                     <div class="row">
@@ -339,7 +342,7 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ service.get_likes_count }}</span>
+                                {{ service.mylikes }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                 {{ service.get_transactions_count }} </span>
                         </div>

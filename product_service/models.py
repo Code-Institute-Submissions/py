@@ -119,9 +119,6 @@ class Product(models.Model):
     download_url = models.ManyToManyField(
         'Download', related_name='product_downloads', blank=True)
 
-    def get_likes_count(self):
-        return self.likes.count()
-
     def get_transactions_count(self):
         return self.transactions.count()
 
@@ -194,9 +191,6 @@ class Service(models.Model):
     # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
-
-    def get_likes_count(self):
-        return self.likes.count()
 
     def get_transactions_count(self):
         return self.transactions.count()
