@@ -119,9 +119,6 @@ class Product(models.Model):
     download_url = models.ManyToManyField(
         'Download', related_name='product_downloads', blank=True)
 
-    def get_transactions_count(self):
-        return self.transactions.count()
-
     class Meta:
         ordering = ['title']
 
@@ -191,9 +188,6 @@ class Service(models.Model):
     # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
-
-    def get_transactions_count(self):
-        return self.transactions.count()
 
     class Meta:
         ordering = ['title']

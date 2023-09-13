@@ -56,6 +56,14 @@
                                     </a>
                                 </div>
                                 <small>by {{ service.author }}</small>
+                                {% if service.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{service.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ service.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
                                 <p class="my-0 fs-6">
                                     {% for codes in service.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -85,9 +93,9 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ service.mylikes }}</span>
+                                {{ service.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ service.get_transactions_count }} </span>
+                                {{ service.transactionscount }} </span>
                         </div>
                     </div>
                 </div>

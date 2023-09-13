@@ -28,30 +28,50 @@
         <div class="col-12 d-flex justify-content-center align-items-center mt-4">
             <div class="sort-select-wrapper">
                 <select id="sort-selector" class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
-                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort items by...
+                    <option value="reset">
+                        Sort items by...
                     </option>
-                    <option value="{% url 'sorted' %}_price_asc"
-                        {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low
-                        to
-                        high)</option>
-                    <option value="{% url 'sorted' %}_price_desc"
-                        {% if current_sorting == 'price_desc' %}selected{% endif %}>Price
-                        (high
-                        to low)</option>
-                    <option value="{% url 'sorted' %}_mylikes_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating
-                        (low
-                        to high)</option>
-                    <option value="{% url 'sorted' %}_mylikes_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating
-                        (high to low)</option>
-                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)
+
+                    <option value="{% url 'sorted' %}_price_asc">
+                        Price (low to high)
                     </option>
-                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)
+
+                    <option value="{% url 'sorted' %}_price_desc">
+                        Price (high to low)
                     </option>
-                    <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>
+
+                    <option value="{% url 'sorted' %}_likescount_asc">
+                        Rating (low to high)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_likescount_desc">
+                        Rating (high to low)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_transactionscount_asc">
+                        Purchase (low to high)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_transactionscount_desc">
+                        Purchase (high to low)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_title_asc">
+                        Title (A-Z)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_title_desc">
+                        Title (Z-A)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_category_asc">
                         Category
-                        (A-Z)</option>
-                    <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>
-                        Category (Z-A)</option>
+                        (A-Z)
+                    </option>
+
+                    <option value="{% url 'sorted' %}_category_desc">
+                        Category (Z-A)
+                    </option>
                 </select>
             </div>
         </div>
@@ -139,10 +159,9 @@
                                     {% endfor %}
                                     {% endif %}
                                 </p>
-                                
+
                                 <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="">
-                                        {{ item.mylikes }}
                                         Read More
                                     </a>
                                 </p>
@@ -155,9 +174,9 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ item.mylikes }}</span>
+                                {{ item.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ item.get_transactions_count }} </span>
+                                {{ item.transactionscount }} </span>
                         </div>
                     </div>
                 </div>
@@ -252,9 +271,9 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ product.mylikes }}</span>
+                                {{ product.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ product.get_transactions_count }} </span>
+                                {{ product.transactionscount }} </span>
                         </div>
                     </div>
                 </div>
@@ -342,9 +361,9 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ service.mylikes }}</span>
+                                {{ service.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ service.get_transactions_count }} </span>
+                                {{ service.transactionscount }} </span>
                         </div>
                     </div>
                 </div>
