@@ -6,17 +6,6 @@
 }
 
 /* General Styling */
-.border-primary {
-    border-color: #dadada !important;
-    color: #333333;
-    transition: 0.3s;
-}
-
-.border-primary:hover {
-    border-color: #4f8eb8 !important;
-    color: #297fb9;
-    transition: 0.3s;
-}
 
 a {
     text-decoration: none !important;
@@ -443,4 +432,29 @@ i {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+}
+
+/* Sorting */
+
+.badge-black {
+    color: #333333;
+    transition: 0.3s;
+}
+
+.badge-black:hover {
+    border-color: #297fb9 !important;
+    color: #297fb9;
+    transition: 0.3s;
+}
+
+.border-primary {
+    border-color: #dadada !important;
+    color: #333333;
+    transition: 0.3s;
+}
+
+.border-primary:hover {
+    border-color: #297fb9 !important;
+    color: #297fb9;
+    transition: 0.3s;
 }

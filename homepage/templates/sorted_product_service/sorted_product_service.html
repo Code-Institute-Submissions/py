@@ -11,7 +11,7 @@
             <div class="col text-center">
                 {% for c in categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">
-                    <span class="p-2 mx-1 mt-2 badge badge-white text-muted rounded border border-muted">{{ c }}
+                    <span class="p-2 mx-1 mt-2 badge badge-black rounded border border-muted">{{ c }}
                     </span>
                 </a>
                 {% endfor %}
