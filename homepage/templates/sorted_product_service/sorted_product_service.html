@@ -3,42 +3,31 @@
 {% block content %}
 <div class="container px-4 px-lg-0">
 
-    <!-- PRODUCT Row-->
-    <div class="row gx-4 gx-lg-5 mt-4">
-        <p class="h1 fairplay-font text-center">Product</p>
-
-        <div class="row mb-4">
-            <div class="col text-center">
-                {% for c in categories %}
-                <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">
-                    <span class="p-2 mx-1 mt-2 badge badge-white text-muted rounded border border-muted">{{ c }}
-                    </span>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
+    <!-- Product & Service Row-->
+    <div class="row gx-4 gx-lg-5 mt-5">
+        <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
 
         <!-- Records not found -->
-        {% if not product_all %}
+        {% if not combined_items %}
         <p class="text-center">No records found so far </p>
         {% endif %}
 
         <!-- Records found -->
-        {% for product in product_all %}
+        {% for item in combined_items %}
         <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
                 <!-- Card Header -->
-                {% if product.type %}
-                <div class="card-header text-center h4">{{ product.get_type_display}}</div>
+                {% if item.type %}
+                <div class="card-header text-center h4">{{ item.get_type_display}}</div>
                 {% else %}
                 <div class="card-header text-center h4">UNKNOWN</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
-                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
+                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
                         <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ product.get_instance_display }}</span>
-                            <span class="thumbnail-tags-right">{{ product.price }} $</span>
+                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
+                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
                         </div>
                     </div>
                 </div>
@@ -47,24 +36,16 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
-                                <p class="h5 pb-0 mb-0">{{ product.title }}</p>
-                                <small>by {{ product.author }}</small>
-                                {% if product.category %}
-                                <p class="small mt-1 mb-0">
-                                    <a class="text-muted"
-                                        href="{% url 'combined_items_all' %}/?q={{product.category.alt_name}}">
-                                        <i class="fas fa-tag mr-1"></i> {{ product.category }}
-                                    </a>
-                                </p>
-                                {% endif %}
+                                <p class="h5 pb-0 mb-0">{{ item.title }}</p>
+                                <small>by {{ item.author }}</small>
                                 <p class="my-0 fs-6">
-                                    {% for codes in product.code.all %}
+                                    {% for code in item.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
-                                        {{ codes }}
+                                        {{ code }}
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ product.excerpt|safe }}...
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="">
                                         Read More
                                     </a>
@@ -74,18 +55,26 @@
                     </div>
                 </div>
                 <!-- Likes and Purchases -->
-                <div class="row mb-1">
+                <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ product.get_likes_count }}</span>
+                                {{ item.get_likes_count }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ product.get_transactions_count }} </span>
+                                {{ item.get_transactions_count }} </span>
                         </div>
                     </div>
                 </div>
                 <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY NOW</a>
+                {% if item.instance == 0 %}
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' item.slug %}">
+                    BUY NOW
+                </a>
+                {% else %}
+                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' item.slug %}">
+                    HIRE NOW
+                </a>
+                {% endif%}
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}

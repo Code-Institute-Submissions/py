@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib import messages
+from django.db.models.functions import Lower
 
 # Python
 import logging
@@ -179,7 +180,12 @@ class AllProductServiceListView(generic.ListView):
         except PageNotAnInteger:
             page_obj = paginator.page(1)
 
+        # Get unique categories
+        unique_categories = list(set([obj.category for obj in page_obj]))
+
+        # Establish template context variables
         context['page_obj'] = page_obj
+        context['categories'] = unique_categories
         context['is_paginated'] = len(combined_list) > self.paginate_by
         return context
 
@@ -220,7 +226,6 @@ class AllProductServiceListView(generic.ListView):
 
 
 class AllProductListView(generic.ListView):
-    """Dedicated page for displaying list of all product instances."""
     model = Product
     template_name = 'all_product_service/all_product.html'
     paginate_by = 6
@@ -228,12 +233,21 @@ class AllProductListView(generic.ListView):
 
     def get_queryset(self):
         try:
-            products = list(Product.objects.filter(
-                status=2).order_by('-created_on'))
-            return products
+            return Product.objects.filter(status=2).order_by('-created_on')
         except Exception as e:
             print(e)
             return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        product_all = context[self.context_object_name]
+
+        unique_categories = list(
+            set([product.category for product in product_all]))
+
+        context['categories'] = unique_categories
+        return context
 
 # All Services
 
@@ -247,12 +261,21 @@ class AllServiceListView(generic.ListView):
 
     def get_queryset(self):
         try:
-            services = list(Service.objects.filter(
-                status=2).order_by('-created_on'))
-            return services
+            return Service.objects.filter(status=2).order_by('-created_on')
         except Exception as e:
             print(e)
             return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_all = context[self.context_object_name]
+
+        unique_categories = list(
+            set([service.category for service in service_all]))
+
+        context['categories'] = unique_categories
+        return context
 
 # Single Product
 
@@ -299,3 +322,61 @@ class SingleServiceView(View):
                           "has_purchased": has_purchased,
                           "user_authenticated": request.user.is_authenticated
                       })
+
+
+class SortedProductServiceListView(generic.ListView):
+    '''
+    View for sorting products & services
+    '''
+    model = Product
+    template_name = 'sorted_product_service/sorted_product_service.html'
+    paginate_by = 6
+    context_object_name = 'combined_items'
+
+    def get_queryset(self):
+        sortkey = self.request.GET.get('sort', 'created_on')
+
+        if sortkey == 'title':
+            products = Product.objects.annotate(
+                lower_title=Lower('title')).order_by('lower_title')
+            services = Service.objects.annotate(
+                lower_title=Lower('title')).order_by('lower_title')
+        else:
+            products = Product.objects.all().order_by(sortkey)
+            services = Service.objects.all().order_by(sortkey)
+
+        if self.request.GET.get('direction') == 'desc':
+            products = products.reverse()
+            services = services.reverse()
+
+        products = products.filter(status=2)
+        services = services.filter(status=2)
+        combined_list = self.combine_products_and_services(
+            list(products),
+            list(services)
+        )
+
+        return combined_list
+
+    def combine_products_and_services(self, products, services):
+        combined_list = []
+        product_iter = iter(products)
+        service_iter = iter(services)
+
+        has_more_products = True
+        has_more_services = True
+
+        while has_more_products or has_more_services:
+            if has_more_products:
+                try:
+                    combined_list.append(next(product_iter))
+                except StopIteration:
+                    has_more_products = False
+
+            if has_more_services:
+                try:
+                    combined_list.append(next(service_iter))
+                except StopIteration:
+                    has_more_services = False
+
+        return combined_list

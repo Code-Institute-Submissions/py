@@ -40,8 +40,8 @@
                 <!-- Card Header -->
                 {% if item.type %}
                 <div class="card-header text-center h4">{{ item.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif item.instance %}
+                <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
@@ -59,6 +59,14 @@
                             <div class="p-1">
                                 <p class="h5 pb-0 mb-0">{{ item.title }}</p>
                                 <small>by {{ item.author }}</small>
+                                {% if item.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{item.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ item.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
                                 <p class="my-0 fs-6">
                                     {% if item.instance == 0%}
                                     {% for code in item.code.all %}
@@ -133,8 +141,8 @@
                 <!-- Card Header -->
                 {% if product.type %}
                 <div class="card-header text-center h4">{{ product.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif product.instance %}
+                <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
@@ -152,6 +160,14 @@
                             <div class="p-1">
                                 <p class="h5 pb-0 mb-0">{{ product.title }}</p>
                                 <small>by {{ product.author }}</small>
+                                {% if product.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{product.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ product.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
                                 <p class="my-0 fs-6">
                                     {% for codes in product.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -209,8 +225,8 @@
                 <!-- Card Header -->
                 {% if service.type %}
                 <div class="card-header text-center h4">{{ service.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif service.instance %}
+                <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
@@ -228,6 +244,14 @@
                             <div class="p-1">
                                 <p class="h5 pb-0 mb-0">{{ service.title }}</p>
                                 <small>by {{ service.author }}</small>
+                                {% if service.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{service.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ service.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
                                 <p class="my-0 fs-6">
                                     {% for services in service.service.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">

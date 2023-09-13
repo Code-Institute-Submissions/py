@@ -8,6 +8,7 @@ from .views import (HomepageProductServiceView,
                     AllServiceListView,
                     SingleProductView,
                     SingleServiceView,
+                    SortedProductServiceListView,
                     CustomLoginView,
                     CustomSignupView,
                     CustomLogoutView)
@@ -37,6 +38,9 @@ urlpatterns = [
          name='single_product'),
     path('service/<slug:slug>', SingleServiceView.as_view(),
          name='single_service'),
+    path('sorted_products_services/', SortedProductServiceListView.as_view(),
+         name='sorted'),
+
 
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),

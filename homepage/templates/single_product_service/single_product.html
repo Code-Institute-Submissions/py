@@ -17,8 +17,8 @@
                 <!-- Card Header -->
                 {% if product.type %}
                 <div class="card-header text-center h4">{{ product.get_type_display}}</div>
-                {% else %}
-                <div class="card-header text-center h4">UNKNOWN</div>
+                {% elif product.instance %}
+                <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
                 {% endif %}
                 <!-- Card Thumbnail -->
                 <div class="row bg-thumbnail">
@@ -50,6 +50,14 @@
                             <div class="px-1 pb-1 pt-0">
                                 <p class="h5 pb-0 mb-0">{{ product.title }}</p>
                                 <small>by {{ product.author }}</small>
+                                {% if product.category %}
+                                <p class="small mt-1 mb-0">
+                                    <a class="text-muted"
+                                        href="{% url 'combined_items_all' %}/?q={{product.category.alt_name}}">
+                                        <i class="fas fa-tag mr-1"></i> {{ product.category }}
+                                    </a>
+                                </p>
+                                {% endif %}
                                 <p class="my-0 fs-6">
                                     {% for codes in product.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">

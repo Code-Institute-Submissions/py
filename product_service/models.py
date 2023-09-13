@@ -3,7 +3,7 @@ from django.db import models
 from homepage.models import STATUS
 
 SCOPE_TYPE = (
-    (0, 'Pending'),
+    (0, 'NA'),
     (1, 'Ownership'),
     (2, 'License'),
 )
