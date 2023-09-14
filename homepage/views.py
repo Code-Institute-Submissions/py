@@ -205,7 +205,7 @@ class AllProductServiceListView(generic.ListView):
     def combine_products_and_services(self, products, services):
         '''
         This function can be called in this class scope with 'self.'.
-        No rearranging of the list when using pop() is necessary 
+        No rearranging of the list when using pop() is necessary
         with this approach.
         '''
         combined_list = []
@@ -356,8 +356,9 @@ class SortedProductServiceListView(generic.ListView):
 
     def get_queryset(self):
         sortkey = self.request.GET.get('sort', 'created_on')
-        try:
+        direction = self.request.GET.get('direction', 'asc')
 
+        try:
             if sortkey == 'title':
                 products = Product.objects.annotate(
                     lower_title=Lower('title')).order_by('lower_title')
@@ -383,8 +384,11 @@ class SortedProductServiceListView(generic.ListView):
             list(services)
         )
 
-        if self.request.GET.get('direction') == 'desc':
+        if direction == 'desc':
             combined_list.reverse()
+
+        self.sortkey = sortkey
+        self.direction = direction
 
         return combined_list
 
@@ -396,6 +400,8 @@ class SortedProductServiceListView(generic.ListView):
         unique_categories = list(
             set([item.category for item in combined_list]))
 
+        context['sortkey'] = self.sortkey
+        context['direction'] = self.direction
         context['categories'] = unique_categories
         return context
 

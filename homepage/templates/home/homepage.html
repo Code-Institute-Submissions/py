@@ -27,57 +27,69 @@
 
     <!-- Sorting Element -->
     <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center mt-4">
+        <div class="col-12 d-flex justify-content-center align-items-center mt-3">
             <div class="sort-select-wrapper">
                 <select id="sort-selector" class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
                     <option value="reset">
                         Sort items by...
                     </option>
 
-                    <option value="{% url 'sorted' %}_price_asc">
+                    <option {% if sortkey == 'price' and direction == 'asc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_price_asc">
                         Price (low to high)
                     </option>
 
-                    <option value="{% url 'sorted' %}_price_desc">
+                    <option {% if sortkey == 'price' and direction == 'desc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_price_desc">
                         Price (high to low)
                     </option>
 
-                    <option value="{% url 'sorted' %}_likescount_asc">
+                    <option {% if sortkey == 'likescount' and direction == 'asc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_likescount_asc">
                         Rating (low to high)
                     </option>
 
-                    <option value="{% url 'sorted' %}_likescount_desc">
+                    <option {% if sortkey == 'likescount' and direction == 'desc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_likescount_desc">
                         Rating (high to low)
                     </option>
 
-                    <option value="{% url 'sorted' %}_transactionscount_asc">
+                    <option {% if sortkey == 'transactionscount' and direction == 'asc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_transactionscount_asc">
                         Purchase (low to high)
                     </option>
 
-                    <option value="{% url 'sorted' %}_transactionscount_desc">
+                    <option {% if sortkey == 'transactionscount' and direction == 'desc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_transactionscount_desc">
                         Purchase (high to low)
                     </option>
 
-                    <option value="{% url 'sorted' %}_title_asc">
+                    <option {% if sortkey == 'title' and direction == 'asc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_title_asc">
                         Title (A-Z)
                     </option>
 
-                    <option value="{% url 'sorted' %}_title_desc">
+                    <option {% if sortkey == 'title' and direction == 'desc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_title_desc">
                         Title (Z-A)
                     </option>
 
-                    <option value="{% url 'sorted' %}_category_asc">
+                    <option {% if sortkey == 'category' and direction == 'desc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_category_desc">
                         Category
                         (A-Z)
                     </option>
 
-                    <option value="{% url 'sorted' %}_category_desc">
+                    <option {% if sortkey == 'category' and direction == 'asc' %} selected {% endif %}
+                        value="{% url 'sorted' %}_category_asc">
                         Category (Z-A)
                     </option>
                 </select>
             </div>
         </div>
     </div>
+
+
 
     <!-- PRODUCT & SERVICE Row-->
     <div class="row gx-4 gx-lg-5 mt-4">

@@ -4,11 +4,14 @@
 <div class="container px-4 px-lg-0">
 
     <!-- Service Row-->
-    <div class="row gx-4 gx-lg-5 mt-5">
-        <p class="h1 fairplay-font text-center">Service</p>
+    <div class="row gx-4 gx-lg-5 mt-4">
+        <p class="h1 fairplay-font text-center mb-4">Service</p>
 
         <div class="row mb-4 m-0">
             <div class="col text-center">
+                <p class="text-muted text-center mb-0">
+                    {{ service_all|length }} items on this page for
+                </p>
                 {% for c in categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">
                     <span class="p-2 mx-1 mt-2 badge badge-black rounded border border-muted">{{ c }}
@@ -17,7 +20,7 @@
                 {% endfor %}
             </div>
         </div>
-
+        
         <!-- Sorting Element -->
         <div class="row">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
@@ -28,44 +31,54 @@
                             Sort items by...
                         </option>
 
-                        <option value="{% url 'sorted' %}_price_asc">
+                        <option {% if sortkey == 'price' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_price_asc">
                             Price (low to high)
                         </option>
 
-                        <option value="{% url 'sorted' %}_price_desc">
+                        <option {% if sortkey == 'price' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_price_desc">
                             Price (high to low)
                         </option>
 
-                        <option value="{% url 'sorted' %}_likescount_asc">
+                        <option {% if sortkey == 'likescount' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_likescount_asc">
                             Rating (low to high)
                         </option>
 
-                        <option value="{% url 'sorted' %}_likescount_desc">
+                        <option {% if sortkey == 'likescount' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_likescount_desc">
                             Rating (high to low)
                         </option>
 
-                        <option value="{% url 'sorted' %}_transactionscount_asc">
+                        <option {% if sortkey == 'transactionscount' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_transactionscount_asc">
                             Purchase (low to high)
                         </option>
 
-                        <option value="{% url 'sorted' %}_transactionscount_desc">
+                        <option {% if sortkey == 'transactionscount' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_transactionscount_desc">
                             Purchase (high to low)
                         </option>
 
-                        <option value="{% url 'sorted' %}_title_asc">
+                        <option {% if sortkey == 'title' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_title_asc">
                             Title (A-Z)
                         </option>
 
-                        <option value="{% url 'sorted' %}_title_desc">
+                        <option {% if sortkey == 'title' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_title_desc">
                             Title (Z-A)
                         </option>
 
-                        <option value="{% url 'sorted' %}_category_desc">
+                        <option {% if sortkey == 'category' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_category_desc">
                             Category
                             (A-Z)
                         </option>
 
-                        <option value="{% url 'sorted' %}_category_asc">
+                        <option {% if sortkey == 'category' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_category_asc">
                             Category (Z-A)
                         </option>
                     </select>
