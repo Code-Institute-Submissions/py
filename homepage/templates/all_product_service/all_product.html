@@ -4,13 +4,13 @@
 <div class="container px-4 px-lg-0">
 
     <!-- Product Row-->
-    <div class="row gx-4 gx-lg-5 mt-4">
+    <div id="item-container" class="row gx-4 gx-lg-5 mt-4">
         <p class="h1 fairplay-font text-center mb-4">Product</p>
 
         <div class="row mb-4 m-0">
             <div class="col text-center">
                 <p class="text-muted text-center mb-0">
-                    {{ product_all|length }} items on this page for
+                    {{ product_all|length }} items on
                 </p>
                 {% for c in categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">
@@ -25,49 +25,41 @@
         <div class="row">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
                 <div class="sort-select-wrapper">
-                    <select id="sort-selector"
+                    <select id="sort-selector-product"
                         class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
                         <option value="reset">
                             Sort items by...
                         </option>
 
-                        <option {% if sortkey == 'price' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_price_asc">
+                        <option value="price_asc">
                             Price (low to high)
                         </option>
 
-                        <option {% if sortkey == 'price' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_price_desc">
+                        <option value="price_desc">
                             Price (high to low)
                         </option>
 
-                        <option {% if sortkey == 'likescount' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_likescount_asc">
+                        <option value="likes_asc">
                             Rating (low to high)
                         </option>
 
-                        <option {% if sortkey == 'likescount' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_likescount_desc">
+                        <option value="likes_desc">
                             Rating (high to low)
                         </option>
 
-                        <option {% if sortkey == 'transactionscount' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_transactionscount_asc">
+                        <option value="transactions_asc">
                             Purchase (low to high)
                         </option>
 
-                        <option {% if sortkey == 'transactionscount' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_transactionscount_desc">
+                        <option value="transactions_desc">
                             Purchase (high to low)
                         </option>
 
-                        <option {% if sortkey == 'title' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_title_asc">
+                        <option value="title_asc">
                             Title (A-Z)
                         </option>
 
-                        <option {% if sortkey == 'title' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_title_desc">
+                        <option value="title_desc">
                             Title (Z-A)
                         </option>
 
@@ -93,7 +85,7 @@
 
         <!-- Records found -->
         {% for product in product_all %}
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+        <div class="col-lg-4 col-md-12 mb-5 col-sm-12 item">
             <div class="card h-100">
                 <!-- Card Header -->
                 {% if product.type %}
@@ -107,7 +99,7 @@
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ product.get_instance_display }}</span>
-                            <span class="thumbnail-tags-right">{{ product.price }} $</span>
+                            <span class="thumbnail-tags-right price">{{ product.price }} $</span>
                         </div>
                     </div>
                 </a>
@@ -119,7 +111,7 @@
                             <div class="p-1">
                                 <div>
                                     <a href="{% url 'single_product' product.slug %}"
-                                        class="h5 pb-0 mb-0">{{ product.title }}
+                                        class="title h5 pb-0 mb-0">{{ product.title }}
                                     </a>
                                 </div>
                                 <small>by {{ product.author }}</small>
@@ -152,9 +144,15 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ product.likescount }}</span>
+                                <span class="likes">
+                                    {{ product.likescount }}
+                                </span>
+                            </span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ product.transactionscount }} </span>
+                                <span class="transactions">
+                                    {{ product.transactionscount }}
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>

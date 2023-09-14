@@ -10,7 +10,7 @@
         <div class="row mb-4 m-0">
             <div class="col text-center">
                 <p class="text-muted text-center mb-0">
-                    {{ page_obj|length }} items on this page for
+                    {{ page_obj|length }} items on
                 </p>
                 {% for c in categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'combined_items_all' %}/?q={{ c.alt_name}}">

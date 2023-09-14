@@ -138,6 +138,17 @@ a {
 
 /* Buttons */
 
+.btn-scroll {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    bottom: 20px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #297fb9;
+    color: #fff;
+}
+
 .single-item-button {
     background-color: #297fb9;
     color: #fff;

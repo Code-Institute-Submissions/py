@@ -41,6 +41,7 @@ nav:
       - Developer Reminder: developer-snack/development_reminder.md
       - Google Auth Installation: developer-snack/google_auth.md
       - Common Bugs: developer-snack/common_bugs.md
+      - Naming Convention: developer-snack/naming_convention.md
   - About:
       - Plexosoft Docs: about.md
       - License: LICENSE.md
