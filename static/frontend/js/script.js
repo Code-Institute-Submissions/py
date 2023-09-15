@@ -24,22 +24,29 @@ $(document).ready(function () {
 
     // SORTING on the same page
     function rearrangeItems() {
-        let selectedOption = $('#sort-selector-product').val();
+        // Get selectedOption value
+        let selectedOption = $('#sort-selector-items').val();
+
+        // Create array of objects/store values
         let itemElements = [];
 
+        // Get object instances and exploit them
         $('.item').each(function () {
             let $item = $(this);
+
             let priceContent = parseFloat($item.find('.price').html());
             let likesCount = parseFloat($item.find('.likes').html());
             let transactionsCount = parseFloat($item.find('.transactions').html());
             let titleContent = $item.find('.title').html();
+            let categoryContent = $item.find('.category').html();
 
             itemElements.push({
                 element: $item,
                 price: priceContent,
                 likes: likesCount,
                 transactions: transactionsCount,
-                title: titleContent
+                title: titleContent,
+                category: categoryContent
             });
         });
 
@@ -56,8 +63,12 @@ $(document).ready(function () {
 
             'title_asc': (a, b) => a.title.localeCompare(b.title),
             'title_desc': (a, b) => b.title.localeCompare(a.title),
+
+            'category_desc': (a, b) => a.category.localeCompare(b.category),
+            'category_asc': (a, b) => b.category.localeCompare(a.category),
         };
 
+        // Sort elements' position inside our array of objects
         if (selectedOption in sortingFunctions) {
             itemElements.sort(sortingFunctions[selectedOption]);
 
@@ -72,6 +83,6 @@ $(document).ready(function () {
     }
 
     // CALL the rearrangeItems function when the selector changes
-    $('#sort-selector-product').on('change', rearrangeItems);
+    $('#sort-selector-items').on('change', rearrangeItems);
 
 });

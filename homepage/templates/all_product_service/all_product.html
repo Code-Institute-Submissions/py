@@ -22,10 +22,10 @@
         </div>
 
         <!-- Sorting Element -->
-        <div class="row">
+        <div class="row m-0">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
                 <div class="sort-select-wrapper">
-                    <select id="sort-selector-product"
+                    <select id="sort-selector-items"
                         class="custom-select custom-select-sm rounded border-primary p-2 fs-6 text">
                         <option value="reset">
                             Sort items by...
@@ -63,14 +63,12 @@
                             Title (Z-A)
                         </option>
 
-                        <option {% if sortkey == 'category' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_category_desc">
+                        <option value="category_desc">
                             Category
                             (A-Z)
                         </option>
 
-                        <option {% if sortkey == 'category' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_category_asc">
+                        <option value="category_asc">
                             Category (Z-A)
                         </option>
                     </select>
@@ -119,7 +117,10 @@
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
                                         href="{% url 'combined_items_all' %}/?q={{product.category.alt_name}}">
-                                        <i class="fas fa-tag mr-1"></i> {{ product.category }}
+                                        <i class="fas fa-tag mr-1"></i>
+                                        <span class="category">
+                                            {{ product.category }}
+                                        </span>
                                     </a>
                                 </p>
                                 {% endif %}
