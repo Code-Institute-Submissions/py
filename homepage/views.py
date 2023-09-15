@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import Count
+from operator import attrgetter
 
 # Python
 import logging
@@ -357,38 +358,47 @@ class SortedProductServiceListView(generic.ListView):
     def get_queryset(self):
         sortkey = self.request.GET.get('sort', 'created_on')
         direction = self.request.GET.get('direction', 'asc')
+        self.sortkey = sortkey
+        self.direction = direction
 
-        try:
-            if sortkey == 'title':
-                products = Product.objects.annotate(
-                    lower_title=Lower('title')).order_by('lower_title')
-                services = Service.objects.annotate(
-                    lower_title=Lower('title')).order_by('lower_title')
-            else:
-                products = Product.objects.all().annotate(
-                    likescount=Count('likes'),
-                    transactionscount=Count('transactions')).order_by(sortkey)
-                services = Service.objects.all().annotate(
-                    likescount=Count('likes'),
-                    transactionscount=Count('transactions')).order_by(sortkey)
-        except Exception as e:
-            logger.error(f"Error while sorting products and services: {e}")
-            messages.error(self.request, 'That was not a valid sorting value.')
-            return []
+        products = Product.objects.filter(status=2).annotate(
+            lower_title=Lower('title'),
+            likescount=Count('likes'),
+            transactionscount=Count('transactions')).order_by('created_on')
 
-        products = products.filter(status=2)
-        services = services.filter(status=2)
+        services = Service.objects.filter(status=2).annotate(
+            lower_title=Lower('title'),
+            likescount=Count('likes'),
+            transactionscount=Count('transactions')).order_by('created_on')
 
         combined_list = self.combine_products_and_services(
             list(products),
             list(services)
         )
 
+        try:
+            if sortkey == 'title':
+                combined_list.sort(key=lambda item: item.title.lower())
+            elif sortkey == 'likescount':
+                combined_list.sort(key=lambda item: float(item.likescount))
+            elif sortkey == 'transactionscount':
+                combined_list.sort(
+                    key=lambda item: float(item.transactionscount))
+            elif sortkey == 'price':
+                combined_list.sort(key=lambda item: float(item.price))
+            elif sortkey == 'category':
+                combined_list.sort(
+                    key=lambda item: item.category.category_name.lower())
+            else:
+                combined_list.sort(key=lambda item: item.created_on)
+
+        except Exception as e:
+            logger.error(f"Error while sorting products and services: {e}")
+            messages.error(self.request, 'That was not a valid sorting value.')
+            return []
+
         if direction == 'desc':
             combined_list.reverse()
-
-        self.sortkey = sortkey
-        self.direction = direction
 
         return combined_list
 

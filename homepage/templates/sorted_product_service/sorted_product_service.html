@@ -71,14 +71,14 @@
                             Title (Z-A)
                         </option>
 
-                        <option {% if sortkey == 'category' and direction == 'desc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_category_desc">
+                        <option {% if sortkey == 'category' and direction == 'asc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_category_asc">
                             Category
                             (A-Z)
                         </option>
 
-                        <option {% if sortkey == 'category' and direction == 'asc' %} selected {% endif %}
-                            value="{% url 'sorted' %}_category_asc">
+                        <option {% if sortkey == 'category' and direction == 'desc' %} selected {% endif %}
+                            value="{% url 'sorted' %}_category_desc">
                             Category (Z-A)
                         </option>
                     </select>
