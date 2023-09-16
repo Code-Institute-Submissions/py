@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'product_service',
     'admin_dashboard',
     'user_dashboard',
-    'bag',
+    'product_bag',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +84,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'homepage.custom_context_processors.get_verified_email',
-                'bag.custom_context_processors.bag_contents',
+                'product_bag.custom_context_processors.bag_contents',
             ],
         },
     },

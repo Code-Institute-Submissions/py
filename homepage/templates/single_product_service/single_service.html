@@ -13,101 +13,108 @@
 
         <!-- Records found -->
         <div class="col-lg-8 col-md-12 mb-5 col-sm-12">
-            <div class="card h-100">
-                <!-- Card Header -->
-                {% if service.type %}
-                <div class="card-header text-center h4">{{ service.get_type_display}}</div>
-                {% elif service.instance %}
-                <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
-                {% endif %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="card h-100">
+                    <!-- Card Header -->
+                    {% if service.type %}
+                    <div class="card-header text-center h4">{{ service.get_type_display}}</div>
+                    {% elif service.instance %}
+                    <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
+                    {% endif %}
 
-                <!-- Card Thumbnail -->
-                <a href="{% url 'single_service' service.slug %}" class="row bg-thumbnail d-block">
-                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
-                        <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
-                            <span class="thumbnail-tags-right">{{ service.price }} $</span>
+                    <!-- Card Thumbnail -->
+                    <a href="{% url 'single_service' service.slug %}" class="row bg-thumbnail d-block">
+                        <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ service.image_url }}')">
+                            <div class="d-flex justify-content-between">
+                                <span class="thumbnail-tags-left">{{ service.get_instance_display }}</span>
+                                <span class="thumbnail-tags-right">{{ service.price }} $</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Card Body -->
-                <div class="d-flex justify-content-between">
-                    <a class="single-item-button w-100 text-center" href="{{ service.docs }}" rel="noopener noreferrer"
-                        target="_blank">
-                        Docs
-                    </a>
-                    <a class="single-item-button w-100 text-center" href="{{ service.support }}"
-                        rel="noopener noreferrer" target="_blank">
-                        Support
-                    </a>
-                    <a class="single-item-button-right w-100 text-center" href="" rel="noopener noreferrer"
-                        target="_blank">
-                        FAQ
-                    </a>
-                </div>
-                <div class="card-body pt-2 px-2 pb-1">
-                    <div class="row">
-                        <div class="col-12 d-inline-block">
-                            <div class="px-1 pb-1 pt-0">
-                                <div>
-                                    <a href="{% url 'single_service' service.slug %}"
-                                        class="h5 pb-0 mb-0">{{ service.title }}
-                                    </a>
+                    <!-- Card Body -->
+                    <div class="d-flex justify-content-between">
+                        <a class="single-item-button w-100 text-center" href="{{ service.docs }}"
+                            rel="noopener noreferrer" target="_blank">
+                            Docs
+                        </a>
+                        <a class="single-item-button w-100 text-center" href="{{ service.support }}"
+                            rel="noopener noreferrer" target="_blank">
+                            Support
+                        </a>
+                        <a class="single-item-button-right w-100 text-center" href="" rel="noopener noreferrer"
+                            target="_blank">
+                            FAQ
+                        </a>
+                    </div>
+                    <div class="card-body pt-2 px-2 pb-1">
+                        <div class="row">
+                            <div class="col-12 d-inline-block">
+                                <div class="px-1 pb-1 pt-0">
+                                    <div>
+                                        <a href="{% url 'single_service' service.slug %}"
+                                            class="h5 pb-0 mb-0">{{ service.title }}
+                                        </a>
+                                    </div>
+                                    <small>by {{ service.author }}</small>
+                                    {% if service.category %}
+                                    <p class="small mt-1 mb-0">
+                                        <a class="text-muted"
+                                            href="{% url 'combined_items_all' %}/?q={{service.category.alt_name}}">
+                                            <i class="fas fa-tag mr-1"></i> {{ service.category }}
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                    <p class="my-0 fs-6">
+                                        {% for codes in service.code.all %}
+                                        <span class="item-tags d-inline-block m-0 mt-2">
+                                            {{ codes }}
+                                        </span>
+                                        {% endfor %}
+                                    </p>
+                                    <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
+                                        {{ service.description|safe }}
+                                    </p>
+                                    <p class="my-0 fs-6">
+                                        {% for services in service.service.all %}
+                                        <span class="item-tags d-inline-block m-0 mt-2">
+                                            {{ services }}
+                                        </span>
+                                        {% endfor %}
+                                    </p>
+                                    <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
+                                        Note: here it goes
+                                    </p>
                                 </div>
-                                <small>by {{ service.author }}</small>
-                                {% if service.category %}
-                                <p class="small mt-1 mb-0">
-                                    <a class="text-muted"
-                                        href="{% url 'combined_items_all' %}/?q={{service.category.alt_name}}">
-                                        <i class="fas fa-tag mr-1"></i> {{ service.category }}
-                                    </a>
-                                </p>
-                                {% endif %}
-                                <p class="my-0 fs-6">
-                                    {% for codes in service.code.all %}
-                                    <span class="item-tags d-inline-block m-0 mt-2">
-                                        {{ codes }}
-                                    </span>
-                                    {% endfor %}
-                                </p>
-                                <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
-                                    {{ service.description|safe }}
-                                </p>
-                                <p class="my-0 fs-6">
-                                    {% for services in service.service.all %}
-                                    <span class="item-tags d-inline-block m-0 mt-2">
-                                        {{ services }}
-                                    </span>
-                                    {% endfor %}
-                                </p>
-                                <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
-                                    Note: here it goes
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Likes and Purchases -->
-                <div class="row mb-1">
-                    <div class="col-12">
-                        <div class="d-flex justify-content-between">
-                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ service.likescount }}</span>
-                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ service.transactionscount }} </span>
+                    <!-- Likes and Purchases -->
+                    <div class="row mb-1">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
+                                    {{ service.likescount }}</span>
+                                <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                    {{ service.transactionscount }} </span>
+                            </div>
                         </div>
                     </div>
+                    <!-- Card Footer -->
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    {% if service.status == 2 %}
+                    <div class="card-footer text-center fs-5 btn" style="position: relative;">
+                        <input class="add-to-cart" type="submit" value="1" name="quantity">
+                        Add to Cart
+                    </div>
+                    {% elif service.status == 1 %}
+                    <button class="card-footer text-center fs-5 btn">SUSPENDED SERVICE</button>
+                    {% elif service.status == 0 %}
+                    <button class="card-footer text-center fs-5 btn">DRAFT SERVICE</button>
+                    {% endif %}
                 </div>
-                <!-- Card Footer -->
-                {% if service.status == 2 %}
-                <a class="card-footer text-center fs-5 btn" href="">HIRE NOW</a>
-                {% elif service.status == 1 %}
-                <button class="card-footer text-center fs-5 btn">SUSPENDED SERVICE</button>
-                {% elif service.status == 0 %}
-                <button class="card-footer text-center fs-5 btn">DRAFT SERVICE</button>
-                {% endif %}
-            </div>
+            </form>
         </div>
         <!-- Newsletter -->
         <div class="d-flex justify-content-center">
