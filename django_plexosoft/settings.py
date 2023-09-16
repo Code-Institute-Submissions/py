@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'product_service',
     'admin_dashboard',
     'user_dashboard',
+    'bag',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'homepage.custom_context_processors.get_verified_email'
+                'homepage.custom_context_processors.get_verified_email',
+                'bag.custom_context_processors.bag_contents',
             ],
         },
     },
@@ -195,3 +197,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAND_DISCOUNT_THRESHOLD = 100
+GRAND_DISCOUNT_PERCENTAGE = 10
+
+NORMAL_DISCOUNT_THRESHOLD = 40
+NORMAL_DISCOUNT_PERCENTAGE = 5
