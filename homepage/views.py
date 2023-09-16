@@ -251,7 +251,8 @@ class AllProductListView(generic.ListView):
                 likescount=Count('likes'),
                 transactionscount=Count('transactions')).order_by('-created_on')
         except Exception as e:
-            print(e)
+            logger.error(f"Error fetching Product instances: {e}")
+            messages.error(self.request, 'Error fetching Product instances.')
             return []
 
     def get_context_data(self, **kwargs):
@@ -281,7 +282,8 @@ class AllServiceListView(generic.ListView):
                 likescount=Count('likes'),
                 transactionscount=Count('transactions')).order_by('-created_on')
         except Exception as e:
-            print(e)
+            logger.error(f"Error fetching Service instances: {e}")
+            messages.error(self.request, 'Error fetching Service instances.')
             return []
 
     def get_context_data(self, **kwargs):

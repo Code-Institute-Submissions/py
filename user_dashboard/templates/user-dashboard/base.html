@@ -187,7 +187,7 @@
                 role="alert">
                 <div class="col-12 card-body">
                     {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message }}</p>
+                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message|safe }}</p>
                     {% endfor %}
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
