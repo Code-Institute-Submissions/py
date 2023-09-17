@@ -9,9 +9,9 @@ from product_service.views import Product
 class ProductAddToCartMixin:
     def add_to_cart(self, product_id):
         try:
-            product = Product.objects.get(id=product_id)
+            product = Product.objects.filter(status=2).get(id=product_id)
             # "add to cart" logic here
-            
+
             return product
         except Product.DoesNotExist:
             return False
@@ -27,21 +27,23 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
 
         quantity = int(request.POST.get('quantity'))
         redirect_url = request.POST.get('redirect_url')
-        bag = request.session.get('bag', {})
+        product_bag = request.session.get('product_bag', {})
         product = self.add_to_cart(product_id)
         title = product.title
 
-        if product_id in list(bag.keys()):
-            bag[product_id] += quantity
+        if product_id in list(product_bag.keys()):
+            product_bag[product_id]['quantity'] += quantity
         else:
-            bag[title] = title
-            bag[product_id] = quantity
+            product_bag[product_id] = {
+                'title': title,
+                'quantity': quantity,
+            }
 
-        request.session['bag'] = bag
+        request.session['product_bag'] = product_bag
 
         messages.info(
-            request, f'''You have <strong>{bag[product_id]}</strong> products
-            for <strong>{bag[title]}</strong> in the cart!'''
+            request, f'''You have <strong>{product_bag[product_id]['quantity']}</strong> products
+            for <strong>{product_bag[product_id]['title']}</strong> in the cart!'''
         )
 
         return redirect(redirect_url)
@@ -49,7 +51,7 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
 
 class ProductShoppingCartView(ListView, ProductAddToCartMixin):
     model = Product
-    template_name = 'bag/bag.html'
+    template_name = 'product_bag/product_bag.html'
     context_object_name = 'products'
 
     def get_queryset(self):

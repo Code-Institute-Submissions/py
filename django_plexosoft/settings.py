@@ -84,7 +84,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'homepage.custom_context_processors.get_verified_email',
-                'product_bag.custom_context_processors.bag_contents',
+                'product_bag.custom_context_processors.product_bag_contents',
             ],
         },
     },

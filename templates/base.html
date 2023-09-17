@@ -177,11 +177,10 @@
                 </ul>
                 <!-- Shopping cart -->
                 <div class="d-flex">
-                    <a {% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %}
-                        class="btn btn-outline-dark" href="{% url 'bag_page' %}">
+                    <a class="btn btn-outline-dark" href="{% url 'bag_page' %}">
                         <i class="bi-cart-fill me-1 text-white"></i>
                         Cart
-                        <span class="badge bg-light text-black ms-1 rounded-pil">
+                        <span class="{% if grand_total %}text-success{% else %}text-muted{% endif %} badge bg-light ms-1 rounded-pil">
                             {% if grand_total %}
                             ${{ grand_total|floatformat:2 }}
                             {% else %}
