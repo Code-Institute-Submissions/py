@@ -16,15 +16,17 @@
                     <table class="table table-sm table-borderless mb-0">
                         <thead class="text-black">
                             <tr>
-                                <th scope="col">Product Info</th>
+                                <th scope="col">Item Info</th>
                                 <th scope="col"></th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Qty</th>
                                 <th scope="col">Subtotal</th>
+                                <th scope="col" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in bag_items %}
+                            <!-- Item Info -->
                             <tr class="p-3">
                                 <td class="py-3 w-25">
                                     <a href="{% url 'single_product' item.product.slug %}">
@@ -37,22 +39,68 @@
                                     </a>
                                     <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                                 </td>
+                                <!-- Item Price -->
                                 <td class="py-3">
                                     <p class="my-0">${{ item.product.price }}</p>
                                 </td>
-                                <td class="py-3">
-                                    <p class="mx-2">{{ item.quantity }}</p>
+                                <!-- Item Quantity -->
+                                <td class="py-3 w-25">
+                                    <form action="" class="form update-form" method="POST">
+                                        {% csrf_token %}
+
+                                        <!-- Quantity Handler -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <!-- Decrement -->
+                                                <div class="input-group-prepend">
+                                                    <button class="decrement-qty btn btn-primary rounded-0"
+                                                        data-item_id="{{ item.id }}" id="decrement-qty_{{ item.id }}">
+                                                        <span>
+                                                            <i class="fas fa-minus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <!-- Inner value -->
+                                                <input class="form-control qty_input" type="number" name="quantity"
+                                                    value="{{ item.quantity }}" min="1" max="100"
+                                                    data-item_id="{{ item.id }}" id="id_qty_{{ item.id }}">
+
+                                                <!-- Increment -->
+                                                <div class="input-group-append">
+                                                    <button class="increment-qty btn btn-primary rounded-0"
+                                                        data-item_id="{{ item.id }}" id="increment-qty_{{ item.id }}">
+                                                        <span>
+                                                            <i class="fas fa-plus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </td>
+                                <!-- Item Price -->
                                 <td class="py-3">
                                     <p class="mx-2">${{ item.product.price }}</p>
                                 </td>
+                                <!-- Action Field -->
+                                <td>
+                                    <div class="text-center">
+                                        <a class="update-link text-info d-block">Update</a>
+                                        <hr>
+                                        <a class="remove-item text-danger d-block mt-1"
+                                            id="remove_{{ item.item_id }}">Remove</a>
+                                    </div>
+                                </td>
                             </tr>
                             {% endfor %}
+                            <!-- Item Count -->
                             <tr>
                                 <td colspan="5" class="text-center">
                                     <h6>Items: {{ product_count }}</h6>
                                 </td>
                             </tr>
+                            <!-- Cart Results -->
                             <tr>
                                 <td colspan="5" class="text-center">
                                     <h6><strong>Cart Subtotal: ${{ total|floatformat:2 }}</strong></h6>
@@ -102,3 +150,30 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% include 'bag/includes/update_quantity.html' %}
+<script type="text/javascript">
+    // Update quantity on click
+    $('.update-link').click(function (e) {
+        let form = $(this).prev('.update-form');
+        form.submit();
+    })
+
+    // Remove item and reload on click
+    $('.remove-item').click(function (e) {
+        let csrfToken = "{{ csrf_token }}";
+        let itemId = $(this).attr('id').split('remove_')[1];
+        let url = `/bag/remove/${itemId}`;
+        let data = {
+            'csrfmiddlewaretoken': csrfToken,
+        };
+
+        $.post(url, data)
+            .done(function () {
+                location.reload();
+            });
+    })
+</script>
+{% endblock postloadjs%}
