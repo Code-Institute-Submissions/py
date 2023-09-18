@@ -23,8 +23,6 @@ nav:
           - Surface: user-centric/surface/surface.md
       - Entity Relationship Diagram ERD:
           - Overview: erd/erd.md
-          - Diagram: erd/diagram/diagram.md
-          - Table Model: erd/table-model/table_model.md
           - Developer Experience: erd/dev-experience/dev_experience.md
   - Development:
       - Agile Development: agile-development/agile_development.md
@@ -38,11 +36,12 @@ nav:
   - Snack:
       - Overview: developer-snack/developer_snack.md
       - Make Documentation: developer-snack/mkdoc/mkdoc.md
-      - Developer Reminder: developer-snack/development_reminder.md
+      - Django Admin & Summernote: developer-snack/development_reminder.md
       - Google Auth Installation: developer-snack/google_auth.md
       - Common Bugs: developer-snack/common_bugs.md
       - Naming Convention: developer-snack/naming_convention.md
       - Lambda Convention: developer-snack/lambda.md
+      - Database & Django Shell: developer-snack/shell_database.md
   - About:
       - Plexosoft Docs: about.md
       - License: LICENSE.md
