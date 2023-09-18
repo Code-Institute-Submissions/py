@@ -111,9 +111,9 @@ class AllProductServiceListView(generic.ListView):
     searched_items = None
 
     def get(self, request, *args, **kwargs):
-        '''
+        """
         For the Request Handling.
-        '''
+        """
         # .strip() to remove any accidental whitespace
         self.search = request.GET.get('q', '').strip()
 
@@ -150,10 +150,10 @@ class AllProductServiceListView(generic.ListView):
         return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
-        '''
+        """
         For the View.
         And conditional code if 'searched_items'.
-        '''
+        """
         if self.searched_items is not None:
             return self.searched_items
 
@@ -176,10 +176,10 @@ class AllProductServiceListView(generic.ListView):
             return []
 
     def get_context_data(self, **kwargs):
-        '''
+        """
         For the template display.
         From here on the code will run based on get_queryset results.
-        '''
+        """
         context = super().get_context_data(**kwargs)
 
         combined_list = self.get_queryset()
@@ -204,11 +204,11 @@ class AllProductServiceListView(generic.ListView):
         return context
 
     def combine_products_and_services(self, products, services):
-        '''
+        """
         This function can be called in this class scope with 'self.'.
         No rearranging of the list when using pop() is necessary
         with this approach.
-        '''
+        """
         combined_list = []
 
         # Convert lists to iterators

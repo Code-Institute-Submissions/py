@@ -78,22 +78,18 @@
                     </table>
                 </div>
                 {% else %}
-                <p class="lead mb-5">Your bag is empty.</p>
-                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
+                <p class="m-0 p-3 text-center">Your cart is empty.</p>
                 {% endif %}
             </div>
             <!-- Card Footer -->
+            {% if bag_items%}
             <a href="" class="card-footer btn btn-primary btn-lg m-0">
                 <span class="text-uppercase">Secure Checkout</span>
                 <span class="icon">
                     <i class="fas fa-lock"></i>
                 </span>
             </a>
+            {% endif %}
         </div>
         <div class="text-center">
             <a href="" class="btn btn-outline-black btn-lg mt-2">

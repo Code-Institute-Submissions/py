@@ -21,9 +21,9 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
     ''' Independent Add to Cart view for products'''
 
     def post(self, request, product_id):
-        ''' Get POST parameters and create session.
+        """ Get POST parameters and create session.
         Remember to use "if product_id: request.session.clear()" to clear
-        the session when developing.'''
+        the session when developing."""
 
         quantity = int(request.POST.get('quantity'))
         redirect_url = request.POST.get('redirect_url')
@@ -51,7 +51,7 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
 
 class ProductShoppingCartView(ListView, ProductAddToCartMixin):
     model = Product
-    template_name = 'product_bag/product_bag.html'
+    template_name = 'bag/bag.html'
     context_object_name = 'products'
 
     def get_queryset(self):
