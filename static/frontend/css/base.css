@@ -16,6 +16,10 @@ a {
     text-align: justify;
 }
 
+.text-right {
+    text-align: right !important;
+}
+
 /* Homepage CTA */
 
 .bg-main {

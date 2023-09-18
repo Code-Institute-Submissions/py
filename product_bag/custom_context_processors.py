@@ -47,11 +47,11 @@ def product_bag_contents(request):
     context = {
         'bag_items': bag_items,
         'total': total,
+        'grand_total': grand_total,
         'product_count': product_count,
         'discount': discount,
         'to_grand_delta': to_grand_delta,
         'current_grand_delta': current_grand_delta,
-        'grand_total': grand_total,
         'grand_discount': GRAND_DISCOUNT_PERCENTAGE,
         'normal_discount': NORMAL_DISCOUNT_PERCENTAGE, }
 
