@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import View, ListView
 from django.contrib import messages
 from django.http import HttpResponse
 
 from product_service.views import Product
+
+# Cart Functionality
 
 
 class ProductAddToCartMixin:
@@ -60,3 +62,34 @@ class ProductShoppingCartView(ListView, ProductAddToCartMixin):
 
     def post(self, request, product_id):
         print('placeholder')
+
+# UPDATE Product Cart
+
+
+class UpdateProductCartView(View):
+    ''' Update product cart for products'''
+
+    def post(self, request, product_id):
+        """ Get POST parameters and update session."""
+        product_bag = request.session.get('product_bag', {})
+        new_quantity = int(request.POST.get('quantity'))
+        old_quantity = product_bag[product_id]['quantity']
+
+        if new_quantity > 0 and new_quantity <= 100:
+            if new_quantity >= old_quantity:
+                quantity_difference = new_quantity - old_quantity
+                product_bag[product_id]['quantity'] += quantity_difference
+            elif new_quantity <= old_quantity:
+                quantity_difference = old_quantity - new_quantity
+                product_bag[product_id]['quantity'] -= quantity_difference
+        else:
+            messages.error(request, 'Quantity must be greater than 0 and cannot exceed 100!')
+
+        request.session['product_bag'] = product_bag
+
+        messages.info(
+            request, f'''You have <strong>{product_bag[product_id]['quantity']}</strong> products
+            for <strong>{product_bag[product_id]['title']}</strong> in the cart!'''
+        )
+
+        return redirect(reverse('bag_page'))

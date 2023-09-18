@@ -45,7 +45,7 @@
                                 </td>
                                 <!-- Item Quantity -->
                                 <td class="py-3 w-25">
-                                    <form action="" class="form update-form" method="POST">
+                                    <form action="{% url 'update_cart' item.product.id %}" class="form update-form" method="POST">
                                         {% csrf_token %}
 
                                         <!-- Quantity Handler -->
@@ -96,13 +96,13 @@
                             {% endfor %}
                             <!-- Item Count -->
                             <tr>
-                                <td colspan="5" class="text-center">
+                                <td colspan="6" class="text-center">
                                     <h6>Items: {{ product_count }}</h6>
                                 </td>
                             </tr>
                             <!-- Cart Results -->
                             <tr>
-                                <td colspan="5" class="text-center">
+                                <td colspan="6" class="text-center">
                                     <h6><strong>Cart Subtotal: ${{ total|floatformat:2 }}</strong></h6>
                                     {% if to_grand_delta > 0 %}
                                     Discount: -${{ discount|floatformat:2}} ({{ normal_discount }}%)
@@ -116,10 +116,6 @@
                                     <h4 class="mt-3"><strong>Grand Total:
                                             ${{ grand_total|floatformat:2 }}</strong>
                                     </h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="text-center p-0">
                                 </td>
                             </tr>
                         </tbody>
@@ -157,7 +153,7 @@
 <script type="text/javascript">
     // Update quantity on click
     $('.update-link').click(function (e) {
-        let form = $(this).prev('.update-form');
+        let form = $('.update-form');
         form.submit();
     })
 
