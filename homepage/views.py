@@ -172,7 +172,7 @@ class AllProductServiceListView(generic.ListView):
                 products, services)
             return combined_list
         except Exception as e:
-            logger.error(f"Error fetching products and services: {e}")
+            logger.error(f"Error fetching products and services: {str(e)}")
             return []
 
     def get_context_data(self, **kwargs):
@@ -251,7 +251,7 @@ class AllProductListView(generic.ListView):
                 likescount=Count('likes'),
                 transactionscount=Count('transactions')).order_by('-created_on')
         except Exception as e:
-            logger.error(f"Error fetching Product instances: {e}")
+            logger.error(f"Error fetching Product instances: {str(e)}")
             messages.error(self.request, 'Error fetching Product instances.')
             return []
 
@@ -282,7 +282,7 @@ class AllServiceListView(generic.ListView):
                 likescount=Count('likes'),
                 transactionscount=Count('transactions')).order_by('-created_on')
         except Exception as e:
-            logger.error(f"Error fetching Service instances: {e}")
+            logger.error(f"Error fetching Service instances: {str(e)}")
             messages.error(self.request, 'Error fetching Service instances.')
             return []
 
@@ -395,7 +395,7 @@ class SortedProductServiceListView(generic.ListView):
                 combined_list.sort(key=lambda item: item.created_on)
 
         except Exception as e:
-            logger.error(f"Error while sorting products and services: {e}")
+            logger.error(f"Error while sorting products and services: {str(e)}")
             messages.error(self.request, 'That was not a valid sorting value.')
             return []
 

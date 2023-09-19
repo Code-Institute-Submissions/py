@@ -89,10 +89,14 @@
                                 </td>
                                 <!-- Action Field -->
                                 <td>
-                                    <div class="text-center">
-                                        <a class="remove-item text-danger d-block mt-1"
-                                            id="remove_{{ item.item_id }}">Remove</a>
-                                    </div>
+                                    <form action="{% url 'delete_from_cart' item.product.id %}"
+                                        class="form delete-form-{{item.product.id}} text-center" method="POST">
+                                        {% csrf_token %}
+                                        <div class="d-inline-block">
+                                            <button class="btn btn-danger text-white d-block mt-1 text-center"
+                                                id="remove_{{ item.product.id }}" type="submit">Remove</button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -138,7 +142,7 @@
             {% endif %}
         </div>
         <div class="text-center">
-            <a href="" class="btn btn-outline-black btn-lg mt-2">
+            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
                 <span class="icon">
                     <i class="fas fa-chevron-left"></i>
                 </span>
@@ -152,21 +156,4 @@
 {% block postloadjs %}
 {{ block.super }}
 {% include 'bag/includes/update_quantity.html' %}
-<script type="text/javascript">
-    
-    // Remove item and reload on click
-    $('.remove-item').click(function (e) {
-        let csrfToken = "{{ csrf_token }}";
-        let itemId = $(this).attr('id').split('remove_')[1];
-        let url = `/bag/remove/${itemId}`;
-        let data = {
-            'csrfmiddlewaretoken': csrfToken,
-        };
-
-        $.post(url, data)
-            .done(function () {
-                location.reload();
-            });
-    })
-</script>
 {% endblock postloadjs%}
