@@ -278,20 +278,20 @@
     {% if bag_items %}
     <div class="btn-cart shadow-sm rounded">
         <a href="{% url 'bag_page' %}" class="d-flex h-100 align-items-center justify-content-center">
-            <div class="d-flex flex-column align-items-center mt-3">
+            <div class="d-flex flex-column align-items-center">
                 <i class="fa-solid fa-basket-shopping my-auto text-center"></i>
-                <p class="text-side-cart-small rounded text-center border mt-1">
-                    {% if grand_total %}
-                    ${{ grand_total|floatformat:2 }}
-                    {% else %}
-                    $0.00
-                    {% endif %}
-                </p>
             </div>
         </a>
+        <p class="text-side-cart-small rounded text-center border mt-1">
+            <small>
+                {% if grand_total %}
+                ${{ grand_total|floatformat:2 }}
+                {% else %}
+                $0.00
+                {% endif %}
+            </small>
+        </p>
     </div>
-    
-    
     {% endif %}
 
     <!-- Scroll up button -->

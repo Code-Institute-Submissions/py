@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 {% block content %}
 <div class="container px-4 px-lg-0">
     <div class="container mt-5">
@@ -85,7 +86,7 @@
                                 </td>
                                 <!-- Item Price -->
                                 <td class="py-3">
-                                    <p class="mx-2">${{ item.product.price }}</p>
+                                    <p class="mx-2">${{ item.product.price | calc_subtotal:item.quantity }}</p>
                                 </td>
                                 <!-- Action Field -->
                                 <td>

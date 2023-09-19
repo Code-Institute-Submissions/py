@@ -2,7 +2,7 @@
     // Enable or Disable buttons
     function handleEnableDisable(itemId) {
         let currentValue = parseInt($(`#id_qty_${itemId}`).val());
-        let minusDisable = currentValue <= 1;
+        let minusDisable = currentValue <= 0;
         let plusDisable = currentValue >= 100;
         $(`#decrement-qty_${itemId}`).prop('disabled', minusDisable);
         $(`#increment-qty_${itemId}`).prop('disabled', plusDisable);
@@ -23,23 +23,29 @@
 
     // Increment QTY
     $('.increment-qty').click(function (e) {
-        e.preventDefault();
         let closestInput = $(this).closest('.input-group').find('.qty_input')[0];
         let currentValue = parseInt($(closestInput).val());
         $(closestInput).val(currentValue + 1);
 
+        if (currentValue == 101) {
+            $(closestInput).val(currentValue - 1);
+        } else {
+            $(closestInput).val(currentValue + 1);
+        }
+
         let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
     });
 
     // Decrement QTY
     $('.decrement-qty').click(function (e) {
-        e.preventDefault();
         let closestInput = $(this).closest('.input-group').find('.qty_input')[0];
         let currentValue = parseInt($(closestInput).val());
-        $(closestInput).val(currentValue - 1);
+        if (currentValue == 0) {
+            $(closestInput).val(currentValue + 1);
+        } else {
+            $(closestInput).val(currentValue - 1);
+        }
 
         let itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
     });
 </script>

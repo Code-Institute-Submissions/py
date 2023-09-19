@@ -59,12 +59,12 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
             return redirect(redirect_url)
         except KeyError:
             messages.error(
-                request, '''Bag, product ID or its data
-                not found in your cart!''')
+                request, '''Data not found in your cart!''')
             return redirect(reverse('bag_page'))
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
-            return HttpResponseServerError()
+            messages.error(request, 'An error has occurred!')
+            return redirect(reverse('bag_page'))
 
 
 class ProductShoppingCartView(ListView, ProductAddToCartMixin):
@@ -114,7 +114,8 @@ class UpdateProductCartView(View):
             return redirect(reverse('bag_page'))
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
-            return HttpResponseServerError()
+            messages.error(request, 'Quantity field cannot be empty')
+            return redirect(reverse('bag_page'))
 
 # DELETE Product instances in the cart
 
@@ -142,10 +143,10 @@ class DeleteProductCartView(View):
             return redirect(reverse('bag_page'))
         except KeyError:
             messages.error(
-                request, '''Product ID and Product Bag
-                not found in your cart!''')
+                request, '''Data not found in your cart!''')
             return redirect(reverse('bag_page'))
 
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
-            return HttpResponseServerError()
+            messages.error(request, 'An error has occurred!')
+            return redirect(reverse('bag_page'))
