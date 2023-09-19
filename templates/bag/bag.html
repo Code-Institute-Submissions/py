@@ -45,7 +45,8 @@
                                 </td>
                                 <!-- Item Quantity -->
                                 <td class="py-3 w-25">
-                                    <form action="{% url 'update_cart' item.product.id %}" class="form update-form" method="POST">
+                                    <form action="{% url 'update_cart' item.product.id %}"
+                                        class="form update-form-{{item.product.id}}" method="POST">
                                         {% csrf_token %}
 
                                         <!-- Quantity Handler -->
@@ -54,7 +55,8 @@
                                                 <!-- Decrement -->
                                                 <div class="input-group-prepend">
                                                     <button class="decrement-qty btn btn-primary rounded-0"
-                                                        data-item_id="{{ item.id }}" id="decrement-qty_{{ item.id }}">
+                                                        data-item_id="{{ item.product.id }}"
+                                                        id="decrement-qty_{{ item.product.id }}" type="submit">
                                                         <span>
                                                             <i class="fas fa-minus"></i>
                                                         </span>
@@ -64,12 +66,14 @@
                                                 <!-- Inner value -->
                                                 <input class="form-control qty_input" type="number" name="quantity"
                                                     value="{{ item.quantity }}" min="1" max="100"
-                                                    data-item_id="{{ item.id }}" id="id_qty_{{ item.id }}">
+                                                    data-item_id="{{ item.product.id }}"
+                                                    id="id_qty_{{ item.product.id }}">
 
                                                 <!-- Increment -->
                                                 <div class="input-group-append">
                                                     <button class="increment-qty btn btn-primary rounded-0"
-                                                        data-item_id="{{ item.id }}" id="increment-qty_{{ item.id }}">
+                                                        data-item_id="{{ item.product.id }}"
+                                                        id="increment-qty_{{ item.product.id }}" type="submit">
                                                         <span>
                                                             <i class="fas fa-plus"></i>
                                                         </span>
@@ -86,8 +90,6 @@
                                 <!-- Action Field -->
                                 <td>
                                     <div class="text-center">
-                                        <a class="update-link text-info d-block">Update</a>
-                                        <hr>
                                         <a class="remove-item text-danger d-block mt-1"
                                             id="remove_{{ item.item_id }}">Remove</a>
                                     </div>
@@ -151,12 +153,7 @@
 {{ block.super }}
 {% include 'bag/includes/update_quantity.html' %}
 <script type="text/javascript">
-    // Update quantity on click
-    $('.update-link').click(function (e) {
-        let form = $('.update-form');
-        form.submit();
-    })
-
+    
     // Remove item and reload on click
     $('.remove-item').click(function (e) {
         let csrfToken = "{{ csrf_token }}";
