@@ -24,6 +24,8 @@ nav:
       - Entity Relationship Diagram ERD:
           - Overview: erd/erd.md
           - Developer Experience: erd/dev-experience/dev_experience.md
+      - Web Marketing Strategy:
+          - Overview: web-marketing/web_marketing.md
   - Development:
       - Agile Development: agile-development/agile_development.md
   - Features:
