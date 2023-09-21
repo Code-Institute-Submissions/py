@@ -1,39 +1,183 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 {% block extra_corecss %}
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 {% block content %}
 <div class="container px-4 px-lg-0">
     <div class="container mt-5">
-        <div class="card">
-            <div class="row">
-                <div class="col card-header">
-                    <h3 class="logo-font text-center">Checkout</h3>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="row">
+                        <div class="col card-header">
+                            <h3 class="logo-font text-center m-0">Checkout</h3>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <!-- Order Summary -->
+                    <div class="card-body p-0">
+                        <div class="row d-flex justify-content-center align-items-center p-3">
+                            <div class="col-12">
+                                <div class="col-12 col-lg-12 mb-3">
+                                    <h5 class="text-center">Order Summary ({{ product_count }})</h5>
+                                    <div class="text-center">
+                                        {% if to_grand_delta > 0 %}
+                                        <p class="mb-1 text-danger">
+                                            You could get 10% discount by spending just
+                                            <strong>${{ to_grand_delta }}</strong> more!
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Item</th>
+                                                <th scope="col" class="text-right">Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in bag_items %}
+                                            <tr>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-2 w-25">
+                                                            <a href="{% url 'single_product' item.product.slug %}">
+                                                                {% if item.product.image_url %}
+                                                                <a href="{% url 'single_product' item.product.slug %}">
+                                                                    <img class="img-fluid rounded" src="{{ item.product.image_url }}">
+                                                                </a>
+                                                                {% else %}
+                                                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png"
+                                                                    alt="{{ product.title }}">
+                                                                {% endif %}
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <p class="my-0"><strong>{{ item.product.title }}</strong>
+                                                            </p>
+                                                            <p class="my-0 small text-muted">Qty: {{ item.quantity }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <p class="my-0 small text-muted">
+                                                        ${{ item.product.price | calc_subtotal:item.quantity }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="row text-black text-right">
+                                        <div class="col-7 offset-1">
+                                            <p class="my-0">Order Subtotal:</p>
+                                            <p class="my-0">Discount:</p>
+                                            <p class="my-0">Grand total:</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="my-0">${{ total|floatformat:2 }}</p>
+                                            {% if to_grand_delta > 0 %}
+                                            <p class="my-0">-${{ discount|floatformat:2}} ({{ normal_discount }}%)</p>
+                                            {% else %}
+                                            <p class="my-0">-${{ discount|floatformat:2}} ({{ grand_discount }}%)</p>
+                                            {% endif %}
+                                            <p class="my-0">${{ grand_total|floatformat:2 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Checkout form -->
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <form class="" action="{% url 'checkout_page' %}" method="POST" id="payment-form">
+                                    {% csrf_token %}
+                                    <div class="">
+                                        <fieldset class="rounded px-3 mb-3">
+                                            <legend class="fieldset-label text-black px-2 text-center">Order Details
+                                            </legend>
+                                            <p class="text-center">Please fill out the form below to complete your order
+                                            </p>
+                                            <div>
+                                                {{ order_form.full_name | as_crispy_field }}
+                                                {{ order_form.email | as_crispy_field }}
+                                                {{ order_form.phone_number | as_crispy_field }}
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="rounded px-3 mb-3">
+                                            <div class="form-check form-check-inline float-right mr-0">
+                                                {% if user.is_authenticated %}
+                                                <label class="form-check-label" for="id-save-info">Save this delivery
+                                                    information to
+                                                    my profile</label>
+                                                <input class="form-check-input ml-2 mr-0" type="checkbox"
+                                                    id="id-save-info" name="save-info" checked>
+                                                {% else %}
+                                                <label class="form-check-label" for="id-save-info">
+                                                    <a class="text-info" href="{% url 'account_signup' %}">Create an
+                                                        account</a> or
+                                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to
+                                                    save
+                                                    this
+                                                    information
+                                                </label>
+                                                {% endif %}
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="px-3">
+                                            <legend class="fieldset-label text-black px-2 text-center">Payment Gateway
+                                            </legend>
+                                            <!-- A Stripe card element will go here -->
+                                            <div class="mb-3" id="card-element"></div>
+                                            <!-- Used to display form errors -->
+                                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                                            <!-- Pass the client secret to the view so we can get the payment intent id -->
+                                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                                        </fieldset>
+                                    </div>
+                                    <p class="small text-danger mb-3 text-center">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </span>
+                                        <span>Your card will be charged
+                                            <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                    </p>
+
+                                    <!-- Card Footer -->
+                                    <button id="submit-button" class="card-footer btn btn-primary btn-lg m-0">
+                                        <span class="font-weight-bold">Complete Order</span>
+                                        <span class="icon">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-
-            </div>
-            <!-- Card Footer -->
-            {% if bag_items%}
-            <a href="" class="card-footer btn btn-primary btn-lg m-0">
-                <span class="text-uppercase">Secure Checkout</span>
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </a>
-            {% endif %}
         </div>
+        <!-- USEFUL LINKS -->
         <div class="text-center">
-            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
+            <a href="{% url 'bag_page' %}" class="btn btn-outline-black btn-lg mt-2 d-block">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Adjust Bag</span>
+            </a>
+            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2 d-block">
                 <span class="icon">
                     <i class="fas fa-chevron-left"></i>
                 </span>
                 <span class="text-uppercase">Keep Shopping</span>
             </a>
         </div>
+
     </div>
 </div>
 {% endblock content %}

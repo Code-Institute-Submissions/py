@@ -10,10 +10,11 @@ class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
     def get(self, request):
-        bag = request.session.get('bag', {})
+        bag = request.session.get('product_bag', {})
         if not bag:
             messages.error(request, 'Your bag is empty!')
             return redirect(reverse('bag_page'))
+        return super().get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

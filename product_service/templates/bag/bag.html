@@ -7,7 +7,7 @@
         <div class="card">
             <div class="row">
                 <div class="col card-header">
-                    <h3 class="logo-font text-center">Shopping Cart</h3>
+                    <h3 class="logo-font text-center m-0">Shopping Cart</h3>
                 </div>
             </div>
             <!-- Card Body -->
@@ -132,9 +132,10 @@
                 <p class="m-0 p-3 text-center">Your cart is empty.</p>
                 {% endif %}
             </div>
+
             <!-- Card Footer -->
             {% if bag_items%}
-            <a href="" class="card-footer btn btn-primary btn-lg m-0">
+            <a href="{% url 'checkout_page' %}" class="card-footer btn btn-primary btn-lg m-0">
                 <span class="text-uppercase">Secure Checkout</span>
                 <span class="icon">
                     <i class="fas fa-lock"></i>
@@ -142,6 +143,7 @@
             </a>
             {% endif %}
         </div>
+        
         <div class="text-center">
             <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
                 <span class="icon">
