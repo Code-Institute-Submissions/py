@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'user_dashboard',
     'product_bag',
     'checkout',
+    # Vendor
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_plexosoft.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -87,6 +91,10 @@ TEMPLATES = [
                 'homepage.custom_context_processors.get_verified_email',
                 'homepage.custom_context_processors.service_product_bag_content',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]

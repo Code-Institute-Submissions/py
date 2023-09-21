@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_corecss %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container px-4 px-lg-0">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="row">
+                <div class="col card-header">
+                    <h3 class="logo-font text-center">Checkout</h3>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+
+            </div>
+            <!-- Card Footer -->
+            {% if bag_items%}
+            <a href="" class="card-footer btn btn-primary btn-lg m-0">
+                <span class="text-uppercase">Secure Checkout</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </a>
+            {% endif %}
+        </div>
+        <div class="text-center">
+            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Keep Shopping</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
