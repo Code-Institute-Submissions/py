@@ -446,8 +446,8 @@ i {
 
 /* Basic styling for the messages container */
 .messages {
-    width: 100%;
     margin-top: 20px;
+    transition: 0.3s;
 }
 
 /* Styles for specific message types */
@@ -458,6 +458,8 @@ i {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    transition: 0.3s;
+    width: auto;
 }
 
 .alert-error {
@@ -467,6 +469,7 @@ i {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
 .alert-success {
@@ -476,6 +479,7 @@ i {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
 .alert-warning {
@@ -485,6 +489,7 @@ i {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
 /* Sorting */

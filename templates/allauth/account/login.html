@@ -9,21 +9,6 @@
 
 {% get_providers as socialaccount_providers %}
 
-<!-- Messages -->
-<div class="row">
-  <div class="col-8 mx-auto">
-    {% if not user.is_authenticated %}
-    <div class="row mt-4 mb-0 mx-3 alert card alert-plexosoft py-0 text-center text-black alert-dismissible"
-      role="alert">
-      <div class="col-12 card-body">
-        <p class="my-0">Hello dear <a href="">Visitor</a>, <br>Sign up/log in now to unlock exclusive offers just for you!</p>
-      </div>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endif %}
-  </div>
-</div>
-
 <div id="layoutAuthentication">
   <div id="layoutAuthentication_content">
     <main>
