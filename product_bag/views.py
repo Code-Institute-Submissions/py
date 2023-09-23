@@ -35,41 +35,40 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
         try:
             quantity = int(request.POST.get('quantity'))
             redirect_url = request.POST.get('redirect_url')
-            product_bag = request.session.get('product_bag', {})
+            item_bag = request.session.get('item_bag', {})
             product = self.add_to_cart(product_id)
             title = product.title
+            product_id = product.id
 
-            if product_id in list(product_bag.keys()):
-                product_bag[product_id]['quantity'] += quantity
+            if 'product' not in item_bag:
+                item_bag['product'] = {}
+
+            if str(product_id) in item_bag['product']:
+                item_bag['product'][str(product_id)]['quantity'] += quantity
             else:
-                product_bag[product_id] = {
+                item_bag['product'][str(product_id)] = {
                     'title': title,
                     'quantity': quantity,
                 }
+            request.session['item_bag'] = item_bag
 
-            request.session['product_bag'] = product_bag
-
-            messages.success(
-                request, f'''You have added
-                <strong>{product_bag[product_id]['quantity']}</strong> products
-                for <strong>{product_bag[product_id]['title']}</strong>
-                in the cart!'''
-            )
+            # messages.success(
+            #     request, f'''You have added
+            #     <strong>{item_bag[product][product_id]['quantity']}</strong> products
+            #     for <strong>{item_bag[product][product_id]['title']}</strong>
+            #     in the cart!'''
+            # )
 
             return redirect(redirect_url)
-        except KeyError:
+        except KeyError as e:
             messages.error(
                 request, '''Data not found in your cart!''')
+            logger.error(f"KeyError: {str(e)}")
             return redirect(reverse('bag_page'))
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
             messages.error(request, 'An error has occurred!')
             return redirect(reverse('bag_page'))
-
-
-class ProductShoppingCartView(ListView, ProductAddToCartMixin):
-    model = Product
-    template_name = 'bag/bag.html'
 
 # UPDATE Product instances in the cart
 
@@ -80,29 +79,29 @@ class UpdateProductCartView(View):
     def post(self, request, product_id):
         """ Get POST parameters and update session."""
         try:
-            product_bag = request.session.get('product_bag', {})
+            item_bag = request.session.get('item_bag', {})
             new_quantity = int(request.POST.get('quantity'))
-            old_quantity = product_bag[product_id]['quantity']
+            old_quantity = item_bag[product][product_id]['quantity']
 
             if new_quantity > 0 and new_quantity <= 100:
                 if new_quantity >= old_quantity:
                     quantity_difference = new_quantity - old_quantity
-                    product_bag[product_id]['quantity'] += quantity_difference
+                    item_bag[product][product_id]['quantity'] += quantity_difference
                 elif new_quantity <= old_quantity:
                     quantity_difference = old_quantity - new_quantity
-                    product_bag[product_id]['quantity'] -= quantity_difference
+                    item_bag[product][product_id]['quantity'] -= quantity_difference
             else:
-                product_bag.pop(product_id)
+                item_bag.pop(product_id)
                 messages.error(
                     request, '''Quantity must be greater than
                     0 and cannot exceed 100!''')
 
-            request.session['product_bag'] = product_bag
+            request.session['item_bag'] = item_bag
 
             messages.success(
                 request, f'''You have
-                <strong>{product_bag[product_id]['quantity']}</strong> products
-                for <strong>{product_bag[product_id]['title']}</strong>
+                <strong>{item_bag[product][product_id]['quantity']}</strong> products
+                for <strong>{item_bag[product][product_id]['title']}</strong>
                 in the cart!'''
             )
 
@@ -125,20 +124,20 @@ class DeleteProductCartView(View):
 
     def post(self, request, product_id):
         try:
-            product_bag = request.session.get('product_bag', {})
+            item_bag = request.session.get('item_bag', {})
 
-            if product_id and product_bag:
+            if product_id and item_bag:
                 messages.success(
                     request, f'''You have deleted
-                    <strong>{product_bag[product_id]['title']}</strong>
+                    <strong>{item_bag[product][product_id]['title']}</strong>
                     from the cart successfully!'''
                 )
-                product_bag.pop(product_id)
+                item_bag.pop(product_id)
             else:
                 messages.error(
                     request, '''Product not found in your cart!''')
 
-            request.session['product_bag'] = product_bag
+            request.session['item_bag'] = item_bag
 
             return redirect(reverse('bag_page'))
         except KeyError:

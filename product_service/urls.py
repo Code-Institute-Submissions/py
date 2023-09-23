@@ -8,7 +8,8 @@ from .views import (AdminProductCreation,
                     AdminServiceCreation,
                     ServiceList,
                     AdminUpdateServiceView,
-                    ServiceDelete)
+                    ServiceDelete,
+                    shoppingCartView)
 
 
 urlpatterns = [
@@ -33,5 +34,9 @@ urlpatterns = [
          name='admin_service_update'),
     path('account/admin/service/delete/<slug:slug>/',
          ServiceDelete.as_view(), name='delete_service'),
+
+    # Bag View
+    path('bag/', shoppingCartView.as_view(),
+         name='bag_page'),
 
 ]

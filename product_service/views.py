@@ -358,3 +358,10 @@ class ServiceDelete(AdminRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Service Instance has been deleted!')
         return reverse_lazy('admin_all_services')
+
+# BAG view
+
+
+class shoppingCartView(generic.ListView):
+    model = Product
+    template_name = 'bag/bag.html'

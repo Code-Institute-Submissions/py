@@ -11,7 +11,7 @@ class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
     def get(self, request):
-        bag = request.session.get('product_bag', {})
+        bag = request.session.get('item_bag', {})
         if not bag:
             messages.error(request, 'Your bag is empty!')
             return redirect(reverse('bag_page'))

@@ -29,29 +29,67 @@ def service_product_bag_content(request):
     """
     bag_items = []
     total = 0
-    product_count = 0
+    item_count = 0
     current_grand_delta = 0
     to_grand_delta = 0
-    product_bag = request.session.get('product_bag', {})
-    service_bag = request.session.get('service_bag', {})
+    item_bag = request.session.get('item_bag', {})
 
-    if product_bag:
-        for product_id, item_data in product_bag.items():
-            # product_id is the key and item_data is
-            # the dictionary for each product
-            quantity = item_data['quantity']
-            product = get_object_or_404(Product, pk=product_id)
-            product.price = Decimal(product.price)
+    if item_bag:
+        for item_type, item_data in item_bag.items():
+            if item_type == 'product':
+                for product_id, product_info in item_data.items():
+                    product_quantity = product_info.get('quantity')
+                    item_count += product_quantity
+                    product = get_object_or_404(Product, pk=product_id)
+                    product.price = Decimal(product.price)
+                    total_product = product_quantity * product.price
+                    total += total_product
 
-            total += quantity * product.price
-            product_count += quantity
-            bag_items.append({
-                "product_id": product_id,
-                "quantity": quantity,
-                "product": product,
-            })
-    elif service_bag:
-        print('service_bag')
+                    # Check if the product is already in bag_items
+                    found_product = None
+                    for item in bag_items:
+                        if 'product' in item and item['product'].id == product_id:
+                            found_product = item
+                            break
+
+                    if found_product:
+                        # Update existing product
+                        found_product['quantity'] += product_quantity
+                    else:
+                        # Add a new product otherwise
+                        product_data = {
+                            "product": product,
+                            'quantity': product_quantity,
+                        }
+                        bag_items.append(product_data)
+
+            elif item_type == 'service':
+
+                for service_id, service_info in item_data.items():
+                    service_quantity = service_info.get('quantity')
+                    item_count += service_quantity
+                    service = get_object_or_404(Service, pk=service_id)
+                    service.price = Decimal(service.price)
+                    total_service = service_quantity * service.price
+                    total += total_service
+
+                    # Check if the service is already in bag_items
+                    found_service = None
+                    for item in bag_items:
+                        if 'service' in item and item['service'].id == service_id:
+                            found_service = item
+                            break
+
+                    if found_service:
+                        # Update existing service
+                        found_service['quantity'] += service_quantity
+                    else:
+                        # Add a new service otherwise
+                        service_data = {
+                            "service": service,
+                            'quantity': service_quantity,
+                        }
+                        bag_items.append(service_data)
 
     if total < GRAND_DISCOUNT_THRESHOLD:
         discount = total * Decimal(NORMAL_DISCOUNT_PERCENTAGE/100)
@@ -66,7 +104,7 @@ def service_product_bag_content(request):
         'bag_items': bag_items,
         'total': total,
         'grand_total': grand_total,
-        'product_count': product_count,
+        'item_count': item_count,
         'discount': discount,
         'to_grand_delta': to_grand_delta,
         'current_grand_delta': current_grand_delta,
