@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'homepage.custom_context_processors.get_verified_email',
                 'homepage.custom_context_processors.service_product_bag_content',
+                'django.template.context_processors.media',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

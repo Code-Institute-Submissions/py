@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
 from .forms import OrderForm
+import os
 
 
 class Checkout(TemplateView):
@@ -20,4 +21,5 @@ class Checkout(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['order_form'] = OrderForm()
+        context['stripe_public_key'] = os.environ.get('STRIPE_PUBLIC_KEY')
         return context

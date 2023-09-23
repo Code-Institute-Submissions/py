@@ -46,7 +46,8 @@
                                                             <a href="{% url 'single_product' item.product.slug %}">
                                                                 {% if item.product.image_url %}
                                                                 <a href="{% url 'single_product' item.product.slug %}">
-                                                                    <img class="img-fluid rounded" src="{{ item.product.image_url }}">
+                                                                    <img class="img-fluid rounded"
+                                                                        src="{{ item.product.image_url }}">
                                                                 </a>
                                                                 {% else %}
                                                                 <img class="w-100" src="{{ MEDIA_URL }}noimage.png"
@@ -95,7 +96,7 @@
                         <!-- Checkout form -->
                         <div class="row">
                             <div class="col-12 col-lg-12">
-                                <form class="" action="{% url 'checkout_page' %}" method="POST" id="payment-form">
+                                <form class="" action="" method="" id="payment-form">
                                     {% csrf_token %}
                                     <div class="">
                                         <fieldset class="rounded px-3 mb-3">
@@ -132,12 +133,20 @@
                                         <fieldset class="px-3">
                                             <legend class="fieldset-label text-black px-2 text-center">Payment Gateway
                                             </legend>
-                                            <!-- A Stripe card element will go here -->
-                                            <div class="mb-3" id="card-element"></div>
-                                            <!-- Used to display form errors -->
-                                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                                            <!-- Pass the client secret to the view so we can get the payment intent id -->
-                                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+
+                                            <p class="d-inline-flex gap-1">
+                                                <button id="toggleFirst" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#multiCollapseExample1" aria-expanded="false"
+                                                    aria-controls="multiCollapseExample1">Manual Payment</button>
+
+                                                <button id="toggleSecond" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#multiCollapseExample2" aria-expanded="false"
+                                                    aria-controls="multiCollapseExample2">Stripe Payment</button>
+
+                                                <button id="toggleThird" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#multiCollapseExample3" aria-expanded="false"
+                                                    aria-controls="multiCollapseExample3">Crypto Payment</button>
+                                            </p>
                                         </fieldset>
                                     </div>
                                     <p class="small text-danger mb-3 text-center">
@@ -147,14 +156,38 @@
                                         <span>Your card will be charged
                                             <strong>${{ grand_total|floatformat:2 }}</strong></span>
                                     </p>
-
                                     <!-- Card Footer -->
-                                    <button id="submit-button" class="card-footer btn btn-primary btn-lg m-0">
-                                        <span class="font-weight-bold">Complete Order</span>
-                                        <span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </button>
+
+                                    <!-- CRYPTO Checkout -->
+                                    <div class="collapse multi-collaps" id="multiCollapseExample3">
+                                        <button id="submit-button-3" class="card-footer btn btn-primary btn-lg m-0">
+                                            <span class="font-weight-bold">Crypto Checkout</span>
+                                            <span class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <!-- STRIPE Checkout -->
+
+                                    <div class="collapse multi-collaps" id="multiCollapseExample2">
+                                        <button id="submit-button-2" class="card-footer btn btn-primary btn-lg m-0">
+                                            <span class="font-weight-bold">Stripe Checkout</span>
+                                            <span class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <!-- MANUAL Checkout -->
+
+                                    <div class="collapse multi-collaps" id="multiCollapseExample1">
+                                        <button id="submit-button-1" class="card-footer btn btn-primary btn-lg m-0">
+                                            <span class="font-weight-bold">Manual Checkout</span>
+                                            <span class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -175,9 +208,14 @@
                     <i class="fas fa-chevron-left"></i>
                 </span>
                 <span class="text-uppercase">Keep Shopping</span>
+                <span>{{ session_id }}</span>
             </a>
         </div>
 
     </div>
 </div>
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'checkout/js/script.js' %}"></script>
+{% endblock %}
 {% endblock content %}
