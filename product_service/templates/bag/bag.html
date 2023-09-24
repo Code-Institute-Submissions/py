@@ -44,13 +44,14 @@
                                     {% if item.product.instance == 0 %}
                                     <a href="{% url 'single_product' item.product.slug %}">
                                         <strong>{{ item.product.title }}</strong>
+                                        <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                                     </a>
                                     {% elif item.service.instance == 1 %}
                                     <a href="{% url 'single_service' item.service.slug %}">
                                         <strong>{{ item.service.title }}</strong>
+                                        <p class="my-0 small text-muted">SKU: {{ item.service.sku|upper }}</p>
                                     </a>
                                     {% endif %}
-                                    <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                                 </td>
                                 <!-- Item Price -->
                                 <td class="py-3">
@@ -178,7 +179,7 @@
                             <!-- Item Count -->
                             <tr>
                                 <td colspan="6" class="text-center">
-                                    <h6>Items: {{ product_count }}</h6>
+                                    <h6>Items: {{ item_count }}</h6>
                                 </td>
                             </tr>
 
@@ -220,7 +221,7 @@
         </div>
 
         <div class="text-center">
-            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
+            <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto btn-lg mt-2">
                 <span class="icon">
                     <i class="fas fa-chevron-left"></i>
                 </span>

@@ -131,8 +131,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ product.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ product.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_product' product.slug %}">
                                         Read More
                                     </a>
                                 </p>

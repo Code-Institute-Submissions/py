@@ -158,11 +158,19 @@
                                     </span>
                                     {% endfor %}
                                 </p>
+                                {% if item.instance == 0 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                    <a class="read-more" href="{% url 'single_product' item.slug %}">
                                         Read More
                                     </a>
                                 </p>
+                                {% elif item.instance == 1 %}
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_service' item.slug %}">
+                                        Read More
+                                    </a>
+                                </p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

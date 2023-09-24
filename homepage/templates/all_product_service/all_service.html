@@ -131,8 +131,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ service.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_service' service.slug %}">
                                         Read More
                                     </a>
                                 </p>

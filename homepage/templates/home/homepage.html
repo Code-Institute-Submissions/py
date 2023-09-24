@@ -175,11 +175,19 @@
                                     {% endif %}
                                 </p>
 
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ item.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                {% if item.instance == 0 %}
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_product' item.slug %}">
                                         Read More
                                     </a>
                                 </p>
+                                {% elif item.instance == 1 %}
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_service' item.slug %}">
+                                        Read More
+                                    </a>
+                                </p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -272,8 +280,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ product.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ product.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_product' product.slug %}">
                                         Read More
                                     </a>
                                 </p>
@@ -362,8 +370,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
-                                <p class="my-0 fs-6 text-justify mt-2 lh-sm"> {{ service.excerpt|safe }}...
-                                    <a class="read-more" href="">
+                                <p class="my-0 fs-6 text-justify mt-2"> {{ service.excerpt|safe }}...
+                                    <a class="read-more" href="{% url 'single_service' service.slug %}">
                                         Read More
                                     </a>
                                 </p>

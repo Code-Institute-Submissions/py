@@ -43,6 +43,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2 w-25">
+                                                            {% if item.product.instance == 0 %}
                                                             <a href="{% url 'single_product' item.product.slug %}">
                                                                 {% if item.product.image_url %}
                                                                 <a href="{% url 'single_product' item.product.slug %}">
@@ -54,19 +55,53 @@
                                                                     alt="{{ product.title }}">
                                                                 {% endif %}
                                                             </a>
+                                                            {% elif item.service.instance == 1 %}
+                                                            <a href="{% url 'single_service' item.service.slug %}">
+                                                                {% if item.service.image_url %}
+                                                                <a href="{% url 'single_service' item.service.slug %}">
+                                                                    <img class="img-fluid rounded"
+                                                                        src="{{ item.service.image_url }}">
+                                                                </a>
+                                                                {% else %}
+                                                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png"
+                                                                    alt="{{ service.title }}">
+                                                                {% endif %}
+                                                            </a>
+                                                            {% endif %}
                                                         </div>
+                                                        {% if item.product.instance == 0 %}
                                                         <div class="col-8">
-                                                            <p class="my-0"><strong>{{ item.product.title }}</strong>
-                                                            </p>
+                                                            <a href="{% url 'single_product' item.product.slug %}">
+                                                                <strong>{{ item.product.title }}</strong>
+                                                            </a>
+                                                            <p class="my-0 small text-muted">SKU:
+                                                                {{ item.product.sku|upper }}</p>
                                                             <p class="my-0 small text-muted">Qty: {{ item.quantity }}
                                                             </p>
                                                         </div>
+                                                        {% elif item.service.instance == 1 %}
+                                                        <div class="col-8">
+                                                            <a href="{% url 'single_service' item.service.slug %}">
+                                                                <strong>{{ item.service.title }}</strong>
+                                                            </a>
+                                                            <p class="my-0 small text-muted">SKU:
+                                                                {{ item.service.sku|upper }}</p>
+                                                            <p class="my-0 small text-muted">Qty: {{ item.quantity }}
+                                                            </p>
+                                                        </div>
+                                                        {% endif %}
                                                     </div>
                                                 </td>
                                                 <td class="text-right">
+                                                    {% if item.product.instance == 0 %}
                                                     <p class="my-0 small text-muted">
                                                         ${{ item.product.price | calc_subtotal:item.quantity }}
                                                     </p>
+                                                    {% elif item.service.instance == 1 %}
+                                                    <p class="my-0 small text-muted">
+                                                        ${{ item.service.price | calc_subtotal:item.quantity }}
+                                                    </p>
+                                                    {% endif %}
                                                 </td>
                                             </tr>
                                             {% endfor %}
@@ -110,8 +145,8 @@
                                                 {{ order_form.phone_number | as_crispy_field }}
                                             </div>
                                         </fieldset>
-                                        <fieldset class="rounded px-3 mb-3">
-                                            <div class="form-check form-check-inline float-right mr-0">
+                                        <fieldset class="rounded px-3 mb-3 text-center">
+                                            <div class="form-check form-check-inline float-center mr-0">
                                                 {% if user.is_authenticated %}
                                                 <label class="form-check-label" for="id-save-info">Save this delivery
                                                     information to
@@ -130,22 +165,26 @@
                                                 {% endif %}
                                             </div>
                                         </fieldset>
-                                        <fieldset class="px-3">
+                                        <!-- Payment Methods -->
+                                        <fieldset class="px-3 text-center">
                                             <legend class="fieldset-label text-black px-2 text-center">Payment Gateway
                                             </legend>
 
                                             <p class="d-inline-flex gap-1">
-                                                <button id="toggleFirst" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#multiCollapseExample1" aria-expanded="false"
-                                                    aria-controls="multiCollapseExample1">Manual Payment</button>
+                                                <button id="toggleFirst" class="btn btn-primary" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
+                                                    aria-expanded="false" aria-controls="multiCollapseExample1">Manual
+                                                    Payment</button>
 
-                                                <button id="toggleSecond" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#multiCollapseExample2" aria-expanded="false"
-                                                    aria-controls="multiCollapseExample2">Stripe Payment</button>
+                                                <button id="toggleSecond" class="btn btn-primary" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
+                                                    aria-expanded="false" aria-controls="multiCollapseExample2">Stripe
+                                                    Payment</button>
 
-                                                <button id="toggleThird" class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#multiCollapseExample3" aria-expanded="false"
-                                                    aria-controls="multiCollapseExample3">Crypto Payment</button>
+                                                <button id="toggleThird" class="btn btn-primary" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3"
+                                                    aria-expanded="false" aria-controls="multiCollapseExample3">Crypto
+                                                    Payment</button>
                                             </p>
                                         </fieldset>
                                     </div>
@@ -197,19 +236,23 @@
         </div>
         <!-- USEFUL LINKS -->
         <div class="text-center">
-            <a href="{% url 'bag_page' %}" class="btn btn-outline-black btn-lg mt-2 d-block">
-                <span class="icon">
-                    <i class="fas fa-chevron-left"></i>
-                </span>
-                <span class="text-uppercase">Adjust Bag</span>
-            </a>
-            <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2 d-block">
-                <span class="icon">
-                    <i class="fas fa-chevron-left"></i>
-                </span>
-                <span class="text-uppercase">Keep Shopping</span>
-                <span>{{ session_id }}</span>
-            </a>
+            <div>
+                <a href="{% url 'bag_page' %}" class="btn btn-primary w-auto btn-lg mt-3">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Adjust Bag</span>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto btn-lg mt-2">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Keep Shopping</span>
+                    <span>{{ session_id }}</span>
+                </a>
+            </div>
         </div>
 
     </div>
