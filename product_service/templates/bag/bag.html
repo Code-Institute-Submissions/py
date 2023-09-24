@@ -30,26 +30,43 @@
                             <!-- Item Info -->
                             <tr class="p-3">
                                 <td class="py-3 w-25">
+                                    {% if item.product.instance == 0 %}
                                     <a href="{% url 'single_product' item.product.slug %}">
                                         <img class="img-fluid rounded" src="{{ item.product.image_url }}">
                                     </a>
+                                    {% elif item.service.instance == 1 %}
+                                    <a href="{% url 'single_service' item.service.slug %}">
+                                        <img class="img-fluid rounded" src="{{ item.service.image_url }}">
+                                    </a>
+                                    {% endif %}
                                 </td>
                                 <td class="p-3">
+                                    {% if item.product.instance == 0 %}
                                     <a href="{% url 'single_product' item.product.slug %}">
                                         <strong>{{ item.product.title }}</strong>
                                     </a>
+                                    {% elif item.service.instance == 1 %}
+                                    <a href="{% url 'single_service' item.service.slug %}">
+                                        <strong>{{ item.service.title }}</strong>
+                                    </a>
+                                    {% endif %}
                                     <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
                                 </td>
                                 <!-- Item Price -->
                                 <td class="py-3">
+                                    {% if item.product.instance == 0 %}
                                     <p class="my-0">${{ item.product.price }}</p>
+                                    {% elif item.service.instance == 1 %}
+                                    <p class="my-0">${{ item.service.price }}</p>
+                                    {% endif %}
                                 </td>
                                 <!-- Item Quantity -->
                                 <td class="py-3 w-25">
-                                    <form action="{% url 'update_cart' item.product.id %}"
+                                    <!-- Product form -->
+                                    {% if item.product.instance == 0 %}
+                                    <form action="{% url 'update_cart_product' item.product.id %}"
                                         class="form update-form-{{item.product.id}}" method="POST">
                                         {% csrf_token %}
-
                                         <!-- Quantity Handler -->
                                         <div class="form-group">
                                             <div class="input-group">
@@ -83,14 +100,60 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <!-- Service Form -->
+                                    {% elif item.service.instance == 1 %}
+                                    <form action="{% url 'update_cart_service' item.service.id %}"
+                                        class="form update-form-{{item.service.id}}" method="POST">
+                                        {% csrf_token %}
+                                        <!-- Quantity Handler -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <!-- Decrement -->
+                                                <div class="input-group-prepend">
+                                                    <button class="decrement-qty btn btn-primary rounded-0"
+                                                        data-item_id="{{ item.service.id }}"
+                                                        id="decrement-qty_{{ item.service.id }}" type="submit">
+                                                        <span>
+                                                            <i class="fas fa-minus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <!-- Inner value -->
+                                                <input class="form-control qty_input" type="number" name="quantity"
+                                                    value="{{ item.quantity }}" min="1" max="100"
+                                                    data-item_id="{{ item.service.id }}"
+                                                    id="id_qty_{{ item.service.id }}">
+
+                                                <!-- Increment -->
+                                                <div class="input-group-append">
+                                                    <button class="increment-qty btn btn-primary rounded-0"
+                                                        data-item_id="{{ item.service.id }}"
+                                                        id="increment-qty_{{ item.service.id }}" type="submit">
+                                                        <span>
+                                                            <i class="fas fa-plus"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
                                 </td>
+
                                 <!-- Item Price -->
                                 <td class="py-3">
+                                    {% if item.product.instance == 0  %}
                                     <p class="mx-2">${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                                    {% elif item.service.instance == 1 %}
+                                    <p class="mx-2">${{ item.service.price | calc_subtotal:item.quantity }}</p>
+                                    {% endif %}
                                 </td>
+
                                 <!-- Action Field -->
                                 <td>
-                                    <form action="{% url 'delete_from_cart' item.product.id %}"
+                                    {% if item.product.instance == 0 %}
+                                    <form action="{% url 'delete_from_cart_product' item.product.id %}"
                                         class="form delete-form-{{item.product.id}} text-center" method="POST">
                                         {% csrf_token %}
                                         <div class="d-inline-block">
@@ -98,15 +161,27 @@
                                                 id="remove_{{ item.product.id }}" type="submit">Remove</button>
                                         </div>
                                     </form>
+                                    {% elif item.service.instance == 1 %}
+                                    <form action="{% url 'delete_from_cart_service' item.service.id %}"
+                                        class="form delete-form-{{item.service.id}} text-center" method="POST">
+                                        {% csrf_token %}
+                                        <div class="d-inline-block">
+                                            <button class="btn btn-danger text-white d-block mt-1 text-center"
+                                                id="remove_{{ item.service.id }}" type="submit">Remove</button>
+                                        </div>
+                                    </form>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}
+
                             <!-- Item Count -->
                             <tr>
                                 <td colspan="6" class="text-center">
                                     <h6>Items: {{ product_count }}</h6>
                                 </td>
                             </tr>
+
                             <!-- Cart Results -->
                             <tr>
                                 <td colspan="6" class="text-center">
@@ -143,7 +218,7 @@
             </a>
             {% endif %}
         </div>
-        
+
         <div class="text-center">
             <a href="{% url 'combined_items_all' %}" class="btn btn-outline-black btn-lg mt-2">
                 <span class="icon">

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'admin_dashboard',
     'user_dashboard',
     'product_bag',
+    'service_bag',
     'checkout',
     # Vendor
     'crispy_forms'

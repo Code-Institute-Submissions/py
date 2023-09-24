@@ -7,9 +7,9 @@ from .views import (ProductAddToCartView,
 
 urlpatterns = [
     path('bag/add/product/<product_id>/', ProductAddToCartView.as_view(),
-         name='add_to_cart'),
+         name='add_to_cart_product'),
     path('bag/update/product/<product_id>/', UpdateProductCartView.as_view(),
-         name='update_cart'),
+         name='update_cart_product'),
     path('bag/delete/product/<product_id>/', DeleteProductCartView.as_view(),
-         name='delete_from_cart'),
+         name='delete_from_cart_product'),
 ]
