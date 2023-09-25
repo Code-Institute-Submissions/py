@@ -1,24 +1,18 @@
-# Plexosoft - 
+# Plexosoft - Your Destination for Software Solutions
 
-![Responsive Mockup image](https://github.com/plexoio/musa/blob/main/documentation/assets/img/mockup/mockup.png)
+![Responsive Mockup image](https://github.com/plexoio/py/blob/main/docs/assets/img/mockup.png)
 
-**Plexosofts's**: A Comprehensive Digital Balloting Platform
+Welcome to Plexosoft, where innovation meets user-centric design. We're a software marketplace connecting individuals, businesses, and developers with functional code, whether for ownership or licensing. Our mission is rooted in clarity, transparency, and inclusivity, ensuring that you get the software you need while understanding the distinctions.
 
-Musa's Voting System is an intuitive, user-friendly digital platform designed to streamline the voting process, ensuring that every vote counts. Built with Django, it offers robust functionality, catering both to official voting events and community-based polls.
+Join us on this journey as we bridge the gap between software ownership and licensing, prioritize user privacy and security, offer diverse payment options, and embrace culturally relevant designs. Our holistic approach means we're not just about code; we're about building trust and knowledge.
+
+Explore Plexosoft and discover a world of software possibilities designed with you in mind. Stay tuned for updates on our exciting journey from blueprint to reality!
 
 **Key Features:**
-- **Diverse VoteCard Types**: Whether it's an official election or a community poll, create VoteCards tailored to your needs.
-- **User Verification (pending)**: Ensure genuine votes with a user verification system.
-- **Real-time Progress Tracking**: Users can view real-time progress bars based on the expiration date, offering clear insight into the voting timeline.
-- **Elegant Handling of Tied Votes**: Recognizes tied results and offers solutions for resolution.
-- **Flexible Voting Status**: VoteCards come with distinct statuses like "Draft", "Online", "Cancelled", and "Completed" for better management and clarity.
-- **Admin Dashboard**: A comprehensive dashboard for administrators to manage, update, and oversee voting events.
-- **User Dashboard**: Allows users to create, view, and manage their VoteCards and voting records(considering privacy, security, and transparency).
+
 
 **FAQ Integration**: 
-For user convenience, the platform also offers an integrated FAQ section, addressing common queries and providing clear answers.
 
-Musa's Voting System is a holistic solution for all voting needs, combining the power of Django with user-centric design principles. Whether you're an organization looking to host elections or an individual interested in community polls, this platform has got you covered.
 
 ---
 
@@ -32,7 +26,7 @@ Musa's Voting System is a holistic solution for all voting needs, combining the 
 
 4. **Deployment Restrictions**: This iteration is not meant for public deployment or utilization. Its primary goal is demonstration. Although the system is operational, it is recommended to wait for subsequent versions for broader use.
 
-5. **Future Deployment by Author**: Post evaluation by Code Institute, the author intends to host his software somewhere else, aiming to facilitate community-driven voting events, in a dedicated hosting and domain service.
+5. **Future Deployment by Author**: Post evaluation by Code Institute, the author intends to host his software somewhere else in a dedicated hosting and domain service.
 
 ---
 
