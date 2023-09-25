@@ -64,6 +64,12 @@ In conclusion, our web marketing strategy for Plexosoft is carefully designed to
 
 ## Actions Taken
 ### Facebook
+We have created a Facebook page accecisble from the main footer of the site. We are going to use it for our client base and paid ads probably in the future. After some releases & a consistent amount of clients we are going to try the organic social media marketing with Facebook and other social media network when prudent.
+#### Footer Access
+![Facebook Page on Footer](https://github.com/plexoio/py/blob/main/docs/assets/img/footer-facebook.png)
+#### Facebook Page
+- [Visit Facebook Page](https://www.facebook.com/plexosoft)
+![Facebook Page Image](https://github.com/plexoio/py/blob/main/docs/assets/img/facebook-page.png)
 ### Content Marketing
 ### Email Marketing
 #### Newsletter
