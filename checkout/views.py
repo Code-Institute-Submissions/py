@@ -11,6 +11,7 @@ class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
     def get(self, request):
+        self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
         bag = request.session.get('item_bag', {})
         if not bag:
             messages.error(request, 'Your bag is empty!')
@@ -21,5 +22,5 @@ class Checkout(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['order_form'] = OrderForm()
-        context['stripe_public_key'] = os.environ.get('STRIPE_PUBLIC_KEY')
+        context['stripe_public_key'] = self.stripe_public_key
         return context

@@ -209,6 +209,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Stripe
+STRIPE_CURRENCY = 'eur'
 GRAND_DISCOUNT_THRESHOLD = 100
 GRAND_DISCOUNT_PERCENTAGE = 10
 
