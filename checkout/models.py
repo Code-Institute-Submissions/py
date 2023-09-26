@@ -28,8 +28,8 @@ class Order(models.Model):
     grand_total = models.DecimalField(max_digits=10, decimal_places=2,
                                       null=False, default=0)
     original_bag = models.TextField(null=False, blank=False, default='')
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False,
-                                  default='')
+    # stripe_pid = models.CharField(max_length=254, null=False, blank=False,
+    #                               default='')
 
     def _generate_order_number(self):
         """
@@ -56,10 +56,19 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the order number
-        if it hasn't been set already.
+        if it hasn't been set already and update the buyer_profile.
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
+
+        # Check if the buyer_profile is not set and the user is logged in.
+        if not self.buyer_profile and hasattr(self, 'request'):
+            user = self.request.user
+            if user.is_authenticated:
+                # Get or create a UserProfile for the user.
+                profile, created = UserProfile.objects.get_or_create(user=user)
+                self.buyer_profile = profile
+
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -70,7 +79,9 @@ class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
                               related_name='lineitems')
-    product = models.ForeignKey(Product, null=False, blank=False,
+    product = models.ForeignKey(Product, null=True, blank=True,
+                                on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, null=True, blank=True,
                                 on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
@@ -82,8 +93,18 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        self.lineitem_total = self.product.price * self.quantity
+
+        if self.product:
+            self.lineitem_total = self.product.price * self.quantity
+        elif self.service:
+            self.lineitem_total = self.service.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        self.product_instance = self.product
+        self.service_instance = self.service
+
+        if self.product_instance:
+            return f'SKU {self.product.sku} on order {self.order.order_number}'
+        elif self.service_instance:
+            return f'SKU {self.service.sku} on order {self.order.order_number}'

@@ -45,8 +45,8 @@ $(document).ready(function () {
     });
 
     // Repopulate the ACTION & METHOD attributes
-    let manualdUrl = "/checkout/manual/";
-    let stripeUrl = "/checkout/stripe/";
+    let manualdUrl = "/checkout/";
+    let stripeUrl = "/checkout/stripe/form/";
     let cryptodUrl = "/checkout/crypto/";
 
     let paymentForm = $('#payment-form')
@@ -59,7 +59,7 @@ $(document).ready(function () {
     $('#submit-button-2').on('click', function () {
         paymentForm.attr({
             'action': stripeUrl,
-            'method': 'GET'
+            'method': 'POST'
         });
     })
     $('#submit-button-3').on('click', function () {

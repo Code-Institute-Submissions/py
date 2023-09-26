@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_corecss %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container px-4 px-lg-0">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center align-items-center">
+<p>Hola</p>
+        </div>
+        <!-- USEFUL LINKS -->
+        <div class="text-center">
+            <div>
+                <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto btn-lg mt-2">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Keep Shopping</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

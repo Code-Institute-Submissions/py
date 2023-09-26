@@ -2,8 +2,8 @@
 from django.urls import path, include
 
 # Local Imports
-from .views import (Checkout)
-from .stripe import StripeCheckoutSessionView
+from .views import (Checkout, CheckoutSuccess)
+from .stripe import StripeCheckoutSessionView, StripeCheckoutView
 
 urlpatterns = [
 
@@ -11,4 +11,8 @@ urlpatterns = [
          name='checkout_page'),
     path('checkout/stripe/', StripeCheckoutSessionView.as_view(),
          name='stripe_checkout'),
+    path('checkout/success/<order_number>', CheckoutSuccess.as_view(),
+         name='checkout_success'),
+    path('checkout/stripe/form/', StripeCheckoutView.as_view(),
+         name='checkout_stripe_form'),
 ]
