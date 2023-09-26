@@ -23,8 +23,8 @@ It is crucial to consider both **Interaction Experience Design (IXD)** and **Inf
 For more details on our **Interactive Experience Design (IXD)** for the **Plexosoft Marketplace**, please refer to the attached mind map.
 
 ??? abstract "Open IXD images"
-    ![IXD Mindmap Initial](../../assets/img/initial-IXD.png)
-    ![IXD Mindmap](../../assets/img/IXD.png)
+    ![IXD Mindmap Initial](../../../assets/img/initial-IXD.png)
+    ![IXD Mindmap](../../../assets/img/IXD.png)
 
 - [IXD Live Mindmap](https://gitmind.com/app/docs/m7ramfi4)
 
@@ -34,8 +34,8 @@ For more details on our **Interactive Experience Design (IXD)** for the **Plexos
 For more details on our **Information Architecture Design (IAD)** for the **Plexosoft Marketplace**, please refer to the attached mind map.
 
 ??? abstract "Open IAD images"
-    ![IAD Mindmap Initial](../../assets/img/initial-IAD.png)
-    ![IAD Mindmap](../../assets/img/IAD.png)
+    ![IAD Mindmap Initial](../../../assets/img/initial-IAD.png)
+    ![IAD Mindmap](../../../assets/img/IAD.png)
 
 - [IAD Live Mindmap](https://gitmind.com/app/docs/m8d0k09v)
 

@@ -3,50 +3,53 @@ site_name: Plexosoft Docs
 nav:
   - Home: index.md
   - Design:
-      - Design Overview: design-overview.md
+      - Overview: design/overview.md
       - Design Thinking:
-          - Overview: design-thinking/overview.md
-          - Idea Outline: design-thinking/idea-outline/idea_outline.md
-          - Empathy: design-thinking/empathy/empathy.md
-          - Personas: design-thinking/personas/personas.md
-          - Definition: design-thinking/definition/definition.md
-          - Persona: design-thinking/persona/persona.md
-          - Ideate: design-thinking/ideate/ideate.md
-          - Conclusion: design-thinking/conclusion/conclusion.md
-          - PoC Prototype: design-thinking/PoC/poc.md
+          - Overview: design/design-thinking/overview.md
+          - Idea Outline: design/design-thinking/idea-outline/idea_outline.md
+          - Empathy: design/design-thinking/empathy/empathy.md
+          - Personas: design/design-thinking/personas/personas.md
+          - Definition: design/design-thinking/definition/definition.md
+          - Persona: design/design-thinking/persona/persona.md
+          - Ideate: design/design-thinking/ideate/ideate.md
+          - Conclusion: design/design-thinking/conclusion/conclusion.md
+          - PoC Prototype: design/design-thinking/PoC/poc.md
       - User-Centric Design:
-          - Overview: user-centric/overview.md
-          - Strategy: user-centric/strategy/strategy.md
-          - Scope: user-centric/scope/scope.md
-          - Structure: user-centric/structure/structure.md
-          - Skeleton: user-centric/skeleton/skeleton.md
-          - Surface: user-centric/surface/surface.md
+          - Overview: design/user-centric/overview.md
+          - Strategy: design/user-centric/strategy/strategy.md
+          - Scope: design/user-centric/scope/scope.md
+          - Structure: design/user-centric/structure/structure.md
+          - Skeleton: design/user-centric/skeleton/skeleton.md
+          - Surface: design/user-centric/surface/surface.md
       - Entity Relationship Diagram ERD:
-          - Overview: erd/erd.md
-          - Developer Experience: erd/dev-experience/dev_experience.md
+          - ERD: design/erd/erd.md
       - Web Marketing Strategy:
-          - Overview: web-marketing/web_marketing.md
+          - Overview: design/web-marketing/overview.md
+          - Strategy Plan: design/web-marketing/strategy_plan.md
+          - Actions Taken: design/web-marketing/actions_taken.md
   - Development:
-      - Agile Development: agile-development/agile_development.md
+      - Agile Development: development/agile-development/agile_development.md
+      - Bug, Testing & Security: development/bug-test-security/bug_test_security.md
   - Features:
-      - Actual Features: actual-features/actual_features.md
-      - Future Features: future-features/future_features.md
+      - Actual Features: features/actual-features/actual_features.md
+      - Future Features: features/future-features/future_features.md
   - Tech:
-      - Technologies Used: tech-used/tech_used.md
+      - Technologies Used: tech/tech_used.md
   - Initialize:
-      - Set Up & Deployment: setup-and-deployment/setup_and_deployment.md
+      - Set Up & Deployment: initialize/setup_and_deployment.md
   - Snack:
-      - Overview: developer-snack/developer_snack.md
-      - Make Documentation: developer-snack/mkdoc/mkdoc.md
-      - Django Admin & Summernote: developer-snack/development_reminder.md
-      - Google Auth Installation: developer-snack/google_auth.md
-      - Common Bugs: developer-snack/common_bugs.md
-      - Naming Convention: developer-snack/naming_convention.md
-      - Lambda Convention: developer-snack/lambda.md
-      - Database & Django Shell: developer-snack/shell_database.md
+      - Overview: snack/developer-snack/overview.md
+      - Make Documentation: snack/mkdoc/mkdoc.md
+      - Django Admin & Summernote: snack/developer-snack/development_reminder.md
+      - Google Auth Installation: snack/developer-snack/google_auth.md
+      - Common Bugs: snack/developer-snack/common_bugs.md
+      - Naming Convention: snack/developer-snack/naming_convention.md
+      - Lambda Convention: snack/developer-snack/lambda.md
+      - Database & Django Shell: snack/developer-snack/shell_database.md
   - About:
-      - Plexosoft Docs: about.md
-      - License: LICENSE.md
+      - Plexosoft Docs: about/about.md
+      - License: about/LICENSE.md
+  - Credits: credits/credits.md
 
 # PLUGINS (bug present as not installed)
 # plugins:

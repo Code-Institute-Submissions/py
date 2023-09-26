@@ -16,4 +16,4 @@ Dive into our online preview and detailed outline via the links provided below:
 
 Get an insight into our PoC by viewing the image below:
 === "PoC"
-    ![PoC Prototype](../../assets/img/poc.png)
+    ![PoC Prototype](../../../assets/img/poc.png)

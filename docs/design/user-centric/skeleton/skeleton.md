@@ -17,30 +17,30 @@ For this plane, we've chosen to use **Adobe XD**, a tool with which the author i
 Although we didn't create a prototype for every feature due to the project's extensive scope, we've outlined the most critical features and layouts that will be extended throughout the project. Our design, intentions, and ideas are accurately reflected in this prototype, crafted using **AdobeXD**.
 
 ??? example "Prototype GIF"
-    ![Skeleton Gif Image](../../assets/img/skeleton.gif)
+    ![Skeleton Gif Image](../../../assets/img/skeleton.gif)
 
 ??? example "Homepage"
-    ![Homepage 1](../../assets/img/skeleton-1.png)
-    ![Homepage 2](../../assets/img/skeleton-2.png)
-    ![Homepage 3](../../assets/img/skeleton-3.png)
-    ![Homepage 4](../../assets/img/skeleton-4.png)
-    ![Homepage 5](../../assets/img/skeleton-5.png)
+    ![Homepage 1](../../../assets/img/skeleton-1.png)
+    ![Homepage 2](../../../assets/img/skeleton-2.png)
+    ![Homepage 3](../../../assets/img/skeleton-3.png)
+    ![Homepage 4](../../../assets/img/skeleton-4.png)
+    ![Homepage 5](../../../assets/img/skeleton-5.png)
 
 ??? example "Dedicated Page"
-    ![Dedicated Page 1](../../assets/img/skeleton-6.png)
-    ![Dedicated Page 2](../../assets/img/skeleton-7.png)
+    ![Dedicated Page 1](../../../assets/img/skeleton-6.png)
+    ![Dedicated Page 2](../../../assets/img/skeleton-7.png)
 
 ??? example "Login & Register"
-    ![Login & Register 1](../../assets/img/skeleton-8.png)
-    ![Login & Register 2](../../assets/img/skeleton-9.png)
-    ![Login & Register 3](../../assets/img/skeleton-10.png)
+    ![Login & Register 1](../../../assets/img/skeleton-8.png)
+    ![Login & Register 2](../../../assets/img/skeleton-9.png)
+    ![Login & Register 3](../../../assets/img/skeleton-10.png)
 
 ??? example "FAQ & Contact"
-    ![FAQ & Contact 1](../../assets/img/skeleton-11.png)
-    ![FAQ & Contact 2](../../assets/img/skeleton-12.png)
+    ![FAQ & Contact 1](../../../assets/img/skeleton-11.png)
+    ![FAQ & Contact 2](../../../assets/img/skeleton-12.png)
 
 ??? example "See More Page"
-    ![FAQ & Contact 1](../../assets/img/skeleton-13.png)
+    ![FAQ & Contact 1](../../../assets/img/skeleton-13.png)
 
 ## Conclusion
 - The design is user-friendly and features straightforward navigation. This approach ensures that all essential functions are within a few clicks from the user's goal.

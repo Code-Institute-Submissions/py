@@ -1,4 +1,3 @@
-## Agile Development Process
 Agile Development prioritizes adaptability and swift responses to changing requirements. By promoting close collaboration between cross-functional teams and stakeholders, it ensures a clearer understanding of end-user needs. Frequent iterations and feedback loops result in a product that's more aligned with customer demands, often leading to higher satisfaction, improved quality, and faster time-to-market.
 
 An agile approach was used before, during and after development. We have used:

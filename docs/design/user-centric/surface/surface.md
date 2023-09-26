@@ -40,7 +40,7 @@ The following color palette was used as a reference throughout the project:
 
 #### Technologies Used
 
-- Vendor templates (as referenced in [Technologies Used](../../tech-used/tech_used.md))
+- Vendor templates (as referenced in [Technologies Used](../../../tech/tech_used.md)
 - Bootstrap
 - Custom Code
 

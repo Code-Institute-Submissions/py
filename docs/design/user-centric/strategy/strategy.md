@@ -95,7 +95,7 @@ We should highlight that achieving most of the features described above doesn't 
 
 ### Research Graphic
 
-![Research Graphic](../../assets/img/graph-1.png)
+![Research Graphic](../../../assets/img/graph-1.png)
 
 - **Relevancy**: As seen from the research graphic, there is a difference of '9' points between the maximum point value of '130' and the relevancy results. This suggests that we might be omitting almost the amount of 2 features, with each feature being 5 points, due to a lack of relevancy or the partial development of some features.
 
@@ -198,36 +198,36 @@ We have chosen 3 keywords from the rearranged table and used them on wordtracker
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
     | **Software Marketplace**                               | software licensing service, second hand software, python made websites | perpetual license to software as a service, second hand software for sale, websites made with python |
 
-    ![Wordtracker 1](../../assets/img/row1.1.png)
-    ![Wordtracker 2](../../assets/img/row1.2.png)
-    ![Wordtracker 3](../../assets/img/row1.3.png)
+    ![Wordtracker 1](../../../assets/img/row1.1.png)
+    ![Wordtracker 2](../../../assets/img/row1.2.png)
+    ![Wordtracker 3](../../../assets/img/row1.3.png)
 
 ??? abstract "Relevant Topic: Buy Your Own Software to Create a Website"
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
     | **Buy Your Own Software to Create a Website**                               | community software group, software university, best website software download | community interactive social media private group software, universal software solutions, best website builder software download |
 
-    ![Wordtracker 1](../../assets/img/row2.1.png)
-    ![Wordtracker 2](../../assets/img/row2.2.png)
-    ![Wordtracker 3](../../assets/img/row2.3.png)
+    ![Wordtracker 1](../../../assets/img/row2.1.png)
+    ![Wordtracker 2](../../../assets/img/row2.2.png)
+    ![Wordtracker 3](../../../assets/img/row2.3.png)
 
 ??? abstract "Relevant Topic: Buy Software with License and Support"
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
     | **Buy Software with License and Support**                               | software license and service agreement, website support services, python expert website developers | software development and license and services agreement, website maintenance and support services, developing websites with python |
 
-    ![Wordtracker 1](../../assets/img/row3.1.png)
-    ![Wordtracker 2](../../assets/img/row3.2.png)
-    ![Wordtracker 3](../../assets/img/row3.3.png)
+    ![Wordtracker 1](../../../assets/img/row3.1.png)
+    ![Wordtracker 2](../../../assets/img/row3.2.png)
+    ![Wordtracker 3](../../../assets/img/row3.3.png)
 
 ??? abstract "Relevant Topic: Buy Customizable Software"
     | Relevant Topic                                            | Short-Tail Keywords (ST)                        | Long-Tail Keywords (LT)                                                     |
     |--------------------------------------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
     | **Buy Customizable Software**                               | customizable software applications, custom software development, ideas software development, buy website marketplace, website buy sell marketplace | custom software development near me, software development ideas |
 
-    ![Wordtracker 1](../../assets/img/row4.1.png)
-    ![Wordtracker 2](../../assets/img/row4.2.png)
-    ![Wordtracker 3](../../assets/img/row4.3.png)
+    ![Wordtracker 1](../../../assets/img/row4.1.png)
+    ![Wordtracker 2](../../../assets/img/row4.2.png)
+    ![Wordtracker 3](../../../assets/img/row4.3.png)
 
 ### STEP 5: Final Results
 #### Final Table

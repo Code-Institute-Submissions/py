@@ -78,6 +78,6 @@ The following table is a well-equipped draft designed to facilitate the developm
 
 ???+ tip "Final User Stories"
 
-    - The **Scope: User Story** is **NOT** the same as the [Final User Story](../../agile-development/agile_development.md) found in the **Agile Development** section.
+    - The **Scope: User Story** is **NOT** the same as the [Final User Story](../../../development/agile-development/agile_development.md) found in the **Agile Development** section.
 
 Consequently, we've aligned our scope with the insights gathered from our research in the **Strategy** plane. It's clear at this stage that our goal is to implement a Minimum Viable Product (MVP) iteration. This will effectively assist us in laying the groundwork for our next phase, the **Structure** stage.

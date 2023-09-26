@@ -5,7 +5,7 @@ Within this section, you'll encounter the following processes:
 1. [Design Thinking](design-thinking/overview.md)
 2. [User-Centric Design](user-centric/overview.md)
 3. [Entity Relationship Diagram (ERD)](erd/erd.md)
-3. [Web Marketing Strategy](web-marketing/web_marketing.md)
+3. [Web Marketing Strategy](web-marketing/overview.md)
 
 ???+ tip
     You can access these sections via the index on the left for desktop devices, and through the dropdown menu on mobile devices.
