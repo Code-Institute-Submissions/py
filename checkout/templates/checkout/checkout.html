@@ -131,7 +131,7 @@
                         <!-- Checkout form -->
                         <div class="row">
                             <div class="col-12 col-lg-12">
-                                <form class="" action="" method="" id="payment-form">
+                                <form class="" action="{% url 'checkout_stripe_form' %}" method="POST" id="payment-form">
                                     {% csrf_token %}
                                     <div class="">
                                         <fieldset class="rounded px-3 mb-3">

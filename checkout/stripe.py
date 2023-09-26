@@ -25,9 +25,7 @@ class StripeCheckoutView(View):
             'phone_number': request.POST.get('phone_number', ''),
         }
 
-        print(form_data)
-
-        order_form = OrderForm(form_data)
+        order_form = OrderForm(request, form_data)
         if order_form.is_valid():
             order = order_form.save()
 
@@ -93,26 +91,26 @@ class StripeCheckoutSessionView(TemplateView):
             messages.warning(request, '''
                 STRIPE: Public key not provided!''')
 
-            session = stripe.checkout.Session.create(
-                payment_method_types=['card'],
-                line_items=[
-                    {
-                        'price_data': {
-                            'currency': settings.STRIPE_CURRENCY,
-                            'product_data': {
-                                'name': 'Plexosoft (Products & Services)',
-                            },
-                            'unit_amount': stripe_total,
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': settings.STRIPE_CURRENCY,
+                        'product_data': {
+                            'name': 'Plexosoft (Products & Services)',
                         },
-                        'quantity': 1,
-                    }
-                ],
-                mode='payment',
-                success_url='http://localhost:8000/success/',  # Update with your success URL
-                cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
-            )
+                        'unit_amount': stripe_total,
+                    },
+                    'quantity': 1,
+                }
+            ],
+            mode='payment',
+            success_url='http://localhost:8000/success/',  # Update with your success URL
+            cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
+        )
 
-            self.session_id = session.id
+        self.session_id = session.id
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

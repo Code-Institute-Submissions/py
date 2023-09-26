@@ -13,18 +13,18 @@ from homepage.models import UserProfile
 class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
         bag = request.session.get('item_bag', {})
         if not bag:
             messages.error(request, 'Your bag is empty!')
             return redirect(reverse('bag_page'))
-        return super().get(request)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['order_form'] = OrderForm()
+        context['order_form'] = OrderForm(request=self.request)
         context['stripe_public_key'] = self.stripe_public_key
         return context
 
