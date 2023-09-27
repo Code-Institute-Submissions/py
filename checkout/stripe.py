@@ -74,47 +74,47 @@ class StripeCheckoutView(View):
             return redirect(reverse('checkout_failure'))
 
 
-@method_decorator(csrf_exempt, name='dispatch')
-class StripeCheckoutSessionView(TemplateView):
-    template_name = 'checkout/stripe/stripe_checkout.html'
+# @method_decorator(csrf_exempt, name='dispatch')
+# class StripeCheckoutSessionView(TemplateView):
+#     template_name = 'checkout/stripe/stripe_checkout.html'
 
-    def get(self, request, *args, **kwargs):
-        self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
-        stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
+#     def get(self, request, *args, **kwargs):
+#         self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
+#         stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
-        current_bag = service_product_bag_content(request)
-        total = current_bag['grand_total']
-        stripe_total = round(total * 100)
-        stripe_quantity = current_bag['item_count']
+#         current_bag = service_product_bag_content(request)
+#         total = current_bag['grand_total']
+#         stripe_total = round(total * 100)
+#         stripe_quantity = current_bag['item_count']
 
-        if not self.stripe_public_key:
-            messages.warning(request, '''
-                STRIPE: Public key not provided!''')
+#         if not self.stripe_public_key:
+#             messages.warning(request, '''
+#                 STRIPE: Public key not provided!''')
 
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price_data': {
-                        'currency': settings.STRIPE_CURRENCY,
-                        'product_data': {
-                            'name': 'Plexosoft (Products & Services)',
-                        },
-                        'unit_amount': stripe_total,
-                    },
-                    'quantity': 1,
-                }
-            ],
-            mode='payment',
-            success_url='http://localhost:8000/success/',  # Update with your success URL
-            cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
-        )
+#         session = stripe.checkout.Session.create(
+#             payment_method_types=['card'],
+#             line_items=[
+#                 {
+#                     'price_data': {
+#                         'currency': settings.STRIPE_CURRENCY,
+#                         'product_data': {
+#                             'name': 'Plexosoft (Products & Services)',
+#                         },
+#                         'unit_amount': stripe_total,
+#                     },
+#                     'quantity': 1,
+#                 }
+#             ],
+#             mode='payment',
+#             success_url='http://localhost:8000/success/',  # Update with your success URL
+#             cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
+#         )
 
-        self.session_id = session.id
-        return super().get(request, *args, **kwargs)
+#         self.session_id = session.id
+#         return super().get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['session_id'] = self.session_id
-        context['stripe_public_key'] = self.stripe_public_key
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['session_id'] = self.session_id
+#         context['stripe_public_key'] = self.stripe_public_key
+#         return context

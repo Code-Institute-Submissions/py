@@ -12,8 +12,16 @@ from django_plexosoft.settings import (
     NORMAL_DISCOUNT_PERCENTAGE, NORMAL_DISCOUNT_THRESHOLD,
     GRAND_DISCOUNT_PERCENTAGE, GRAND_DISCOUNT_THRESHOLD)
 
+ORDER_STATUS = (
+    ('0', 'Pending'),
+    ('1', 'Cancelled'),
+    ('2', 'Completed'),
+
+)
+
 
 class Order(models.Model):
+    status = models.IntegerField(choices=ORDER_STATUS, default=0)
     order_number = models.CharField(max_length=32, null=False, editable=False)
     buyer_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
                                       null=True, blank=True,

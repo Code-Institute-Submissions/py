@@ -131,7 +131,8 @@
                         <!-- Checkout form -->
                         <div class="row">
                             <div class="col-12 col-lg-12">
-                                <form class="" action="{% url 'checkout_stripe_form' %}" method="POST" id="payment-form">
+                                <form class="" action="{% url 'checkout_stripe_form' %}" method="POST"
+                                    id="payment-form">
                                     {% csrf_token %}
                                     <div class="">
                                         <fieldset class="rounded px-3 mb-3">
@@ -258,6 +259,26 @@
 </div>
 {% block postloadjs %}
 {{ block.super }}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ stripe_public_key }}');
+
+    $(document).ready(function () {
+        $('#submit-button-2').on('click', function (event) {
+            event.preventDefault();
+
+            var sessionId = '{{ session_id }}';
+
+            stripe.redirectToCheckout({
+                sessionId: sessionId
+            }).then(function (result) {
+                if (result.error) {
+                    console.error(result.error.message);
+                }
+            });
+        });
+    });
+</script>
 <script src="{% static 'checkout/js/script.js' %}"></script>
 {% endblock %}
 {% endblock content %}
