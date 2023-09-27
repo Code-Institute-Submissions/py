@@ -13,10 +13,9 @@ from django_plexosoft.settings import (
     GRAND_DISCOUNT_PERCENTAGE, GRAND_DISCOUNT_THRESHOLD)
 
 ORDER_STATUS = (
-    ('0', 'Pending'),
-    ('1', 'Cancelled'),
-    ('2', 'Completed'),
-
+    (0, 'Pending'),
+    (1, 'Cancelled'),
+    (2, 'Completed'),
 )
 
 

@@ -17,6 +17,22 @@ class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
     def get(self, request, *args, **kwargs):
+        bag = request.session.get('item_bag', {})
+        if not bag:
+            messages.error(request, 'Your bag is empty!')
+            return redirect(reverse('bag_page'))
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_form'] = OrderForm(request=self.request)
+        return context
+
+
+class CheckoutSuccess(TemplateView):
+    template_name = 'checkout/success.html'
+
+    def get(self, request, order_number):
         self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
         stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
@@ -50,24 +66,6 @@ class Checkout(TemplateView):
 
         self.session_id = session.id
 
-        bag = request.session.get('item_bag', {})
-        if not bag:
-            messages.error(request, 'Your bag is empty!')
-            return redirect(reverse('bag_page'))
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['order_form'] = OrderForm(request=self.request)
-        context['session_id'] = self.session_id
-        context['stripe_public_key'] = self.stripe_public_key
-        return context
-
-
-class CheckoutSuccess(TemplateView):
-    template_name = 'checkout/success.html'
-
-    def get(self, request, order_number):
         save_info = request.session.get('save_info')
         order = get_object_or_404(Order, order_number=order_number)
         if request.user.is_authenticated:
@@ -90,10 +88,13 @@ class CheckoutSuccess(TemplateView):
             email will be sent to {order.email}.')
         self.order = order
         if 'item_bag' in request.session:
+            # Delete() bag after order creation & success message
             del request.session['item_bag']
         return super().get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order'] = self.order
+        context['session_id'] = self.session_id
+        context['stripe_public_key'] = self.stripe_public_key
         return context
