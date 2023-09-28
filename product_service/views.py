@@ -376,6 +376,7 @@ class ShoppingCartView(generic.ListView):
 
 
 class OrderListView(AdminRequiredMixin, generic.ListView):
+    """View for order instances."""
     model = Order
     template_name = 'admin-dashboard/all_orders.html'
     context_object_name = 'all_orders'
