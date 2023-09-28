@@ -172,20 +172,27 @@
                                             </legend>
 
                                             <p class="d-inline-flex gap-1">
+                                                <!-- Next iteration/release -->
+                                                {% if manual_checkout %}
                                                 <button id="toggleFirst" class="btn btn-primary" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
                                                     aria-expanded="false" aria-controls="multiCollapseExample1">Manual
                                                     Payment</button>
+                                                {% endif %}
 
+                                                <!-- CURRENT iteration/release -->
                                                 <button id="toggleSecond" class="btn btn-primary" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
                                                     aria-expanded="false" aria-controls="multiCollapseExample2">Stripe
                                                     Payment</button>
 
+                                                <!-- Next iteration/release -->
+                                                {% if crypto_checkout %}
                                                 <button id="toggleThird" class="btn btn-primary" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3"
                                                     aria-expanded="false" aria-controls="multiCollapseExample3">Crypto
                                                     Payment</button>
+                                                {% endif %}
                                             </p>
                                         </fieldset>
                                     </div>

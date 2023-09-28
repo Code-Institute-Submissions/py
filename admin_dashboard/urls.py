@@ -5,6 +5,7 @@ from .views import (AdminDashboard, AdminSettingsView,
 
 
 urlpatterns = [
+    # Admin Settings
     path('account/admin/', AdminDashboard.as_view(),
          name='admin_dashboard'),
     path('account/admin/settings/', AdminSettingsView.as_view(),

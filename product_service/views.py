@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.views.generic.edit import DeleteView
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse, reverse_lazy
+from django.db.models import Count
 
 # Local imports
 from admin_dashboard.views import AdminRequiredMixin
@@ -14,6 +15,11 @@ from .models import Product, Service, Category, ServiceType, CodeType
 from homepage.models import STATUS
 from .validate_image import validate_image_size
 from .models import SCOPE_TYPE
+from checkout.models import Order
+
+# Python
+import logging
+logger = logging.getLogger(__name__)
 
 # ADMIN CREATE Product & Service
 
@@ -362,6 +368,31 @@ class ServiceDelete(AdminRequiredMixin, DeleteView):
 # BAG view
 
 
-class shoppingCartView(generic.ListView):
+class ShoppingCartView(generic.ListView):
     model = Product
     template_name = 'bag/bag.html'
+
+# Order Management
+
+
+class OrderListView(AdminRequiredMixin, generic.ListView):
+    model = Order
+    template_name = 'admin-dashboard/all_orders.html'
+    context_object_name = 'all_orders'
+
+    def get_queryset(self):
+        try:
+            return Order.objects.annotate(
+                ordercount=Count('id')).order_by('-date')
+        except Exception as e:
+            logger.error(f"Error fetching Order instances: {str(e)}")
+            messages.error(self.request, 'Error fetching Order instances.')
+            return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        all_orders = context[self.context_object_name]
+
+        context['all_orders'] = all_orders
+        return context

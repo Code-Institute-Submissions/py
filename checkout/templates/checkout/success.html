@@ -7,31 +7,56 @@
 <div class="container px-4 px-lg-0">
     <div class="container mt-5">
         <div class="row d-flex justify-content-center align-items-center">
-            <p>Hola</p> {{order.buyer_profile}}
-        </div>
-        <!-- USEFUL LINKS -->
-        <div class="text-center">
-            <div>
-                <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto btn-lg mt-2">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="row">
+                        <div class="col card-header">
+                            <h3 class="logo-font text-center m-0">Redirect</h3>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <!-- Order Summary -->
+                    <div class="card-body p-0">
+                        <div class="row d-flex justify-content-center align-items-center p-3">
+
+                            <p class="text-center">You will be redirected to <strong>Stripe</strong> now!</p>
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="text-center m-0 mt-3">Click the button below if the redirection didn't occur.</p>
+                            <p class="text-center m-0 mt-3">Your order number is<br><strong>{{order}}</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Backup Checkout Button -->
+                    <div class="row">
+                        <div class="col-12 col-lg-12">
+
+                            <button id="submit-button-stripe" class="card-footer btn btn-primary btn-lg m-0">
+                                <span class="font-weight-bold">Stripe Checkout</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 {% block postloadjs %}
 {{ block.super }}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     window.onload = function () {
-        var stripe = Stripe('{{ stripe_public_key }}');
+        let stripe = Stripe('{{ stripe_public_key }}');
+        let sessionId = '{{ session_id }}';
 
-        var sessionId = '{{ session_id }}';
-
+        // Automatic redirection
         stripe.redirectToCheckout({
             sessionId: sessionId
         }).then(function (result) {
@@ -39,6 +64,18 @@
                 console.error(result.error.message);
             }
         });
+
+        // Backup button for redirection
+        $('#submit-button-stripe').click(function () {
+            stripe.redirectToCheckout({
+                sessionId: sessionId
+            }).then(function (result) {
+                if (result.error) {
+                    console.error(result.error.message);
+                }
+            });
+        });
+
     };
 </script>
 

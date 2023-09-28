@@ -70,8 +70,9 @@ class CheckoutSuccess(TemplateView):
         order = get_object_or_404(Order, order_number=order_number)
         if request.user.is_authenticated:
             profile = UserProfile.objects.get(username=request.user)
+            print(f'USER: {profile}')
             # Attach the user's profile to the order
-            order.user_profile = profile
+            order.buyer_profile = profile
             order.save()
 
             # # Save the user's info
@@ -83,9 +84,8 @@ class CheckoutSuccess(TemplateView):
             #     if user_profile_form.is_valid():
             #         user_profile_form.save()
 
-        messages.success(request, f'Order successfully processed! \
-            Your order number is {order_number}. A confirmation \
-            email will be sent to {order.email}.')
+        messages.success(request, f'Order created: <br> \
+            Your order number is<br><strong>{order_number}</strong>')
         self.order = order
         if 'item_bag' in request.session:
             # Delete() bag after order creation & success message

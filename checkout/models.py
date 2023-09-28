@@ -68,14 +68,6 @@ class Order(models.Model):
         if not self.order_number:
             self.order_number = self._generate_order_number()
 
-        # Check if the buyer_profile is not set and the user is logged in.
-        if not self.buyer_profile and hasattr(self, 'request'):
-            user = self.request.user
-            if user.is_authenticated:
-                # Get or create a UserProfile for the user.
-                profile, created = UserProfile.objects.get_or_create(user=user)
-                self.buyer_profile = profile
-
         super().save(*args, **kwargs)
 
     def __str__(self):
