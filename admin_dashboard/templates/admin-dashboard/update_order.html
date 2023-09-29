@@ -34,16 +34,81 @@
                         </div>
                         <div class="card-body">
 
+                            <!-- Order Number -->
+                            <div class="mb-3">
+                                <label for="order_number" class="form-label"><strong>Order Number</strong></label>
+                                <input type="text" name="order_number" class="form-control" id="order_number"
+                                    value="{{ order.order_number }}" required disabled>
+                                {% if order.order_number.errors %}
+                                <div class="errors">{{ order.order_number.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Date -->
+                            <div class="mb-3">
+                                <label for="date" class="form-label"><strong>Date</strong></label>
+                                <input type="text" name="date" class="form-control" id="date" value="{{ order.date }}"
+                                    required disabled>
+                                {% if order.date.errors %}
+                                <div class="errors">{{ order.date.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Buyer Profile -->
+                            <div class="mb-3">
+                                <label for="buyer_profile" class="form-label"><strong>Buyer</strong></label>
+                                <input type="text" name="buyer_profile" class="form-control" id="buyer_profile"
+                                    value="{{ order.buyer_profile }}" required disabled>
+                                {% if order.buyer_profile.errors %}
+                                <div class="errors">{{ order.buyer_profile.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Full Name -->
+                            <div class="mb-3">
+                                <label for="full_name" class="form-label"><strong>Name</strong></label>
+                                <input type="text" name="full_name" class="form-control" id="full_name"
+                                    value="{{ order.full_name }}" required disabled>
+                                {% if order.full_name.errors %}
+                                <div class="errors">{{ order.full_name.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label"><strong>Email</strong></label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    value="{{ order.email }}" required disabled>
+                                {% if order.email.errors %}
+                                <div class="errors">{{ order.email.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+                                <input type="number" name="phone_number" class="form-control" id="phone_number"
+                                    value="{{ order.phone_number }}" required disabled>
+                                {% if order.phone_number.errors %}
+                                <div class="errors">{{ order.phone_number.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <!-- Inlineitems -->
                             <div class="mb-3">
-                                <label for="code" class="form-label"><strong>Items
+                                <label for="lineitem" class="form-label"><strong>Items {{ order.lineitems.quantity }}
                                     </strong></label>
-                                <select name="code" class="form-control" id="code" multiple="multiple" disabled>
+                                <select name="lineitem" class="form-control" id="lineitem" multiple="multiple" disabled>
                                     {% for lineitem in order.lineitems.all %}
                                     {% if lineitem.service %}
-                                    <option>{{ lineitem.service.title }} ({{ lineitem.service.get_instance_display }})</option>
+                                    <option>{{ lineitem.service.get_instance_display }}: {{ lineitem.service.title }} 
+                                        (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
+                                    </option>
                                     {% else %}
-                                    <option>{{ lineitem.product.title }} ({{ lineitem.product.get_instance_display }})</option>
+                                    <option>{{ lineitem.product.get_instance_display }}: {{ lineitem.product.title }} 
+                                         (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
+                                    </option>
                                     {% endif %}
                                     {% endfor %}
                                 </select>
@@ -52,15 +117,37 @@
                                 {% endif %}
                             </div>
 
-                            <!-- Order Number -->
+                            <!-- Subtotal -->
                             <div class="mb-3">
-                                <label for="sku" class="form-label"><strong>Order Number</strong></label>
-                                <input type="text" name="order_number" class="form-control" id="sku"
-                                    value="{{ order.order_number }}" required disabled>
-                                {% if order.order_number.errors %}
-                                <div class="errors">{{ order.order_number.errors }}</div>
+                                <label for="order_total" class="form-label"><strong>Subtotal (€)</strong></label>
+                                <input type="number" name="order_total" class="form-control" id="order_total"
+                                    value="{{ order.order_total }}" required disabled>
+                                {% if order.order_total.errors %}
+                                <div class="errors">{{ order.order_total.errors }}</div>
                                 {% endif %}
                             </div>
+
+                            <!-- Grand Total -->
+                            <div class="mb-3">
+                                <label for="grand_total" class="form-label"><strong>Grand Total (€)</strong></label>
+                                <input type="number" name="grand_total" class="form-control" id="grand_total"
+                                    value="{{ order.grand_total }}" required disabled>
+                                {% if order.grand_total.errors %}
+                                <div class="errors">{{ order.grand_total.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Gateway -->
+                            <div class="mb-3">
+                                <label for="gateway" class="form-label"><strong>Gateway</strong></label>
+                                <input type="text" name="gateway" class="form-control" id="gateway"
+                                    value="{{ order.get_gateway_display }}" required disabled>
+                                {% if order.gateway.errors %}
+                                <div class="errors">{{ order.gateway.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <!-- Status -->
                             <div class="mb-3">
                                 <label for="status" class="form-label"><strong>Status</strong></label>

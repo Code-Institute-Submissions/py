@@ -43,7 +43,8 @@
                         {% for order in all_orders.all %}
                         <tr>
                             <td>{{ order.buyer_profile }}</td>
-                            <td>{{ order.order_number }}</td>
+                            <td><a href="{% url 'admin_order_update' order.order_number %}">{{ order.order_number }}</a>
+                            </td>
                             <td>{% for lineitem in order.lineitems.all %}
                                 {{ lineitem.quantity }}
 
