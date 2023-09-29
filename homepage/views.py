@@ -306,10 +306,19 @@ class AllProductListView(generic.ListView):
 
         product_all = context[self.context_object_name]
 
+        # Order Counts
+        order_counts = {}
+        for item in product_all:
+            if item.instance == 0:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__product=item).count()
+                order_counts[item.title] = order_count
+
         unique_categories = list(
             set([product.category for product in product_all]))
 
         context['categories'] = unique_categories
+        context['order_count'] = order_counts
         return context
 
 # All Services
@@ -337,10 +346,19 @@ class AllServiceListView(generic.ListView):
 
         service_all = context[self.context_object_name]
 
+        # Order Counts
+        order_counts = {}
+        for item in service_all:
+            if item.instance == 1:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__service=item).count()
+                order_counts[item.title] = order_count
+
         unique_categories = list(
             set([service.category for service in service_all]))
 
         context['categories'] = unique_categories
+        context['order_count'] = order_counts
         return context
 
 # Single Product
@@ -350,10 +368,13 @@ class SingleProductView(View):
     """View for listing SINGLE product instances."""
 
     def get(self, request, slug, *args, **kwargs):
+
         queryset = Product.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
+
         product = get_object_or_404(queryset, slug=slug)
+
         order_count = Order.objects.filter(
             status=2, lineitems__product=product).count()
 
@@ -378,10 +399,13 @@ class SingleServiceView(View):
     """View for listing SINGLE service instances."""
 
     def get(self, request, slug, *args, **kwargs):
+
         queryset = Service.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
+
         service = get_object_or_404(queryset, slug=slug)
+
         order_count = Order.objects.filter(
             status=2, lineitems__service=service).count()
 

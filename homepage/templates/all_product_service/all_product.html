@@ -151,7 +151,11 @@
                             </span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                 <span class="transactions">
-                                    {{ product.transactionscount }}
+                                    {% for title, count in order_count.items %}
+                                    {% if product.title == title %}
+                                    {{ count }}
+                                    {% endif %}
+                                    {% endfor %}
                                 </span>
                             </span>
                         </div>
