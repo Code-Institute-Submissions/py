@@ -16,8 +16,7 @@ from .models import Product, Service, Category, ServiceType, CodeType
 from homepage.models import STATUS
 from .validate_image import validate_image_size
 from .models import SCOPE_TYPE
-from checkout.models import Order, OrderLineItem
-
+from checkout.models import Order, OrderLineItem, ORDER_STATUS
 # Python
 import logging
 logger = logging.getLogger(__name__)
@@ -375,9 +374,11 @@ class ShoppingCartView(generic.ListView):
 
 # Order Management
 
+# READ Order ListView
+
 
 class AdminOrderListView(AdminRequiredMixin, generic.ListView):
-    """View for admin order instances."""
+    """ListView for admin/global orders. Another approach instead of View"""
     model = Order
     template_name = 'admin-dashboard/all_orders.html'
     context_object_name = 'all_orders'
@@ -407,7 +408,7 @@ class AdminOrderListView(AdminRequiredMixin, generic.ListView):
 
 
 class BuyerOrderListView(BuyerRequiredMixin, generic.ListView):
-    """View for user order instances."""
+    """ListView for user order instances. Another approach instead of View"""
     model = Order
     template_name = 'user-dashboard/all_orders.html'
     context_object_name = 'all_orders'
@@ -435,3 +436,41 @@ class BuyerOrderListView(BuyerRequiredMixin, generic.ListView):
 
         context['all_orders'] = all_orders
         return context
+
+# UPDATE Order ListView
+
+
+class BaseUpdateOrderView(AdminRequiredMixin, View):
+    """Base class for service list view."""
+    template_name = None
+
+    def get(self, request, order_number, *args, **kwargs):
+        context = self.get_context_data(order_number)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, order_number):
+        queryset = Order.objects.order_by('-date')
+        order = get_object_or_404(queryset, order_number=order_number)
+        status = ORDER_STATUS
+        return {
+            "order": order,
+            "status": status,
+            "user_authenticated": self.request.user.is_authenticated
+        }
+
+
+class AdminUpdateOrderView(BaseUpdateOrderView):
+    """View to update service instance"""
+    template_name = 'admin-dashboard/update_order.html'
+
+    def post(self, request, order_number, *args, **kwargs):
+        order = get_object_or_404(Order, order_number=order_number)
+
+        status = request.POST.get('status')
+        order.status = int(status)
+
+        order.save()
+
+        messages.success(
+            request, "Congratulations! The order instance has been updated!")
+        return redirect('all_orders_admin')

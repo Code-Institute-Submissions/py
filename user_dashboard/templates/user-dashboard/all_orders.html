@@ -52,6 +52,10 @@
                             <td>{{ order.order_number }}</td>
                             <td>{% for lineitem in order.lineitems.all %}
                                 {{ lineitem.quantity }}
+                                <!-- For Development -->
+                                {% for download in lineitem.service.download_url.all %}
+                                {{ download}}
+                                {% endfor %}
                                 {% endfor %}</td>
                             <td>{{ order.date }}</td>
                             <td>{{ order.order_total }}</td>

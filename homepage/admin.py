@@ -12,8 +12,7 @@ from product_service.models import (CodeType,
                                     Category,
                                     Product,
                                     Service,
-                                    Download,
-                                    Transaction)
+                                    Download,)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -132,23 +131,6 @@ class DownloadAdmin(admin.ModelAdmin):
     ordering = ('product',)
 
 
-class TransactionAdmin(admin.ModelAdmin):
-    list_display = (
-        'buyer',
-        'product',
-        'service',
-        'sku',
-        'price',
-        'paid',
-        'gateway',
-        'timestamp'
-    )
-    list_filter = ('product', 'service', 'gateway')
-    search_fields = ['gateway', 'timestamp']
-
-    ordering = ('-timestamp',)
-
-
 # User Related
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Comment, CommentAdmin)
@@ -162,4 +144,3 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Download, DownloadAdmin)
-admin.site.register(Transaction, TransactionAdmin)

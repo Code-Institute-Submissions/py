@@ -18,7 +18,8 @@ from allauth.account.views import LoginView, SignupView, LogoutView
 
 # Local Imports
 from .forms import CustomLoginForm, CustomSignupForm
-from product_service.models import Product, Service, Transaction
+from product_service.models import Product, Service
+from checkout.models import Order
 
 logger = logging.getLogger(__name__)
 # LOGIN, SIGUNUP & LOGOUT
@@ -53,7 +54,7 @@ class ProductBaseListView(generic.ListView):
         """Return products with a status of 2, ordered by creation date."""
         products = Product.objects.filter(status=2).annotate(
             likescount=Count('likes'),
-            transactionscount=Count('transactions')).order_by('-created_on')[:3]
+        ).order_by('-created_on')[:3]
 
         return products
 
@@ -70,7 +71,7 @@ class HomepageProductServiceView(ProductBaseListView):
         services = list(Service.objects.filter(
             status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on')[:3])
+        ).order_by('-created_on')[:3])
 
         product_single = []
         service_single = []
@@ -127,10 +128,10 @@ class AllProductServiceListView(generic.ListView):
         combined_list = self.combine_products_and_services(
             list(Product.objects.filter(status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on')),
+            ).order_by('-created_on')),
             list(Service.objects.filter(status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on'))
+            ).order_by('-created_on'))
         )
 
         # Filter the combined list based on the searched keyword
@@ -162,11 +163,11 @@ class AllProductServiceListView(generic.ListView):
             products = list(Product.objects.filter(
                 status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on'))
+            ).order_by('-created_on'))
             services = list(Service.objects.filter(
                 status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on'))
+            ).order_by('-created_on'))
 
             combined_list = self.combine_products_and_services(
                 products, services)
@@ -249,7 +250,7 @@ class AllProductListView(generic.ListView):
         try:
             return Product.objects.filter(status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on')
+            ).order_by('-created_on')
         except Exception as e:
             logger.error(f"Error fetching Product instances: {str(e)}")
             messages.error(self.request, 'Error fetching Product instances.')
@@ -280,7 +281,7 @@ class AllServiceListView(generic.ListView):
         try:
             return Service.objects.filter(status=2).annotate(
                 likescount=Count('likes'),
-                transactionscount=Count('transactions')).order_by('-created_on')
+            ).order_by('-created_on')
         except Exception as e:
             logger.error(f"Error fetching Service instances: {str(e)}")
             messages.error(self.request, 'Error fetching Service instances.')
@@ -306,19 +307,23 @@ class SingleProductView(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Product.objects.annotate(
             likescount=Count('likes'),
-            transactionscount=Count('transactions')).order_by('-created_on')
+        ).order_by('-created_on')
         product = get_object_or_404(queryset, slug=slug)
+        order_count = Order.objects.filter(
+            status=2, lineitems__product=product).count()
 
         # Check if user purchased or not
         if request.user.is_authenticated:
-            has_purchased = Transaction.objects.filter(
-                buyer=request.user, product=product).exists()
+            has_purchased = Order.objects.filter(
+                buyer_profile=request.user,
+                lineitems__product=product).exists()
         else:
             has_purchased = False
 
         return render(request, "single_product_service/single_product.html",
                       {
                           "product": product,
+                          "order_count": order_count,
                           "has_purchased": has_purchased,
                           "user_authenticated": request.user.is_authenticated
                       })
@@ -330,19 +335,23 @@ class SingleServiceView(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Service.objects.annotate(
             likescount=Count('likes'),
-            transactionscount=Count('transactions')).order_by('-created_on')
+        ).order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
+        order_count = Order.objects.filter(
+            status=2, lineitems__service=service).count()
 
         # Check if user purchased or not
         if request.user.is_authenticated:
-            has_purchased = Transaction.objects.filter(
-                buyer=request.user, service=service).exists()
+            has_purchased = Order.objects.filter(
+                buyer_profile=request.user,
+                lineitems__service=service).exists()
         else:
             has_purchased = False
 
         return render(request, "single_product_service/single_service.html",
                       {
                           "service": service,
+                          "order_count": order_count,
                           "has_purchased": has_purchased,
                           "user_authenticated": request.user.is_authenticated
                       })
@@ -366,12 +375,12 @@ class SortedProductServiceListView(generic.ListView):
         products = Product.objects.filter(status=2).annotate(
             lower_title=Lower('title'),
             likescount=Count('likes'),
-            transactionscount=Count('transactions')).order_by('created_on')
+        ).order_by('created_on')
 
         services = Service.objects.filter(status=2).annotate(
             lower_title=Lower('title'),
             likescount=Count('likes'),
-            transactionscount=Count('transactions')).order_by('created_on')
+        ).order_by('created_on')
 
         combined_list = self.combine_products_and_services(
             list(products),
@@ -395,7 +404,8 @@ class SortedProductServiceListView(generic.ListView):
                 combined_list.sort(key=lambda item: item.created_on)
 
         except Exception as e:
-            logger.error(f"Error while sorting products and services: {str(e)}")
+            logger.error(
+                f"Error while sorting products and services: {str(e)}")
             messages.error(self.request, 'That was not a valid sorting value.')
             return []
 

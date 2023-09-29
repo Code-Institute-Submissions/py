@@ -18,6 +18,13 @@ ORDER_STATUS = (
     (2, 'Completed'),
 )
 
+GATEWAY_TYPE = (
+    (0, 'Pending'),
+    (1, 'Stripe'),
+    (2, 'Manual'),
+    (3, 'Crypto'),
+)
+
 
 class Order(models.Model):
     status = models.IntegerField(choices=ORDER_STATUS, default=0)
@@ -37,6 +44,7 @@ class Order(models.Model):
     original_bag = models.TextField(null=False, blank=False, default='')
     # stripe_pid = models.CharField(max_length=254, null=False, blank=False,
     #                               default='')
+    gateway = models.IntegerField(choices=GATEWAY_TYPE, default=0)
 
     def _generate_order_number(self):
         """

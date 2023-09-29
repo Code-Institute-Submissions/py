@@ -46,13 +46,20 @@
                             <td>{{ order.order_number }}</td>
                             <td>{% for lineitem in order.lineitems.all %}
                                 {{ lineitem.quantity }}
+
+                                <!-- For Development -->
+                                {% for download in lineitem.service.download_url.all %}
+                                {{ download}}
+                                {% endfor %}
+
                                 {% endfor %}</td>
                             <td>{{ order.date }}</td>
                             <td>{{ order.order_total }}</td>
                             <td>{{ order.grand_total }}</td>
                             <td>{{ order.get_status_display }}</td>
                             <td>
-                                <a href="">Edit & Details</a>
+                                <a href="{% url 'admin_order_update' order.order_number %}">Edit &
+                                    Details</a>
                             </td>
                         </tr>
                         {% endfor %}

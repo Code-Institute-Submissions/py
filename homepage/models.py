@@ -26,10 +26,6 @@ class UserProfile(AbstractUser):
     role = models.IntegerField(choices=ROLES, default=0)
     type = models.IntegerField(choices=USER_TYPE, default=0)
     status = models.IntegerField(choices=STATUS, default=2)
-    user_transactions = models.ManyToManyField(
-        'product_service.Product',
-        through='product_service.Transaction',
-        related_name='user_profiles')
 
     class Meta:
         ordering = ['username']

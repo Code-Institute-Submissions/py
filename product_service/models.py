@@ -111,9 +111,8 @@ class Product(models.Model):
     comments = models.ManyToManyField(
         'homepage.Comment', related_name='product_comments', blank=True)
 
-    transactions = models.ManyToManyField(
-        'homepage.UserProfile', through='Transaction',
-        related_name='product_transactions', blank=True)
+    orders = models.ManyToManyField(
+        'checkout.Order', related_name='product_orders', blank=True)
 
     # Download Data
     download_url = models.ManyToManyField(
@@ -181,10 +180,6 @@ class Service(models.Model):
     comments = models.ManyToManyField(
         'homepage.Comment', related_name='service_comments', blank=True)
 
-    transactions = models.ManyToManyField(
-        'homepage.UserProfile', through='Transaction',
-        related_name='service_transactions', blank=True)
-
     # Download Data
     download_url = models.ManyToManyField(
         'Download', related_name='service_downloads', blank=True)
@@ -216,48 +211,48 @@ class Download(models.Model):
         return f'{self.file_url}'
 
 
-class Transaction(models.Model):
-    buyer = models.ForeignKey('homepage.UserProfile',
-                              on_delete=models.SET_NULL,
-                              related_name='buyer_transactions',
-                              null=True)
+# class Transaction(models.Model):
+#     buyer = models.ForeignKey('homepage.UserProfile',
+#                               on_delete=models.SET_NULL,
+#                               related_name='buyer_transactions',
+#                               null=True)
 
-    product = models.ForeignKey(
-        Product, on_delete=models.SET_NULL, null=True, blank=True)
+#     product = models.ForeignKey(
+#         Product, on_delete=models.SET_NULL, null=True, blank=True)
 
-    service = models.ForeignKey(
-        Service, on_delete=models.SET_NULL, null=True, blank=True)
+#     service = models.ForeignKey(
+#         Service, on_delete=models.SET_NULL, null=True, blank=True)
 
-    sku = models.CharField(max_length=64, null=True, blank=True)
+#     sku = models.CharField(max_length=64, null=True, blank=True)
 
-    price = models.DecimalField(
-        max_digits=6, decimal_places=2, null=True, blank=True)
+#     price = models.DecimalField(
+#         max_digits=6, decimal_places=2, null=True, blank=True)
 
-    paid = models.DecimalField(max_digits=6, decimal_places=2)
+#     paid = models.DecimalField(max_digits=6, decimal_places=2)
 
-    item_url = models.URLField(max_length=1024, null=True, blank=True)
+#     item_url = models.URLField(max_length=1024, null=True, blank=True)
 
-    gateway = models.IntegerField(choices=GATEWAY_TYPE, default=0)
+#     gateway = models.IntegerField(choices=GATEWAY_TYPE, default=0)
 
-    timestamp = models.DateTimeField(auto_now_add=True)
+#     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if self.product:
-            self.sku = self.product.sku
-            self.price = self.product.price
-            download_urls = self.product.download_url.all()
-            if download_urls.exists():
-                self.item_url = download_urls.first().file_url
-        elif self.service:
-            self.sku = self.service.sku
-            self.price = self.service.price
-            download_urls = self.service.download_url.all()
-            if download_urls.exists():
-                self.item_url = download_urls.first().file_url
-        super(Transaction, self).save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         if self.product:
+#             self.sku = self.product.sku
+#             self.price = self.product.price
+#             download_urls = self.product.download_url.all()
+#             if download_urls.exists():
+#                 self.item_url = download_urls.first().file_url
+#         elif self.service:
+#             self.sku = self.service.sku
+#             self.price = self.service.price
+#             download_urls = self.service.download_url.all()
+#             if download_urls.exists():
+#                 self.item_url = download_urls.first().file_url
+#         super(Transaction, self).save(*args, **kwargs)
 
-    class Meta:
-        ordering = ['product', 'service']
+#     class Meta:
+#         ordering = ['product', 'service']
 
-    def __str__(self):
-        return f'{self.buyer.username}'
+#     def __str__(self):
+#         return f'{self.buyer.username}'

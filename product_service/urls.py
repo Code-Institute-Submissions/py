@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, register_converter
 
 from .views import (AdminProductCreation,
                     ProductList,
@@ -11,8 +11,12 @@ from .views import (AdminProductCreation,
                     ServiceDelete,
                     ShoppingCartView,
                     AdminOrderListView,
-                    BuyerOrderListView,)
+                    BuyerOrderListView,
+                    AdminUpdateOrderView,)
+from .converters import OrderNumberConverter
 
+# Register the custom converter
+register_converter(OrderNumberConverter, 'order_number')
 
 urlpatterns = [
     # Admin product features
@@ -42,6 +46,9 @@ urlpatterns = [
          name='all_orders_admin'),
     path('account/user/order/', BuyerOrderListView.as_view(),
          name='all_orders_user'),
+    path('account/admin/order/update/<order_number:order_number>/',
+         AdminUpdateOrderView.as_view(),
+         name='admin_order_update'),
 
     # Frontend Bag View
     path('bag/', ShoppingCartView.as_view(),
