@@ -70,7 +70,6 @@ class CheckoutSuccess(TemplateView):
         order = get_object_or_404(Order, order_number=order_number)
         if request.user.is_authenticated:
             profile = UserProfile.objects.get(username=request.user)
-            print(f'USER: {profile}')
             # Attach the user's profile to the order
             order.buyer_profile = profile
             order.save()

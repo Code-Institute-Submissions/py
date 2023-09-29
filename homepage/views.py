@@ -387,6 +387,17 @@ class SortedProductServiceListView(generic.ListView):
             list(services)
         )
 
+        self.order_counts = {}
+        for item in combined_list:
+            if item.instance == 0:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__product=item).count()
+                self.order_counts[item.title] = order_count
+            else:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__service=item).count()
+                self.order_counts[item.title] = order_count
+
         try:
             if sortkey == 'title':
                 combined_list.sort(key=lambda item: item.title.lower())
@@ -425,6 +436,7 @@ class SortedProductServiceListView(generic.ListView):
         context['sortkey'] = self.sortkey
         context['direction'] = self.direction
         context['categories'] = unique_categories
+        context['order_count'] = self.order_counts
         return context
 
     def combine_products_and_services(self, products, services):

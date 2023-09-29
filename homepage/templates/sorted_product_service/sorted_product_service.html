@@ -6,7 +6,6 @@
     <!-- Product & Service Row-->
     <div class="row gx-4 gx-lg-5 mt-4">
         <p class="h1 fairplay-font text-center mb-4">Product & Service</p>
-
         <div class="row mb-4 m-0">
             <div class="col-12 text-center">
                 <p class="text-muted text-center mb-0">
@@ -182,7 +181,12 @@
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                 {{ item.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ item.transactionscount }} </span>
+                                {% for title, count in order_count.items %}
+                                {% if item.title == title %}
+                                {{ count }}
+                                {% endif %}
+                                {% endfor %}
+                            </span>
                         </div>
                     </div>
                 </div>
