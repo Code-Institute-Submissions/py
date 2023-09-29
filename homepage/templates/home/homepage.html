@@ -199,7 +199,12 @@
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                 {{ item.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ item.transactionscount }} </span>
+                                {% for title, count in order_count_combined.items %}
+                                {% if item.title == title %}
+                                {{ count }}
+                                {% endif %}
+                                {% endfor %}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -296,7 +301,12 @@
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                 {{ product.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ product.transactionscount }} </span>
+                                {% for title, count in order_count_product.items %}
+                                {% if product.title == title %}
+                                {{ count }}
+                                {% endif %}
+                                {% endfor %}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -386,7 +396,12 @@
                             <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                 {{ service.likescount }}</span>
                             <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {{ service.transactionscount }} </span>
+                                {% for title, count in order_count_service.items %}
+                                {% if service.title == title %}
+                                {{ count }}
+                                {% endif %}
+                                {% endfor %}
+                            </span>
                         </div>
                     </div>
                 </div>

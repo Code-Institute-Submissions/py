@@ -92,9 +92,38 @@ class HomepageProductServiceView(ProductBaseListView):
             combined_list.extend(products[:1])
             products = products[1:]
 
+        order_count_combined = {}
+        order_count_product = {}
+        order_count_service = {}
+
+        for item in combined_list:
+            if item.instance == 0:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__product=item).count()
+                order_count_combined[item.title] = order_count
+            else:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__service=item).count()
+                order_count_combined[item.title] = order_count
+
+        for item in product_single:
+            if item.instance == 0:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__product=item).count()
+                order_count_product[item.title] = order_count
+
+        for item in service_single:
+            if item.instance == 1:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__service=item).count()
+                order_count_service[item.title] = order_count
+
         context['combined_items'] = combined_list
         context['product_single'] = product_single
         context['service_single'] = service_single
+        context['order_count_combined'] = order_count_combined
+        context['order_count_product'] = order_count_product
+        context['order_count_service'] = order_count_service
         return context
 
 # All Product & Services
@@ -155,6 +184,7 @@ class AllProductServiceListView(generic.ListView):
         For the View.
         And conditional code if 'searched_items'.
         """
+        # # If YES searched_items run this
         if self.searched_items is not None:
             return self.searched_items
 
@@ -178,13 +208,27 @@ class AllProductServiceListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         """
-        For the template display.
+        For the template display. Comments are important.
         From here on the code will run based on get_queryset results.
         """
         context = super().get_context_data(**kwargs)
 
+        # Get results
         combined_list = self.get_queryset()
 
+        # Order Counts
+        order_counts = {}
+        for item in combined_list:
+            if item.instance == 0:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__product=item).count()
+                order_counts[item.title] = order_count
+            else:
+                order_count = Order.objects.filter(
+                    status=2, lineitems__service=item).count()
+                order_counts[item.title] = order_count
+
+        # Pagination
         paginator = Paginator(combined_list, self.paginate_by)
         page_number = self.request.GET.get('page', 1)
 
@@ -202,6 +246,7 @@ class AllProductServiceListView(generic.ListView):
         context['page_obj'] = page_obj
         context['categories'] = unique_categories
         context['is_paginated'] = len(combined_list) > self.paginate_by
+        context['order_count'] = order_counts
         return context
 
     def combine_products_and_services(self, products, services):
@@ -405,7 +450,10 @@ class SortedProductServiceListView(generic.ListView):
                 combined_list.sort(key=lambda item: float(item.likescount))
             elif sortkey == 'transactionscount':
                 combined_list.sort(
-                    key=lambda item: float(item.transactionscount))
+                    key=lambda item: (
+                        float(self.order_counts.get(item.title, 0)),
+                    )
+                )
             elif sortkey == 'price':
                 combined_list.sort(key=lambda item: float(item.price))
             elif sortkey == 'category':
