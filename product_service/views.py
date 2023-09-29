@@ -6,16 +6,17 @@ from django.contrib import messages
 from django.views.generic.edit import DeleteView
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse, reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 
 # Local imports
 from admin_dashboard.views import AdminRequiredMixin
+from user_dashboard.views import BuyerRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
 from .models import Product, Service, Category, ServiceType, CodeType
 from homepage.models import STATUS
 from .validate_image import validate_image_size
 from .models import SCOPE_TYPE
-from checkout.models import Order
+from checkout.models import Order, OrderLineItem
 
 # Python
 import logging
@@ -375,16 +376,53 @@ class ShoppingCartView(generic.ListView):
 # Order Management
 
 
-class OrderListView(AdminRequiredMixin, generic.ListView):
-    """View for order instances."""
+class AdminOrderListView(AdminRequiredMixin, generic.ListView):
+    """View for admin order instances."""
     model = Order
     template_name = 'admin-dashboard/all_orders.html'
     context_object_name = 'all_orders'
 
     def get_queryset(self):
         try:
-            return Order.objects.annotate(
+
+            queryset = Order.objects.annotate(
                 ordercount=Count('id')).order_by('-date')
+            queryset = queryset.prefetch_related(
+                Prefetch('lineitems', queryset=OrderLineItem.objects.select_related(
+                    'product', 'service'))
+            )
+            return queryset
+        except Exception as e:
+            logger.error(f"Error fetching Order instances: {str(e)}")
+            messages.error(self.request, 'Error fetching Order instances.')
+            return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        all_orders = context[self.context_object_name]
+
+        context['all_orders'] = all_orders
+        return context
+
+
+class BuyerOrderListView(BuyerRequiredMixin, generic.ListView):
+    """View for user order instances."""
+    model = Order
+    template_name = 'user-dashboard/all_orders.html'
+    context_object_name = 'all_orders'
+
+    def get_queryset(self):
+        try:
+            user = self.request.user
+            queryset = Order.objects.filter(buyer_profile=user).annotate(
+                ordercount=Count('id')).order_by('-date')
+
+            queryset = queryset.prefetch_related(
+                Prefetch('lineitems', queryset=OrderLineItem.objects.select_related(
+                    'product', 'service'))
+            )
+            return queryset
         except Exception as e:
             logger.error(f"Error fetching Order instances: {str(e)}")
             messages.error(self.request, 'Error fetching Order instances.')

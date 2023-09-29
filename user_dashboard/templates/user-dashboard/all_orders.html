@@ -1,4 +1,4 @@
-{% extends "admin-dashboard/base.html" %}
+{% extends "user-dashboard/base.html" %}
 
 {% block content%}
 <main class="pb-5 mb-5">
@@ -6,7 +6,6 @@
         <h1 class="mt-4">All orders</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">All created orders in Plexosoft's marketplace</li>
-
         </ol>
         <div class="card mb-4">
             <div class="card-header">
@@ -41,6 +40,13 @@
                     </tfoot>
                     <tbody>
                         {% for order in all_orders.all %}
+                        <!-- For development -->
+                        {% for lineitem in order.lineitems.all %}
+                        {{ lineitem.product }}
+                        {{ lineitem.service }}
+                        {{ lineitem.quantity }}
+                        {{ lineitem.lineitem_total }}
+                        {% endfor %}
                         <tr>
                             <td>{{ order.buyer_profile }}</td>
                             <td>{{ order.order_number }}</td>
@@ -52,7 +58,7 @@
                             <td>{{ order.grand_total }}</td>
                             <td>{{ order.get_status_display }}</td>
                             <td>
-                                <a href="">Edit & Details</a>
+                                <a href="">Details</a>
                             </td>
                         </tr>
                         {% endfor %}
