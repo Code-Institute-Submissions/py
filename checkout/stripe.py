@@ -12,17 +12,19 @@ from homepage.custom_context_processors import service_product_bag_content
 from django.conf import settings
 from product_service.models import (Product, Service)
 from .forms import OrderForm
-from .models import Order, OrderLineItem
+from .models import Order, OrderLineItem, GATEWAY_TYPE
 
 
 class StripeCheckoutView(View):
     def post(self, request):
+
         bag = request.session.get('item_bag', {})
 
         form_data = {
             'full_name': request.POST.get('full_name', ''),
             'email': request.POST.get('email', ''),
             'phone_number': request.POST.get('phone_number', ''),
+            'gateway': GATEWAY_TYPE[1][0],
         }
 
         order_form = OrderForm(request, form_data)
