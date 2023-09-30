@@ -440,7 +440,7 @@ class BuyerOrderListView(BuyerRequiredMixin, generic.ListView):
 # UPDATE Order ListView
 
 
-class BaseUpdateOrderView(AdminRequiredMixin, View):
+class AdminBaseUpdateOrderView(AdminRequiredMixin, View):
     """Base class for service list view."""
     template_name = None
 
@@ -459,7 +459,7 @@ class BaseUpdateOrderView(AdminRequiredMixin, View):
         }
 
 
-class AdminUpdateOrderView(BaseUpdateOrderView):
+class AdminUpdateOrderView(AdminBaseUpdateOrderView):
     """View to update service instance"""
     template_name = 'admin-dashboard/update_order.html'
 
@@ -468,9 +468,41 @@ class AdminUpdateOrderView(BaseUpdateOrderView):
 
         status = request.POST.get('status')
         order.status = int(status)
-
         order.save()
 
         messages.success(
             request, "Congratulations! The order instance has been updated!")
         return redirect('all_orders_admin')
+
+
+class UserBaseUpdateOrderView(BuyerRequiredMixin, View):
+    """Base class for service list view."""
+    template_name = None
+
+    def get(self, request, order_number, *args, **kwargs):
+        context = self.get_context_data(order_number)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, order_number):
+        queryset = Order.objects.order_by('-date')
+        order = get_object_or_404(queryset, order_number=order_number)
+        return {
+            "order": order,
+            "user_authenticated": self.request.user.is_authenticated
+        }
+
+
+class UserUpdateOrderView(UserBaseUpdateOrderView):
+    """View to update service instance"""
+    template_name = 'user-dashboard/update_order.html'
+
+    def post(self, request, order_number, *args, **kwargs):
+        order = get_object_or_404(Order, order_number=order_number)
+
+        email = request.POST.get('email')
+        order.email = email
+        order.save()
+
+        messages.success(
+            request, "Congratulations! The order instance has been updated!")
+        return redirect('all_orders_user')

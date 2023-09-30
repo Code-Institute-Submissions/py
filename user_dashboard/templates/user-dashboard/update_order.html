@@ -1,0 +1,206 @@
+{% extends "user-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-4 pb-5">
+        <div class="my-3">
+            <a class="my-0" href="{% url 'all_orders_user' %}">Return</a>
+        </div>
+        <hr>
+        <h1 class="mt-4">Order Update</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">You can update this order instance</li>
+        </ol>
+
+        <!-- Role Alert -->
+        {% if request.user.role == 1 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In order to update a order instance you need to be an admin.
+        </div>
+        {% elif request.user.role == 0%}
+
+        <!-- Form Container -->
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 col-md-12 d-inline-block">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if order.non_field_errors %}
+                    <div class="errors">{{ order.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center font-weight-light my-2">{% trans "Update Form" %}</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <!-- Order Number -->
+                            <div class="mb-3">
+                                <label for="order_number" class="form-label"><strong>Order Number</strong></label>
+                                <input type="text" name="order_number" class="form-control" id="order_number"
+                                    value="{{ order.order_number }}" required disabled>
+                                {% if order.order_number.errors %}
+                                <div class="errors">{{ order.order_number.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Date -->
+                            <div class="mb-3">
+                                <label for="date" class="form-label"><strong>Date</strong></label>
+                                <input type="text" name="date" class="form-control" id="date" value="{{ order.date }}"
+                                    required disabled>
+                                {% if order.date.errors %}
+                                <div class="errors">{{ order.date.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Buyer Profile -->
+                            <div class="mb-3">
+                                <label for="buyer_profile" class="form-label"><strong>Buyer</strong></label>
+                                <input type="text" name="buyer_profile" class="form-control" id="buyer_profile"
+                                    value="{{ order.buyer_profile }}" required disabled>
+                                {% if order.buyer_profile.errors %}
+                                <div class="errors">{{ order.buyer_profile.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Full Name -->
+                            <div class="mb-3">
+                                <label for="full_name" class="form-label"><strong>Name</strong></label>
+                                <input type="text" name="full_name" class="form-control" id="full_name"
+                                    value="{{ order.full_name }}" required disabled>
+                                {% if order.full_name.errors %}
+                                <div class="errors">{{ order.full_name.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label"><strong>Email</strong></label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    value="{{ order.email }}" required>
+                                {% if order.email.errors %}
+                                <div class="errors">{{ order.email.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label"><strong>Phone Number</strong></label>
+                                <input type="number" name="phone_number" class="form-control" id="phone_number"
+                                    value="{{ order.phone_number }}" required disabled>
+                                {% if order.phone_number.errors %}
+                                <div class="errors">{{ order.phone_number.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Inlineitems -->
+                            <div class="mb-3">
+                                <label for="lineitem" class="form-label"><strong>Items {{ order.lineitems.quantity }}
+                                    </strong></label>
+                                <select name="lineitem" class="form-control" id="lineitem" multiple="multiple" disabled>
+                                    {% for lineitem in order.lineitems.all %}
+                                    {% if lineitem.service %}
+                                    <option>{{ lineitem.service.get_instance_display }}: {{ lineitem.service.title }}
+                                        (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
+                                    </option>
+                                    {% else %}
+                                    <option>{{ lineitem.product.get_instance_display }}: {{ lineitem.product.title }}
+                                        (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
+                                    </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% if code.code.errors %}
+                                <div class="errors">{{ code.code.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Subtotal -->
+                            <div class="mb-3">
+                                <label for="order_total" class="form-label"><strong>Subtotal (€)</strong></label>
+                                <input type="number" name="order_total" class="form-control" id="order_total"
+                                    value="{{ order.order_total }}" required disabled>
+                                {% if order.order_total.errors %}
+                                <div class="errors">{{ order.order_total.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Grand Total -->
+                            <div class="mb-3">
+                                <label for="grand_total" class="form-label"><strong>Grand Total (€)</strong></label>
+                                <input type="number" name="grand_total" class="form-control" id="grand_total"
+                                    value="{{ order.grand_total }}" required disabled>
+                                {% if order.grand_total.errors %}
+                                <div class="errors">{{ order.grand_total.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Gateway -->
+                            <div class="mb-3">
+                                <label for="gateway" class="form-label"><strong>Gateway</strong></label>
+                                <input type="text" name="gateway" class="form-control" id="gateway"
+                                    value="{{ order.get_gateway_display }}" required disabled>
+                                {% if order.gateway.errors %}
+                                <div class="errors">{{ order.gateway.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label"><strong>Status</strong></label>
+                                <input type="text" name="status" class="form-control" id="status"
+                                    value="{{ order.get_status_display }}" required disabled>
+                                {% if order.status.errors %}
+                                <div class="errors">{{ order.status.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Download Links -->
+                            <div class="my-3 p-4">
+                                <div class="card shadow-lg border-0 rounded-lg">
+                                    <div class="card-header p-1">
+                                        <h4 class="text-center font-weight-light my-2">{% trans "Download" %}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-center">Do not share these links with anyone else
+                                        </p>
+                                        <ul class="list-group my-3 rounded text-center">
+                                            <li class="list-group-item text-center text-white bg-success"
+                                                aria-current="true">
+                                                Files</li>
+                                            {% for lineitem in order.lineitems.all %}
+                                            {% if lineitem.product %}
+                                            {% for download in lineitem.product.download_url.all %}
+                                            <li class="list-group-item"><a
+                                                    href="{{ download }}">{{ lineitem.product.title }}</a></li>
+                                            {% endfor %}
+                                            {% else %}
+                                            {% for download in lineitemm.service.download_url.all %}
+                                            <li class="list-group-item"><a
+                                                    href="{{ download }}">{{ lineitem.service.title }}</a></li>
+                                            {% endfor %}
+                                            {% endif %}
+
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4 text-center">
+                                <div class="col-12 d-inline-block">
+                                    <button type="submit" class="btn btn-success mx-1">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

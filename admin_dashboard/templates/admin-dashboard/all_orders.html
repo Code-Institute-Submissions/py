@@ -46,13 +46,11 @@
                             <td><a href="{% url 'admin_order_update' order.order_number %}">{{ order.order_number }}</a>
                             </td>
                             <td>{% for lineitem in order.lineitems.all %}
-                                {{ lineitem.quantity }}
-
-                                <!-- For Development -->
-                                {% for download in lineitem.service.download_url.all %}
-                                {{ download}}
-                                {% endfor %}
-
+                                {% if lineitem.product %}
+                                {{ lineitem.product.title }} ({{ lineitem.quantity }}),
+                                {% else %}
+                                {{ lineitem.service.title }} ({{ lineitem.quantity }}),
+                                {% endif %}
                                 {% endfor %}</td>
                             <td>{{ order.date }}</td>
                             <td>{{ order.order_total }}</td>

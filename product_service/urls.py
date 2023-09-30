@@ -12,7 +12,8 @@ from .views import (AdminProductCreation,
                     ShoppingCartView,
                     AdminOrderListView,
                     BuyerOrderListView,
-                    AdminUpdateOrderView,)
+                    AdminUpdateOrderView,
+                    UserUpdateOrderView,)
 from .converters import OrderNumberConverter
 
 # Register the custom converter
@@ -49,6 +50,10 @@ urlpatterns = [
     path('account/admin/order/update/<order_number:order_number>/',
          AdminUpdateOrderView.as_view(),
          name='admin_order_update'),
+    path('account/user/order/update/<order_number:order_number>/',
+         UserUpdateOrderView.as_view(),
+         name='user_order_update'),
+
 
     # Frontend Bag View
     path('bag/', ShoppingCartView.as_view(),

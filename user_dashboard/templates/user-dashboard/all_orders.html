@@ -18,7 +18,7 @@
                         <tr>
                             <th>Buyer</th>
                             <th>Order Number</th>
-                            <th>Quantity</th>
+                            <th>Items</th>
                             <th>Date</th>
                             <th>Subtotal</th>
                             <th>Grand total</th>
@@ -30,7 +30,7 @@
                         <tr>
                             <th>Buyer</th>
                             <th>Order Number</th>
-                            <th>Quantity</th>
+                            <th>Items</th>
                             <th>Date</th>
                             <th>Subtotal</th>
                             <th>Grand total</th>
@@ -40,29 +40,23 @@
                     </tfoot>
                     <tbody>
                         {% for order in all_orders.all %}
-                        <!-- For development -->
-                        {% for lineitem in order.lineitems.all %}
-                        {{ lineitem.product }}
-                        {{ lineitem.service }}
-                        {{ lineitem.quantity }}
-                        {{ lineitem.lineitem_total }}
-                        {% endfor %}
                         <tr>
                             <td>{{ order.buyer_profile }}</td>
-                            <td>{{ order.order_number }}</td>
+                            <td><a href="{% url 'user_order_update' order.order_number %}">{{ order.order_number }}</a>
+                            </td>
                             <td>{% for lineitem in order.lineitems.all %}
-                                {{ lineitem.quantity }}
-                                <!-- For Development -->
-                                {% for download in lineitem.service.download_url.all %}
-                                {{ download}}
-                                {% endfor %}
+                                {% if lineitem.product %}
+                                {{ lineitem.product.title }} ({{ lineitem.quantity }}),
+                                {% else %}
+                                {{ lineitem.service.title }} ({{ lineitem.quantity }}),
+                                {% endif %}
                                 {% endfor %}</td>
                             <td>{{ order.date }}</td>
                             <td>{{ order.order_total }}</td>
                             <td>{{ order.grand_total }}</td>
                             <td>{{ order.get_status_display }}</td>
                             <td>
-                                <a href="">Details</a>
+                                <a href="{% url 'user_order_update' order.order_number %}">Details & Update</a>
                             </td>
                         </tr>
                         {% endfor %}
