@@ -175,13 +175,23 @@
                                             {% for lineitem in order.lineitems.all %}
                                             {% if lineitem.product %}
                                             {% for download in lineitem.product.download_url.all %}
+                                            {% if download.status == 2 %}
                                             <li class="list-group-item"><a
-                                                    href="{{ download }}">{{ lineitem.product.title }}</a></li>
+                                                    href="{{ request.scheme }}s://{{ request.get_host }}/media/{{ download.file }}">{{ download.file_name }}
+                                                    ({{ download.product.title}})</a>
+                                            </li>
+                                            {% endif %}
                                             {% endfor %}
+
                                             {% else %}
-                                            {% for download in lineitemm.service.download_url.all %}
+
+                                            {% for download in lineitem.service.download_url.all %}
+                                            {% if download.status == 2 %}
                                             <li class="list-group-item"><a
-                                                    href="{{ download }}">{{ lineitem.service.title }}</a></li>
+                                                    href="{{ request.scheme }}s://{{ request.get_host }}/media/{{ download.file }}">{{ download.file_name }}
+                                                    ({{ download.service.title}})</a>
+                                            </li>
+                                            {% endif %}
                                             {% endfor %}
                                             {% endif %}
 

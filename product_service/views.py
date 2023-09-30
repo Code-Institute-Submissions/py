@@ -275,6 +275,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         scope = SCOPE_TYPE
         offer_code = service.code.all()
         offer_service = service.service.all()
+        files_selected = service.download_url.all()
 
         return {
             "categories": categories,
@@ -287,6 +288,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
             "offer_code": offer_code,
             "offer_service": offer_service,
             "related_downloads": related_downloads,
+            "files_selected": files_selected,
             "user_authenticated": self.request.user.is_authenticated
         }
 
@@ -333,6 +335,10 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
             service.image = image
 
         service.image_url = request.POST.get('image_url')
+
+        related_downloads = request.POST.getlist('related_downloads')
+        service.download_url.set(related_downloads)
+
         service.save()
 
         messages.success(

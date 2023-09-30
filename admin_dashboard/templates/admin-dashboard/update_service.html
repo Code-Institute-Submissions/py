@@ -230,7 +230,8 @@
                                 <select name="related_downloads" class="form-control" id="related_downloads"
                                     multiple="multiple" required>
                                     {% for url in related_downloads %}
-                                    <option value="{{ url.id }}">{{ url }}</option>
+                                    <option {% for file_selected in files_selected %}{% if file_selected == url %} selected
+                                    {% endif %}{% endfor %} value="{{ url.id }}">{{ url }}</option>
                                     {% endfor %}
                                 </select>
                                 {% if service.download_url.errors %}
