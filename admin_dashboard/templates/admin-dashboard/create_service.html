@@ -273,6 +273,16 @@
                                 <div class="form-text">{{ form.image_url.help_text }}</div>
                             </div>
 
+                            <!-- Download Files-->
+                            <div class="mb-3">
+                                <label for="download_url" class="form-label"><strong>File Download</strong></label>
+                                <input type="text" name="download_url" class="form-control text-center" id="download_url"
+                                    value="Update this field after service creation" disabled>
+                                {% if service.download_url.errors %}
+                                <div class="errors">{{ service.download_url.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <div class="row my-4 text-center">
                                 <div class="col-12 d-inline-block">
                                     <button type="submit" class="btn btn-success">Submit</button>

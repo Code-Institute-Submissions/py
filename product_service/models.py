@@ -192,6 +192,8 @@ class Service(models.Model):
 
 
 class Download(models.Model):
+    file_name = models.CharField(
+        max_length=64, unique=True, null=True, blank=True)
     product = models.ForeignKey(
         Product, related_name='product_downloads',
         on_delete=models.SET_NULL, null=True, blank=True)
@@ -200,15 +202,23 @@ class Download(models.Model):
         Service, related_name='service_downloads',
         on_delete=models.SET_NULL, null=True, blank=True)
 
-    file_url = models.URLField(max_length=1024, null=True, blank=True)
+    file = models.FileField(upload_to='downloads/', null=True, blank=True)
 
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ['product', 'service']
 
+    @property
+    def file_url(self):
+        if self.file:
+            # Assuming you want to generate a URL based on the current host
+            # You can change this logic if you have a specific host in mind
+            return self.file.url
+        return None
+
     def __str__(self):
-        return f'{self.file_url}'
+        return f'{self.file_name}'
 
 
 # class Transaction(models.Model):

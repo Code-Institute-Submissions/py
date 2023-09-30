@@ -223,6 +223,21 @@
                                 {% endif %}
                             </div>
 
+                            <!-- Download URL -->
+                            <div class="mb-3">
+                                <label for="related_downloads" class="form-label"><strong>Download URL
+                                    </strong></label>
+                                <select name="related_downloads" class="form-control" id="related_downloads"
+                                    multiple="multiple" required>
+                                    {% for url in related_downloads %}
+                                    <option value="{{ url.id }}">{{ url }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% if service.download_url.errors %}
+                                <div class="errors">{{ service.download_url.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <div class="row my-4 text-center">
                                 <div class="col-12 d-inline-block">
                                     <button type="submit" class="btn btn-success mx-1">Submit</button>

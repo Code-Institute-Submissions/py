@@ -82,6 +82,7 @@ class AdminProductCreationForm(forms.ModelForm):
 
 
 class AdminServiceCreationForm(forms.ModelForm):
+
     title = forms.CharField(
         required=True, help_text='Insert a descriptive title')
     price = forms.DecimalField(
@@ -103,7 +104,7 @@ class AdminServiceCreationForm(forms.ModelForm):
         else:
             self.save_m2m = lambda: (
                 instance.code.set(self.cleaned_data['code']),
-                instance.service.set(self.cleaned_data['service']))
+                instance.service.set(self.cleaned_data['service']),)
         return instance
 
     class Meta:

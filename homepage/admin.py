@@ -119,16 +119,17 @@ class ServiceAdmin(SummernoteModelAdmin):
 
 class DownloadAdmin(admin.ModelAdmin):
     list_display = (
+        'file_name',
         'product',
         'service',
         'file_url',
         'status',
     )
 
-    list_filter = ('product', 'service', 'status')
-    search_fields = ['file_url', 'status']
+    list_filter = ('status',)
+    search_fields = ['file_name', 'file_url', 'status']
 
-    ordering = ('product',)
+    ordering = ('file_name',)
 
 
 # User Related

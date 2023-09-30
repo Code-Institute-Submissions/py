@@ -12,7 +12,7 @@ from django.db.models import Count, Prefetch
 from admin_dashboard.views import AdminRequiredMixin
 from user_dashboard.views import BuyerRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
-from .models import Product, Service, Category, ServiceType, CodeType
+from .models import Product, Service, Category, ServiceType, CodeType, Download
 from homepage.models import STATUS
 from .validate_image import validate_image_size
 from .models import SCOPE_TYPE
@@ -260,12 +260,17 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def get_context_data(self, slug):
+
         categories = Category.objects.all()
         services = ServiceType.objects.all()
         codes = CodeType.objects.all()
 
         queryset = Service.objects.order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
+
+        # Dynamically filter choices for download_url based on the current instance
+        related_downloads = Download.objects.filter(service=service)
+
         status = STATUS
         scope = SCOPE_TYPE
         offer_code = service.code.all()
@@ -281,6 +286,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
             "scope": scope,
             "offer_code": offer_code,
             "offer_service": offer_service,
+            "related_downloads": related_downloads,
             "user_authenticated": self.request.user.is_authenticated
         }
 
@@ -327,7 +333,6 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
             service.image = image
 
         service.image_url = request.POST.get('image_url')
-
         service.save()
 
         messages.success(
