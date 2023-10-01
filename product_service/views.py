@@ -95,10 +95,16 @@ class BaseUpdateProductView(AdminRequiredMixin, View):
 
         queryset = Product.objects.order_by('-created_on')
         product = get_object_or_404(queryset, slug=slug)
+
+        # Dynamically filter choices for
+        # download_url based on the current instance
+        related_downloads = Download.objects.filter(product=product)
+
         status = STATUS
         scope = SCOPE_TYPE
         offer_code = product.code.all()
         offer_service = product.service.all()
+        files_selected = product.download_url.all()
 
         return {
             "categories": categories,
@@ -110,6 +116,8 @@ class BaseUpdateProductView(AdminRequiredMixin, View):
             "scope": scope,
             "offer_code": offer_code,
             "offer_service": offer_service,
+            "related_downloads": related_downloads,
+            "files_selected": files_selected,
             "user_authenticated": self.request.user.is_authenticated
         }
 
@@ -156,6 +164,9 @@ class AdminUpdateProductView(BaseUpdateProductView):
             product.image = image
 
         product.image_url = request.POST.get('image_url')
+
+        related_downloads = request.POST.getlist('related_downloads')
+        product.download_url.set(related_downloads)
 
         product.save()
 
@@ -268,7 +279,8 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         queryset = Service.objects.order_by('-created_on')
         service = get_object_or_404(queryset, slug=slug)
 
-        # Dynamically filter choices for download_url based on the current instance
+        # Dynamically filter choices for
+        # download_url based on the current instance
         related_downloads = Download.objects.filter(service=service)
 
         status = STATUS

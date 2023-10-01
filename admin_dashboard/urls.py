@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from .views import (AdminDashboard, AdminSettingsView,
-                    AdminPasswordChange, AdminRole)
+                    AdminPasswordChange, AdminRole, AdminDownloadCreation)
 
 
 urlpatterns = [
@@ -14,4 +14,6 @@ urlpatterns = [
          name='admin_change_password'),
     path('account/admin/role/', AdminRole.as_view(),
          name='admin_role'),
+    path('account/admin/download/create/', AdminDownloadCreation.as_view(),
+         name='admin_download_create'),
 ]
