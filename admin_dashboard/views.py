@@ -11,7 +11,6 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http import HttpResponse, Http404
-import uuid
 import os
 # Local Imports
 from homepage.models import UserProfile, STATUS
@@ -159,6 +158,13 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
 
 
 class DownloadWithToken(View):
+    """ Download file protection with: user is_authenticated,
+    user has placed an order, secret UUID token for file name,
+    str token for url name & renaming of the file when downloading with
+    Download model file_name.
+    All designed to hide the UUID token as the actual file name.
+    Remember to include permission on server production."""
+
     def get(self, request, download_token, *args, **kwargs):
         try:
             # Fetch the download instance associated with the token
