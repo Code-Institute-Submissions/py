@@ -33,7 +33,7 @@ DEBUG = IN_DEVELOPMENT
 if IN_DEVELOPMENT:
     ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
 else:
-    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
+    ALLOWED_HOSTS = ['plexosoft-2714f270803c.herokuapp.com',]
 
 # Application definition
 
