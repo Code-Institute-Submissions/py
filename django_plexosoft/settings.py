@@ -28,12 +28,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = IN_DEVELOPMENT
+DEBUG = True
 
-if IN_DEVELOPMENT:
-    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
-else:
-    ALLOWED_HOSTS = ['plexosoft-2714f270803c.herokuapp.com',]
+# if IN_DEVELOPMENT:
+#     ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
+# else:
+ALLOWED_HOSTS = ['plexosoft-2714f270803c.herokuapp.com',]
 
 # Application definition
 
