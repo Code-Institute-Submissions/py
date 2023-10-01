@@ -13,6 +13,7 @@ from django.contrib import messages
 # Local Imports
 from homepage.models import UserProfile
 from .forms import AdminDownloadCreationForm
+from product_service.models import Download
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -154,19 +155,19 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
 # # READ Product instances
 
 
-# class ProductBaseListView(AdminRequiredMixin, ListView):
-#     """ Base view for listing Product instances."""
-#     model = Product
+class DownloadBaseListView(AdminRequiredMixin, ListView):
+    """ Base view for listing Download instances. """
+    model = Download
 
-#     def get_queryset(self):
-#         """ Return product instances ordered by creation date."""
-#         return Product.objects.order_by('-created_on')
+    def get_queryset(self):
+        """ Return download instances ordered by creation date."""
+        return Download.objects.order_by('file_name')
 
 
-# class ProductList(ProductBaseListView):
-#     """ Read all created product instances tempalte"""
-#     template_name = 'admin-dashboard/all_products.html'
-#     context_object_name = 'admin_all_products'
+class DownloadList(DownloadBaseListView):
+    """ Read all created download instances tempalte """
+    template_name = 'admin-dashboard/all_downloads.html'
+    context_object_name = 'admin_all_downloads'
 
 
 # # UPDATE Product instance

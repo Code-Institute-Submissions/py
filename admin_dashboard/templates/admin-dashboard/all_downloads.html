@@ -1,0 +1,56 @@
+{% extends "admin-dashboard/base.html" %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid p-4 pt-0 pb-5">
+        <h1 class="mt-4">All downloads</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">All created download files in Plexosoft's marketplace</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Admin Created Downloads
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>File name</th>
+                            <th>Product</th>
+                            <th>Service</th>
+                            <th>File</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>File name</th>
+                            <th>Product</th>
+                            <th>Service</th>
+                            <th>File</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for item in admin_all_downloads.all %}
+                        <tr>
+                            <td>{{ item.file_name }}</td>
+                            <td>{% if not item.product %}N/A{%else%}{{ item.product }}{%endif%}</td>
+                            <td>{% if not item.service %}N/A{%else%}{{ item.service }}{%endif%}</td>
+                            <td>{{ item.file }}</td>
+                            <td>{{ item.get_status_display }}</td>
+                            <td>
+                                <a href="">Update or Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
