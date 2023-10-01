@@ -9,13 +9,16 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
-
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
+from django.http import HttpResponse, Http404
+import uuid
+import os
 # Local Imports
 from homepage.models import UserProfile, STATUS
 from .forms import AdminDownloadCreationForm
 from product_service.models import Download, Service, Product
 from product_service.validate_file import validate_file_size
+from checkout.models import Order
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -131,7 +134,6 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
 
         # Validating File MB
         file = request.FILES.get('file')
-        print(f'FILE CONDITION: {file}')
         if file is not None:
             max_upload_size = 500000000
             if file.size > max_upload_size:
@@ -149,11 +151,58 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
                 messages.success(
                     request,
                     "Congratulations! The download instance has been created!")
-                return redirect('admin_role')
+                return redirect('admin_all_downloads')
 
         return render(
             request, self.template_name,
             {'form': form})
+
+
+class DownloadWithToken(View):
+    def get(self, request, download_token, *args, **kwargs):
+        try:
+            # Fetch the download instance associated with the token
+            download_instance = Download.objects.get(
+                download_token=download_token)
+
+            # Check if the user is authorized to download
+            if not request.user.is_authenticated:
+                raise PermissionDenied(
+                    "You are not authorized to access this download.")
+
+            # Check if the user has placed an order
+            if not Order.objects.filter(buyer_profile=request.user).exists():
+                raise PermissionDenied(
+                    "You must have placed an order to access this download.")
+
+            # Construct the file path based on the 'file' field
+            file_path = download_instance.file.path
+
+            if os.path.exists(file_path):
+                # Get file extension
+                print(f'{ download_instance.file.name}')
+                file_extension = os.path.splitext(
+                    download_instance.file.name)[1]
+
+                # File name
+                filename = download_instance.file_name
+
+                # Serve the file
+                with open(file_path, 'rb') as file:
+                    response = HttpResponse(
+                        # direct download, do not display in the browser
+                        file.read(), content_type='application/octet-stream')
+                    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+                # Add file extension
+                if file_extension:
+                    response['Content-Disposition'] += file_extension
+                return response
+            else:
+                raise Http404("Download file not found.")
+
+        except Download.DoesNotExist:
+            raise Http404("Download not found.")
 
 # # READ Product instances
 
@@ -261,33 +310,33 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
 
         return redirect('admin_all_downloads')
 
-# # DELETE Product instance
+# # DELETE Download instance
 
 
-# class ProductDelete(AdminRequiredMixin, DeleteView):
-#     """View for deleting product instances."""
-#     model = Product
-#     template_name = None
-#     allowed_roles = [1]
+class DownloadDelete(AdminRequiredMixin, DeleteView):
+    """View for deleting download instances."""
+    model = Download
+    template_name = None
+    allowed_roles = [1]
 
-#     def dispatch(self, request, *args, **kwargs):
-#         product = self.get_object()
-#         if product.status == 2:
-#             messages.error(
-#                 request, "Error: product's status must be suspended or draft.")
-#             return redirect('admin_all_products')
+    def dispatch(self, request, *args, **kwargs):
+        download = self.get_object()
+        if download.status == 2:
+            messages.error(
+                request, "Error: product's status must be suspended or draft.")
+            return redirect('admin_all_downloads')
 
-#         if self.request.user.role not in self.allowed_roles:
-#             messages.error(
-#                 request, "Error: User does not have the required role")
-#             return redirect('admin_all_products')
+        if self.request.user.role not in self.allowed_roles:
+            messages.error(
+                request, "Error: User does not have the required role")
+            return redirect('admin_all_downloads')
 
-#         return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
-#     def get_object(self, queryset=None):
-#         slug = self.kwargs.get('slug')
-#         return get_object_or_404(Product, slug=slug)
+    def get_object(self, queryset=None):
+        item_id = self.kwargs.get('item_id')
+        return get_object_or_404(Download, pk=item_id)
 
-#     def get_success_url(self):
-#         messages.success(self.request, 'Product Instance has been deleted!')
-#         return reverse_lazy('admin_all_products')
+    def get_success_url(self):
+        messages.success(self.request, 'Download Instance has been deleted!')
+        return reverse_lazy('admin_all_downloads')

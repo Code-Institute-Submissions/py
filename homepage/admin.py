@@ -122,8 +122,9 @@ class DownloadAdmin(admin.ModelAdmin):
         'file_name',
         'product',
         'service',
-        'file_url',
         'status',
+        'download_token',
+        'created_on',
     )
 
     list_filter = ('status',)

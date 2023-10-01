@@ -52,7 +52,8 @@
                                     <strong>Product</strong>
                                 </label>
                                 <select name="product" class="form-select" id="product">
-                                    <option class="text-info" value="None" {% if download.product is None %} selected {% endif %}>
+                                    <option class="text-info" value="None" {% if download.product is None %} selected
+                                        {% endif %}>
                                         Unselected
                                     </option>
                                     {% for item in product.all %}
@@ -74,7 +75,8 @@
                                     <strong>Service</strong>
                                 </label>
                                 <select name="service" class="form-select" id="service">
-                                    <option class="text-info" value="None" {% if download.service is None %} selected {% endif %}>
+                                    <option class="text-info" value="None" {% if download.service is None %} selected
+                                        {% endif %}>
                                         Unselected
                                     </option>
                                     {% for item in service.all %}
@@ -124,6 +126,8 @@
                             <div class="row my-4 text-center">
                                 <div class="col-12 d-inline-block">
                                     <button type="submit" class="btn btn-success mx-1">Submit</button>
+                                    <button id="mymodal" class="btn btn-danger mx-1" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal3">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -135,4 +139,25 @@
     </div>
 </main>
 
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" action="{% url 'admin_delete_download' download.id %}">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Download</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this download instance?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary">Delete</button>
+                <button type="button" class="btn btn-success m-2" data-bs-dismiss="modal"
+                    aria-label="Close">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
 {% endblock %}

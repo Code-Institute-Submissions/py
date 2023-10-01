@@ -177,7 +177,7 @@
                                             {% for download in lineitem.product.download_url.all %}
                                             {% if download.status == 2 %}
                                             <li class="list-group-item"><a
-                                                    href="{{ request.scheme }}s://{{ request.get_host }}/media/{{ download.file }}">{{ download.file_name }}
+                                                    href="{% url 'download_with_token' download_token=download.download_token %}">{{ download.file_name }}
                                                     ({{ download.product.title}})</a>
                                             </li>
                                             {% endif %}

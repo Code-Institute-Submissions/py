@@ -6,7 +6,6 @@ from .views import (BuyerDashboard,
                     BuyerPasswordChange,
                     BuyerRole)
 
-
 urlpatterns = [
     path('account/user/', BuyerDashboard.as_view(),
          name='buyer_dashboard'),
@@ -17,4 +16,5 @@ urlpatterns = [
          name='buyer_change_password'),
     path('account/user/role/', BuyerRole.as_view(),
          name='buyer_role'),
+
 ]

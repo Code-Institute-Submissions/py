@@ -1,6 +1,9 @@
 from django.db import models
-
+import uuid
 from homepage.models import STATUS
+from django.utils import timezone
+import os
+from .utils import generate_download_token
 
 SCOPE_TYPE = (
     (0, 'NA'),
@@ -191,6 +194,14 @@ class Service(models.Model):
         return self.title
 
 
+def custom_upload_to(instance, filename):
+    """
+    Generates a unique filename based on the instance's token.
+    """
+    ext = filename.split('.')[-1]
+    return os.path.join('downloads', f'{instance.token}.{ext}')
+
+
 class Download(models.Model):
     file_name = models.CharField(
         max_length=64, unique=True, null=True, blank=True)
@@ -202,9 +213,15 @@ class Download(models.Model):
         Service, related_name='service_downloads',
         on_delete=models.SET_NULL, null=True, blank=True)
 
-    file = models.FileField(upload_to='downloads/', null=True, blank=True)
+    file = models.FileField(upload_to=custom_upload_to, null=True, blank=True)
 
     status = models.IntegerField(choices=STATUS, default=0)
+
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+
+    download_token = models.CharField(max_length=12, unique=True)
+
+    created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['product', 'service']
@@ -216,6 +233,20 @@ class Download(models.Model):
             # You can change this logic if you have a specific host in mind
             return self.file.url
         return None
+
+    def _generate_download_token(self):
+        return generate_download_token()
+
+    def save(self, *args, **kwargs):
+        if not self.download_token:
+            self.download_token = self._generate_download_token()
+
+        super().save(*args, **kwargs)
+
+    def is_valid(self):
+        # Define your logic for token validity here (e.g., expiration time)
+        expiration_time = timezone.now() - timezone.timedelta(hours=1)
+        return self.created_on >= expiration_time
 
     def __str__(self):
         return f'{self.file_name}'
