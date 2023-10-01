@@ -186,7 +186,6 @@ class DownloadWithToken(View):
 
             if os.path.exists(file_path):
                 # Get file extension
-                print(f'{ download_instance.file.name}')
                 file_extension = os.path.splitext(
                     download_instance.file.name)[1]
 
