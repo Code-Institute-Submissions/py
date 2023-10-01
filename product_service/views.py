@@ -14,7 +14,7 @@ from user_dashboard.views import BuyerRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
 from .models import Product, Service, Category, ServiceType, CodeType, Download
 from homepage.models import STATUS
-from .validate_image import validate_image_size
+from .validate_file import validate_image_size
 from .models import SCOPE_TYPE
 from checkout.models import Order, OrderLineItem, ORDER_STATUS
 # Python

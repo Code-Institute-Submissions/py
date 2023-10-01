@@ -1,0 +1,138 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-4 pb-5">
+        <div class="my-3">
+            <a class="my-0" href="{% url 'admin_all_downloads' %}">Return</a>
+        </div>
+        <hr>
+        <h1 class="mt-4">Download Update</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">You can update this download instance</li>
+        </ol>
+
+        <!-- Role Alert -->
+        {% if request.user.role == 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In order to update a download instance you need to be an admin.
+        </div>
+        {% elif request.user.role == 1%}
+
+        <!-- Form Container -->
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 col-md-12 d-inline-block">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if download.non_field_errors %}
+                    <div class="errors">{{ download.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center font-weight-light my-2">{% trans "Download File Details" %}</h4>
+                        </div>
+                        <div class="card-body">
+
+
+                            <!-- File Name -->
+                            <div class="mb-3">
+                                <label for="file_name" class="form-label"><strong>Name</strong></label>
+                                <input type="text" name="file_name" class="form-control" id="file_name"
+                                    value="{{ download.file_name }}" required>
+                                {% if download.file_name.errors %}
+                                <div class="errors">{{ download.file_name.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Product -->
+                            <div class="mb-3">
+                                <label for="product" class="form-label">
+                                    <strong>Product</strong>
+                                </label>
+                                <select name="product" class="form-select" id="product">
+                                    <option class="text-info" value="None" {% if download.product is None %} selected {% endif %}>
+                                        Unselected
+                                    </option>
+                                    {% for item in product.all %}
+                                    <option value="{{ item.id }}"
+                                        {% if download.product.title == item.title %}selected{% endif %}>
+                                        {{ item.title }}
+                                    </option>
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if download.product.errors %}
+                                <div class="errors">{{ download.product.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Service -->
+                            <div class="mb-3">
+                                <label for="service" class="form-label">
+                                    <strong>Service</strong>
+                                </label>
+                                <select name="service" class="form-select" id="service">
+                                    <option class="text-info" value="None" {% if download.service is None %} selected {% endif %}>
+                                        Unselected
+                                    </option>
+                                    {% for item in service.all %}
+                                    <option value="{{ item.id }}"
+                                        {% if download.service.title == item.title %}selected{% endif %}>
+                                        {{ item.title }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% if download.service.errors %}
+                                <div class="errors">{{ download.service.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <!-- File Input Field -->
+                            <div class="mb-3">
+                                <label for="file" class="form-label"><strong>File (Max: 500MB)</strong></label>
+                                <input type="file" name="file" id="file">
+                                {% if download.file %}
+                                <p>Current File: <a href="{{ download.file.url }}"
+                                        target="_blank">{{ download.file.name }}</a></p>
+                                {% else %}
+                                <p>No file is currently associated with this download instance.</p>
+                                {% endif %}
+                                {% if download.file.errors %}
+                                <div class="errors">{{ download.file.errors }}</div>
+                                {% endif %}
+                            </div>
+
+
+                            <!-- Status -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label"><strong>Status</strong></label>
+                                <select id="status" name="status" class="form-select">
+                                    <option value="{{ download.status }}" selected> {{ download.get_status_display }}
+                                    </option>
+                                    {% for status_int, status_str in status %}
+                                    {% if status_int != download.status %}
+                                    <option value="{{ status_int }}">{{ status_str }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% if download.status.errors %}
+                                <div class="errors">{{ download.status.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row my-4 text-center">
+                                <div class="col-12 d-inline-block">
+                                    <button type="submit" class="btn btn-success mx-1">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

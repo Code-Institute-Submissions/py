@@ -9,11 +9,13 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 
 # Local Imports
-from homepage.models import UserProfile
+from homepage.models import UserProfile, STATUS
 from .forms import AdminDownloadCreationForm
-from product_service.models import Download
+from product_service.models import Download, Service, Product
+from product_service.validate_file import validate_file_size
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -117,12 +119,13 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
         product = request.POST.get('product')
         service = request.POST.get('service')
 
-        single_instance = 1
+        form_ready = 1
         if not product and not service:
+            form_ready = 0
             form.add_error('product',
                            "Select at least one product or service instance.")
         elif product and service:
-            single_instance = 0
+            form_ready = 0
             form.add_error('product',
                            "Cannot select 2 instances at the same time.")
 
@@ -138,7 +141,7 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
             form.add_error('file',
                            "File field cannot be empty.")
 
-        if single_instance and file is not None:
+        if form_ready and file is not None:
             if form.is_valid():
                 download_instance = form.save(commit=False)
                 download_instance.save()
@@ -170,102 +173,93 @@ class DownloadList(DownloadBaseListView):
     context_object_name = 'admin_all_downloads'
 
 
-# # UPDATE Product instance
+# # UPDATE Download instance
 
 
-# class BaseUpdateProductView(AdminRequiredMixin, View):
-#     """Base class for product list view."""
-#     template_name = None
+class BaseUpdateDownloadView(AdminRequiredMixin, View):
+    """Base class for download update view."""
+    template_name = None
 
-#     def get(self, request, slug, *args, **kwargs):
-#         context = self.get_context_data(slug)
-#         return render(request, self.template_name, context)
+    def get(self, request, item_id, *args, **kwargs):
+        context = self.get_context_data(item_id)
+        return render(request, self.template_name, context)
 
-#     def get_context_data(self, slug):
-#         categories = Category.objects.all()
-#         services = ServiceType.objects.all()
-#         codes = CodeType.objects.all()
+    def get_context_data(self, item_id):
 
-#         queryset = Product.objects.order_by('-created_on')
-#         product = get_object_or_404(queryset, slug=slug)
+        product = Product.objects.filter(status=2).order_by('-created_on')
+        service = Service.objects.filter(status=2).order_by('-created_on')
 
-#         # Dynamically filter choices for
-#         # download_url based on the current instance
-#         related_downloads = Download.objects.filter(product=product)
+        download_set = Download.objects.order_by('file_name')
+        download_instance = get_object_or_404(
+            download_set, pk=item_id)
 
-#         status = STATUS
-#         scope = SCOPE_TYPE
-#         offer_code = product.code.all()
-#         offer_service = product.service.all()
-#         files_selected = product.download_url.all()
+        status = STATUS
 
-#         return {
-#             "categories": categories,
-#             "services": services,
-#             "codes": codes,
-
-#             "product": product,
-#             "status": status,
-#             "scope": scope,
-#             "offer_code": offer_code,
-#             "offer_service": offer_service,
-#             "related_downloads": related_downloads,
-#             "files_selected": files_selected,
-#             "user_authenticated": self.request.user.is_authenticated
-#         }
+        return {
+            "download": download_instance,
+            "status": status,
+            "product": product,
+            "service": service,
+            "user_authenticated": self.request.user.is_authenticated
+        }
 
 
-# class AdminUpdateProductView(BaseUpdateProductView):
-#     """View to update product instance"""
-#     template_name = 'admin-dashboard/update_product.html'
+class AdminUpdateDownloadView(BaseUpdateDownloadView):
+    """View to update download instance"""
+    template_name = 'admin-dashboard/update_download.html'
 
-#     def post(self, request, slug, *args, **kwargs):
+    def post(self, request, item_id, *args, **kwargs):
 
-#         product = get_object_or_404(Product, slug=slug)
+        download = get_object_or_404(Download, pk=item_id)
+        download.file_name = request.POST.get('file_name')
+        product_post = request.POST.get('product')
+        service_post = request.POST.get('service')
 
-#         product.title = request.POST.get('title')
-#         product.sku = request.POST.get('sku')
-#         product.price = request.POST.get('price')
+        # Handle 'None' values for Product
+        if product_post == 'None':
+            download.product = None
+        elif product_post != 'None':
+            try:
+                product = Product.objects.get(pk=product_post)
+                download.product = product
+            except Product.DoesNotExist:
+                messages.error(request, 'Product does not exist')
 
-#         product.category = Category.objects.get(
-#             pk=request.POST.get('category'))
+        # Handle 'None' values for Service
+        if service_post == 'None':
+            download.service = None
+        elif service_post != 'None':
+            try:
+                service = Service.objects.get(pk=service_post)
+                download.service = service
+            except Service.DoesNotExist:
+                messages.error(request, 'Service does not exist')
 
-#         status = request.POST.get('status')
-#         product.status = int(status)
+        # Extra validation
+        form_ready = 1
+        if product_post == 'None' and service_post == 'None':
+            form_ready = 0
+            messages.error(request,
+                           "Select at least one product or service instance.")
+        elif product_post != 'None' and service_post != 'None':
+            form_ready = 0
+            messages.error(request,
+                           "Cannot select 2 instances at the same time.")
 
-#         type = request.POST.get('type')
-#         product.type = int(type)
+        status = request.POST.get('status')
+        download.status = int(status)
 
-#         code = request.POST.getlist('code')
-#         product.code.set(code)
+        file = request.FILES.get(
+            'file')
+        if file and validate_file_size(request, file):
+            download.file = file
 
-#         services = request.POST.getlist('service')
-#         product.service.set(services)
+        if form_ready:
+            messages.success(
+                request, "Congratulations! The download instance has been updated!")
+            download.save()
 
-#         product.preview = request.POST.get('preview')
-
-#         product.docs = request.POST.get('docs')
-
-#         description = request.POST.get('description')
-#         product.description = description[:528]
-
-#         product.excerpt = request.POST.get('excerpt')
-
-#         image = request.FILES.get(
-#             'image')
-#         if image and validate_image_size(request, image):
-#             product.image = image
-
-#         product.image_url = request.POST.get('image_url')
-
-#         related_downloads = request.POST.getlist('related_downloads')
-#         product.download_url.set(related_downloads)
-
-#         product.save()
-
-#         messages.success(
-#             request, "Congratulations! The product instance has been updated!")
-#         return redirect('admin_product_update', slug=product.slug)
+        return redirect('admin_all_downloads')
 
 # # DELETE Product instance
 

@@ -43,7 +43,7 @@
                             <td>{{ item.file }}</td>
                             <td>{{ item.get_status_display }}</td>
                             <td>
-                                <a href="">Update or Delete</a>
+                                <a href="{% url 'admin_update_download' item.id %}">Update or Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
