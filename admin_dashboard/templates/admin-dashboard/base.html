@@ -101,16 +101,13 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Product & Service Management
+                            Asset Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
 
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="{% url 'admin_product_creation' %}">Create Product</a>
-                                <a class="nav-link" href="{% url 'admin_service_creation' %}">Create Service</a>
-
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                     data-bs-target="#pagesCollapseProduct" aria-expanded="false"
                                     aria-controls="pagesCollapseProduct">
@@ -120,10 +117,10 @@
                                 <div class="collapse" id="pagesCollapseProduct" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{% url 'admin_all_products' %}">Control</a>
+                                        <a class="nav-link" href="{% url 'admin_product_creation' %}">Create</a>
                                     </nav>
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Download</a>
+                                        <a class="nav-link" href="{% url 'admin_all_products' %}">Control</a>
                                     </nav>
                                 </div>
 
@@ -136,10 +133,10 @@
                                 <div class="collapse" id="pagesCollapseService" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="{% url 'admin_all_services' %}">Control</a>
+                                        <a class="nav-link" href="{% url 'admin_service_creation' %}">Create</a>
                                     </nav>
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Download</a>
+                                        <a class="nav-link" href="{% url 'admin_all_services' %}">Control</a>
                                     </nav>
                                 </div>
                             </nav>
@@ -149,7 +146,7 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRoles"
                             aria-expanded="false" aria-controls="collapseRoles">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Asset Management
+                            File Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseRoles" aria-labelledby="headingOne"
