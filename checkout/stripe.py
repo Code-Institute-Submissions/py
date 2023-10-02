@@ -9,10 +9,14 @@ from django.views.generic import TemplateView, ListView, View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from homepage.custom_context_processors import service_product_bag_content
+from homepage.models import UserProfile
 from django.conf import settings
 from product_service.models import (Product, Service)
 from .forms import OrderForm
 from .models import Order, OrderLineItem, GATEWAY_TYPE
+import uuid
+from product_service.utils import generate_random_password
+from allauth.account.models import EmailAddress
 
 
 class StripeCheckoutView(View):
@@ -29,6 +33,30 @@ class StripeCheckoutView(View):
 
         order_form = OrderForm(request, form_data)
         if order_form.is_valid():
+
+            # Generate a random username
+            random_uuid = uuid.uuid4()
+            username = str(random_uuid).replace("-", "")
+
+            # Create or get the user based on the email
+            user, created = UserProfile.objects.get_or_create(
+                username=username, email=form_data['email'])
+
+            # Set user's password, full name, and email (set primary)
+            # if it's a new user
+            if created:
+                password = generate_random_password()
+                user.set_password(password)
+
+            user.first_name = form_data['full_name']
+            user.save()
+
+            # Create/get NEW user profile and associate it with the new user
+            user_profile, created = UserProfile.objects.get_or_create(
+                username=user)
+
+            order = order_form.save(commit=False)
+            order.buyer_profile = user_profile
             order = order_form.save()
 
             for item_type, item_data in bag.items():
@@ -68,6 +96,7 @@ class StripeCheckoutView(View):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
+            messages.info(request, f'Your new temporal password is {password}')
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(
