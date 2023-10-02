@@ -46,6 +46,7 @@ nav:
       - Naming Convention: snack/developer-snack/naming_convention.md
       - Lambda Convention: snack/developer-snack/lambda.md
       - Database & Django Shell: snack/developer-snack/shell_database.md
+      - Download Security: snack/developer-snack/download_security.md
   - About:
       - Plexosoft Docs: about/about.md
       - License: about/LICENSE.md

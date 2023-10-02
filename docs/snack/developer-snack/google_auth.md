@@ -87,7 +87,10 @@ SOCIALACCOUNT_PROVIDERS = {
     site_ids = Site.objects.all()
 
     for item in site_ids:
-        print(item)
+        print(item.id)
+
+    # Or you can try creating it:
+
     # Development:
     dev_site = Site.objects.create(domain='8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io', name='Development Site')
 

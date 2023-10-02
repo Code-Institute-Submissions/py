@@ -79,7 +79,7 @@
     // Decode the URL-encoded password parameter
     var encodedPassword = "{{ password }}";
     var password = decodeURIComponent(encodedPassword);
-    if (password) {
+    if (password != 'None') {
         // Create a hidden link element and trigger the download
         var downloadLink = document.createElement('a');
         downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(password);

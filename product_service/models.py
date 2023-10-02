@@ -2,8 +2,9 @@ from django.db import models
 import uuid
 from homepage.models import STATUS
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 import os
-from .utils import generate_download_token
+from .utils import generate_download_token, custom_upload_to
 
 SCOPE_TYPE = (
     (0, 'NA'),
@@ -194,14 +195,6 @@ class Service(models.Model):
         return self.title
 
 
-def custom_upload_to(instance, filename):
-    """
-    Generates a unique filename based on the instance's token.
-    """
-    ext = filename.split('.')[-1]
-    return os.path.join('downloads', f'{instance.token}.{ext}')
-
-
 class Download(models.Model):
     file_name = models.CharField(
         max_length=64, unique=True, null=True, blank=True)
@@ -244,9 +237,9 @@ class Download(models.Model):
         super().save(*args, **kwargs)
 
     def is_valid(self):
-        # Define your logic for token validity here (e.g., expiration time)
-        expiration_time = timezone.now() - timezone.timedelta(hours=1)
-        return self.created_on >= expiration_time
+        expiration_time = self.created_on + relativedelta(years=1)
+        current_time = timezone.now()
+        return current_time <= expiration_time
 
     def __str__(self):
         return f'{self.file_name}'

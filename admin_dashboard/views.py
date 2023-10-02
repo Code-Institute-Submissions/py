@@ -171,6 +171,13 @@ class DownloadWithToken(View):
             download_instance = Download.objects.get(
                 download_token=download_token)
 
+            # If yearly availability has been reached
+            if not download_instance.is_valid():
+                messages.error(request, '''Awaiting for update:
+                 please contact the support team.''')
+                raise PermissionDenied(
+                    "You are not authorized to access this download.")
+
             # Check if the user is authorized to download
             if not request.user.is_authenticated:
                 raise PermissionDenied(
