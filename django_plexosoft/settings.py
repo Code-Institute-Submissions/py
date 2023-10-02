@@ -28,12 +28,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = IN_DEVELOPMENT
 
-# if IN_DEVELOPMENT:
-#     ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
-# else:
-ALLOWED_HOSTS = ['plexosoft-2714f270803c.herokuapp.com',]
+if IN_DEVELOPMENT:
+    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
 
 # Application definition
 
@@ -145,17 +145,17 @@ SOCIALACCOUNT_PROVIDERS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if IN_DEVELOPMENT:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
+# if IN_DEVELOPMENT:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+# else:
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
 
 # Password validation

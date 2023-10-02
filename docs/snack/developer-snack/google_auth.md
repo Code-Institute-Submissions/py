@@ -85,10 +85,10 @@ SOCIALACCOUNT_PROVIDERS = {
     from django.contrib.sites.models import Site
 
     # Development:
-    dev_site = Site.objects.create(domain='dev.example.com', name='Development Site')
+    dev_site = Site.objects.create(domain='8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io', name='Development Site')
 
     # Production:
-    prod_site = Site.objects.create(domain='www.example.com', name='Production Site')
+    prod_site = Site.objects.create(domain='plexosoft-2714f270803c.herokuapp.com', name='Production Site')
 
     print(f"Development Site ID: {dev_site.id}")
     print(f"Production Site ID: {prod_site.id}")
