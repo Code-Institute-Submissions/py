@@ -11,6 +11,7 @@ from homepage.models import UserProfile
 import stripe
 from homepage.custom_context_processors import service_product_bag_content
 from django.conf import settings
+from django.contrib.sessions.models import Session
 
 
 class Checkout(TemplateView):
@@ -33,6 +34,7 @@ class CheckoutSuccess(TemplateView):
     template_name = 'checkout/success.html'
 
     def get(self, request, order_number):
+
         self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
         stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
@@ -89,11 +91,16 @@ class CheckoutSuccess(TemplateView):
         if 'item_bag' in request.session:
             # Delete() bag after order creation & success message
             del request.session['item_bag']
+
+        self.download_password = request.session.get('download_password')
         return super().get(request)
 
     def get_context_data(self, **kwargs):
+        # Retrieve the password from the session variable
+
         context = super().get_context_data(**kwargs)
         context['order'] = self.order
         context['session_id'] = self.session_id
         context['stripe_public_key'] = self.stripe_public_key
+        context['password'] = self.download_password
         return context

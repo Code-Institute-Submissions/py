@@ -76,6 +76,19 @@
             });
         });
 
+    // Decode the URL-encoded password parameter
+    var encodedPassword = "{{ password }}";
+    var password = decodeURIComponent(encodedPassword);
+    if (password) {
+        // Create a hidden link element and trigger the download
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(password);
+        downloadLink.download = 'password.txt';
+        downloadLink.style.display = 'none';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
     };
 </script>
 

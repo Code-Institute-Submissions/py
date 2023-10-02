@@ -16,7 +16,8 @@ from .forms import OrderForm
 from .models import Order, OrderLineItem, GATEWAY_TYPE
 import uuid
 from product_service.utils import generate_random_password
-from allauth.account.models import EmailAddress
+from django.contrib.sessions.models import Session
+from urllib.parse import quote
 
 
 class StripeCheckoutView(View):
@@ -38,18 +39,25 @@ class StripeCheckoutView(View):
             random_uuid = uuid.uuid4()
             username = str(random_uuid).replace("-", "")
 
-            # Create or get the user based on the email
-            user, created = UserProfile.objects.get_or_create(
-                username=username, email=form_data['email'])
-
-            # Set user's password, full name, and email (set primary)
-            # if it's a new user
-            if created:
+            try:
+                # Try to get the user based on the email address
+                user = UserProfile.objects.get(email=form_data['email'])
+                messages.info(
+                    request, f'Log in to find your order!')
+            except UserProfile.DoesNotExist:
+                # If the user doesn't exist, create a new one
+                user = UserProfile.objects.create_user(
+                    username=username, email=form_data['email'])
                 password = generate_random_password()
+                encoded_password = quote(password)
+                request.session['download_password'] = encoded_password
                 user.set_password(password)
-
-            user.first_name = form_data['full_name']
-            user.save()
+                user.first_name = form_data['full_name']
+                user.save()
+                messages.info(
+                    request, f'''Your new password <strong>{password}</strong>
+                    has been downloaded!
+                    <br> Password also sent to your email.''')
 
             # Create/get NEW user profile and associate it with the new user
             user_profile, created = UserProfile.objects.get_or_create(
@@ -96,7 +104,6 @@ class StripeCheckoutView(View):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            messages.info(request, f'Your new temporal password is {password}')
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(
