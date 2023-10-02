@@ -114,7 +114,7 @@ AUTHENTICATION_BACKENDS = [
 if IN_DEVELOPMENT:
     SITE_ID = 2  # ID for development domain
 else:
-    SITE_ID = 1  # ID for production domain
+    SITE_ID = 2  # ID for production domain
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -145,17 +145,17 @@ SOCIALACCOUNT_PROVIDERS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# if IN_DEVELOPMENT:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-# else:
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+if IN_DEVELOPMENT:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
 
 # Password validation

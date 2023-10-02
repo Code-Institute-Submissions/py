@@ -84,6 +84,10 @@ SOCIALACCOUNT_PROVIDERS = {
     python3 manage.py shell
     from django.contrib.sites.models import Site
 
+    site_ids = Site.objects.all()
+
+    for item in site_ids:
+        print(item)
     # Development:
     dev_site = Site.objects.create(domain='8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io', name='Development Site')
 
