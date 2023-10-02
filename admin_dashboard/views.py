@@ -12,12 +12,14 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http import HttpResponse, Http404
 import os
+from django.http import HttpResponseForbidden
 # Local Imports
 from homepage.models import UserProfile, STATUS
 from .forms import AdminDownloadCreationForm
 from product_service.models import Download, Service, Product
 from product_service.validate_file import validate_file_size
 from checkout.models import Order
+from product_service.utils import check_rate_limit
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -167,6 +169,9 @@ class DownloadWithToken(View):
 
     def get(self, request, download_token, *args, **kwargs):
         try:
+            rate_limit_response = check_rate_limit(request)
+            if rate_limit_response:
+                return rate_limit_response
             # Fetch the download instance associated with the token
             download_instance = Download.objects.get(
                 download_token=download_token)
@@ -215,6 +220,7 @@ class DownloadWithToken(View):
 
         except Download.DoesNotExist:
             raise Http404("Download not found.")
+
 
 # # READ Product instances
 

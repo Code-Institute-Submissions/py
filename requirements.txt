@@ -1,4 +1,5 @@
 asgiref==3.7.2
+async-timeout==4.0.3
 cairocffi==1.6.1
 CairoSVG==2.7.1
 click==8.1.6

@@ -31,9 +31,10 @@ IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
 DEBUG = IN_DEVELOPMENT
 
 if IN_DEVELOPMENT:
-    ALLOWED_HOSTS = ['8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io',]
+    ALLOWED_HOSTS = [os.environ.get('GITPOD_WORKSPACE_URL'),]
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
+
 
 # Application definition
 
@@ -216,3 +217,10 @@ GRAND_DISCOUNT_PERCENTAGE = 10
 
 NORMAL_DISCOUNT_THRESHOLD = 40
 NORMAL_DISCOUNT_PERCENTAGE = 5
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
