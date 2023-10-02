@@ -7,7 +7,7 @@
 
 /* General Styling */
 .text-side-cart-small {
-    cursor:default;
+    cursor: default;
     font-size: 12px;
     font-weight: 500;
     color: white;
@@ -165,9 +165,11 @@ a {
     color: transparent;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 50px;
     opacity: 0;
     cursor: pointer;
+    left: 0px;
+    bottom: 0.01px;
 }
 
 .btn-cart {

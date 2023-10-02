@@ -104,10 +104,11 @@
                     <!-- Card Footer -->
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     {% if service.status == 2 %}
-                    <div class="card-footer text-center fs-5 btn" style="position: relative;">
+                    <div class="card-footer text-center fs-5 btn">
                         <input class="add-to-cart" type="submit" value="1" name="quantity">
                         Add to Cart
                     </div>
+                    
                     {% elif service.status == 1 %}
                     <button class="card-footer text-center fs-5 btn">SUSPENDED SERVICE</button>
                     {% elif service.status == 0 %}
