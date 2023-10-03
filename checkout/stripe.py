@@ -1,23 +1,19 @@
-import stripe
-import os
+# Python standard library imports
+import uuid
+from urllib.parse import quote
+
+# Third-party library imports (Django)
 from django.contrib import messages
-from django.http import JsonResponse
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
-from django.views import View
-from django.views.generic import TemplateView, ListView, View
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from homepage.custom_context_processors import service_product_bag_content
+from django.views.generic import View
+
+# Application-specific imports
 from homepage.models import UserProfile
-from django.conf import settings
-from product_service.models import (Product, Service)
+from product_service.models import Product, Service
+from product_service.utils import generate_random_password
 from .forms import OrderForm
 from .models import Order, OrderLineItem, GATEWAY_TYPE
-import uuid
-from product_service.utils import generate_random_password
-from django.contrib.sessions.models import Session
-from urllib.parse import quote
 
 
 class StripeCheckoutView(View):

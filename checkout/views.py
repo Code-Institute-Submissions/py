@@ -1,17 +1,19 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+# Python standard library imports
+import os
+
+# Third-party library imports (Django and Stripe)
+from django.conf import settings
 from django.contrib import messages
-from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
+from django.views.generic import TemplateView
+import stripe
+
+# Application-specific imports
+from homepage.models import UserProfile
+from homepage.custom_context_processors import service_product_bag_content
 from .forms import OrderForm
 from .models import Order
-import os
-from product_service.models import (Product, Service)
-from homepage.models import UserProfile
-import stripe
-from homepage.custom_context_processors import service_product_bag_content
-from django.conf import settings
-from django.contrib.sessions.models import Session
 
 
 class Checkout(TemplateView):
