@@ -12,7 +12,15 @@
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-white-border text-white mb-4">
-                    <div class="card-body">Placeholder</div>
+                    <div class="card-body">My orders</div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a class="stretched-link" href="{% url 'all_orders_user' %}"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-white-border text-white mb-4">
+                    <div class="card-body">My Likes</div>
                     <div class="d-flex align-items-center justify-content-between">
                         <a class="stretched-link" href=""></a>
                     </div>
@@ -20,15 +28,7 @@
             </div>
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-white-border text-white mb-4">
-                    <div class="card-body">Placeholder</div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a class="stretched-link" href=""></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-white-border text-white mb-4">
-                    <div class="card-body">Placeholder</div>
+                    <div class="card-body">My Comments</div>
                     <div class="d-flex align-items-center justify-content-between">
                         <a class="stretched-link" href="#"></a>
                     </div>
@@ -36,9 +36,9 @@
             </div>
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-white-border text-white mb-4">
-                    <div class="card-body">Placeholder</div>
+                    <div class="card-body">My Settings</div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <a class="stretched-link" href=""></a>
+                        <a class="stretched-link" href="{% url 'buyer_settings' %}"></a>
                     </div>
                 </div>
             </div>
@@ -48,35 +48,44 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Event Overview
-                <small> (Admin Created)</small>
+                Order Overview
             </div>
             <div class="card-body">
-                <table class="datatablesSimple">
+                <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
+                            <th>Order Number</th>
+                            <th>Items</th>
                             <th>Status</th>
-                            <th>Location</th>
-                            <th>Created On</th>
-                            <th>Expire On</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
+                            <th>Order Number</th>
+                            <th>Items</th>
                             <th>Status</th>
-                            <th>Location</th>
-                            <th>Created On</th>
-                            <th>Expire On</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
-
+                        {% for order in buyer_dashboard.order_instance.all %}
+                        <tr>
+                            <td><a href="{% url 'user_order_update' order.order_number %}">{{ order.order_number }}</a>
+                            </td>
+                            <td>{% for lineitem in order.lineitems.all %}
+                                {% if lineitem.product %}
+                                {{ lineitem.product.title }} ({{ lineitem.quantity }}),
+                                {% else %}
+                                {{ lineitem.service.title }} ({{ lineitem.quantity }}),
+                                {% endif %}
+                                {% endfor %}</td>
+                            <td>{{ order.get_status_display }}</td>
+                            <td>
+                                <a href="{% url 'user_order_update' order.order_number %}">View</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

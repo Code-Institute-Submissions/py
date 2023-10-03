@@ -523,9 +523,11 @@ class UserUpdateOrderView(UserBaseUpdateOrderView):
         order = get_object_or_404(Order, order_number=order_number)
 
         email = request.POST.get('email')
-        order.email = email
-        order.save()
-
-        messages.success(
-            request, "Congratulations! The order instance has been updated!")
+        if email != request.user.email:
+            messages.error(request, 'Please, use your own email!')
+        else:
+            order.email = email
+            order.save()
+            messages.success(
+                request, "Congratulations! The order has been updated!")
         return redirect('all_orders_user')

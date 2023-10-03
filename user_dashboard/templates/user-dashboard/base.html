@@ -66,17 +66,17 @@
             <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Main</div>
+                        <div class="sb-sidenav-menu-heading">Overview</div>
                         <a class="nav-link" href="{% url 'buyer_dashboard' %}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
+                        <div class="sb-sidenav-menu-heading">Marketplace</div>
 
                         <!-- User Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                             Order Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -87,56 +87,25 @@
                             </nav>
                         </div>
 
-                        <!--  Product & Service Management -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Placeholder
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        <!--  Likes & Comments -->
+                        <a class="nav-link" href="{% url 'buyer_role' %}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-heart"></i></div>
+                            My Likes
+                        </a>
+                        <a class="nav-link" href="{% url 'buyer_role' %}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
+                            My Comments
                         </a>
 
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="">Placeholder</a>
-                                <a class="nav-link" href="">Placeholder</a>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseEvent" aria-expanded="false"
-                                    aria-controls="pagesCollapseEvent">
-                                    Placeholder
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseEvent" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Create</a>
-                                    </nav>
-                                </div>
-
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Placeholder
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="">Placeholder</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                        </div>
-
                         <!-- My role -->
-                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <div class="sb-sidenav-menu-heading">My Account</div>
                         <a class="nav-link" href="{% url 'buyer_role' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-user"></i></div>
                             My Role
                         </a>
                         <!-- My Settings -->
                         <a class="nav-link" href="{% url 'buyer_settings' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-gears"></i></i></div>
                             My Settings
                         </a>
                     </div>
@@ -181,15 +150,17 @@
         <div id="layoutSidenav_content">
             <!-- Messages -->
             {% if messages %}
-            <div class="row mt-4 mb-0 mx-3 alert card alert-success py-1 text-center text-black alert-dismissible"
-                role="alert">
-                <div class="col-12 card-body">
-                    {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }} mb-0" {% endif %}>{{ message|safe }}</p>
-                    {% endfor %}
+            {% for message in messages %}
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="mt-5 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-black alert-dismissible"
+                    role="alert">
+                    <div class="card-body text-center">
+                        <p {% if message.tags %} class="mb-0 px-4" {% endif %}> {{ message|safe }}</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            {% endfor %}
             {% endif %}
             {% block content %}
 
@@ -198,17 +169,17 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted mt-5 footer-sticky">
+    <footer class="text-center text-lg-start bg-light text-white mt-5 footer-sticky">
         <!-- Copyright -->
         <div class="text-center pt-4 px-4 footer-bg">
             © {{ copyright }} Copyright
-            <a class="text-reset fw-bold" href="https://github.com/plexoio/py">Plexosoft</a>
+            <a class="text-reset fw-bold text-white" href="https://github.com/plexoio/py">Plexosoft</a>
         </div>
         <!-- Terms & GDPR -->
         <div class="text-center pb-4 px-4 footer-bg m-0">
-            <a href="" target="_blank">Privacy Policy</a>
+            <a class="text-white" href="" target="_blank">Privacy Policy</a>
             &middot;
-            <a href="" target="_blank">Terms &amp; Conditions</a>
+            <a class="text-white" href="" target="_blank">Terms &amp; Conditions</a>
         </div>
     </footer>
 

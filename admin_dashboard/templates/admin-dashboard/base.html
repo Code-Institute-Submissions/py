@@ -216,14 +216,14 @@
             <!-- Messages -->
             {% if messages %}
             {% for message in messages %}
-            <div class="row mt-4 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-center text-black alert-dismissible"
-                role="alert">
-                <div class="col-12 card-body">
-
-                    <p {% if message.tags %} class="mb-0" {% endif %}> {{ message|safe }}</p>
-
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="mt-5 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-black alert-dismissible"
+                    role="alert">
+                    <div class="card-body text-center">
+                        <p {% if message.tags %} class="mb-0 px-4" {% endif %}> {{ message|safe }}</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endfor %}
             {% endif %}

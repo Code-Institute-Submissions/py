@@ -248,8 +248,8 @@ a {
 
 .bg-white-border {
     background-color: #fff;
-    border: 1px solid #dadada;
-    color: #333333 !important;
+    border: 1px solid #297fb9;
+    color: #297fb9 !important;
     text-align: center;
     transition: 0.3s;
 }
@@ -440,8 +440,8 @@ i {
 }
 
 .sb-sidenav-light .sb-sidenav-footer {
-    background-color: #2980b9;
-    color: #fff;
+    border-top: 1px solid #297fb9;
+    color: #297fb9;
 }
 
 /* Messages */
