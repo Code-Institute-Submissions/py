@@ -169,9 +169,11 @@ class DownloadWithToken(View):
 
     def get(self, request, download_token, *args, **kwargs):
         try:
+            # Rate Limit
             rate_limit_response = check_rate_limit(request)
             if rate_limit_response:
                 return rate_limit_response
+
             # Fetch the download instance associated with the token
             download_instance = Download.objects.get(
                 download_token=download_token)

@@ -22,7 +22,7 @@ from urllib.parse import quote
 
 class StripeCheckoutView(View):
     def post(self, request):
-
+        user = None
         bag = request.session.get('item_bag', {})
 
         form_data = {
@@ -33,6 +33,7 @@ class StripeCheckoutView(View):
         }
 
         order_form = OrderForm(request, form_data)
+        order = order_form.save(commit=False)
         if order_form.is_valid():
 
             # Generate a random username
@@ -41,11 +42,15 @@ class StripeCheckoutView(View):
 
             try:
                 # Try to get the user based on the email address
-                user = UserProfile.objects.get(email=form_data['email'])
-                messages.info(
-                    request, f'Log in to find your order!')
+                if request.user.is_authenticated:
+                    user = UserProfile.objects.get(
+                        email=request.user.email)
+                else:
+                    user = UserProfile.objects.get(email=form_data['email'])
+                    messages.info(
+                        request, f'''Log in to your account with {order.email}
+                        to find your order!''')
             except UserProfile.DoesNotExist:
-                # If the user doesn't exist, create a new one
                 user = UserProfile.objects.create_user(
                     username=username, email=form_data['email'])
                 password = generate_random_password()
@@ -55,16 +60,17 @@ class StripeCheckoutView(View):
                 user.first_name = form_data['full_name']
                 user.save()
                 messages.info(
-                    request, f'''Your new password <strong>{password}</strong>
-                    has been downloaded!
-                    <br> Password also sent to your email.''')
+                    request, f'''Your new password <b>{password} </b>
+                        has been downloaded!
+                        <br> Password also sent to your email.''')
 
             # Create/get NEW user profile and associate it with the new user
-            user_profile, created = UserProfile.objects.get_or_create(
-                username=user)
+            # IMPORTANT for ORDER assignment
+            if user is not None:
+                user_profile, created = UserProfile.objects.get_or_create(
+                    username=user)
+                order.buyer_profile = user_profile
 
-            order = order_form.save(commit=False)
-            order.buyer_profile = user_profile
             order = order_form.save()
 
             for item_type, item_data in bag.items():
@@ -104,9 +110,13 @@ class StripeCheckoutView(View):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+
+            if order.email != user.email:
+                messages.error(request, 'Please, use your own email address.')
+                return redirect(reverse('checkout_page'))
+            else:
+                return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(
                 request, 'There was an error with your form. Please double-check your information.')
-            # Handle this URL appropriately
             return redirect(reverse('checkout_failure'))

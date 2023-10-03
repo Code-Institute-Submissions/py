@@ -211,12 +211,21 @@
 
             <!-- Card Footer -->
             {% if bag_items%}
+            {% if user.is_authenticated %}
             <a href="{% url 'checkout_page' %}" class="card-footer btn btn-primary btn-lg m-0">
                 <span class="text-uppercase">Secure Checkout</span>
                 <span class="icon">
                     <i class="fas fa-lock"></i>
                 </span>
             </a>
+            {% else %}
+            <a href="{% url 'checkout_page' %}" class="card-footer btn btn-primary btn-lg m-0">
+                <span class="text-uppercase">Guest Checkout</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </a>
+            {% endif %}
             {% endif %}
         </div>
 

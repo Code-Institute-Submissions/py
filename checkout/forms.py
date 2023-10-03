@@ -19,6 +19,11 @@ class OrderForm(forms.ModelForm):
             'phone_number': 'Phone Number',
             'gateway': 'Gateway',
         }
+        if request.user.is_authenticated:
+            self.fields['full_name'].widget.attrs[
+                'value'] = request.user.first_name + ' ' + \
+                request.user.last_name
+            self.fields['email'].widget.attrs['value'] = request.user.email
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
 

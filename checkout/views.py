@@ -18,6 +18,13 @@ class Checkout(TemplateView):
     template_name = 'checkout/checkout.html'
 
     def get(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            messages.warning(
+                request, """The system will create an account for you
+                 <strong>after checkout</strong>
+                 if you don't already have one.""")
+
         bag = request.session.get('item_bag', {})
         if not bag:
             messages.error(request, 'Your bag is empty!')
@@ -85,8 +92,8 @@ class CheckoutSuccess(TemplateView):
             #     if user_profile_form.is_valid():
             #         user_profile_form.save()
 
-        messages.success(request, f'Order created: <br> \
-            Your order number is<br><strong>{order_number}</strong>')
+        messages.success(request, f'<b>Order created</b> <br> \
+            Your order number is <br> <strong>{order_number}</strong>')
         self.order = order
         if 'item_bag' in request.session:
             # Delete() bag after order creation & success message
