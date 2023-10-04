@@ -87,7 +87,7 @@
                         <!-- Orders Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                             Order Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -101,7 +101,7 @@
                         <!--  Assets Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-shop-lock"></i></div>
                             Asset Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -146,7 +146,7 @@
                         <!--  File Management -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRoles"
                             aria-expanded="false" aria-controls="collapseRoles">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
                             File Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -161,14 +161,14 @@
                         </div>
 
                         <!-- My role -->
-                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <div class="sb-sidenav-menu-heading">My Account</div>
                         <a class="nav-link" href="{% url 'admin_role' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-user"></i></div>
                             My Role
                         </a>
                         <!-- My Settings -->
                         <a class="nav-link" href="{% url 'admin_settings' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-gears"></i></i></div>
                             My Settings
                         </a>
                     </div>
@@ -234,18 +234,19 @@
         </div>
     </div>
 
+
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted mt-5 footer-sticky">
+    <footer class="text-center text-lg-start bg-light text-white mt-5 footer-sticky">
         <!-- Copyright -->
-        <div class="text-center pt-3 px-4 footer-bg text-white">
-            © {{ copyright }} Copyright by
-            <a class="text-reset" href="https://github.com/plexoio/py">Plexosoft</a>
+        <div class="text-center pt-4 px-4 footer-bg">
+            © {{ copyright }} Copyright
+            <a class="text-reset fw-bold text-white" href="https://github.com/plexoio/py">Plexosoft</a>
         </div>
         <!-- Terms & GDPR -->
-        <div class="text-center pb-3 px-4 footer-bg m-0 text-white">
-            <a class="text-reset" href="" target="_blank">Privacy Policy</a>
+        <div class="text-center pb-3 px-4 footer-bg m-0">
+            <a class="text-white" href="" target="_blank">Privacy Policy</a>
             &middot;
-            <a class="text-reset" href="" target="_blank">Terms &amp; Conditions</a>
+            <a class="text-white" href="" target="_blank">Terms &amp; Conditions</a>
         </div>
     </footer>
 

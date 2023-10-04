@@ -280,7 +280,17 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
     def post(self, request, item_id, *args, **kwargs):
 
         download = get_object_or_404(Download, pk=item_id)
-        download.file_name = request.POST.get('file_name')
+
+        # Validate file title
+        file_name = request.POST.get('file_name')
+        file_title_exist = Download.objects.filter(
+            file_name=file_name).exists()
+        if file_title_exist:
+            messages.error(request, 'Title taken, choose another title!')
+            return redirect('admin_all_downloads')
+        else:
+            download.file_name = request.POST.get('file_name')
+
         product_post = request.POST.get('product')
         service_post = request.POST.get('service')
 
