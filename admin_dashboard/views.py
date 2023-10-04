@@ -285,7 +285,7 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
         file_name = request.POST.get('file_name')
         file_title_exist = Download.objects.filter(
             file_name=file_name).exists()
-        if file_title_exist:
+        if file_title_exist and file_name != download.file_name:
             messages.error(request, 'Title taken, choose another title!')
             return redirect('admin_all_downloads')
         else:
