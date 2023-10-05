@@ -56,39 +56,50 @@
         let stripe = Stripe('{{ stripe_public_key }}');
         let sessionId = '{{ session_id }}';
 
-        // Automatic redirection
-        stripe.redirectToCheckout({
-            sessionId: sessionId
-        }).then(function (result) {
-            if (result.error) {
-                console.error(result.error.message);
-            }
-        });
+        setTimeout(function () {
+            let stripe = Stripe('{{ stripe_public_key }}');
+            let clientSecret = '{{ client_secret }}';
 
-        // Backup button for redirection
-        $('#submit-button-stripe').click(function () {
-            stripe.redirectToCheckout({
-                sessionId: sessionId
-            }).then(function (result) {
-                if (result.error) {
-                    console.error(result.error.message);
-                }
-            });
-        });
+            // Fetch API call
+            fetch('/cache_checkout/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: 'client_secret=' + clientSecret + '&save_info={{ save_info }}'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Redirect to Stripe Checkout
+                    return stripe.redirectToCheckout({
+                        sessionId: '{{ session_id }}'
+                    });
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        console.error(result.error.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }, 5000); // Delay for 5 seconds
 
-    // Decode the URL-encoded password parameter
-    var encodedPassword = "{{ password }}";
-    var password = decodeURIComponent(encodedPassword);
-    if (password != 'None') {
-        // Create a hidden link element and trigger the download
-        var downloadLink = document.createElement('a');
-        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(password);
-        downloadLink.download = 'password.txt';
-        downloadLink.style.display = 'none';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
+
+        // Decode the URL-encoded password parameter
+        var encodedPassword = "{{ password }}";
+        var password = decodeURIComponent(encodedPassword);
+        if (password != 'None') {
+            // Create a hidden link element and trigger the download
+            var downloadLink = document.createElement('a');
+            downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(password);
+            downloadLink.download = 'password.txt';
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
     };
 </script>
 
