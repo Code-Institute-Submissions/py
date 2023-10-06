@@ -50,10 +50,7 @@ class CheckoutSuccess(TemplateView):
 
     Attributes:
         - stripe_public_key: The public key used for Stripe transactions.
-        - client_secret: The client secret of the Stripe PaymentIntent.
         - session_id: The session ID of the Stripe checkout session.
-        - save_info: Indicates if the user wants to save their information for
-        future purchases.
         - order: The Order object associated with the current transaction.
         - download_password: The password to download a digital good,
         if applicable.
@@ -71,8 +68,8 @@ class CheckoutSuccess(TemplateView):
             6. Attaches any saved 'download_password' to the session.
 
         - get_context_data(): Populates context data for rendering the
-        template. Adds stripe_public_key, client_secret, session_id,
-        save_info, order, and download_password to the context.
+        template. Adds stripe_public_key, session_id, order,
+        and download_password to the context.
     """
     template_name = 'checkout/success.html'
 
@@ -117,6 +114,7 @@ class CheckoutSuccess(TemplateView):
                 'bag': json.dumps(request.session.get('item_bag', {})),
                 'save_info': request.session.get('save_info'),
                 'username': request.session.get('username'),
+                'order_number': order_number,
             }
         )
 

@@ -1,7 +1,10 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-from .models import OrderLineItem
+from django.utils import timezone
+from datetime import timedelta
+from .models import OrderLineItem, Order
+from homepage.models import UserProfile
 
 
 @receiver(post_save, sender=OrderLineItem)
@@ -18,3 +21,14 @@ def update_on_delete(sender, instance, **kwargs):
     Update order total on lineitem delete
     """
     instance.order.update_total()
+
+
+# @receiver(post_save, sender=UserProfile)
+# def cleanup_old_orders(sender, **kwargs):
+#     """Delete incomplete orders older than 3 days."""
+#     one_day_ago = timezone.now() - timedelta(days=1)
+#     orders_to_delete = Order.objects.filter(
+#         status=0,
+#         date__lt=one_day_ago,
+#     )
+#     orders_to_delete.delete()
