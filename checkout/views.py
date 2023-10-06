@@ -126,10 +126,10 @@ class CheckoutSuccess(TemplateView):
             messages.warning(request, '''
                 STRIPE: Public key not provided!''')
 
-        # Generate dynamic success URL
-        scheme = request.scheme  # http or https
-        host = request.get_host()  # localhost:8000 or your domain
-        success_url = f"{scheme}://{host}/webhook/"
+        # # Generate dynamic success URL
+        # scheme = request.scheme  # http or https
+        # host = request.get_host()  # localhost:8000 or your domain
+        # success_url = f"{scheme}://{host}/webhook/"
 
         payment_intent = stripe.PaymentIntent.create(
             amount=stripe_total,
@@ -153,7 +153,8 @@ class CheckoutSuccess(TemplateView):
                 }
             ],
             mode='payment',
-            success_url=success_url,  # Update with your success URL
+            # Update with your success URL
+            success_url='https://8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io/',
             cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
         )
 
@@ -177,8 +178,8 @@ class CheckoutSuccess(TemplateView):
             #     if user_profile_form.is_valid():
             #         user_profile_form.save()
 
-        messages.success(request, f'<b>Order created</b> <br> \
-            Your order number is <br> <strong>{order_number}</strong>')
+        messages.success(request, f'Order created, \
+            You will be redirected after 5 seconds!')
         self.order = order
 
         self.download_password = request.session.get('download_password')

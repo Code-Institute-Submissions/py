@@ -14,6 +14,7 @@ class StripeWebhookHandler:
 
     def event_handler(self, event):
         """Handle webhook events (generic, unknown, unexpected)"""
+        print(f'MY EVENT IS: {event["type"]} (GENERAL)')
         return HttpResponse(
             content=f'Unknown webhook received {event["type"]}',
             status=200
@@ -21,6 +22,7 @@ class StripeWebhookHandler:
 
     def event_handler_success(self, event):
         """Handle success webhook events"""
+        print(f'MY EVENT IS: {event["type"]} (SUCCESS)')
         return HttpResponse(
             content=f'Success webhook received {event["type"]}',
             status=200
@@ -28,6 +30,7 @@ class StripeWebhookHandler:
 
     def event_handler_failure(self, event):
         """Handle failure webhook events"""
+        print(f'MY EVENT IS: {event["type"]} (FAILURE)')
         return HttpResponse(
             content=f'Failure webhook received {event["type"]}',
             status=200
