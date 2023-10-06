@@ -2,7 +2,7 @@
 from django.urls import path, include
 
 # Local Imports
-from .views import (Checkout, CheckoutSuccess, CacheCheckoutDataView)
+from .views import (Checkout, CheckoutSuccess)
 from .stripe import StripeCheckoutView
 from .webhooks import StripeWebhookView
 
@@ -16,6 +16,4 @@ urlpatterns = [
          name='checkout_stripe_form'),
     path('webhook/', StripeWebhookView.as_view(),
          name='webhook'),
-    path('cache_checkout/', CacheCheckoutDataView.as_view(),
-         name='cache_checkout'),
 ]

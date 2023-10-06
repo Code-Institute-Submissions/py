@@ -40,6 +40,9 @@ class StripeWebhookView(View):
         event_map = {
             'payment_intent.succeeded': handler.event_handler_success,
             'payment_intent.payment_failed': handler.event_handler_failure,
+            'payment_intent.payment_canceled': handler.event_handler_failure,
+            'checkout.session.completed':
+            handler.event_handler_session_completed,
         }
 
         # Get the webhook type from Stripe

@@ -66,9 +66,9 @@ class StripeCheckoutView(View):
                 user_profile, created = UserProfile.objects.get_or_create(
                     username=user)
                 order.buyer_profile = user_profile
-
             order = order_form.save()
 
+            # Start adding to Order_line_item
             for item_type, item_data in bag.items():
                 try:
                     if item_type == 'product':
@@ -104,8 +104,9 @@ class StripeCheckoutView(View):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
-            # Save the info to the user's profile if all is well
+            # For further use in stripe work flow
             request.session['save_info'] = 'save-info' in request.POST
+            request.session['username'] = user_profile.username
 
             if order.email != user.email:
                 messages.error(request, 'Please, use your own email address.')

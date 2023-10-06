@@ -1,6 +1,7 @@
 # Python standard library imports
 import os
 import json
+import time
 
 # Third-party library imports (Django and Stripe)
 from django.conf import settings
@@ -17,43 +18,6 @@ from homepage.models import UserProfile
 from homepage.custom_context_processors import service_product_bag_content
 from .forms import OrderForm
 from .models import Order
-
-
-class CacheCheckoutDataView(View):
-    """
-    This view handles POST requests to cache checkout data for Stripe.
-
-    It receives the client_secret and save_info variables from the client-side
-    after a Stripe checkout session is initiated. It then modifies the corresponding
-    Stripe PaymentIntent to include additional metadata such as the current shopping bag,
-    the user's preference for saving information, and the username.
-
-    This metadata is stored with the Stripe PaymentIntent for record-keeping and
-    possibly for future transaction-related logic.
-
-    Written by Frank Arellano & proofread by ChatGPT4
-    """
-    http_method_names = ['post']
-
-    def post(self, request, *args, **kwargs):
-        try:
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
-            stripe.PaymentIntent.modify(pid, metadata={
-                'bag': json.dumps(request.session.get('item_bag', {})),
-                'save_info': request.POST.get('save_info'),
-                'username': request.user,
-            })
-
-            if 'item_bag' in request.session:
-                # Delete() bag after order creation & success message
-                del request.session['item_bag']
-            return JsonResponse({'status': 'success'}, status=200)
-        except Exception as e:
-            messages.error(request, ('Sorry, your payment cannot be '
-                                     'processed right now. Please try '
-                                     'again later.'))
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
 
 class Checkout(TemplateView):
@@ -131,13 +95,6 @@ class CheckoutSuccess(TemplateView):
         # host = request.get_host()  # localhost:8000 or your domain
         # success_url = f"{scheme}://{host}/webhook/"
 
-        payment_intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency='eur',
-        )
-
-        self.client_secret = payment_intent['client_secret']
-
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -155,42 +112,41 @@ class CheckoutSuccess(TemplateView):
             mode='payment',
             # Update with your success URL
             success_url='https://8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io/',
-            cancel_url='http://localhost:8000/cancel/',    # Update with your cancel URL
+            cancel_url='http://localhost:8000/cancel/',
+            metadata={
+                'bag': json.dumps(request.session.get('item_bag', {})),
+                'save_info': request.session.get('save_info'),
+                'username': request.session.get('username'),
+            }
         )
 
         self.session_id = session.id
 
-        self.save_info = request.session.get('save_info')
-
         order = get_object_or_404(Order, order_number=order_number)
-        if request.user.is_authenticated:
-            profile = UserProfile.objects.get(username=request.user)
-            # Attach the user's profile to the order
-            order.buyer_profile = profile
-            order.save()
 
-            # # Save the user's info
-            # if save_info:
-            #     profile_data = {
-            #         'default_phone_number': order.phone_number,
-            #     }
-            #     user_profile_form = UserProfileForm(profile_data, instance=profile)
-            #     if user_profile_form.is_valid():
-            #         user_profile_form.save()
+        # # Save the user's info
+        # if save_info:
+        #     profile_data = {
+        #         'default_phone_number': order.phone_number,
+        #     }
+        #     user_profile_form = UserProfileForm(profile_data, instance=profile)
+        #     if user_profile_form.is_valid():
+        #         user_profile_form.save()
 
         messages.success(request, f'Order created, \
             You will be redirected after 5 seconds!')
+
         self.order = order
+
+        # Delete() bag after order creation & success message
+        if 'item_bag' in request.session:
+            del request.session['item_bag']
 
         self.download_password = request.session.get('download_password')
         return super().get(request)
 
     def get_context_data(self, **kwargs):
-        # Retrieve the password from the session variable
-
         context = super().get_context_data(**kwargs)
-        context['save_info'] = self.save_info
-        context['client_secret'] = self.client_secret
         context['order'] = self.order
         context['session_id'] = self.session_id
         context['stripe_public_key'] = self.stripe_public_key
