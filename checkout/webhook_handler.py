@@ -53,6 +53,7 @@ class StripeWebhookHandler:
         """
 
         intent = event.data.object
+        event_type = event["type"]
         print(f'MY EVENT IS: {event["type"]} (GENERAL)')
 
         return HttpResponse(
@@ -114,6 +115,7 @@ class StripeWebhookHandler:
             HttpResponse: An HTTP response.
         """
         intent = event.data.object
+        event_type = event["type"]
         print(f'MY EVENT IS: {event["type"]} (SUCCESS)')
 
         return HttpResponse(
@@ -133,6 +135,7 @@ class StripeWebhookHandler:
         """
 
         intent = event.data.object
+        event_type = event["type"]
         print(f'MY EVENT IS: {event["type"]} (FAILURE)')
 
         return HttpResponse(
