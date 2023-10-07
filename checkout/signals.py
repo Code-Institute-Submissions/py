@@ -7,6 +7,7 @@ from .models import OrderLineItem, Order
 from homepage.models import UserProfile
 from admin_dashboard.models import OrderDeletionRecord
 
+
 @receiver(post_save, sender=OrderLineItem)
 def update_on_save(sender, instance, created, **kwargs):
     """
@@ -25,8 +26,8 @@ def update_on_delete(sender, instance, **kwargs):
 
 @receiver(post_save, sender=OrderDeletionRecord)
 def cleanup_old_orders(sender, **kwargs):
-    """Delete incomplete orders older than 3 days."""
-    one_day_ago = timezone.now() - timedelta(days=1)
+    """Delete pending orders older than 3 days."""
+    one_day_ago = timezone.now() - timedelta(days=3)
     orders_to_delete = Order.objects.filter(
         status=0,
         date__lt=one_day_ago,
