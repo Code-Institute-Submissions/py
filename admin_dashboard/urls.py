@@ -3,7 +3,8 @@ from django.urls import path, include
 from .views import (AdminDashboard, AdminSettingsView,
                     AdminPasswordChange, AdminRole, AdminDownloadCreation,
                     DownloadWithToken,
-                    DownloadList, AdminUpdateDownloadView, DownloadDelete)
+                    DownloadList, AdminUpdateDownloadView, DownloadDelete,
+                    PendingOrderDeletionView)
 
 
 urlpatterns = [
@@ -26,5 +27,7 @@ urlpatterns = [
          DownloadDelete.as_view(), name='admin_delete_download'),
     path('media/downloads/<str:download_token>/', DownloadWithToken.as_view(),
          name='download_with_token'),
+    path('account/admin/orders/delete/', PendingOrderDeletionView.as_view(),
+         name='orders_delete'),
 
 ]

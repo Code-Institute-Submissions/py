@@ -20,6 +20,7 @@ from product_service.models import Download, Service, Product
 from product_service.validate_file import validate_file_size
 from checkout.models import Order
 from product_service.utils import check_rate_limit
+from .models import OrderDeletionRecord
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -370,3 +371,17 @@ class DownloadDelete(AdminRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Download Instance has been deleted!')
         return reverse_lazy('admin_all_downloads')
+
+# Order Deletion
+
+
+class PendingOrderDeletionView(AdminRequiredMixin, View):
+    """View for order deletion."""
+    template_name = None
+
+    def get(self, request, *args, **kwargs):
+        record = OrderDeletionRecord(initiated_by=request.user)
+        record.save()
+        messages.success(
+            request, "Orders with status 'Pending' deleted successfully")
+        return redirect(reverse('all_orders_admin'))

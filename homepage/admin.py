@@ -14,6 +14,8 @@ from product_service.models import (CodeType,
                                     Service,
                                     Download,)
 
+from admin_dashboard.models import OrderDeletionRecord
+
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = (
@@ -133,16 +135,29 @@ class DownloadAdmin(admin.ModelAdmin):
     ordering = ('file_name',)
 
 
+class OrderDeletionRecordAdmin(admin.ModelAdmin):
+    list_display = (
+        'initiated_by',
+        'timestamp',
+    )
+
+    list_filter = ('timestamp',)
+    search_fields = ['timestamp',]
+
+    ordering = ('-timestamp',)
+
+
 # User Related
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(NewsLetter, NewsLetterAdmin)
 
-# Product & Service related
+# Product & Service & Order related
 admin.site.register(CodeType)
 admin.site.register(ServiceType)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Download, DownloadAdmin)
+admin.site.register(OrderDeletionRecord, OrderDeletionRecordAdmin)

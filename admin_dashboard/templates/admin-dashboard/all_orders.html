@@ -6,7 +6,6 @@
         <h1 class="mt-4">All orders</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">All created orders in Plexosoft's marketplace</li>
-
         </ol>
         <div class="card mb-4">
             <div class="card-header">
@@ -64,6 +63,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <h5 class="text-center">Database Maintenance</h5>
+            <p class="text-center">Delete <strong>Pending</strong> orders<br>older than 3 days</p>
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <a href="{% url 'orders_delete' %}" class="btn btn-danger">Delete Orders</a>
             </div>
         </div>
     </div>
