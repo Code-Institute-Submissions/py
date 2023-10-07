@@ -66,6 +66,9 @@ class StripeCheckoutView(View):
                 user_profile, created = UserProfile.objects.get_or_create(
                     username=user)
                 order.buyer_profile = user_profile
+                # For further use in stripe work flow
+                request.session['save_info'] = 'save-info' in request.POST
+                request.session['username'] = user_profile.username
             order = order_form.save()
 
             # Start adding to Order_line_item
@@ -103,10 +106,6 @@ class StripeCheckoutView(View):
                         request, "One of the services in your bag wasn't found in our database. Please call us for assistance.")
                     order.delete()
                     return redirect(reverse('view_bag'))
-
-            # For further use in stripe work flow
-            request.session['save_info'] = 'save-info' in request.POST
-            request.session['username'] = user_profile.username
 
             if order.email != user.email:
                 messages.error(request, 'Please, use your own email address.')
