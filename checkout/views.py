@@ -1,21 +1,10 @@
-# Python standard library imports
-import os
-import json
-import time
-
-# Third-party library imports (Django and Stripe)
-from django.conf import settings
+# Third-party library imports (Django)
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import View, TemplateView
-import stripe
-from django.views.decorators.http import require_POST
-from django.http import JsonResponse
+from django.views.generic import TemplateView
 
 # Application-specific imports
-from homepage.models import UserProfile
-from homepage.custom_context_processors import service_product_bag_content
 from .forms import OrderForm
 from .models import Order
 

@@ -17,7 +17,7 @@ class StripeWebhookHandler:
 
     Methods:
         - __init__(self, request):
-        Constructor to initialize the 'request' attribute.
+        Constructor to initialize the 'request' (HttpRequest) attribute.
 
         - event_handler(self, event):
         Handles generic and unknown webhook events.
@@ -36,9 +36,15 @@ class StripeWebhookHandler:
     """
 
     def __init__(self, request):
-        '''We use it to assign the request as an attribute of the class
+        """"
+        We use it to assign the request as an attribute of the class
         just in case we need to access any attributes of the
-        request coming from stripe somewhere else in the class.'''
+        request coming from stripe somewhere else in the class.
+
+        Args:
+            request (HttpRequest): The incoming request from Stripe's webhook.
+        """
+
         self.request = request
 
     def event_handler(self, event):
