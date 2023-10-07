@@ -52,6 +52,7 @@ class StripeWebhookHandler:
             order = get_object_or_404(Order, order_number=order_number)
             if order:
                 order.stripe_pid = payment_intent_id
+                order.status = 2
                 order.save()
 
         return HttpResponse(
