@@ -1,15 +1,23 @@
 # Python standard library imports
 import uuid
+import os
+import json
+import time
 from urllib.parse import quote
 
-# Third-party library imports (Django)
+# Third-party library imports (Django and Stripe)
+from django.conf import settings
 from django.contrib import messages
-from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import View
+from django.urls import reverse
+from django.views.generic import View, TemplateView
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+import stripe
 
 # Application-specific imports
 from homepage.models import UserProfile
+from homepage.custom_context_processors import service_product_bag_content
 from product_service.models import Product, Service
 from product_service.utils import generate_random_password
 from .forms import OrderForm
@@ -116,3 +124,115 @@ class StripeCheckoutView(View):
             messages.error(
                 request, 'There was an error with your form. Please double-check your information.')
             return redirect(reverse('checkout_failure'))
+
+
+class StripeCheckoutSuccess(TemplateView):
+    """
+    This view handles the success page displayed to the user following a
+    successful checkout. Note that this occurs post-checkout but pre-payment
+    confirmation. An order is created before the payment, which is subsequently
+    marked as completed when the payment is successful. This is achieved
+    through Stripe's webhook, specifically the "checkout.session.completed"
+    event.
+
+    Attributes:
+        - stripe_public_key: The Stripe public key used for transactions.
+        - session_id: The unique identifier for the Stripe checkout session.
+        - order: The Order model instance related to the current transaction.
+        - download_password: A password required for downloading a digital
+        good, if applicable.
+
+    Methods:
+        - get(request, order_number): Executes the primary logic for populating 
+          variables and initializing Stripe's checkout session.
+            1. Retrieves the current shopping bag's total amount
+            and item count.
+            2. Generates a Stripe checkout session with line items and URLs.
+            3. Associates the newly created order with the user's profile.
+            4. Optionally, attaches a 'download_password' to the session if
+            neccessary.
+
+        - get_context_data(**kwargs): Populates context data needed for
+        rendering the template. Adds 'stripe_public_key', 'session_id',
+        'order', and 'download_password' to the context.
+
+    """
+    template_name = 'checkout/success.html'
+
+    def get(self, request, order_number):
+
+        self.stripe_public_key = os.environ.get('STRIPE_PUBLIC_KEY')
+        stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
+
+        current_bag = service_product_bag_content(request)
+        total = current_bag['grand_total']
+        stripe_total = round(total * 100)
+        stripe_quantity = current_bag['item_count']
+
+        if not self.stripe_public_key:
+            messages.warning(request, '''
+                STRIPE: Public key not provided!''')
+
+        # # Generate dynamic success URL
+        # scheme = request.scheme  # http or https
+        # host = request.get_host()  # localhost:8000 or your domain
+        # success_url = f"{scheme}://{host}/webhook/"
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': settings.STRIPE_CURRENCY,
+                        'product_data': {
+                            'name': 'Plexosoft (Products & Services)',
+                        },
+                        'unit_amount': stripe_total,
+                    },
+                    'quantity': 1,
+                }
+            ],
+            mode='payment',
+            # Update with your success URL
+            success_url='https://8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io/',
+            cancel_url='http://localhost:8000/cancel/',
+            metadata={
+                'bag': json.dumps(request.session.get('item_bag', {})),
+                'save_info': request.session.get('save_info'),
+                'username': request.session.get('username'),
+                'order_number': order_number,
+            }
+        )
+
+        self.session_id = session.id
+
+        order = get_object_or_404(Order, order_number=order_number)
+
+        # # Save the user's info
+        # if save_info:
+        #     profile_data = {
+        #         'default_phone_number': order.phone_number,
+        #     }
+        #     user_profile_form = UserProfileForm(profile_data, instance=profile)
+        #     if user_profile_form.is_valid():
+        #         user_profile_form.save()
+
+        messages.success(request, f'Order created, \
+            You will be redirected after 5 seconds!')
+
+        self.order = order
+
+        # Delete() bag after order creation & success message
+        if 'item_bag' in request.session:
+            del request.session['item_bag']
+
+        self.download_password = request.session.get('download_password')
+        return super().get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order'] = self.order
+        context['session_id'] = self.session_id
+        context['stripe_public_key'] = self.stripe_public_key
+        context['password'] = self.download_password
+        return context

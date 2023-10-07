@@ -1,14 +1,38 @@
-from django.http import HttpResponse, HttpRequest
+# Django built-in imports
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.contrib.messages.storage.fallback import FallbackStorage
+
+# Third-party imports
 import json
 import stripe
+
+# Application-specific imports
 from .models import Order
-from django.shortcuts import get_object_or_404
 
 
 class StripeWebhookHandler:
     """
-    Handling responses from Stripe payments
+    This class handles Stripe webhook events and responds accordingly.
+
+    Methods:
+        - __init__(self, request):
+        Constructor to initialize the 'request' attribute.
+
+        - event_handler(self, event):
+        Handles generic and unknown webhook events.
+
+        - event_handler_session_completed(self, event):
+        Handles the 'checkout.session.completed' webhook event.
+
+        - event_handler_success(self, event):
+        Handles webhook events that indicate success.
+
+        - event_handler_failure(self, event):
+        Handles webhook events that indicate failure.
+
+        - event_handler_canceled(self, event):
+        Handles webhook events that indicate cancellation.
     """
 
     def __init__(self, request):
@@ -18,7 +42,16 @@ class StripeWebhookHandler:
         self.request = request
 
     def event_handler(self, event):
-        """Handle webhook events (generic, unknown, unexpected)"""
+        """
+        Handle generic, unknown, or unexpected webhook events.
+
+        Args:
+            event (stripe.Event): The event data from Stripe.
+
+        Returns:
+            HttpResponse: An HTTP response.
+        """
+
         intent = event.data.object
         print(f'MY EVENT IS: {event["type"]} (GENERAL)')
 
@@ -28,9 +61,19 @@ class StripeWebhookHandler:
         )
 
     def event_handler_session_completed(self, event):
-        """Handle webhook when session event completed.
-        It copies the Metadata from the session and paste it
-        in the final paymente intent object for further use."""
+        """
+        Handle 'checkout.session.completed' events.
+
+        This method copies the metadata from the completed Stripe session and
+        attaches it to the final PaymentIntent object for further processing.
+
+        Args:
+            event (stripe.Event): The event data from Stripe.
+
+        Returns:
+            HttpResponse: An HTTP response.
+        """
+
         intent = event.data.object
         event_type = event["type"]
         print(f'MY EVENT IS: {event["type"]} (COMPLETED)')
@@ -61,7 +104,15 @@ class StripeWebhookHandler:
         )
 
     def event_handler_success(self, event):
-        """Handle success webhook events"""
+        """
+        Handle success events.
+
+        Args:
+            event (stripe.Event): The event data from Stripe.
+
+        Returns:
+            HttpResponse: An HTTP response.
+        """
         intent = event.data.object
         print(f'MY EVENT IS: {event["type"]} (SUCCESS)')
 
@@ -71,7 +122,16 @@ class StripeWebhookHandler:
         )
 
     def event_handler_failure(self, event):
-        """Handle failure webhook events"""
+        """
+        Handle failure events.
+
+        Args:
+            event (stripe.Event): The event data from Stripe.
+
+        Returns:
+            HttpResponse: An HTTP response.
+        """
+
         intent = event.data.object
         print(f'MY EVENT IS: {event["type"]} (FAILURE)')
 
@@ -81,7 +141,19 @@ class StripeWebhookHandler:
         )
 
     def event_handler_canceled(self, event):
-        """Handle canceled webhook events"""
+        """
+        Handle the canceled webhook event.
+
+        This method deletes the associated order from the database
+        if the payment intent has been canceled.
+
+        Args:
+            event (stripe.Event): The event data from Stripe.
+
+        Returns:
+            HttpResponse: An HTTP response.
+        """
+
         intent = event.data.object
         event_type = event["type"]
         print(f'MY EVENT IS: {event["type"]} (CANCELED)')
