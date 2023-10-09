@@ -10,8 +10,8 @@
             <div class="col-12 col-lg-6">
                 <div class="card">
                     <div class="row">
-                        <div class="col card-header">
-                            <h3 class="logo-font text-center m-0">Congratulations!</h3>
+                        <div class="col card-header bg-danger">
+                            <h3 class="logo-font text-center m-0">Order Cancelled!</h3>
                         </div>
                     </div>
                     <!-- Card Body -->
@@ -19,9 +19,10 @@
                     <div class="card-body p-0">
                         <div class="row d-flex justify-content-center align-items-center p-3">
 
-                            <p class="text-center">Payment completed!</p>
-                            <i class="fa-regular fa-circle-check fs-1 text text-success"></i>
-                            <p class="text-center m-0 mt-3">{{ username }}<br>You can find the details of your order in your existing
+                            <p class="text-center">Order cancelled!</p>
+                            <i class="fa-solid fa-ban fs-1 text text-danger"></i>
+                            <p class="text-center m-0 mt-3">{{ username }}<br>You can find the details of your order in
+                                your existing
                                 account<br><strong>OR</strong><br>in the account we've recently created for you.</p>
                             <p class="text-center m-0 mt-3">Your order number is<br><strong>{{ order_number }}</strong>
                             </p>
@@ -33,7 +34,7 @@
                         <div class="col-12 col-lg-12">
                             {% if user.is_authenticated %}
                             <a href="{% url 'all_orders_user' %}" id="submit-button-stripe"
-                                class="card-footer btn btn-primary btn-lg m-0">
+                                class="card-footer btn btn-primary btn-lg m-0 bg-danger">
                                 <span class="font-weight-bold">My Orders</span>
                                 <span class="icon">
                                     <i class="fa-solid fa-cart-shopping"></i>
@@ -41,7 +42,7 @@
                             </a>
                             {% else %}
                             <a href="{% url 'account_login' %}" id="submit-button-stripe"
-                                class="card-footer btn btn-primary btn-lg m-0">
+                                class="card-footer btn btn-primary btn-lg m-0 bg-danger border-danger">
                                 <span class="font-weight-bold">Login</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>

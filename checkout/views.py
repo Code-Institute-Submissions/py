@@ -25,7 +25,7 @@ class Checkout(TemplateView):
         the template.
             - Adds the 'order_form' to the context.
     """
-    template_name = 'checkout/checkout.html'
+    template_name = 'checkout/general_checkout.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -51,4 +51,104 @@ class Checkout(TemplateView):
         """
         context = super().get_context_data(**kwargs)
         context['order_form'] = OrderForm(request=self.request)
+        return context
+
+
+class CheckoutSuccess(TemplateView):
+    """
+    Handles the checkout success page, displayed after a payment,
+    when successful.
+
+    Attributes:
+        template_name (str): The name of the template to be rendered.
+        username (str): The username retrieved from the session.
+        order_number (str): The order number retrieved from the session.
+
+    Methods:
+        get(request, *args, **kwargs): Handles GET requests for the
+        checkout success page.
+            - Retrieves username and order number from the session.
+            - Displays an info message containing the tracking order number.
+            - Returns the default GET response from the parent class.
+
+        get_context_data(**kwargs): Populates additional context data for
+        rendering the template.
+            - Adds 'order_number' and 'username' to the context.
+    """
+    template_name = 'checkout/success.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests.
+        Retrieves username and order number from the session and
+        displays an info message.
+        """
+        self.username = request.session.get('username')
+        self.order_number = request.session.get('order_number')
+        user_presence = request.user.is_authenticated
+
+        if user_presence or not user_presence:
+            messages.info(
+                request, f"""Your tracking order is
+                <br><strong>{self.order_number}</strong>""")
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """
+        Populates additional context for rendering the template.
+        Adds 'order_number' and 'username' to the context.
+        """
+        context = super().get_context_data(**kwargs)
+        context['order_number'] = self.order_number
+        context['username'] = self.username
+        return context
+
+
+class CheckoutCancel(TemplateView):
+    """
+    Handles the checkout cancel page, displayed after a payment,
+    when unsuccessful.
+
+    Attributes:
+        template_name (str): The name of the template to be rendered.
+        username (str): The username retrieved from the session.
+        order_number (str): The order number retrieved from the session.
+
+    Methods:
+        get(request, *args, **kwargs): Handles GET requests for the
+        checkout success page.
+            - Retrieves username and order number from the session.
+            - Displays an info message containing the tracking order number.
+            - Returns the default GET response from the parent class.
+
+        get_context_data(**kwargs): Populates additional context data for
+        rendering the template.
+            - Adds 'order_number' and 'username' to the context.
+    """
+    template_name = 'checkout/cancel.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests.
+        Retrieves username and order number from the session and
+        displays an info message.
+        """
+        self.username = request.session.get('username')
+        self.order_number = request.session.get('order_number')
+        user_presence = request.user.is_authenticated
+
+        if user_presence or not user_presence:
+            messages.info(
+                request, f"""Your tracking order is
+                <br><strong>{self.order_number}</strong>""")
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """
+        Populates additional context for rendering the template.
+        Adds 'order_number' and 'username' to the context.
+        """
+        context = super().get_context_data(**kwargs)
+        context['order_number'] = self.order_number
+        context['username'] = self.username
         return context

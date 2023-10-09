@@ -79,6 +79,8 @@ class StripeCheckoutView(View):
                 request.session['username'] = user_profile.username
             order = order_form.save()
 
+            request.session['order_number'] = order.order_number
+
             # Start adding to Order_line_item
             for item_type, item_data in bag.items():
                 try:
@@ -119,14 +121,14 @@ class StripeCheckoutView(View):
                 messages.error(request, 'Please, use your own email address.')
                 return redirect(reverse('checkout_page'))
             else:
-                return redirect(reverse('checkout_success', args=[order.order_number]))
+                return redirect(reverse('stripe_redirect', args=[order.order_number]))
         else:
             messages.error(
                 request, 'There was an error with your form. Please double-check your information.')
             return redirect(reverse('checkout_failure'))
 
 
-class StripeCheckoutSuccess(TemplateView):
+class StripeCheckoutRedirect(TemplateView):
     """
     This view handles the success page displayed to the user following a
     successful checkout. Note that this occurs post-checkout but pre-payment
@@ -157,7 +159,7 @@ class StripeCheckoutSuccess(TemplateView):
         'order', and 'download_password' to the context.
 
     """
-    template_name = 'checkout/success.html'
+    template_name = 'checkout/stripe/stripe_redirect.html'
 
     def get(self, request, order_number):
 
@@ -174,9 +176,10 @@ class StripeCheckoutSuccess(TemplateView):
                 STRIPE: Public key not provided!''')
 
         # # Generate dynamic success URL
-        # scheme = request.scheme  # http or https
-        # host = request.get_host()  # localhost:8000 or your domain
-        # success_url = f"{scheme}://{host}/webhook/"
+        scheme = request.scheme  # http or https
+        host = request.get_host()  # localhost:8000 or your domain
+        success_url = f"{scheme}://{host}/checkout/success/"
+        cancelled_url = f"{scheme}://{host}/checkout/cancelled/"
 
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -194,8 +197,8 @@ class StripeCheckoutSuccess(TemplateView):
             ],
             mode='payment',
             # Update with your success URL
-            success_url='https://8000-plexoio-py-om3gwfq21br.ws-eu105.gitpod.io/',
-            cancel_url='http://localhost:8000/cancel/',
+            success_url=success_url,
+            cancel_url=cancelled_url,
             metadata={
                 'bag': json.dumps(request.session.get('item_bag', {})),
                 'save_info': request.session.get('save_info'),
