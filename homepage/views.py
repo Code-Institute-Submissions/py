@@ -384,8 +384,6 @@ class SingleProductView(CommentListView):
     """View for listing SINGLE product instances."""
 
     def get_product(self, request, slug):
-
-        # Product
         queryset = Product.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
@@ -428,15 +426,17 @@ class SingleProductView(CommentListView):
         comment_form = ProductCommentCreationForm(data=request.POST)
         if 'comment_submit' in request.POST:
             if comment_form.is_valid():
-                if request.user.is_authenticated:
+                if request.user.is_authenticated and self.has_purchased:
                     comment_form.instance.writer = request.user
                     comment_form.instance.product = self.product
                     comment_form.save()
                     messages.success(
-                        request, 'Your comment has been submitted!')
+                        request, '''Your comment has been submitted!
+                        <br>Awaiting for approval!''')
                 else:
                     messages.error(
-                        request, 'You need to be logged in to comment!')
+                        request, '''You need to log in
+                        & purchase a product to comment!''')
             else:
                 error_messages = []
                 for field, errors in comment_form.errors.items():
