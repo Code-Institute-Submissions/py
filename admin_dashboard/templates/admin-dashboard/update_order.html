@@ -44,6 +44,16 @@
                                 {% endif %}
                             </div>
 
+                            <!-- Stripe Number -->
+                            <div class="mb-3">
+                                <label for="stripe_pid" class="form-label"><strong>Stripe PID</strong></label>
+                                <input type="text" name="stripe_pid" class="form-control" id="stripe_pid"
+                                    value="{{ order.stripe_pid }}" required disabled>
+                                {% if order.stripe_pid.errors %}
+                                <div class="errors">{{ order.stripe_pid.errors }}</div>
+                                {% endif %}
+                            </div>
+
 
                             <!-- Date -->
                             <div class="mb-3">
@@ -102,12 +112,12 @@
                                 <select name="lineitem" class="form-control" id="lineitem" multiple="multiple" disabled>
                                     {% for lineitem in order.lineitems.all %}
                                     {% if lineitem.service %}
-                                    <option>{{ lineitem.service.get_instance_display }}: {{ lineitem.service.title }} 
+                                    <option>{{ lineitem.service.get_instance_display }}: {{ lineitem.service.title }}
                                         (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
                                     </option>
                                     {% else %}
-                                    <option>{{ lineitem.product.get_instance_display }}: {{ lineitem.product.title }} 
-                                         (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
+                                    <option>{{ lineitem.product.get_instance_display }}: {{ lineitem.product.title }}
+                                        (€{{ lineitem.lineitem_total }} x {{ lineitem.quantity }})
                                     </option>
                                     {% endif %}
                                     {% endfor %}

@@ -44,6 +44,15 @@
                                 {% endif %}
                             </div>
 
+                            <!-- Stripe Number -->
+                            <div class="mb-3">
+                                <label for="stripe_pid" class="form-label"><strong>Stripe PID</strong></label>
+                                <input type="text" name="stripe_pid" class="form-control" id="stripe_pid"
+                                    value="{{ order.stripe_pid }}" required disabled>
+                                {% if order.stripe_pid.errors %}
+                                <div class="errors">{{ order.stripe_pid.errors }}</div>
+                                {% endif %}
+                            </div>
 
                             <!-- Date -->
                             <div class="mb-3">
