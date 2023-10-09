@@ -33,33 +33,35 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
         Remember to use "if product_id: request.session.clear()" to clear
         the session when developing."""
         try:
-            quantity = int(request.POST.get('quantity'))
-            redirect_url = request.POST.get('redirect_url')
-            item_bag = request.session.get('item_bag', {})
-            product = self.add_to_cart(product_id)
-            title = product.title
-            product_id = product.id
+            if 'quantity' in request.POST:
+                quantity = int(request.POST.get('quantity'))
+                redirect_url = request.POST.get('redirect_url')
+                item_bag = request.session.get('item_bag', {})
+                product = self.add_to_cart(product_id)
+                title = product.title
+                product_id = product.id
 
-            if 'product' not in item_bag:
-                item_bag['product'] = {}
+                if 'product' not in item_bag:
+                    item_bag['product'] = {}
 
-            if str(product_id) in item_bag['product']:
-                item_bag['product'][str(product_id)]['quantity'] += quantity
-            else:
-                item_bag['product'][str(product_id)] = {
-                    'title': title,
-                    'quantity': quantity,
-                }
-            request.session['item_bag'] = item_bag
+                if str(product_id) in item_bag['product']:
+                    item_bag['product'][str(product_id)
+                                        ]['quantity'] += quantity
+                else:
+                    item_bag['product'][str(product_id)] = {
+                        'title': title,
+                        'quantity': quantity,
+                    }
+                request.session['item_bag'] = item_bag
 
-            messages.success(
-                request, f'''You have added
-                <strong>{item_bag['product'][str(product_id)]['quantity']}</strong> products
-                for <strong>{item_bag['product'][str(product_id)]['title']}</strong>
-                in the cart!'''
-            )
+                messages.success(
+                    request, f'''You have added
+                    <strong>{item_bag['product'][str(product_id)]['quantity']}</strong> products
+                    for <strong>{item_bag['product'][str(product_id)]['title']}</strong>
+                    in the cart!'''
+                )
 
-            return redirect(redirect_url)
+                return redirect(redirect_url)
         except KeyError as e:
             messages.error(
                 request, '''Data not found in your cart!''')

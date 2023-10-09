@@ -24,16 +24,6 @@ from .models import Comment
 
 logger = logging.getLogger(__name__)
 
-
-# Comment Creation View
-
-
-class CommentCreationView(ListView):
-    model = Comment
-    queryset = Comment.objects.filter(status=2).order_by('-created_on')
-    template_name = 'index.html'
-    paginated_by = 6
-
 # LOGIN, SIGUNUP & LOGOUT
 
 
@@ -375,66 +365,91 @@ class AllServiceListView(ListView):
 
 # Single Product
 
+# Comment Creation View
 
-class SingleProductView(View):
+
+class CommentListView(ListView):
+    model = Comment
+    paginate_by = 6
+    template_name = 'single_product_service/single_product.html'
+    context_object_name = 'comments_list'
+
+    def get_queryset(self):
+        """Return comments with a status of 2, ordered by creation date."""
+        comments = Comment.objects.filter(status=0).order_by('-created_on')
+        return comments
+
+
+class SingleProductView(CommentListView):
     """View for listing SINGLE product instances."""
 
-    def get_product(self, slug):
+    def get_product(self, request, slug):
+
+        # Product
         queryset = Product.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
-
         self.product = get_object_or_404(queryset, slug=slug)
-
-    def get(self, request, slug, *args, **kwargs):
-        self.get_product(slug)
-
-        order_count = Order.objects.filter(
+        self.order_count = Order.objects.filter(
             status=2, lineitems__product=self.product).count()
 
         # Check if user purchased or not
         if request.user.is_authenticated:
-            has_purchased = Order.objects.filter(
+            self.has_purchased = Order.objects.filter(
                 buyer_profile=request.user,
                 lineitems__product=self.product).exists()
         else:
-            has_purchased = False
+            self.has_purchased = False
 
-        # Comment
-        form = ProductCommentCreationForm(initial={'writer': request.user,
-                                                   'product': self.product})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-        return render(request, "single_product_service/single_product.html",
-                      {
-                          "product": self.product,
-                          "order_count": order_count,
-                          "has_purchased": has_purchased,
-                          "user_authenticated": request.user.is_authenticated,
-                          "comment_form": form,
-                          "commented": False,
-                      })
+        self.get_product(self.request, self.kwargs['slug'])
+
+        context['product'] = self.product
+        context['order_count'] = self.order_count
+        context['has_purchased'] = self.has_purchased
+        context['user_authenticated'] = self.request.user.is_authenticated
+
+        # Comment Form
+        comment_form = ProductCommentCreationForm(initial={'writer': self.request.user,
+                                                           'product': self.product})
+        context['comment_form'] = comment_form
+
+        return context
+
+    def get(self, request, slug, *args, **kwargs):
+        return super().get(request, slug, *args, **kwargs)
 
     def post(self, request, slug, *args, **kwargs):
-        self.get_product(slug)
+        self.get_product(request, slug)
+
         # Comment
         comment_form = ProductCommentCreationForm(data=request.POST)
-
-        if comment_form.is_valid():
-            if request.user.is_authenticated:
-                comment_form.instance.writer = request.user
-                comment_form.instance.product = self.product
-                comment_form.save()
+        if 'comment_submit' in request.POST:
+            if comment_form.is_valid():
+                if request.user.is_authenticated:
+                    comment_form.instance.writer = request.user
+                    comment_form.instance.product = self.product
+                    comment_form.save()
+                    messages.success(
+                        request, 'Your comment has been submitted!')
+                else:
+                    messages.error(
+                        request, 'You need to be logged in to comment!')
             else:
-                messages.error(request, 'You need to be logged in to comment!')
-        else:
-            messages.error(
-                request, f'Your form is not valid! {comment_form.errors}')
+                error_messages = []
+                for field, errors in comment_form.errors.items():
+                    field_errors = ', '.join(errors)
+                    error_messages.append(f"{field}: {field_errors}")
 
-        return render(request, "single_product_service/single_product.html",
-                      {
-                          "comment_form": comment_form,
-                          "commented": True
-                      })
+                error_message_str = ', '.join(error_messages)
+                messages.error(
+                    request, f'Your form is not valid!<br>{error_message_str}')
+
+        # Sperclass method which takes care of calling get_context_data
+        # and rendering the template
+        return super().get(request, slug, *args, **kwargs)
 
 
 class SingleServiceView(View):
