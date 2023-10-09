@@ -230,6 +230,7 @@ class StripeCheckoutRedirect(TemplateView):
         if 'item_bag' in request.session:
             del request.session['item_bag']
 
+        self.buyername = request.session.get('username')
         self.download_password = request.session.get('download_password')
         return super().get(request)
 
@@ -238,5 +239,6 @@ class StripeCheckoutRedirect(TemplateView):
         context['order'] = self.order
         context['session_id'] = self.session_id
         context['stripe_public_key'] = self.stripe_public_key
+        context['buyername'] = self.buyername
         context['password'] = self.download_password
         return context

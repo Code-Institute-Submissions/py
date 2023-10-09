@@ -68,12 +68,15 @@
         }, 5000); // Delay for 5 seconds
 
         // Decode the URL-encoded password parameter
-        var encodedPassword = "{{ password }}";
-        var password = decodeURIComponent(encodedPassword);
+        let encodedPassword = "{{ password }}";
+        let username = "{{ buyername }}";
+
+        let password = decodeURIComponent(encodedPassword);
         if (password != 'None') {
-            // Create a hidden link element and trigger the download
-            var downloadLink = document.createElement('a');
-            downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(password);
+            const userData = `Username: ${username}\nPassword: ${encodeURIComponent(password)}`;
+            const mimeType = 'data:text/plain;charset=utf-8,';
+            let downloadLink = document.createElement('a');
+            downloadLink.href = `${mimeType}${userData}`;
             downloadLink.download = 'password.txt';
             downloadLink.style.display = 'none';
             document.body.appendChild(downloadLink);
