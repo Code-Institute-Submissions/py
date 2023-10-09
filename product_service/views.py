@@ -1,6 +1,6 @@
 # Django Imports
 from django.shortcuts import render
-from django.views import View, generic
+from django.views.generic import View, ListView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.views.generic.edit import DeleteView
@@ -62,7 +62,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
 # READ Product instances
 
 
-class ProductBaseListView(AdminRequiredMixin, generic.ListView):
+class ProductBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Product instances."""
     model = Product
 
@@ -245,7 +245,7 @@ class AdminServiceCreation(AdminRequiredMixin, View):
 # READ Service instances
 
 
-class ServiceBaseListView(AdminRequiredMixin, generic.ListView):
+class ServiceBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Service instances."""
     model = Service
 
@@ -391,7 +391,7 @@ class ServiceDelete(AdminRequiredMixin, DeleteView):
 # BAG view
 
 
-class ShoppingCartView(generic.ListView):
+class ShoppingCartView(ListView):
     model = Product
     template_name = 'bag/bag.html'
 
@@ -400,7 +400,7 @@ class ShoppingCartView(generic.ListView):
 # READ Order ListView
 
 
-class AdminOrderListView(AdminRequiredMixin, generic.ListView):
+class AdminOrderListView(AdminRequiredMixin, ListView):
     """ListView for admin/global orders. Another approach instead of View"""
     model = Order
     template_name = 'admin-dashboard/all_orders.html'
@@ -430,7 +430,7 @@ class AdminOrderListView(AdminRequiredMixin, generic.ListView):
         return context
 
 
-class BuyerOrderListView(BuyerRequiredMixin, generic.ListView):
+class BuyerOrderListView(BuyerRequiredMixin, ListView):
     """ListView for user order instances. Another approach instead of View"""
     model = Order
     template_name = 'user-dashboard/all_orders.html'

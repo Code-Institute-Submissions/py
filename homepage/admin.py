@@ -39,9 +39,10 @@ class CommentAdmin(SummernoteModelAdmin):
         'service',
         'comment',
         'created_on',
+        'status',
     )
 
-    list_filter = ('created_on', 'product', 'service')
+    list_filter = ('status', 'product', 'service', 'created_on')
     search_fields = ['comment', 'created_on']
 
     summernote_fields = ('comment')
@@ -55,12 +56,13 @@ class LikeAdmin(admin.ModelAdmin):
         'product',
         'service',
         'created_on',
+        'status',
     )
 
-    list_filter = ('product', 'service', 'created_on')
-    search_fields = ['created_on']
+    list_filter = ('status', 'product', 'service', 'created_on')
+    search_fields = ['created_on', 'status']
 
-    ordering = ('liker',)
+    ordering = ('-created_on',)
 
 
 class NewsLetterAdmin(admin.ModelAdmin):

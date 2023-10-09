@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views import View, generic
+from django.views.generic import View, ListView
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
@@ -17,11 +17,23 @@ import logging
 from allauth.account.views import LoginView, SignupView, LogoutView
 
 # Local Imports
-from .forms import CustomLoginForm, CustomSignupForm
+from .forms import CustomLoginForm, CustomSignupForm, ProductCommentCreationForm
 from product_service.models import Product, Service
 from checkout.models import Order
+from .models import Comment
 
 logger = logging.getLogger(__name__)
+
+
+# Comment Creation View
+
+
+class CommentCreationView(ListView):
+    model = Comment
+    queryset = Comment.objects.filter(status=2).order_by('-created_on')
+    template_name = 'index.html'
+    paginated_by = 6
+
 # LOGIN, SIGUNUP & LOGOUT
 
 
@@ -46,7 +58,7 @@ class CustomLogoutView(LogoutView):
 # Product & Services
 
 
-class ProductBaseListView(generic.ListView):
+class ProductBaseListView(ListView):
     """Base view for listing products based on these conditions."""
     model = Product
 
@@ -129,7 +141,7 @@ class HomepageProductServiceView(ProductBaseListView):
 # All Product & Services
 
 
-class AllProductServiceListView(generic.ListView):
+class AllProductServiceListView(ListView):
     """Dedicated page for displaying list of all products & services and
     instances from the search engine & category implementation."""
     model = Product
@@ -285,7 +297,7 @@ class AllProductServiceListView(generic.ListView):
 # All Product
 
 
-class AllProductListView(generic.ListView):
+class AllProductListView(ListView):
     model = Product
     template_name = 'all_product_service/all_product.html'
     paginate_by = 6
@@ -324,7 +336,7 @@ class AllProductListView(generic.ListView):
 # All Services
 
 
-class AllServiceListView(generic.ListView):
+class AllServiceListView(ListView):
     """Dedicated page for displaying list of all service instances."""
     model = Service
     template_name = 'all_product_service/all_service.html'
@@ -367,31 +379,61 @@ class AllServiceListView(generic.ListView):
 class SingleProductView(View):
     """View for listing SINGLE product instances."""
 
-    def get(self, request, slug, *args, **kwargs):
-
+    def get_product(self, slug):
         queryset = Product.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
 
-        product = get_object_or_404(queryset, slug=slug)
+        self.product = get_object_or_404(queryset, slug=slug)
+
+    def get(self, request, slug, *args, **kwargs):
+        self.get_product(slug)
 
         order_count = Order.objects.filter(
-            status=2, lineitems__product=product).count()
+            status=2, lineitems__product=self.product).count()
 
         # Check if user purchased or not
         if request.user.is_authenticated:
             has_purchased = Order.objects.filter(
                 buyer_profile=request.user,
-                lineitems__product=product).exists()
+                lineitems__product=self.product).exists()
         else:
             has_purchased = False
 
+        # Comment
+        form = ProductCommentCreationForm(initial={'writer': request.user,
+                                                   'product': self.product})
+
         return render(request, "single_product_service/single_product.html",
                       {
-                          "product": product,
+                          "product": self.product,
                           "order_count": order_count,
                           "has_purchased": has_purchased,
-                          "user_authenticated": request.user.is_authenticated
+                          "user_authenticated": request.user.is_authenticated,
+                          "comment_form": form,
+                          "commented": False,
+                      })
+
+    def post(self, request, slug, *args, **kwargs):
+        self.get_product(slug)
+        # Comment
+        comment_form = ProductCommentCreationForm(data=request.POST)
+
+        if comment_form.is_valid():
+            if request.user.is_authenticated:
+                comment_form.instance.writer = request.user
+                comment_form.instance.product = self.product
+                comment_form.save()
+            else:
+                messages.error(request, 'You need to be logged in to comment!')
+        else:
+            messages.error(
+                request, f'Your form is not valid! {comment_form.errors}')
+
+        return render(request, "single_product_service/single_product.html",
+                      {
+                          "comment_form": comment_form,
+                          "commented": True
                       })
 
 
@@ -426,7 +468,7 @@ class SingleServiceView(View):
                       })
 
 
-class SortedProductServiceListView(generic.ListView):
+class SortedProductServiceListView(ListView):
     '''
     View for sorting products & services
     '''

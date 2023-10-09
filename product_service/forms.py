@@ -80,6 +80,8 @@ class AdminProductCreationForm(forms.ModelForm):
             'author': 'The author has been automatically selected',
         }
 
+# Service Creation
+
 
 class AdminServiceCreationForm(forms.ModelForm):
 

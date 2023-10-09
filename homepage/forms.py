@@ -9,7 +9,7 @@ from allauth.account.forms import LoginForm, SignupForm
 
 # Local Imports
 
-from .models import UserProfile, USER_TYPE
+from .models import UserProfile, USER_TYPE, Comment
 
 
 class CustomSignupForm(SignupForm):
@@ -29,3 +29,17 @@ class CustomSignupForm(SignupForm):
 
 
 CustomLoginForm = LoginForm
+
+# Comment creation
+
+
+class ProductCommentCreationForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['writer', 'comment', 'product',]
+
+
+class ServiceCommentCreationForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['writer', 'comment', 'service', 'instance']

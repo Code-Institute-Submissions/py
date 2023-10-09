@@ -18,6 +18,11 @@ STATUS = (
     (2, 'Active'),
 )
 
+INSTANCE_TYPE = (
+    (0, 'Product'),
+    (1, 'Service'),
+)
+
 
 class UserProfile(AbstractUser):
     """Extended user profile with custom attributes."""
@@ -51,6 +56,10 @@ class Comment(models.Model):
                                 related_name='comment_services',
                                 null=True, blank=True)
 
+    status = models.IntegerField(choices=STATUS, default=0)
+
+    instance = models.IntegerField(choices=INSTANCE_TYPE, default=0)
+
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -74,6 +83,10 @@ class Like(models.Model):
                                 on_delete=models.SET_NULL,
                                 related_name='liked_services',
                                 null=True, blank=True)
+
+    status = models.IntegerField(choices=STATUS, default=0)
+
+    instance = models.IntegerField(choices=INSTANCE_TYPE, default=1)
 
     created_on = models.DateTimeField(auto_now_add=True)
 
