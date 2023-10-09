@@ -79,6 +79,7 @@ class StripeCheckoutView(View):
                 request.session['username'] = user_profile.username
             order = order_form.save()
 
+            # Pass order number to the session
             request.session['order_number'] = order.order_number
 
             # Start adding to Order_line_item

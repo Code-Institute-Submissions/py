@@ -91,6 +91,15 @@ class CheckoutSuccess(TemplateView):
             messages.info(
                 request, f"""Your tracking order is
                 <br><strong>{self.order_number}</strong>""")
+
+            # Clear specific session keys after successful payment
+            keys_to_delete = ['save_info', 'download_password',]
+            for key in keys_to_delete:
+                try:
+                    del request.session[key]
+                except KeyError:
+                    print(
+                        f"Key {key} not found in session. Skipping deletion.")
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -141,6 +150,15 @@ class CheckoutCancel(TemplateView):
             messages.info(
                 request, f"""Your tracking order is
                 <br><strong>{self.order_number}</strong>""")
+
+            # Clear specific session keys after unsuccessful payment
+            keys_to_delete = ['save_info', 'download_password',]
+            for key in keys_to_delete:
+                try:
+                    del request.session[key]
+                except KeyError:
+                    print(
+                        f"Key {key} not found in session. Skipping deletion.")
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
