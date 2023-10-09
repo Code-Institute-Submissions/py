@@ -371,7 +371,6 @@ class AllServiceListView(ListView):
 class CommentListView(ListView):
     model = Comment
     paginate_by = 6
-    template_name = 'single_product_service/single_product.html'
     context_object_name = 'comments_list'
 
     def get_queryset(self):
@@ -382,6 +381,7 @@ class CommentListView(ListView):
 
 class SingleProductView(CommentListView):
     """View for listing SINGLE product instances."""
+    template_name = 'single_product_service/single_product.html'
 
     def get_product(self, request, slug):
         queryset = Product.objects.annotate(

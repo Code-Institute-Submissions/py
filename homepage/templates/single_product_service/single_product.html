@@ -146,17 +146,15 @@
 </div>
 
 <!-- Comments -->
-<div class="d-flex justify-content-center mt-3">
-    <div class="row">
-        <div class="col-sm-12">
+<div class="container mt-3 px-4 px-lg-0">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-12">
             <p class="h5 text-uppercase mb-4 text-center">
                 Comments
-                {% for comment in comments_list %}
-                <div class="comment">
-                    <strong>{{ comment.comment }}</strong>
-                </div>
-                {% endfor %}
             </p>
+            {% for comment in comments_list %}
+            <strong>{{ comment.comment }}</strong>
+            {% endfor %}
             <!-- Comments' Pagination -->
             {% if is_paginated %}
             <nav aria-label="Page navigation">
@@ -168,15 +166,15 @@
                     {% if page_obj.has_next %}
                     <li class="mx-1"><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary"> NEXT
                             &raquo;</a></li>
-
                     {% endif %}
                 </ul>
-
                 <p class="mt-0 text-center">
                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </p>
             </nav>
             {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-6">
             <div class="content">
                 {% if commented %}
                 <div class="alert alert-success" role="alert">
@@ -184,18 +182,17 @@
                 </div>
                 {% else %}
                 {% if user_authenticated and has_purchased %}
-                <div class="col-md-12 card">
+                <div class="card">
                     <div class="card-body">
                         <form method="post" style="margin-top: 1.3em;">
                             {{ comment_form | crispy }}
                             {% csrf_token %}
                             <button type="submit" name="comment_submit" class="btn btn-signup btn-lg">Submit</button>
                         </form>
-                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
-
+                {% endif %}
             </div>
         </div>
     </div>

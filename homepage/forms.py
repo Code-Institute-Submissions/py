@@ -1,6 +1,7 @@
 # Django Imports
 from django import forms
 from django.utils.text import slugify
+from django.core.validators import MaxLengthValidator
 
 # Python imports
 from datetime import date
@@ -34,6 +35,12 @@ CustomLoginForm = LoginForm
 
 
 class ProductCommentCreationForm(forms.ModelForm):
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 50}),
+        validators=[MaxLengthValidator(256)],
+        max_length=256,
+    )
+
     class Meta:
         model = Comment
         fields = ['writer', 'comment', 'product',]

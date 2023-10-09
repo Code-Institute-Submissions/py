@@ -6,6 +6,17 @@
 }
 
 /* General Styling */
+textarea {
+    white-space: pre-wrap;
+    /* CSS 2.1 */
+    word-wrap: break-word;
+    /* IE 5.5+ and CSS 3 */
+    overflow-wrap: break-word;
+    /* CSS 3 */
+    resize: vertical;
+    /* allow vertical resize */
+}
+
 .text-side-cart-small {
     cursor: default;
     font-size: 12px;
