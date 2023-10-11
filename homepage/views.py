@@ -19,7 +19,8 @@ from allauth.account.views import LoginView, SignupView, LogoutView
 # Local Imports
 from .forms import (CustomLoginForm,
                     CustomSignupForm,
-                    ProductCommentCreationForm)
+                    ProductCommentCreationForm,
+                    ServiceCommentCreationForm,)
 from product_service.models import Product, Service
 from checkout.models import Order
 from .models import Comment
@@ -365,12 +366,12 @@ class AllServiceListView(ListView):
         context['order_count'] = order_counts
         return context
 
-# Single Product
+# Product Single
 
 # Comment Creation View
 
 
-class CommentListView(ListView):
+class ProductCommentListView(ListView):
     model = Comment
     paginate_by = 6
     context_object_name = 'comments_list'
@@ -378,16 +379,17 @@ class CommentListView(ListView):
     def get_queryset(self):
         """Return comments with a status of 2 and comments count,
         ordered by creation date."""
-        comments = Comment.objects.filter(status=0).order_by('-created_on')
+        comments = Comment.objects.filter(
+            status=2, instance=0).order_by('-created_on')
         self.comment_count = Comment.objects.filter(
-            status=0).order_by('-created_on').count()
+            status=2, instance=0).order_by('-created_on').count()
 
         self.user_commented = Comment.objects.filter(
-            writer=self.request.user).order_by('-created_on').exists()
+            writer=self.request.user, instance=0).order_by('-created_on').exists()
         return comments
 
 
-class SingleProductView(CommentListView):
+class SingleProductView(ProductCommentListView):
     """View for listing SINGLE product instances."""
     template_name = 'single_product_service/single_product.html'
 
@@ -421,7 +423,7 @@ class SingleProductView(CommentListView):
 
         # Comment Form
         comment_form = ProductCommentCreationForm(self.request, initial={'writer': self.request.user,
-                                                                    'product': self.product})
+                                                                         'product': self.product})
         context['comment_form'] = comment_form
 
         return context
@@ -461,36 +463,103 @@ class SingleProductView(CommentListView):
         # and rendering the template
         return super().get(request, slug, *args, **kwargs)
 
+# Service Single
 
-class SingleServiceView(View):
+# Comment Creation View
+
+
+class ServiceCommentListView(ListView):
+    model = Comment
+    paginate_by = 6
+    context_object_name = 'comments_list'
+
+    def get_queryset(self):
+        """Return comments with a status of 2 and comments count,
+        ordered by creation date."""
+        comments = Comment.objects.filter(
+            status=2, instance=1).order_by('-created_on')
+        self.comment_count = Comment.objects.filter(
+            status=2, instance=1).order_by('-created_on').count()
+
+        self.user_commented = Comment.objects.filter(
+            writer=self.request.user, instance=1).order_by('-created_on').exists()
+        return comments
+
+
+class SingleServiceView(ServiceCommentListView):
     """View for listing SINGLE service instances."""
+    template_name = 'single_product_service/single_service.html'
 
-    def get(self, request, slug, *args, **kwargs):
-
+    def get_service(self, request, slug):
         queryset = Service.objects.annotate(
             likescount=Count('likes'),
         ).order_by('-created_on')
-
-        service = get_object_or_404(queryset, slug=slug)
-
-        order_count = Order.objects.filter(
-            status=2, lineitems__service=service).count()
+        self.service = get_object_or_404(queryset, slug=slug)
+        self.order_count = Order.objects.filter(
+            status=2, lineitems__service=self.service).count()
 
         # Check if user purchased or not
         if request.user.is_authenticated:
-            has_purchased = Order.objects.filter(
+            self.has_purchased = Order.objects.filter(
                 buyer_profile=request.user,
-                lineitems__service=service).exists()
+                lineitems__service=self.service).exists()
         else:
-            has_purchased = False
+            self.has_purchased = False
 
-        return render(request, "single_product_service/single_service.html",
-                      {
-                          "service": service,
-                          "order_count": order_count,
-                          "has_purchased": has_purchased,
-                          "user_authenticated": request.user.is_authenticated
-                      })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        self.get_service(self.request, self.kwargs['slug'])
+
+        context['service'] = self.service
+        context['order_count'] = self.order_count
+        context['has_purchased'] = self.has_purchased
+        context['user_authenticated'] = self.request.user.is_authenticated
+        context['comment_count'] = self.comment_count
+        context['commented'] = self.user_commented
+
+        # Comment Form
+        comment_form = ServiceCommentCreationForm(self.request, initial={'writer': self.request.user,
+                                                                         'service': self.service})
+        context['comment_form'] = comment_form
+
+        return context
+
+    def get(self, request, slug, *args, **kwargs):
+        return super().get(request, slug, *args, **kwargs)
+
+    def post(self, request, slug, *args, **kwargs):
+        self.get_service(request, slug)
+
+        # Comment
+        comment_form = ServiceCommentCreationForm(request, data=request.POST)
+        if 'comment_submit' in request.POST:
+            if comment_form.is_valid():
+                if request.user.is_authenticated and self.has_purchased:
+                    comment_form.instance.writer = request.user
+                    comment_form.instance.service = self.service
+                    comment_form.instance.instance = 1
+                    comment_form.save()
+                    messages.success(
+                        request, '''Your comment has been submitted!
+                        <br>Awaiting for approval!''')
+                else:
+                    messages.error(
+                        request, '''You need to log in
+                        & purchase a service to comment!''')
+            else:
+                error_messages = []
+                for field, errors in comment_form.errors.items():
+                    field_errors = ', '.join(errors)
+                    error_messages.append(f"{field}: {field_errors}")
+
+                error_message_str = ', '.join(error_messages)
+                messages.error(
+                    request, f'Your form is not valid!<br>{error_message_str}')
+
+        # Sperclass method which takes care of calling get_context_data
+        # and rendering the template
+        return super().get(request, slug, *args, **kwargs)
 
 
 class SortedProductServiceListView(ListView):

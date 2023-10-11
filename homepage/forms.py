@@ -35,6 +35,9 @@ CustomLoginForm = LoginForm
 
 
 class ProductCommentCreationForm(forms.ModelForm):
+    """
+    Service form for service instances
+    """
     comment = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 50}),
         validators=[MaxLengthValidator(256)],
@@ -68,6 +71,36 @@ class ProductCommentCreationForm(forms.ModelForm):
 
 
 class ServiceCommentCreationForm(forms.ModelForm):
+    """
+    Service form for service instances
+    """
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 50}),
+        validators=[MaxLengthValidator(256)],
+        max_length=256,
+    )
+
     class Meta:
         model = Comment
-        fields = ['writer', 'comment', 'service', 'instance']
+        fields = ['comment',]
+
+    def __init__(self, request, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field and pass
+        the request.
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'comment': 'Add a ramarkable comment',
+        }
+        for field in self.fields:
+            if field:
+
+                if self.fields[field].required:
+                    placeholder = f'{placeholders[field]}'
+
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+
+            self.fields[field].widget.attrs['class'] = 'mb-2'
+            self.fields[field].label = False
