@@ -374,8 +374,14 @@ class CommentListView(ListView):
     context_object_name = 'comments_list'
 
     def get_queryset(self):
-        """Return comments with a status of 2, ordered by creation date."""
+        """Return comments with a status of 2 and comments count,
+        ordered by creation date."""
         comments = Comment.objects.filter(status=0).order_by('-created_on')
+        self.comment_count = Comment.objects.filter(
+            status=0).order_by('-created_on').count()
+
+        self.user_commented = Comment.objects.filter(
+            writer=self.request.user).order_by('-created_on').exists()
         return comments
 
 
@@ -408,6 +414,8 @@ class SingleProductView(CommentListView):
         context['order_count'] = self.order_count
         context['has_purchased'] = self.has_purchased
         context['user_authenticated'] = self.request.user.is_authenticated
+        context['comment_count'] = self.comment_count
+        context['commented'] = self.user_commented
 
         # Comment Form
         comment_form = ProductCommentCreationForm(initial={'writer': self.request.user,

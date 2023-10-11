@@ -148,40 +148,52 @@
 <!-- Comments -->
 <div class="container mt-3 px-4 px-lg-0">
     <div class="row align-items-center justify-content-center">
-        <div class="col-12">
-            <p class="h5 text-uppercase mb-4 text-center">
-                Comments
-            </p>
-            {% for comment in comments_list %}
-            <strong>{{ comment.comment }}</strong>
-            {% endfor %}
-            <!-- Comments' Pagination -->
-            {% if is_paginated %}
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                    <li class="mx-1"><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">&laquo;
-                            PREV </a></li>
-                    {% endif %}
-                    {% if page_obj.has_next %}
-                    <li class="mx-1"><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary"> NEXT
-                            &raquo;</a></li>
-                    {% endif %}
-                </ul>
-                <p class="mt-0 text-center">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                </p>
-            </nav>
-            {% endif %}
+
+        <!-- Comment Display -->
+        <div class="col-sm-12 col-md-6 m-3">
+            <div class="content">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="h5 text-uppercase mb-4 text-center">
+                            Comments <i class="fa-solid fa-comment"></i> {{ comment_count }}
+                        </p>
+                        {% for comment in comments_list %}
+                        <strong>{{ comment.comment }}</strong>
+                        {% endfor %}
+                        <!-- Comments' Pagination -->
+                        {% if is_paginated %}
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                <li class="mx-1"><a href="?page={{ page_obj.previous_page_number }}"
+                                        class="btn btn-primary">&laquo;
+                                        PREV </a></li>
+                                {% endif %}
+                                {% if page_obj.has_next %}
+                                <li class="mx-1"><a href="?page={{ page_obj.next_page_number }}"
+                                        class="btn btn-primary"> NEXT
+                                        &raquo;</a></li>
+                                {% endif %}
+                            </ul>
+                            <p class="mt-0 text-center">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </p>
+                        </nav>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12 col-md-6">
+
+        <!-- Comment Form -->
+        <div class="col-sm-12 col-md-6 m-3">
             <div class="content">
                 {% if commented %}
-                <div class="alert alert-success" role="alert">
-                    Your comment is awaiting approval
+                <div class="alert alert-success text-center" role="alert">
+                    You already commented this product
                 </div>
                 {% else %}
-                {% if user_authenticated and has_purchased %}
+                {% if user_authenticated and has_purchased and not commented %}
                 <div class="card">
                     <div class="card-body">
                         <form method="post" style="margin-top: 1.3em;">

@@ -43,7 +43,7 @@ class ProductCommentCreationForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['writer', 'comment', 'product',]
+        fields = ['comment',]
 
 
 class ServiceCommentCreationForm(forms.ModelForm):
