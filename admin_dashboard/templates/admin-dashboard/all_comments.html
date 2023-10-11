@@ -19,6 +19,7 @@
                             <th>Writer</th>
                             <th>Comment</th>
                             <th>Instance</th>
+                            <th>Item</th>
                             <th>Created on</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -29,6 +30,7 @@
                             <th>Writer</th>
                             <th>Comment</th>
                             <th>Instance</th>
+                            <th>Item</th>
                             <th>Created on</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -40,6 +42,12 @@
                             <td>{{ comment.writer }}</td>
                             <td>{{ comment.comment }}</td>
                             <td>{{ comment.get_instance_display }}</td>
+                            <td>{% if comment.service %}
+                                {{ comment.service }}
+                                {% else %}
+                                {{ comment.product }}
+                                {% endif %}
+                            </td>
                             <td>{{ comment.created_on }}</td>
                             <td>{{ comment.get_status_display }}</td>
                             <td>

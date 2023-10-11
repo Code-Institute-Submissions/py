@@ -379,13 +379,16 @@ class ProductCommentListView(ListView):
     def get_queryset(self):
         """Return comments with a status of 2 and comments count,
         ordered by creation date."""
+        self.get_product(self.request, self.kwargs['slug'])
         comments = Comment.objects.filter(
-            status=2, instance=0).order_by('-created_on')
+            status=2, instance=0, product=self.product).order_by('-created_on')
         self.comment_count = Comment.objects.filter(
-            status=2, instance=0).order_by('-created_on').count()
+            status=2, instance=0,
+            product=self.product).order_by('-created_on').count()
 
         self.user_commented = Comment.objects.filter(
-            writer=self.request.user, instance=0).order_by('-created_on').exists()
+            writer=self.request.user,
+            instance=0, product=self.product).order_by('-created_on').exists()
         return comments
 
 
@@ -422,8 +425,9 @@ class SingleProductView(ProductCommentListView):
         context['commented'] = self.user_commented
 
         # Comment Form
-        comment_form = ProductCommentCreationForm(self.request, initial={'writer': self.request.user,
-                                                                         'product': self.product})
+        comment_form = ProductCommentCreationForm(
+            self.request, initial={'writer': self.request.user,
+                                   'product': self.product})
         context['comment_form'] = comment_form
 
         return context
@@ -473,16 +477,20 @@ class ServiceCommentListView(ListView):
     paginate_by = 6
     context_object_name = 'comments_list'
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         """Return comments with a status of 2 and comments count,
         ordered by creation date."""
+        self.get_service(self.request, self.kwargs['slug'])
         comments = Comment.objects.filter(
-            status=2, instance=1).order_by('-created_on')
+            status=2, instance=1, service=self.service).order_by(
+                '-created_on')
         self.comment_count = Comment.objects.filter(
-            status=2, instance=1).order_by('-created_on').count()
+            status=2, instance=1, service=self.service).order_by(
+                '-created_on').count()
 
         self.user_commented = Comment.objects.filter(
-            writer=self.request.user, instance=1).order_by('-created_on').exists()
+            writer=self.request.user,
+            instance=1, service=self.service).order_by('-created_on').exists()
         return comments
 
 
@@ -519,8 +527,9 @@ class SingleServiceView(ServiceCommentListView):
         context['commented'] = self.user_commented
 
         # Comment Form
-        comment_form = ServiceCommentCreationForm(self.request, initial={'writer': self.request.user,
-                                                                         'service': self.service})
+        comment_form = ServiceCommentCreationForm(
+            self.request, initial={'writer': self.request.user,
+                                   'service': self.service})
         context['comment_form'] = comment_form
 
         return context
