@@ -369,7 +369,7 @@ class DownloadDelete(AdminRequiredMixin, DeleteView):
         return get_object_or_404(Download, pk=item_id)
 
     def get_success_url(self):
-        messages.success(self.request, 'Download Instance has been deleted!')
+        messages.success(self.request, 'Download instance has been deleted!')
         return reverse_lazy('admin_all_downloads')
 
 # Order Deletion
@@ -449,3 +449,34 @@ class AdminUpdateCommentView(BaseUpdateCommentView):
         comment.save()
 
         return redirect('admin_all_comments')
+
+# Delete Comments
+
+
+class CommentDelete(AdminRequiredMixin, DeleteView):
+    """View for deleting comment instances."""
+    model = Comment
+    template_name = None
+    allowed_roles = [1]
+
+    def dispatch(self, request, *args, **kwargs):
+        comment = self.get_object()
+        if comment.status == 2:
+            messages.error(
+                request, "Error: comment's status must be suspended or draft.")
+            return redirect('admin_all_comments')
+
+        if self.request.user.role not in self.allowed_roles:
+            messages.error(
+                request, "Error: User does not have the required role")
+            return redirect('admin_all_comments')
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        comment_id = self.kwargs.get('comment_id')
+        return get_object_or_404(Comment, pk=comment_id)
+
+    def get_success_url(self):
+        messages.success(self.request, 'Comment instance has been deleted!')
+        return reverse_lazy('admin_all_comments')
