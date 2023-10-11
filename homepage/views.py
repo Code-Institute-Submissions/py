@@ -407,7 +407,7 @@ class SingleProductView(ProductCommentListView):
         # Check if user purchased or not
         if request.user.is_authenticated:
             self.has_purchased = Order.objects.filter(
-                buyer_profile=request.user,
+                buyer_profile=request.user, status=2,
                 lineitems__product=self.product).exists()
         else:
             self.has_purchased = False
@@ -509,7 +509,7 @@ class SingleServiceView(ServiceCommentListView):
         # Check if user purchased or not
         if request.user.is_authenticated:
             self.has_purchased = Order.objects.filter(
-                buyer_profile=request.user,
+                buyer_profile=request.user, status=2,
                 lineitems__service=self.service).exists()
         else:
             self.has_purchased = False
