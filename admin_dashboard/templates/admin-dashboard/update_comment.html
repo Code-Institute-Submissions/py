@@ -34,6 +34,28 @@
                         </div>
                         <div class="card-body">
 
+
+                            <!-- Item -->
+                            <div class="mb-3">
+                                <label for="item" class="form-label"><strong>Item</strong></label>
+                                <input type="text" name="item" class="form-control" id="item"
+                                    value="{% if comment.service %}{{ comment.service }}{% else %}{{ comment.product }}{% endif %}"
+                                    required disabled>
+                                {% if comment.item.errors %}
+                                <div class="errors">{{ comment.item.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Instance -->
+                            <div class="mb-3">
+                                <label for="instance" class="form-label"><strong>Instance</strong></label>
+                                <input type="text" name="instance" class="form-control" id="instance"
+                                    value="{{ comment.get_instance_display}}" required disabled>
+                                {% if comment.instance.errors %}
+                                <div class="errors">{{ comment.instance.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <!-- Writer -->
                             <div class="mb-3">
                                 <label for="writer" class="form-label"><strong>Writer</strong></label>
@@ -69,6 +91,16 @@
                                 </select>
                                 {% if comment.status.errors %}
                                 <div class="errors">{{ comment.status.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Creation Date -->
+                            <div class="mb-3">
+                                <label for="creation" class="form-label"><strong>Creation</strong></label>
+                                <input type="text" name="creation" class="form-control" id="creation"
+                                    value="{{ comment.created_on }}" required disabled>
+                                {% if comment.creation.errors %}
+                                <div class="errors">{{ comment.creation.errors }}</div>
                                 {% endif %}
                             </div>
 
