@@ -17,7 +17,9 @@ import logging
 from allauth.account.views import LoginView, SignupView, LogoutView
 
 # Local Imports
-from .forms import CustomLoginForm, CustomSignupForm, ProductCommentCreationForm
+from .forms import (CustomLoginForm,
+                    CustomSignupForm,
+                    ProductCommentCreationForm)
 from product_service.models import Product, Service
 from checkout.models import Order
 from .models import Comment
@@ -418,8 +420,8 @@ class SingleProductView(CommentListView):
         context['commented'] = self.user_commented
 
         # Comment Form
-        comment_form = ProductCommentCreationForm(initial={'writer': self.request.user,
-                                                           'product': self.product})
+        comment_form = ProductCommentCreationForm(self.request, initial={'writer': self.request.user,
+                                                                    'product': self.product})
         context['comment_form'] = comment_form
 
         return context
@@ -431,7 +433,7 @@ class SingleProductView(CommentListView):
         self.get_product(request, slug)
 
         # Comment
-        comment_form = ProductCommentCreationForm(data=request.POST)
+        comment_form = ProductCommentCreationForm(request, data=request.POST)
         if 'comment_submit' in request.POST:
             if comment_form.is_valid():
                 if request.user.is_authenticated and self.has_purchased:

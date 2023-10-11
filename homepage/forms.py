@@ -45,6 +45,27 @@ class ProductCommentCreationForm(forms.ModelForm):
         model = Comment
         fields = ['comment',]
 
+    def __init__(self, request, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field and pass
+        the request.
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'comment': 'Add a ramarkable comment',
+        }
+        for field in self.fields:
+            if field:
+
+                if self.fields[field].required:
+                    placeholder = f'{placeholders[field]}'
+
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+
+            self.fields[field].widget.attrs['class'] = 'mb-2'
+            self.fields[field].label = False
+
 
 class ServiceCommentCreationForm(forms.ModelForm):
     class Meta:

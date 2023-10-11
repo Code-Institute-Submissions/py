@@ -153,13 +153,16 @@
         <div class="col-sm-12 col-md-6 m-3">
             <div class="content">
                 <div class="card">
-                    <div class="card-body">
-                        <p class="h5 text-uppercase mb-4 text-center">
+                    <div class="card-header">
+                        <h5 class="m-0 text-center">
                             Comments <i class="fa-solid fa-comment"></i> {{ comment_count }}
-                        </p>
+                        </h5>
+                    </div>
+                    <div class="card-body">
                         {% for comment in comments_list %}
                         <strong>{{ comment.comment }}</strong>
                         {% endfor %}
+                        
                         <!-- Comments' Pagination -->
                         {% if is_paginated %}
                         <nav aria-label="Page navigation">
@@ -188,21 +191,22 @@
         <!-- Comment Form -->
         <div class="col-sm-12 col-md-6 m-3">
             <div class="content">
-                {% if commented %}
+                {% if not commented %}
                 <div class="alert alert-success text-center" role="alert">
                     You already commented this product
                 </div>
                 {% else %}
-                {% if user_authenticated and has_purchased and not commented %}
-                <div class="card">
-                    <div class="card-body">
-                        <form method="post" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" name="comment_submit" class="btn btn-signup btn-lg">Submit</button>
-                        </form>
+                {% if user_authenticated and has_purchased and commented %}
+                <form method="post" class="card">
+                    <div class="card-header">
+                        <h5 class="m-0 text-center">Comment</h5>
                     </div>
-                </div>
+                    <div class="card-body">
+                        {{ comment_form | crispy }}
+                        {% csrf_token %}
+                    </div>
+                    <button type="submit" name="comment_submit" class="card-footer border-0">Submit</button>
+                </form>
                 {% endif %}
                 {% endif %}
             </div>
