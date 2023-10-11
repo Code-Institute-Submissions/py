@@ -405,3 +405,47 @@ class CommentList(CommentBaseListView):
     context_object_name = 'admin_all_comments'
 
 # UPDATE Comments
+
+
+class BaseUpdateCommentView(AdminRequiredMixin, View):
+    """Base class for comment update view."""
+    template_name = None
+
+    def get(self, request, comment_id, *args, **kwargs):
+        context = self.get_context_data(comment_id)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, comment_id):
+
+        comment_set = Comment.objects.order_by('-created_on')
+        comment_instance = get_object_or_404(
+            comment_set, pk=comment_id)
+
+        status = STATUS
+
+        return {
+            "comment": comment_instance,
+            "status": status,
+            "user_authenticated": self.request.user.is_authenticated
+        }
+
+
+class AdminUpdateCommentView(BaseUpdateCommentView):
+    """View to update comment instance"""
+    template_name = 'admin-dashboard/update_comment.html'
+
+    def post(self, request, comment_id, *args, **kwargs):
+
+        comment = get_object_or_404(Comment, pk=comment_id)
+
+        comment_text = request.POST.get('comment')
+        status = request.POST.get('status')
+
+        comment.comment = comment_text[:256]
+        comment.status = int(status)
+
+        messages.success(
+            request, "Congratulations! The comment instance has been updated!")
+        comment.save()
+
+        return redirect('admin_all_comments')

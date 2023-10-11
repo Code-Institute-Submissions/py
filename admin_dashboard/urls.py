@@ -4,7 +4,8 @@ from .views import (AdminDashboard, AdminSettingsView,
                     AdminPasswordChange, AdminRole, AdminDownloadCreation,
                     DownloadWithToken,
                     DownloadList, AdminUpdateDownloadView, DownloadDelete,
-                    PendingOrderDeletionView, CommentList,)
+                    PendingOrderDeletionView, CommentList,
+                    AdminUpdateCommentView,)
 
 
 urlpatterns = [
@@ -25,7 +26,8 @@ urlpatterns = [
          name='admin_download_create'),
     path('account/admin/download/all/', DownloadList.as_view(),
          name='admin_all_downloads'),
-    path('account/admin/download/file/<int:item_id>/', AdminUpdateDownloadView.as_view(),
+    path('account/admin/download/file/<int:item_id>/',
+         AdminUpdateDownloadView.as_view(),
          name='admin_update_download'),
     path('account/admin/download/file/delete/<int:item_id>/',
          DownloadDelete.as_view(), name='admin_delete_download'),
@@ -39,4 +41,7 @@ urlpatterns = [
     # Comments
     path('account/admin/comments/', CommentList.as_view(),
          name='admin_all_comments'),
+    path('account/admin/comments/<int:comment_id>/',
+         AdminUpdateCommentView.as_view(),
+         name='admin_update_comment'),
 ]

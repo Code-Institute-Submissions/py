@@ -43,7 +43,7 @@
                             <td>{{ comment.created_on }}</td>
                             <td>{{ comment.get_status_display }}</td>
                             <td>
-                                <a href="">Update & Details</a>
+                                <a href="{% url 'admin_update_comment' comment.id %}">Update & Details</a>
                             </td>
                         </tr>
                         {% endfor %}

@@ -1,0 +1,89 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-4 pb-5">
+        <div class="my-3">
+            <a class="my-0" href="{% url 'admin_all_comments' %}">Return</a>
+        </div>
+        <hr>
+        <h1 class="mt-4">Comment Update</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">You can update this comment instance</li>
+        </ol>
+
+        <!-- Role Alert -->
+        {% if request.user.role == 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In comment to update a comment instance you need to be an admin.
+        </div>
+        {% elif request.user.role == 1%}
+
+        <!-- Form Container -->
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 col-md-12 d-inline-block">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if comment.non_field_errors %}
+                    <div class="errors">{{ comment.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center font-weight-light my-2">{% trans "Comment Details" %}</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <!-- Writer -->
+                            <div class="mb-3">
+                                <label for="writer" class="form-label"><strong>Writer</strong></label>
+                                <input type="text" name="writer" class="form-control" id="writer"
+                                    value="{{ comment.writer }}" required disabled>
+                                {% if comment.writer.errors %}
+                                <div class="errors">{{ comment.writer.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Comment -->
+                            <div class="mb-3">
+                                <label for="comment" class="form-label"><strong>Comment</strong> <small>(256
+                                        characters)</small></label>
+                                <textarea name="comment" class="form-control" id="comment" maxlength="256" rows="4"
+                                    required>{{ comment.comment }}</textarea>
+                                {% if product.comment.errors %}
+                                <div class="errors">{{ product.comment.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label"><strong>Status</strong></label>
+                                <select id="status" name="status" class="form-select">
+                                    <option value="{{ comment.status }}" selected> {{ comment.get_status_display }}
+                                    </option>
+                                    {% for status_int, status_str in status %}
+                                    {% if status_int != comment.status %}
+                                    <option value="{{ status_int }}">{{ status_str }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% if comment.status.errors %}
+                                <div class="errors">{{ comment.status.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row my-4 text-center">
+                                <div class="col-12 d-inline-block">
+                                    <button type="submit" class="btn btn-success mx-1">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}
