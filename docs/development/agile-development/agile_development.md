@@ -46,7 +46,7 @@ The user stories have undergone some modifications since their initial conceptio
     | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu so that it streamlines my search for products & services. | **4** |
     | | Incorporate Search Bar | As a user, I want a search engine so I that I can find specific products or services. | **7** |
     | | Integrate Filter Function | As a user, I want a filter section on the same page, allowing me to sort by categories, price, license, ownership, etc. | **4** |
-    | Likes & Comments | Implement Likes & Comments | As a user, after a purchase, I want to like and comment on my product or service, share my thoughts, and contribute to the community. | **4** |
+    | Likes & Comments | Implement Likes & Comments | As a user, after a purchase, I want to like and comment on my product or service, and share my thoughts so that I can contribute to the community. | **4** |
     | Accountability | Construct Contact Form | As a user, I desire a well-crafted contact page to reach the support team. | **4** |
     | | Implement Request Formats in Contact Form | As a user, I want predefined request formats in the contact form, ensuring effective communication of my ideas. | **4** |
     | | Assemble FAQ Section | As a user, I seek a FAQ section on the support page, offering videos or articles for troubleshooting or answering Plexosoft Marketplace-related questions. | **4** |

@@ -88,7 +88,7 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                            Order Management
+                            Order
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
@@ -102,7 +102,7 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-shop-lock"></i></div>
-                            Asset Management
+                            Asset
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
 
@@ -147,7 +147,7 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRoles"
                             aria-expanded="false" aria-controls="collapseRoles">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
-                            File Management
+                            File
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseRoles" aria-labelledby="headingOne"
@@ -157,6 +157,40 @@
                             </nav>
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{% url 'admin_download_create' %}">Upload</a>
+                            </nav>
+                        </div>
+
+                        <!-- Reputation -->
+                        <div class="sb-sidenav-menu-heading">Reputation</div>
+
+                        <!--  Comments & Likes -->
+
+                        <!-- Comments -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseComments" aria-expanded="false" aria-controls="collapseComments">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
+                            Comment
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseComments" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'admin_all_comments' %}">Control</a>
+                            </nav>
+                        </div>
+
+                        <!-- Likes -->
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLikes" aria-expanded="false" aria-controls="collapseLikes">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
+                            Like
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLikes" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'admin_all_downloads' %}">Control</a>
                             </nav>
                         </div>
 

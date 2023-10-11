@@ -14,7 +14,7 @@ from django.http import HttpResponse, Http404
 import os
 from django.http import HttpResponseForbidden
 # Local Imports
-from homepage.models import UserProfile, STATUS
+from homepage.models import UserProfile, STATUS, Comment
 from .forms import AdminDownloadCreationForm
 from product_service.models import Download, Service, Product
 from product_service.validate_file import validate_file_size
@@ -107,7 +107,7 @@ class AdminRole(AdminDashboard):
 
 # Download  Functionality
 
-# Download Creation instance
+# CREATE Download instance
 
 
 class AdminDownloadCreation(AdminRequiredMixin, View):
@@ -225,7 +225,7 @@ class DownloadWithToken(View):
             raise Http404("Download not found.")
 
 
-# # READ Product instances
+# READ Download instances
 
 
 class DownloadBaseListView(AdminRequiredMixin, ListView):
@@ -238,12 +238,12 @@ class DownloadBaseListView(AdminRequiredMixin, ListView):
 
 
 class DownloadList(DownloadBaseListView):
-    """ Read all created download instances tempalte """
+    """ Read all created download instances template """
     template_name = 'admin-dashboard/all_downloads.html'
     context_object_name = 'admin_all_downloads'
 
 
-# # UPDATE Download instance
+# UPDATE Download instance
 
 
 class BaseUpdateDownloadView(AdminRequiredMixin, View):
@@ -341,7 +341,7 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
 
         return redirect('admin_all_downloads')
 
-# # DELETE Download instance
+# DELETE Download instance
 
 
 class DownloadDelete(AdminRequiredMixin, DeleteView):
@@ -385,3 +385,23 @@ class PendingOrderDeletionView(AdminRequiredMixin, View):
         messages.success(
             request, "Orders with status 'Pending' deleted successfully")
         return redirect(reverse('all_orders_admin'))
+
+# READ Comments
+
+
+class CommentBaseListView(AdminRequiredMixin, ListView):
+    """ Base view for listing Comment instances. """
+    model = Comment
+
+    def get_queryset(self):
+        """ Return comment instances ordered by creation date."""
+        comments = Comment.objects.order_by('-created_on')
+        return comments
+
+
+class CommentList(CommentBaseListView):
+    """ Read all created comment instances template """
+    template_name = 'admin-dashboard/all_comments.html'
+    context_object_name = 'admin_all_comments'
+
+# UPDATE Comments
