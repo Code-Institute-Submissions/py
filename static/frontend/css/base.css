@@ -1,3 +1,5 @@
+/* All code here is also custom code */
+
 /* Fonts */
 @font-face {
     font-family: "Roboto";
@@ -528,4 +530,23 @@ i {
     border-color: #297fb9 !important;
     color: #297fb9;
     transition: 0.3s;
+}
+
+/* Mailchimp - Newsletter*/
+
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 600px;
+}
+
+.newsletter-email-input {
+    height: 45px;
+    margin-top: 15px
+}
+
+.newsletter-hidden-input {
+    position: absolute;
+    left: -5000px;
 }
