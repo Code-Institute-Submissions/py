@@ -98,7 +98,7 @@ class Like(models.Model):
 
 
 class NewsLetter(models.Model):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
     excerpt = models.CharField(max_length=128)
     created_on = models.DateTimeField(auto_now_add=True)
 

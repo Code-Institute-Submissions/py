@@ -8,9 +8,8 @@ from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import Count
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from operator import attrgetter
-from django.http import JsonResponse
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -28,7 +27,7 @@ from .forms import (CustomLoginForm,
                     ServiceCommentCreationForm,)
 from product_service.models import Product, Service
 from checkout.models import Order
-from .models import Comment, Like
+from .models import Comment, Like, NewsLetter
 
 logger = logging.getLogger(__name__)
 
@@ -716,7 +715,7 @@ class ProductLikePost(View):
     """
     Handle the product like functionality.
 
-    This view leverages Django's Class-Based Views and is designed to work with 
+    This view leverages Django's Class-Based Views and is designed to work with
     AJAX on the frontend. It uses `transaction.atomic()` to ensure
     data integrity during the database operations.
 
@@ -762,7 +761,7 @@ class ServiceLikePost(View):
     """
     Handle the service like functionality.
 
-    This view leverages Django's Class-Based Views and is designed to work with 
+    This view leverages Django's Class-Based Views and is designed to work with
     AJAX on the frontend. It uses `transaction.atomic()` to ensure
     data integrity during the database operations.
 
@@ -800,3 +799,31 @@ class ServiceLikePost(View):
 
         return JsonResponse(
             {'status': 'success', 'message': 'Like status updated'})
+
+# Newsletter LIKE
+
+
+class NewsletterPost(View):
+    """
+    Handle the newsletter functionality.
+    """
+
+    def post(self, request):
+        with transaction.atomic():
+            # Here 'email' should be the key that you've sent via AJAX
+            email = request.POST.get('email')
+
+            existing_newsletter = NewsLetter.objects.filter(
+                email=email).exists()
+
+            if not existing_newsletter:
+                newsletter_instance = NewsLetter.objects.create(
+                    email=email,
+                    excerpt='Related to Mailchimp',
+                )
+            else:
+                return JsonResponse(
+                    {'status': 'error', 'message': 'Email already exists in our database!'})
+
+        return JsonResponse(
+            {'status': 'success', 'message': 'Email added to our internal newsletter!'})

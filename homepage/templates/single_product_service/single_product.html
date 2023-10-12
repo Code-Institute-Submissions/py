@@ -294,8 +294,9 @@
 </div>
 
 <!-- Like Functionality -->
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
+        // Like Functionality
         $("#like-button").click(function (event) {
             event.stopPropagation()
             event.preventDefault()
@@ -310,11 +311,37 @@
                 },
                 success: function (json) {
                     if (json.status === 'success') {
-                        location.reload(); // Reload the page to reflect the new like status
+                        location.reload();
                     }
                 },
                 error: function (xhr, errmsg, err) {
                     console.log("Could not update the like!");
+                }
+            });
+        });
+
+        // Newsletter functionality
+
+        $("#mc-embedded-subscribe").click(function (event) {
+
+            const email = $(".newsletter-email-input").val();
+
+            $.ajax({
+                url: `/newsletter/add/`,
+                method: 'POST',
+                data: {
+                    email: email,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (json) {
+                    if (json.status === 'success') {
+                        alert(json.message);
+                    } else {
+                        alert(json.message);
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    alert("Could not add to our internal newsletter database!");
                 }
             });
         });

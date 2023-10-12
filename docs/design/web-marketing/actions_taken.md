@@ -61,6 +61,13 @@ Our current Facebook page is for demonstration purposes only, although we have r
     ![Facebook Page Image](../../assets/img/facebook-page.png)
 
 ### Content Marketing
+For this iteration we chose not to proceed with the blog or academy section.
+
 ### Email Marketing
+
+For email marketing we have implemented Mailchimp. We adapted the code they provided to our own to keep the consistency of the overall design. We have also implemented Mailchimp's pop up newsletter model.
+
+This form is a bit special since it triggers both Mailchimp and our code, we store the emails on Mailchimp and in our database as well as a backup or for future use.
+
 #### Newsletter
 ### SEO

@@ -29,7 +29,7 @@
         }(document, "script",
             "https://chimpstatic.com/mcjs-connected/js/users/891c26c27174245a675267b31/ae9224ba1d03016948dea8891.js");
     </script>
-    
+
     {% endblock corejs %}
 
     {% block extra_corejs %}
@@ -380,7 +380,7 @@
 
                                                             <!-- Email Input -->
                                                             <input type="email" name="EMAIL"
-                                                                class="form-control required email newsletter-email-input"
+                                                                class="form-control required email newsletter-email-input footer-newsletter"
                                                                 id="mce-EMAIL" placeholder="Enter your email *"
                                                                 value="{{ request.user.email }}" required>
 
@@ -466,6 +466,36 @@
     {% block postloadjs %}
 
     {% endblock postloadjs %}
+
+    <!-- Newsletter -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Newsletter functionality
+
+            $("#mc-embedded-subscribe").click(function (event) {
+                const email = $(".footer-newsletter").val();
+
+                $.ajax({
+                    url: `/newsletter/add/`,
+                    method: 'POST',
+                    data: {
+                        email: email,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                    },
+                    success: function (json) {
+                        if (json.status === 'success') {
+                            alert(json.message);
+                        } else {
+                            alert(json.message);
+                        }
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alert("Could not add to our internal newsletter database!");
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Mailchimp JS -->
     <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>

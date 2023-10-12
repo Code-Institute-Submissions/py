@@ -13,7 +13,8 @@ from .views import (HomepageProductServiceView,
                     CustomSignupView,
                     CustomLogoutView,
                     ProductLikePost,
-                    ServiceLikePost,)
+                    ServiceLikePost,
+                    NewsletterPost,)
 from . import role_redirect
 
 
@@ -50,6 +51,10 @@ urlpatterns = [
     # Service Like
     path('service/like/<slug:slug>', ServiceLikePost.as_view(),
          name='service_like'),
+
+    # Newsletter
+    path('newsletter/add/', NewsletterPost.as_view(),
+         name='newsletter'),
 
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),
