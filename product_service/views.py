@@ -1,24 +1,26 @@
-# Django Imports
-from django.shortcuts import render
-from django.views.generic import View, ListView
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from django.views.generic.edit import DeleteView
-from django.core.exceptions import PermissionDenied
-from django.urls import reverse, reverse_lazy
-from django.db.models import Count, Prefetch
+# Standard Library Imports
+import logging
 
-# Local imports
+# Django Core Imports
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import View, ListView
+from django.views.generic.edit import DeleteView
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.db.models import Count, Prefetch
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+# Local App Imports
 from admin_dashboard.views import AdminRequiredMixin
 from user_dashboard.views import BuyerRequiredMixin
 from .forms import AdminProductCreationForm, AdminServiceCreationForm
-from .models import Product, Service, Category, ServiceType, CodeType, Download
+from .models import (Product, Service, Category,
+                     ServiceType, CodeType, Download, SCOPE_TYPE)
 from homepage.models import STATUS
 from .validate_file import validate_image_size
-from .models import SCOPE_TYPE
 from checkout.models import Order, OrderLineItem, ORDER_STATUS
-# Python
-import logging
+
 logger = logging.getLogger(__name__)
 
 # ADMIN CREATE Product & Service
@@ -26,6 +28,7 @@ logger = logging.getLogger(__name__)
 # Product Creation instance
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminProductCreation(AdminRequiredMixin, View):
     """Create product instances for the marketplace """
     template_name = 'admin-dashboard/create_product.html'
@@ -122,6 +125,7 @@ class BaseUpdateProductView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateProductView(BaseUpdateProductView):
     """View to update product instance"""
     template_name = 'admin-dashboard/update_product.html'
@@ -177,6 +181,7 @@ class AdminUpdateProductView(BaseUpdateProductView):
 # DELETE Product instance
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductDelete(AdminRequiredMixin, DeleteView):
     """View for deleting product instances."""
     model = Product
@@ -208,7 +213,7 @@ class ProductDelete(AdminRequiredMixin, DeleteView):
 
 # CREATE Service instance
 
-
+@method_decorator(login_required, name='dispatch')
 class AdminServiceCreation(AdminRequiredMixin, View):
     """Create service instances for the marketplace """
     template_name = 'admin-dashboard/create_service.html'
@@ -305,6 +310,7 @@ class BaseUpdateServiceView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateServiceView(BaseUpdateServiceView):
     """View to update service instance"""
     template_name = 'admin-dashboard/update_service.html'
@@ -360,6 +366,7 @@ class AdminUpdateServiceView(BaseUpdateServiceView):
 # DELETE Service instance
 
 
+@method_decorator(login_required, name='dispatch')
 class ServiceDelete(AdminRequiredMixin, DeleteView):
     """View for deleting service instances."""
     model = Service
@@ -482,6 +489,7 @@ class AdminBaseUpdateOrderView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateOrderView(AdminBaseUpdateOrderView):
     """View to update service instance"""
     template_name = 'admin-dashboard/update_order.html'
@@ -515,6 +523,7 @@ class UserBaseUpdateOrderView(BuyerRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class UserUpdateOrderView(UserBaseUpdateOrderView):
     """View to update service instance"""
     template_name = 'user-dashboard/update_order.html'

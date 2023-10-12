@@ -753,6 +753,8 @@ class ProductLikePost(View):
 
 
 # Service LIKE
+
+
 class ServiceLikePost(View):
     """
     Handle the service like functionality.

@@ -10,7 +10,7 @@ from allauth.account.forms import LoginForm, SignupForm
 
 # Local Imports
 
-from .models import UserProfile, USER_TYPE, Comment, Like
+from .models import UserProfile, USER_TYPE, Comment
 
 
 class CustomSignupForm(SignupForm):

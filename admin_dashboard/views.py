@@ -1,26 +1,31 @@
-# Django Imports
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic import ListView, DetailView, View
-from django.shortcuts import render, get_object_or_404, redirect
-from django import forms
-from django.views.generic.edit import UpdateView, DeleteView
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import logout
-from django.contrib.auth.views import PasswordChangeView
-from django.urls import reverse_lazy, reverse
-from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
-from django.http import HttpResponse, Http404
+# Standard Library Imports
 import os
-from django.http import HttpResponseForbidden
-# Local Imports
+
+# Django Core Imports
+from django import forms
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, View
+from django.views.generic.edit import UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+# Local App Imports
 from homepage.models import UserProfile, STATUS, Comment, Like
 from .forms import AdminDownloadCreationForm
-from product_service.models import Download, Service, Product
-from product_service.validate_file import validate_file_size
-from checkout.models import Order
-from product_service.utils import check_rate_limit
 from .models import OrderDeletionRecord
+from checkout.models import Order
+from product_service.models import Download, Service, Product
+from product_service.utils import check_rate_limit
+from product_service.validate_file import validate_file_size
+
+# Admin Dashboard
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -32,7 +37,8 @@ class AdminRequiredMixin(UserPassesTestMixin):
 
 
 class AdminDashboard(AdminRequiredMixin, DetailView):
-    """Display the dashboard for users with 'role 1'. Redirect to the same page."""
+    """Display the dashboard for users with 'role 1'.
+    Redirect to the same page."""
     model = UserProfile
     template_name = 'admin-dashboard/dashboard.html'
     context_object_name = 'admin_dashboard'
@@ -57,6 +63,7 @@ class AdminSettingsForm(forms.ModelForm):
 # UPDATE settings
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminSettingsView(AdminRequiredMixin, UpdateView):
     """Handle Admin Data Update in settings. Redirect to the same page."""
     model = UserProfile
@@ -74,7 +81,8 @@ class AdminSettingsView(AdminRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         username = self.request.POST.get('username')
-        if UserProfile.objects.filter(username=username).exclude(pk=self.request.user.pk).exists():
+        if UserProfile.objects.filter(
+                username=username).exclude(pk=self.request.user.pk).exists():
             messages.error(self.request, 'Username already exists.')
             return self.form_invalid(form)
         else:
@@ -90,6 +98,7 @@ class AdminPasswordChangeForm(PasswordChangeForm):
         fields = ['old_password', 'new_password1', 'new_password2']
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminPasswordChange(AdminRequiredMixin, PasswordChangeView):
     """View for changing the admin's password. Redirect to the same page."""
     template_name = 'admin-dashboard/password_change.html'
@@ -110,6 +119,7 @@ class AdminRole(AdminDashboard):
 # CREATE Download instance
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminDownloadCreation(AdminRequiredMixin, View):
     """Create Download instances for the product & service """
     template_name = 'admin-dashboard/create_download.html'
@@ -160,6 +170,7 @@ class AdminDownloadCreation(AdminRequiredMixin, View):
             {'form': form})
 
 
+@method_decorator(login_required, name='dispatch')
 class DownloadWithToken(View):
     """ Download file protection with: user is_authenticated,
     user has placed an order, secret UUID token for file name,
@@ -212,7 +223,8 @@ class DownloadWithToken(View):
                     response = HttpResponse(
                         # direct download, do not display in the browser
                         file.read(), content_type='application/octet-stream')
-                    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                    response['Content-Disposition'] = f'''
+                    attachment; filename="{filename}"'''
 
                 # Add file extension
                 if file_extension:
@@ -227,7 +239,7 @@ class DownloadWithToken(View):
 
 # READ Download instances
 
-
+@method_decorator(login_required, name='dispatch')
 class DownloadBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Download instances. """
     model = Download
@@ -245,7 +257,7 @@ class DownloadList(DownloadBaseListView):
 
 # UPDATE Download instance
 
-
+@method_decorator(login_required, name='dispatch')
 class BaseUpdateDownloadView(AdminRequiredMixin, View):
     """Base class for download update view."""
     template_name = None
@@ -274,6 +286,7 @@ class BaseUpdateDownloadView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateDownloadView(BaseUpdateDownloadView):
     """View to update download instance"""
     template_name = 'admin-dashboard/update_download.html'
@@ -336,7 +349,8 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
 
         if form_ready:
             messages.success(
-                request, "Congratulations! The download instance has been updated!")
+                request,
+                "Congratulations! The download instance has been updated!")
             download.save()
 
         return redirect('admin_all_downloads')
@@ -344,6 +358,7 @@ class AdminUpdateDownloadView(BaseUpdateDownloadView):
 # DELETE Download instance
 
 
+@method_decorator(login_required, name='dispatch')
 class DownloadDelete(AdminRequiredMixin, DeleteView):
     """View for deleting download instances."""
     model = Download
@@ -375,6 +390,7 @@ class DownloadDelete(AdminRequiredMixin, DeleteView):
 # Order Deletion
 
 
+@method_decorator(login_required, name='dispatch')
 class PendingOrderDeletionView(AdminRequiredMixin, View):
     """View for order deletion."""
     template_name = None
@@ -407,6 +423,7 @@ class CommentList(CommentBaseListView):
 # UPDATE Comments
 
 
+@method_decorator(login_required, name='dispatch')
 class BaseUpdateCommentView(AdminRequiredMixin, View):
     """Base class for comment update view."""
     template_name = None
@@ -430,6 +447,7 @@ class BaseUpdateCommentView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateCommentView(BaseUpdateCommentView):
     """View to update comment instance"""
     template_name = 'admin-dashboard/update_comment.html'
@@ -453,6 +471,7 @@ class AdminUpdateCommentView(BaseUpdateCommentView):
 # Delete Comments
 
 
+@method_decorator(login_required, name='dispatch')
 class CommentDelete(AdminRequiredMixin, DeleteView):
     """View for deleting comment instances."""
     model = Comment
@@ -527,6 +546,7 @@ class BaseUpdateLikeView(AdminRequiredMixin, View):
         }
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminUpdateLikeView(BaseUpdateLikeView):
     """View to update like instance. In this iteration not much can be done
     by changing the status. Other field have to changed too
@@ -549,6 +569,7 @@ class AdminUpdateLikeView(BaseUpdateLikeView):
 # # Delete Comments
 
 
+@method_decorator(login_required, name='dispatch')
 class LikeDelete(AdminRequiredMixin, DeleteView):
     """View for deleting like instances."""
     model = Like

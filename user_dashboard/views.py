@@ -9,9 +9,13 @@ from django.contrib.auth import logout
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Local Imports
 from homepage.models import UserProfile
+
+# User Dashboard
 
 
 class BuyerRequiredMixin(UserPassesTestMixin):
@@ -44,6 +48,7 @@ class BuyerProfileForm(forms.ModelForm):
 # UPDATE settings
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerSettings(BuyerRequiredMixin, UpdateView):
     """View for updating buyer's settings. Redirect to the same page."""
     model = UserProfile
@@ -61,6 +66,7 @@ class BuyerSettings(BuyerRequiredMixin, UpdateView):
 # DELETE Buyer/User Account
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerDelete(BuyerRequiredMixin, DeleteView):
     """View for deleting the buyer/user profile."""
     model = UserProfile
@@ -90,6 +96,7 @@ class BuyerPasswordChangeForm(PasswordChangeForm):
         fields = ['old_password', 'new_password1', 'new_password2']
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerPasswordChange(BuyerRequiredMixin, PasswordChangeView):
     """View for changing the buyer's password. Redirect to the same page."""
     template_name = 'user-dashboard/password_change.html'
