@@ -90,17 +90,37 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Likes and Purchases -->
                     <div class="row mb-1">
                         <div class="col-12">
                             <div class="d-flex justify-content-between">
+                                {% if user.is_authenticated and has_purchased %}
+                                {% if has_liked %}
+                                <button type="button" id="like-button" name="like-button" value="{{ service.slug }}"
+                                    class="likes-tags-left border-0">
+                                    <i class="fa-solid fa-heart text-danger"></i>
+                                    {{ service.likescount }}
+                                </button>
+                                {% else %}
+                                <button type="button" id="like-button" name="like-button" value="{{ service.slug }}"
+                                    class="likes-tags-left border-0">
+                                    <i class="fa-regular fa-heart"></i>
+                                    {{ service.likescount }}
+                                </button>
+                                {% endif %}
+                                <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                    {{ order_count }} </span>
+                                {% else %}
                                 <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                     {{ service.likescount }}</span>
                                 <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                     {{ order_count }} </span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
+
                     <!-- Card Footer -->
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     {% if service.status == 2 %}
@@ -117,6 +137,7 @@
                 </div>
             </form>
         </div>
+
         <!-- Newsletter -->
         <div class="d-flex justify-content-center">
             <div class="row">
@@ -218,7 +239,7 @@
                 </div>
                 {% elif not has_purchased %}
                 <div class="alert alert-info text-center" role="alert">
-                    You can comment after a successful purchase
+                    You can comment & like this service after a successful purchase
                 </div>
                 {% else %}
                 {% if user_authenticated and has_purchased and not commented %}
@@ -238,4 +259,32 @@
         </div>
     </div>
 </div>
+
+<!-- Like Functionality -->
+<script>
+    $(document).ready(function () {
+        $("#like-button").click(function (event) {
+            event.stopPropagation()
+            event.preventDefault()
+            // Fetch the service slug from the button's value attribute
+            const serviceSlug = $(this).val();
+
+            $.ajax({
+                url: `/service/like/${serviceSlug}`,
+                method: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (json) {
+                    if (json.status === 'success') {
+                        location.reload(); // Reload the page to reflect the new like status
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log("Could not update the like!");
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}

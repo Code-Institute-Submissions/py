@@ -94,21 +94,21 @@
                         <div class="col-12">
                             <div class="d-flex justify-content-between">
                                 {% if user.is_authenticated and has_purchased %}
-                                    {% if has_liked %}
-                                    <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
-                                        class="likes-tags-left border-0">
-                                        <i class="fa-solid fa-heart text-danger"></i>
-                                        {{ product.likescount }}
-                                    </button>
-                                    {% else %}
-                                    <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
-                                        class="likes-tags-left border-0">
-                                        <i class="fa-regular fa-heart"></i>
-                                        {{ product.likescount }}
-                                    </button>
-                                    {% endif %}
-                                    <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                        {{ order_count }} </span>
+                                {% if has_liked %}
+                                <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
+                                    class="likes-tags-left border-0">
+                                    <i class="fa-solid fa-heart text-danger"></i>
+                                    {{ product.likescount }}
+                                </button>
+                                {% else %}
+                                <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
+                                    class="likes-tags-left border-0">
+                                    <i class="fa-regular fa-heart"></i>
+                                    {{ product.likescount }}
+                                </button>
+                                {% endif %}
+                                <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                    {{ order_count }} </span>
                                 {% else %}
                                 <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                     {{ product.likescount }}</span>
@@ -236,7 +236,7 @@
                 </div>
                 {% elif not has_purchased %}
                 <div class="alert alert-info text-center" role="alert">
-                    You can comment after a successful purchase
+                    You can comment & like this product after a successful purchase
                 </div>
                 {% else %}
                 {% if user_authenticated and has_purchased and not commented %}
@@ -257,6 +257,7 @@
     </div>
 </div>
 
+<!-- Like Functionality -->
 <script>
     $(document).ready(function () {
         $("#like-button").click(function (event) {
@@ -273,7 +274,7 @@
                 },
                 success: function (json) {
                     if (json.status === 'success') {
-                        location.reload();  // Reload the page to reflect the new like status
+                        location.reload(); // Reload the page to reflect the new like status
                     }
                 },
                 error: function (xhr, errmsg, err) {

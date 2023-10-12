@@ -391,7 +391,8 @@ class ProductCommentListView(ListView):
         if self.request.user.is_authenticated:
             self.user_commented = Comment.objects.filter(
                 writer=self.request.user,
-                instance=0, product=self.product).order_by('-created_on').exists()
+                instance=0,
+                product=self.product).order_by('-created_on').exists()
         return comments
 
 
@@ -503,7 +504,8 @@ class ServiceCommentListView(ListView):
         if self.request.user.is_authenticated:
             self.user_commented = Comment.objects.filter(
                 writer=self.request.user,
-                instance=1, service=self.service).order_by('-created_on').exists()
+                instance=1,
+                service=self.service).order_by('-created_on').exists()
         return comments
 
 
@@ -527,6 +529,14 @@ class SingleServiceView(ServiceCommentListView):
         else:
             self.has_purchased = False
 
+        # Check if user has liked or not
+        if request.user.is_authenticated:
+            self.has_liked = Like.objects.filter(
+                liker=request.user, status=2,
+                service=self.service).exists()
+        else:
+            self.has_liked = False
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -535,6 +545,7 @@ class SingleServiceView(ServiceCommentListView):
         context['service'] = self.service
         context['order_count'] = self.order_count
         context['has_purchased'] = self.has_purchased
+        context['has_liked'] = self.has_liked
         context['user_authenticated'] = self.request.user.is_authenticated
         context['comment_count'] = self.comment_count
         if self.request.user.is_authenticated:
@@ -695,8 +706,21 @@ class SortedProductServiceListView(ListView):
 
 # Likes Creation
 
+# Product LIKE
+
 
 class ProductLikePost(View):
+    """
+    Handle the product like functionality.
+
+    This view leverages Django's Class-Based Views and is designed to work with 
+    AJAX on the frontend. It uses `transaction.atomic()` to ensure
+    data integrity during the database operations.
+
+    JsonResponse is used to communicate the result back to the AJAX code
+    on the frontend.
+    """
+
     def post(self, request, slug):
         if not request.user.is_authenticated:
             return JsonResponse(
@@ -705,23 +729,68 @@ class ProductLikePost(View):
 
         product = get_object_or_404(Product, slug=slug)
 
-        # Check if a Like instance already exists for this user and product
         existing_like = Like.objects.filter(
             liker=request.user, product=product).first()
 
         with transaction.atomic():
             if request.user.is_authenticated:
+                # If a 'Like' already exists, remove it
                 if existing_like:
                     existing_like.delete()
-                    messages.success(request, 'Your like has been removed!')
+                    messages.success(request, "You've unliked this product!")
                 else:
-                    # No existing Like, so add one
+                    # Otherwise, create a new 'Like' record
                     like_instance = Like.objects.create(
                         liker=request.user,
                         product=product,
-                        status=2
+                        status=2,
                     )
                     product.likes.add(like_instance)
-                    messages.success(request, 'Your like has been submitted!')
+                    messages.success(request, "You've liked this product!")
 
-        return JsonResponse({'status': 'success', 'message': 'Like status updated'})
+        return JsonResponse(
+            {'status': 'success', 'message': 'Like status updated'})
+
+
+# Service LIKE
+class ServiceLikePost(View):
+    """
+    Handle the service like functionality.
+
+    This view leverages Django's Class-Based Views and is designed to work with 
+    AJAX on the frontend. It uses `transaction.atomic()` to ensure
+    data integrity during the database operations.
+
+    JsonResponse is used to communicate the result back to the AJAX code
+    on the frontend.
+    """
+
+    def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'status': 'fail', 'message': 'User not authenticated'}
+            )
+
+        service = get_object_or_404(Service, slug=slug)
+
+        existing_like = Like.objects.filter(
+            liker=request.user, service=service).first()
+
+        with transaction.atomic():
+            if request.user.is_authenticated:
+                # If a 'Like' already exists, remove it
+                if existing_like:
+                    existing_like.delete()
+                    messages.success(request, "You've unliked this service!")
+                else:
+                    # Otherwise, create a new 'Like' record
+                    like_instance = Like.objects.create(
+                        liker=request.user,
+                        service=service,
+                        status=2,
+                    )
+                    service.likes.add(like_instance)
+                    messages.success(request, "You've liked this service!")
+
+        return JsonResponse(
+            {'status': 'success', 'message': 'Like status updated'})
