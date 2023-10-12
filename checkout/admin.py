@@ -14,11 +14,13 @@ class OrderAdmin(admin.ModelAdmin):
                        'grand_total', 'stripe_pid')
 
     fields = ('status', 'order_number', 'buyer_profile', 'date', 'full_name',
-              'email', 'phone_number', 'order_total', 'grand_total',
+              'country', 'email', 'phone_number', 'order_total', 'grand_total',
               'stripe_pid')
 
     list_display = ('order_number', 'buyer_profile', 'date', 'full_name',
                     'order_total', 'grand_total', 'status',)
+
+    list_filter = ('status', 'country',)
 
     ordering = ('-date',)
 

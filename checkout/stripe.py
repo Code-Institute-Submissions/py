@@ -31,6 +31,7 @@ class StripeCheckoutView(View):
 
         form_data = {
             'full_name': request.POST.get('full_name', ''),
+            'country': request.POST.get('country', ''),
             'email': request.POST.get('email', ''),
             'phone_number': request.POST.get('phone_number', ''),
             'gateway': GATEWAY_TYPE[1][0],

@@ -5,7 +5,7 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('full_name', 'email', 'phone_number', 'gateway',)
+        fields = ('full_name', 'country', 'email', 'phone_number', 'gateway',)
 
     def __init__(self, request, *args, **kwargs):
         """
@@ -29,7 +29,7 @@ class OrderForm(forms.ModelForm):
         self.fields['full_name'].widget.attrs['autofocus'] = True
 
         for field in self.fields:
-            if field:
+            if field != 'country':
 
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'

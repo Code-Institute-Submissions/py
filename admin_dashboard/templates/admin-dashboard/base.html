@@ -181,8 +181,8 @@
 
                         <!-- Likes -->
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLikes" aria-expanded="false" aria-controls="collapseLikes">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLikes"
+                            aria-expanded="false" aria-controls="collapseLikes">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
                             Like
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -212,9 +212,9 @@
                 <div class="sb-sidenav-footer text-center">
                     <div class="small"> <i class="fa-solid fa-signal"></i>
                         &nbsp;Online as:
-                        <span class="px-1"><strong>{{ request.user.username }}
-                                {% if request.user.role == 1 %}
-                                {% endif %}
+                        <span class="px-1">
+                            <strong>
+                                {{ request.user.username }}
                             </strong>
                         </span>
                     </div>

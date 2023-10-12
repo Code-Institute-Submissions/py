@@ -8,6 +8,17 @@
 }
 
 /* General Styling */
+
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: #757575 !important;
+}
+
 textarea {
     white-space: pre-wrap;
     /* CSS 2.1 */

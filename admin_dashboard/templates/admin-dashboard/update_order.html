@@ -85,6 +85,16 @@
                                 {% endif %}
                             </div>
 
+                            <!-- Country -->
+                            <div class="mb-3">
+                                <label for="country" class="form-label"><strong>Country</strong></label>
+                                <input type="text" name="country" class="form-control" id="country"
+                                    value="{{ order.get_country_display }}" required disabled>
+                                {% if order.country.errors %}
+                                <div class="errors">{{ order.country.errors }}</div>
+                                {% endif %}
+                            </div>
+
                             <!-- Email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label"><strong>Email</strong></label>
