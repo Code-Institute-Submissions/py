@@ -10,7 +10,7 @@ from allauth.account.forms import LoginForm, SignupForm
 
 # Local Imports
 
-from .models import UserProfile, USER_TYPE, Comment
+from .models import UserProfile, USER_TYPE, Comment, Like
 
 
 class CustomSignupForm(SignupForm):
@@ -104,3 +104,42 @@ class ServiceCommentCreationForm(forms.ModelForm):
 
             self.fields[field].widget.attrs['class'] = 'mb-2'
             self.fields[field].label = False
+
+
+class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(
+        max_length=30, label='First Name', required=True)
+    last_name = forms.CharField(
+        max_length=30, label='Last Name', required=True)
+    type = forms.ChoiceField(choices=USER_TYPE, label='Account Type')
+
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.type = self.cleaned_data['type']
+        user.save()
+        return user
+
+
+CustomLoginForm = LoginForm
+
+# Like creation
+
+
+class LikeCommentCreationForm(forms.ModelForm):
+    """
+    Like form for like instances
+    """
+
+    class Meta:
+        model = Like
+        fields = ['liker',]
+
+    def __init__(self, request, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field and pass
+        the request.
+        """
+        super().__init__(*args, **kwargs)

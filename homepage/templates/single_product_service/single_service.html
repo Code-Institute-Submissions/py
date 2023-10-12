@@ -216,6 +216,10 @@
                 <div class="alert alert-info text-center" role="alert">
                     You already commented this service
                 </div>
+                {% elif not has_purchased %}
+                <div class="alert alert-info text-center" role="alert">
+                    You can comment after a successful purchase
+                </div>
                 {% else %}
                 {% if user_authenticated and has_purchased and not commented %}
                 <form method="post" class="card">

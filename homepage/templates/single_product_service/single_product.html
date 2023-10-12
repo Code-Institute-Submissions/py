@@ -93,10 +93,28 @@
                     <div class="row mb-1">
                         <div class="col-12">
                             <div class="d-flex justify-content-between">
+                                {% if user.is_authenticated and has_purchased %}
+                                    {% if has_liked %}
+                                    <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
+                                        class="likes-tags-left border-0">
+                                        <i class="fa-solid fa-heart text-danger"></i>
+                                        {{ product.likescount }}
+                                    </button>
+                                    {% else %}
+                                    <button type="button" id="like-button" name="like-button" value="{{ product.slug }}"
+                                        class="likes-tags-left border-0">
+                                        <i class="fa-regular fa-heart"></i>
+                                        {{ product.likescount }}
+                                    </button>
+                                    {% endif %}
+                                    <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                                        {{ order_count }} </span>
+                                {% else %}
                                 <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
                                     {{ product.likescount }}</span>
                                 <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
                                     {{ order_count }} </span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -216,7 +234,7 @@
                 <div class="alert alert-info text-center" role="alert">
                     You already commented this product
                 </div>
-                {% elif not has_purchased%}
+                {% elif not has_purchased %}
                 <div class="alert alert-info text-center" role="alert">
                     You can comment after a successful purchase
                 </div>
@@ -238,4 +256,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#like-button").click(function (event) {
+            event.stopPropagation()
+            event.preventDefault()
+            // Fetch the product slug from the button's value attribute
+            const productSlug = $(this).val();
+
+            $.ajax({
+                url: `/product/like/${productSlug}`,
+                method: 'POST',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (json) {
+                    if (json.status === 'success') {
+                        location.reload();  // Reload the page to reflect the new like status
+                    }
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log("Could not update the like!");
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}

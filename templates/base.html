@@ -257,8 +257,7 @@
     {% if messages %}
     {% for message in messages %}
     <div class="d-flex align-items-center justify-content-center">
-        <div class="mt-5 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-black alert-dismissible"
-            role="alert">
+        <div class="mt-5 mb-0 mx-3 alert card py-1 alert-{{ message.tags }} text-black alert-dismissible" role="alert">
             <div class="card-body text-center">
                 <p {% if message.tags %} class="mb-0 px-4" {% endif %}> {{ message|safe }}</p>
             </div>
@@ -404,6 +403,7 @@
     </footer>
     <!-- Custom JavaScript-->
     {% block postloadjs %}
+
     {% endblock postloadjs %}
 </body>
 

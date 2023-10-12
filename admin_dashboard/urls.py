@@ -46,4 +46,6 @@ urlpatterns = [
          name='admin_update_comment'),
     path('account/admin/comments/delete/<int:comment_id>/',
          CommentDelete.as_view(), name='comment_delete'),
+
+    # Likes
 ]

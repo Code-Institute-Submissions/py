@@ -3,12 +3,15 @@ from django.views.generic import View, ListView
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, reverse
 from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import Count
+from django.http import HttpResponseRedirect
 from operator import attrgetter
+from django.http import JsonResponse
+from django.db import transaction
 
 # Python
 import logging
@@ -20,10 +23,11 @@ from allauth.account.views import LoginView, SignupView, LogoutView
 from .forms import (CustomLoginForm,
                     CustomSignupForm,
                     ProductCommentCreationForm,
-                    ServiceCommentCreationForm,)
+                    ServiceCommentCreationForm,
+                    LikeCommentCreationForm)
 from product_service.models import Product, Service
 from checkout.models import Order
-from .models import Comment
+from .models import Comment, Like
 
 logger = logging.getLogger(__name__)
 
@@ -385,10 +389,10 @@ class ProductCommentListView(ListView):
         self.comment_count = Comment.objects.filter(
             status=2, instance=0,
             product=self.product).order_by('-created_on').count()
-
-        self.user_commented = Comment.objects.filter(
-            writer=self.request.user,
-            instance=0, product=self.product).order_by('-created_on').exists()
+        if self.request.user.is_authenticated:
+            self.user_commented = Comment.objects.filter(
+                writer=self.request.user,
+                instance=0, product=self.product).order_by('-created_on').exists()
         return comments
 
 
@@ -412,6 +416,14 @@ class SingleProductView(ProductCommentListView):
         else:
             self.has_purchased = False
 
+        # Check if user has liked or not
+        if request.user.is_authenticated:
+            self.has_liked = Like.objects.filter(
+                liker=request.user, status=2,
+                product=self.product).exists()
+        else:
+            self.has_liked = False
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -420,9 +432,11 @@ class SingleProductView(ProductCommentListView):
         context['product'] = self.product
         context['order_count'] = self.order_count
         context['has_purchased'] = self.has_purchased
+        context['has_liked'] = self.has_liked
         context['user_authenticated'] = self.request.user.is_authenticated
         context['comment_count'] = self.comment_count
-        context['commented'] = self.user_commented
+        if self.request.user.is_authenticated:
+            context['commented'] = self.user_commented
 
         # Comment Form
         comment_form = ProductCommentCreationForm(
@@ -487,10 +501,10 @@ class ServiceCommentListView(ListView):
         self.comment_count = Comment.objects.filter(
             status=2, instance=1, service=self.service).order_by(
                 '-created_on').count()
-
-        self.user_commented = Comment.objects.filter(
-            writer=self.request.user,
-            instance=1, service=self.service).order_by('-created_on').exists()
+        if self.request.user.is_authenticated:
+            self.user_commented = Comment.objects.filter(
+                writer=self.request.user,
+                instance=1, service=self.service).order_by('-created_on').exists()
         return comments
 
 
@@ -524,7 +538,8 @@ class SingleServiceView(ServiceCommentListView):
         context['has_purchased'] = self.has_purchased
         context['user_authenticated'] = self.request.user.is_authenticated
         context['comment_count'] = self.comment_count
-        context['commented'] = self.user_commented
+        if self.request.user.is_authenticated:
+            context['commented'] = self.user_commented
 
         # Comment Form
         comment_form = ServiceCommentCreationForm(
@@ -678,3 +693,36 @@ class SortedProductServiceListView(ListView):
                     has_more_services = False
 
         return combined_list
+
+# Likes Creation
+
+
+class ProductLikePost(View):
+    def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'status': 'fail', 'message': 'User not authenticated'}
+            )
+
+        product = get_object_or_404(Product, slug=slug)
+
+        # Check if a Like instance already exists for this user and product
+        existing_like = Like.objects.filter(
+            liker=request.user, product=product).first()
+
+        with transaction.atomic():
+            if request.user.is_authenticated:
+                if existing_like:
+                    existing_like.delete()
+                    messages.success(request, 'Your like has been removed!')
+                else:
+                    # No existing Like, so add one
+                    like_instance = Like.objects.create(
+                        liker=request.user,
+                        product=product,
+                        status=2
+                    )
+                    product.likes.add(like_instance)
+                    messages.success(request, 'Your like has been submitted!')
+
+        return JsonResponse({'status': 'success', 'message': 'Like status updated'})
