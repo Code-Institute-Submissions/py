@@ -65,6 +65,7 @@ class AdminProductCreation(AdminRequiredMixin, View):
 # READ Product instances
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Product instances."""
     model = Product
@@ -74,6 +75,7 @@ class ProductBaseListView(AdminRequiredMixin, ListView):
         return Product.objects.order_by('-created_on')
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductList(ProductBaseListView):
     """ Read all created product instances tempalte"""
     template_name = 'admin-dashboard/all_products.html'
@@ -82,7 +84,7 @@ class ProductList(ProductBaseListView):
 
 # UPDATE Product instance
 
-
+@method_decorator(login_required, name='dispatch')
 class BaseUpdateProductView(AdminRequiredMixin, View):
     """Base class for product list view."""
     template_name = None
@@ -250,6 +252,7 @@ class AdminServiceCreation(AdminRequiredMixin, View):
 # READ Service instances
 
 
+@method_decorator(login_required, name='dispatch')
 class ServiceBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Service instances."""
     model = Service
@@ -259,6 +262,7 @@ class ServiceBaseListView(AdminRequiredMixin, ListView):
         return Service.objects.order_by('-created_on')
 
 
+@method_decorator(login_required, name='dispatch')
 class ServiceList(ServiceBaseListView):
     """ Read all created service instances tempalte"""
     template_name = 'admin-dashboard/all_services.html'
@@ -267,6 +271,7 @@ class ServiceList(ServiceBaseListView):
 # UPDATE Service instance
 
 
+@method_decorator(login_required, name='dispatch')
 class BaseUpdateServiceView(AdminRequiredMixin, View):
     """Base class for service list view."""
     template_name = None
@@ -407,6 +412,7 @@ class ShoppingCartView(ListView):
 # READ Order ListView
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminOrderListView(AdminRequiredMixin, ListView):
     """ListView for admin/global orders. Another approach instead of View"""
     model = Order
@@ -437,6 +443,7 @@ class AdminOrderListView(AdminRequiredMixin, ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerOrderListView(BuyerRequiredMixin, ListView):
     """ListView for user order instances. Another approach instead of View"""
     model = Order
@@ -470,6 +477,7 @@ class BuyerOrderListView(BuyerRequiredMixin, ListView):
 # UPDATE Order ListView
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminBaseUpdateOrderView(AdminRequiredMixin, View):
     """Base class for service list view."""
     template_name = None
@@ -506,6 +514,7 @@ class AdminUpdateOrderView(AdminBaseUpdateOrderView):
         return redirect('all_orders_admin')
 
 
+@method_decorator(login_required, name='dispatch')
 class UserBaseUpdateOrderView(BuyerRequiredMixin, View):
     """Base class for service list view."""
     template_name = None

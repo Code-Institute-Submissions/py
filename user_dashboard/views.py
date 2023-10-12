@@ -18,6 +18,7 @@ from homepage.models import UserProfile
 # User Dashboard
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerRequiredMixin(UserPassesTestMixin):
     """Mixin to check for user role (role 0) for access control."""
 
@@ -26,6 +27,7 @@ class BuyerRequiredMixin(UserPassesTestMixin):
         return user_profile and user_profile.role == 0
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerDashboard(BuyerRequiredMixin, generic.DetailView):
     """Display the dashboard for users with 'role 0'."""
     model = UserProfile
@@ -108,6 +110,7 @@ class BuyerPasswordChange(BuyerRequiredMixin, PasswordChangeView):
         return self.request.path
 
 
+@method_decorator(login_required, name='dispatch')
 class BuyerRole(BuyerDashboard):
     """Redender view for role info display"""
     template_name = 'user-dashboard/role.html'

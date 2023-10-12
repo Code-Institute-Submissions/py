@@ -12,6 +12,8 @@ from django.http import HttpResponseRedirect
 from operator import attrgetter
 from django.http import JsonResponse
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Python
 import logging
@@ -709,6 +711,7 @@ class SortedProductServiceListView(ListView):
 # Product LIKE
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductLikePost(View):
     """
     Handle the product like functionality.
@@ -754,7 +757,7 @@ class ProductLikePost(View):
 
 # Service LIKE
 
-
+@method_decorator(login_required, name='dispatch')
 class ServiceLikePost(View):
     """
     Handle the service like functionality.

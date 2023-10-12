@@ -28,6 +28,7 @@ from product_service.validate_file import validate_file_size
 # Admin Dashboard
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminRequiredMixin(UserPassesTestMixin):
     """Mixin to check for admin role (role 1) for access control."""
 
@@ -36,6 +37,7 @@ class AdminRequiredMixin(UserPassesTestMixin):
         return user_profile and user_profile.role == 1
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminDashboard(AdminRequiredMixin, DetailView):
     """Display the dashboard for users with 'role 1'.
     Redirect to the same page."""
@@ -110,6 +112,7 @@ class AdminPasswordChange(AdminRequiredMixin, PasswordChangeView):
         return self.request.path
 
 
+@method_decorator(login_required, name='dispatch')
 class AdminRole(AdminDashboard):
     """Redender view for role info display"""
     template_name = 'admin-dashboard/role.html'
@@ -249,6 +252,7 @@ class DownloadBaseListView(AdminRequiredMixin, ListView):
         return Download.objects.order_by('file_name')
 
 
+@method_decorator(login_required, name='dispatch')
 class DownloadList(DownloadBaseListView):
     """ Read all created download instances template """
     template_name = 'admin-dashboard/all_downloads.html'
@@ -405,6 +409,7 @@ class PendingOrderDeletionView(AdminRequiredMixin, View):
 # READ Comments
 
 
+@method_decorator(login_required, name='dispatch')
 class CommentBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Comment instances. """
     model = Comment
@@ -415,6 +420,7 @@ class CommentBaseListView(AdminRequiredMixin, ListView):
         return comments
 
 
+@method_decorator(login_required, name='dispatch')
 class CommentList(CommentBaseListView):
     """ Read all created comment instances template """
     template_name = 'admin-dashboard/all_comments.html'
@@ -505,6 +511,7 @@ class CommentDelete(AdminRequiredMixin, DeleteView):
 # READ Likes
 
 
+@method_decorator(login_required, name='dispatch')
 class LikeBaseListView(AdminRequiredMixin, ListView):
     """ Base view for listing Like instances. """
     model = Like
@@ -515,6 +522,7 @@ class LikeBaseListView(AdminRequiredMixin, ListView):
         return likes
 
 
+@method_decorator(login_required, name='dispatch')
 class LikeList(LikeBaseListView):
     """ Read all created like instances template """
     template_name = 'admin-dashboard/all_likes.html'
@@ -523,6 +531,7 @@ class LikeList(LikeBaseListView):
 # # UPDATE Comments
 
 
+@method_decorator(login_required, name='dispatch')
 class BaseUpdateLikeView(AdminRequiredMixin, View):
     """Base class for like update view."""
     template_name = None
