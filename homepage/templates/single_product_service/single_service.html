@@ -296,13 +296,12 @@
 
 <!-- Like & Newsletter Functionality -->
 <script>
-    // Like Functionality
     $(document).ready(function () {
         // Like Functionality
         $("#like-button").click(function (event) {
             event.stopPropagation()
             event.preventDefault()
-            // Fetch the service slug from the button's value attribute
+
             const serviceSlug = $(this).val();
 
             $.ajax({
@@ -313,7 +312,7 @@
                 },
                 success: function (json) {
                     if (json.status === 'success') {
-                        location.reload(); // Reload the page to reflect the new like status
+                        location.reload();
                     }
                 },
                 error: function (xhr, errmsg, err) {

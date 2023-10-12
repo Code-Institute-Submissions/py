@@ -293,14 +293,14 @@
     </div>
 </div>
 
-<!-- Like Functionality -->
+<!-- Like & Newsletter Functionality -->
 <script type="text/javascript">
     $(document).ready(function () {
         // Like Functionality
         $("#like-button").click(function (event) {
             event.stopPropagation()
             event.preventDefault()
-            // Fetch the product slug from the button's value attribute
+
             const productSlug = $(this).val();
 
             $.ajax({

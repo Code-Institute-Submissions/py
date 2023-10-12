@@ -61,13 +61,24 @@ Our current Facebook page is for demonstration purposes only, although we have r
     ![Facebook Page Image](../../assets/img/facebook-page.png)
 
 ### Content Marketing
-For this iteration we chose not to proceed with the blog or academy section.
+For this iteration, we have chosen not to proceed with the blog or academy section.
 
 ### Email Marketing
 
-For email marketing we have implemented Mailchimp. We adapted the code they provided to our own to keep the consistency of the overall design. We have also implemented Mailchimp's pop up newsletter model.
+For email marketing, we have implemented Mailchimp. We adapted the code they provided to our own in order to maintain the overall design consistency. We have also integrated Mailchimp's pop-up newsletter module.
 
-This form is a bit special since it triggers both Mailchimp and our code, we store the emails on Mailchimp and in our database as well as a backup or for future use.
+The forms are unique because it triggers actions in both Mailchimp and our own code. We store the emails in Mailchimp and also back them up in our database for future use.
+
+We collect these emails for our email marketing campaigns, where we plan to send offers and updates.
 
 #### Newsletter
+
+We have implemented a Mailchimp-based newsletter that appears in various locations: within our product and service instances, in the footer, and in a pop-up model that appears when users attempt to leave the page. As seen here:
+
+??? info "Footer Newsletter Signup Form"
+    ![Footer Newsletter](../../assets/img/footer-newsletter.png)
+
+??? info "Instance Newsletter Signup Form"
+    ![Instance Newsletter](../../assets/img/instance-newsletter.png)
+
 ### SEO
