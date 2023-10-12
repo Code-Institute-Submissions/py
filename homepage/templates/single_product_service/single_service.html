@@ -137,31 +137,65 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
 
-        <!-- Newsletter -->
-        <div class="d-flex justify-content-center">
-            <div class="row">
-                <div class="col-12">
-                    <p class="h5 text-uppercase mb-4 text-center">
-                        Newsletter
-                    </p>
-                    <section class="mb-4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="content">
-                                    <div class="input-group">
-                                        <input type="email" class="form-control" placeholder="Enter your email">
-                                        <span class="input-group-btn">
-                                            <button class="newsletter-btn px-3" type="submit"><i
-                                                    class="fa-regular fa-paper-plane"></i></button>
-                                        </span>
-                                    </div>
+<!-- Newsletter -->
+<!-- Our own with Mailchimp functionalities -->
+<div class="d-flex justify-content-center">
+    <div class="row">
+        <div class="col-12">
+            <p class="h5 text-uppercase mb-4 text-center">
+                Newsletter
+            </p>
+            <section class="mb-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="content">
+
+                            <!-- Mailchimp Form -->
+                            <form
+                                action="https://plexo.us21.list-manage.com/subscribe/post?u=891c26c27174245a675267b31&amp;id=6f2966c92b&amp;f_id=004de0e6f0"
+                                method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                                class="validate" target="_blank">
+                                <div class="input-group">
+
+                                    <!-- Email Input -->
+                                    <input type="email" name="EMAIL"
+                                        class="form-control required email newsletter-email-input" id="mce-EMAIL"
+                                        placeholder="Enter your email *" value="{{ request.user.email }}" required>
+
+                                    <!-- Send Button -->
+                                    <span class="input-group-btn">
+                                        <button type="submit" name="subscribe" id="mc-embedded-subscribe"
+                                            class="newsletter-btn px-3 mb-0"><i
+                                                class="fa-regular fa-paper-plane"></i></button>
+                                    </span>
+
                                 </div>
-                            </div>
+                                <!-- Third Party Acknowledgment -->
+                                <p class="m-2 text-center">
+                                    <small>(We use <a rel="noopener noreferrer"
+                                            href="https://mailchimp.com/legal/terms/">Mailchimp</a> as service
+                                        provider)</small>
+                                </p>
+
+                                <!-- Hidden fields and response divs -->
+                                <div id="mce-responses" class="clear foot">
+                                    <!-- Errors -->
+                                    <div class="response text-center text-danger" id="mce-error-response"></div>
+                                    <!-- Success -->
+                                    <div class="response text-center text-info" id="mce-success-response"></div>
+                                </div>
+                                <div aria-hidden="true" class="newsletter-hidden-input">
+                                    <input type="text" name="b_891c26c27174245a675267b31_6f2966c92b" tabindex="-1"
+                                        value="">
+                                </div>
+                            </form>
                         </div>
-                    </section>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 </div>
@@ -286,5 +320,27 @@
             });
         });
     });
+</script>
+
+<!-- Mailchimp JS -->
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        window.fnames = new Array();
+        window.ftypes = new Array();
+        fnames[0] = 'EMAIL';
+        ftypes[0] = 'email';
+        fnames[1] = 'FNAME';
+        ftypes[1] = 'text';
+        fnames[2] = 'LNAME';
+        ftypes[2] = 'text';
+        fnames[3] = 'ADDRESS';
+        ftypes[3] = 'address';
+        fnames[4] = 'PHONE';
+        ftypes[4] = 'phone';
+        fnames[5] = 'BIRTHDAY';
+        ftypes[5] = 'birthday';
+    }(jQuery));
+    var $mcj = jQuery.noConflict(true);
 </script>
 {% endblock content %}
