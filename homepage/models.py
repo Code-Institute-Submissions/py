@@ -86,7 +86,7 @@ class Like(models.Model):
 
     status = models.IntegerField(choices=STATUS, default=0)
 
-    instance = models.IntegerField(choices=INSTANCE_TYPE, default=1)
+    instance = models.IntegerField(choices=INSTANCE_TYPE, default=0)
 
     created_on = models.DateTimeField(auto_now_add=True)
 

@@ -14,7 +14,7 @@ from django.http import HttpResponse, Http404
 import os
 from django.http import HttpResponseForbidden
 # Local Imports
-from homepage.models import UserProfile, STATUS, Comment
+from homepage.models import UserProfile, STATUS, Comment, Like
 from .forms import AdminDownloadCreationForm
 from product_service.models import Download, Service, Product
 from product_service.validate_file import validate_file_size
@@ -480,3 +480,100 @@ class CommentDelete(AdminRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Comment instance has been deleted!')
         return reverse_lazy('admin_all_comments')
+
+# LIKES
+
+# READ Likes
+
+
+class LikeBaseListView(AdminRequiredMixin, ListView):
+    """ Base view for listing Like instances. """
+    model = Like
+
+    def get_queryset(self):
+        """ Return comment instances ordered by creation date."""
+        likes = Like.objects.order_by('-created_on')
+        return likes
+
+
+class LikeList(LikeBaseListView):
+    """ Read all created like instances template """
+    template_name = 'admin-dashboard/all_likes.html'
+    context_object_name = 'admin_all_likes'
+
+# # UPDATE Comments
+
+
+# class BaseUpdateCommentView(AdminRequiredMixin, View):
+#     """Base class for comment update view."""
+#     template_name = None
+
+#     def get(self, request, comment_id, *args, **kwargs):
+#         context = self.get_context_data(comment_id)
+#         return render(request, self.template_name, context)
+
+#     def get_context_data(self, comment_id):
+
+#         comment_set = Comment.objects.order_by('-created_on')
+#         comment_instance = get_object_or_404(
+#             comment_set, pk=comment_id)
+
+#         status = STATUS
+
+#         return {
+#             "comment": comment_instance,
+#             "status": status,
+#             "user_authenticated": self.request.user.is_authenticated
+#         }
+
+
+# class AdminUpdateCommentView(BaseUpdateCommentView):
+#     """View to update comment instance"""
+#     template_name = 'admin-dashboard/update_comment.html'
+
+#     def post(self, request, comment_id, *args, **kwargs):
+
+#         comment = get_object_or_404(Comment, pk=comment_id)
+
+#         comment_text = request.POST.get('comment')
+#         status = request.POST.get('status')
+
+#         comment.comment = comment_text[:256]
+#         comment.status = int(status)
+
+#         messages.success(
+#             request, "Congratulations! The comment instance has been updated!")
+#         comment.save()
+
+#         return redirect('admin_all_comments')
+
+# # Delete Comments
+
+
+# class CommentDelete(AdminRequiredMixin, DeleteView):
+#     """View for deleting comment instances."""
+#     model = Comment
+#     template_name = None
+#     allowed_roles = [1]
+
+#     def dispatch(self, request, *args, **kwargs):
+#         comment = self.get_object()
+#         if comment.status == 2:
+#             messages.error(
+#                 request, "Error: comment's status must be suspended or draft.")
+#             return redirect('admin_all_comments')
+
+#         if self.request.user.role not in self.allowed_roles:
+#             messages.error(
+#                 request, "Error: User does not have the required role")
+#             return redirect('admin_all_comments')
+
+#         return super().dispatch(request, *args, **kwargs)
+
+#     def get_object(self, queryset=None):
+#         comment_id = self.kwargs.get('comment_id')
+#         return get_object_or_404(Comment, pk=comment_id)
+
+#     def get_success_url(self):
+#         messages.success(self.request, 'Comment instance has been deleted!')
+#         return reverse_lazy('admin_all_comments')

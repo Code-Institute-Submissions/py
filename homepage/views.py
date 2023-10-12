@@ -787,6 +787,7 @@ class ServiceLikePost(View):
                     like_instance = Like.objects.create(
                         liker=request.user,
                         service=service,
+                        instance=1,
                         status=2,
                     )
                     service.likes.add(like_instance)

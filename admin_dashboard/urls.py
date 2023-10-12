@@ -5,7 +5,8 @@ from .views import (AdminDashboard, AdminSettingsView,
                     DownloadWithToken,
                     DownloadList, AdminUpdateDownloadView, DownloadDelete,
                     PendingOrderDeletionView, CommentList,
-                    AdminUpdateCommentView, CommentDelete)
+                    AdminUpdateCommentView, CommentDelete,
+                    LikeList,)
 
 
 urlpatterns = [
@@ -48,4 +49,11 @@ urlpatterns = [
          CommentDelete.as_view(), name='comment_delete'),
 
     # Likes
+    path('account/admin/likes/', LikeList.as_view(),
+         name='admin_all_likes'),
+    #     path('account/admin/likes/<int:comment_id>/',
+    #          AdminUpdateCommentView.as_view(),
+    #          name='admin_update_comment'),
+    #     path('account/admin/comments/delete/<int:comment_id>/',
+    #          CommentDelete.as_view(), name='comment_delete'),
 ]
