@@ -23,8 +23,7 @@ from allauth.account.views import LoginView, SignupView, LogoutView
 from .forms import (CustomLoginForm,
                     CustomSignupForm,
                     ProductCommentCreationForm,
-                    ServiceCommentCreationForm,
-                    LikeCommentCreationForm)
+                    ServiceCommentCreationForm,)
 from product_service.models import Product, Service
 from checkout.models import Order
 from .models import Comment, Like

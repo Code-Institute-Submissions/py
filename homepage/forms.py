@@ -123,23 +123,3 @@ class CustomSignupForm(SignupForm):
 
 
 CustomLoginForm = LoginForm
-
-# Like creation
-
-
-class LikeCommentCreationForm(forms.ModelForm):
-    """
-    Like form for like instances
-    """
-
-    class Meta:
-        model = Like
-        fields = ['liker',]
-
-    def __init__(self, request, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field and pass
-        the request.
-        """
-        super().__init__(*args, **kwargs)
