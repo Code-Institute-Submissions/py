@@ -1,0 +1,133 @@
+{% extends "admin-dashboard/base.html" %}
+{% load i18n %}
+
+{% block content%}
+<main class="pb-5 mb-5">
+    <div class="container-fluid px-4 pb-5">
+        <div class="my-3">
+            <a class="my-0" href="{% url 'admin_all_likes' %}">Return</a>
+        </div>
+        <hr>
+        <h1 class="mt-4">Like Update</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">You can update this like instance</li>
+        </ol>
+
+        <!-- Role Alert -->
+        {% if request.user.role == 0 %}
+        <div class="alert alert-warning text-center" role="alert">
+            In like to update a like instance you need to be an admin.
+        </div>
+        {% elif request.user.role == 1%}
+
+        <!-- Form Container -->
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-6 col-md-12 d-inline-block">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if like.non_field_errors %}
+                    <div class="errors">{{ like.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center font-weight-light my-2">{% trans "Like Details" %}</h4>
+                        </div>
+                        <div class="card-body">
+
+
+                            <!-- Item -->
+                            <div class="mb-3">
+                                <label for="item" class="form-label"><strong>Item</strong></label>
+                                <input type="text" name="item" class="form-control" id="item"
+                                    value="{% if like.service %}{{ like.service }}{% else %}{{ like.product }}{% endif %}"
+                                    required disabled>
+                                {% if like.item.errors %}
+                                <div class="errors">{{ like.item.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Instance -->
+                            <div class="mb-3">
+                                <label for="instance" class="form-label"><strong>Instance</strong></label>
+                                <input type="text" name="instance" class="form-control" id="instance"
+                                    value="{{ like.get_instance_display}}" required disabled>
+                                {% if like.instance.errors %}
+                                <div class="errors">{{ like.instance.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Liker -->
+                            <div class="mb-3">
+                                <label for="liker" class="form-label"><strong>Liker</strong></label>
+                                <input type="text" name="liker" class="form-control" id="liker" value="{{ like.liker }}"
+                                    required disabled>
+                                {% if like.liker.errors %}
+                                <div class="errors">{{ like.liker.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label"><strong>Status</strong></label>
+                                <select id="status" name="status" class="form-select">
+                                    <option value="{{ like.status }}" selected> {{ like.get_status_display }}
+                                    </option>
+                                    {% for status_int, status_str in status %}
+                                    {% if status_int != like.status %}
+                                    <option value="{{ status_int }}">{{ status_str }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% if like.status.errors %}
+                                <div class="errors">{{ like.status.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Creation Date -->
+                            <div class="mb-3">
+                                <label for="creation" class="form-label"><strong>Creation</strong></label>
+                                <input type="text" name="creation" class="form-control" id="creation"
+                                    value="{{ like.created_on }}" required disabled>
+                                {% if like.creation.errors %}
+                                <div class="errors">{{ like.creation.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row my-4 text-center">
+                                <div class="col-12 d-inline-block">
+                                    <button type="submit" class="btn btn-success mx-1">Submit</button>
+                                    <button id="mymodal" class="btn btn-danger mx-1" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal4">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" action="{% url 'like_delete' like.id %}">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Like</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this like instance?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary">Delete</button>
+                <button type="button" class="btn btn-success m-2" data-bs-dismiss="modal"
+                    aria-label="Close">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

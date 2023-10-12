@@ -504,76 +504,75 @@ class LikeList(LikeBaseListView):
 # # UPDATE Comments
 
 
-# class BaseUpdateCommentView(AdminRequiredMixin, View):
-#     """Base class for comment update view."""
-#     template_name = None
+class BaseUpdateLikeView(AdminRequiredMixin, View):
+    """Base class for like update view."""
+    template_name = None
 
-#     def get(self, request, comment_id, *args, **kwargs):
-#         context = self.get_context_data(comment_id)
-#         return render(request, self.template_name, context)
+    def get(self, request, like_id, *args, **kwargs):
+        context = self.get_context_data(like_id)
+        return render(request, self.template_name, context)
 
-#     def get_context_data(self, comment_id):
+    def get_context_data(self, like_id):
 
-#         comment_set = Comment.objects.order_by('-created_on')
-#         comment_instance = get_object_or_404(
-#             comment_set, pk=comment_id)
+        like_set = Like.objects.order_by('-created_on')
+        like_instance = get_object_or_404(
+            like_set, pk=like_id)
 
-#         status = STATUS
+        status = STATUS
 
-#         return {
-#             "comment": comment_instance,
-#             "status": status,
-#             "user_authenticated": self.request.user.is_authenticated
-#         }
+        return {
+            "like": like_instance,
+            "status": status,
+            "user_authenticated": self.request.user.is_authenticated
+        }
 
 
-# class AdminUpdateCommentView(BaseUpdateCommentView):
-#     """View to update comment instance"""
-#     template_name = 'admin-dashboard/update_comment.html'
+class AdminUpdateLikeView(BaseUpdateLikeView):
+    """View to update like instance. In this iteration not much can be done
+    by changing the status. Other field have to changed too
+    to produce some effect on the frontend."""
+    template_name = 'admin-dashboard/update_like.html'
 
-#     def post(self, request, comment_id, *args, **kwargs):
+    def post(self, request, like_id, *args, **kwargs):
 
-#         comment = get_object_or_404(Comment, pk=comment_id)
+        like = get_object_or_404(Like, pk=like_id)
 
-#         comment_text = request.POST.get('comment')
-#         status = request.POST.get('status')
+        status = request.POST.get('status')
+        like.status = int(status)
 
-#         comment.comment = comment_text[:256]
-#         comment.status = int(status)
+        messages.success(
+            request, "Congratulations! The like instance has been updated!")
+        like.save()
 
-#         messages.success(
-#             request, "Congratulations! The comment instance has been updated!")
-#         comment.save()
-
-#         return redirect('admin_all_comments')
+        return redirect('admin_all_likes')
 
 # # Delete Comments
 
 
-# class CommentDelete(AdminRequiredMixin, DeleteView):
-#     """View for deleting comment instances."""
-#     model = Comment
-#     template_name = None
-#     allowed_roles = [1]
+class LikeDelete(AdminRequiredMixin, DeleteView):
+    """View for deleting like instances."""
+    model = Like
+    template_name = None
+    allowed_roles = [1]
 
-#     def dispatch(self, request, *args, **kwargs):
-#         comment = self.get_object()
-#         if comment.status == 2:
-#             messages.error(
-#                 request, "Error: comment's status must be suspended or draft.")
-#             return redirect('admin_all_comments')
+    def dispatch(self, request, *args, **kwargs):
+        like = self.get_object()
+        if like.status == 2:
+            messages.error(
+                request, "Error: like's status must be suspended or draft.")
+            return redirect('admin_all_likes')
 
-#         if self.request.user.role not in self.allowed_roles:
-#             messages.error(
-#                 request, "Error: User does not have the required role")
-#             return redirect('admin_all_comments')
+        if self.request.user.role not in self.allowed_roles:
+            messages.error(
+                request, "Error: User does not have the required role")
+            return redirect('admin_all_likes')
 
-#         return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
-#     def get_object(self, queryset=None):
-#         comment_id = self.kwargs.get('comment_id')
-#         return get_object_or_404(Comment, pk=comment_id)
+    def get_object(self, queryset=None):
+        like_id = self.kwargs.get('like_id')
+        return get_object_or_404(Like, pk=like_id)
 
-#     def get_success_url(self):
-#         messages.success(self.request, 'Comment instance has been deleted!')
-#         return reverse_lazy('admin_all_comments')
+    def get_success_url(self):
+        messages.success(self.request, 'Like instance has been deleted!')
+        return reverse_lazy('admin_all_likes')

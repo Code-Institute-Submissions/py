@@ -48,7 +48,7 @@
                             <td>{{ like.created_on }}</td>
                             <td>{{ like.get_status_display }}</td>
                             <td>
-                                <a href="">Update & Details</a>
+                                <a href="{% url 'admin_update_like' like.id %}">Update & Details</a>
                             </td>
                         </tr>
                         {% endfor %}
