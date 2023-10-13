@@ -107,131 +107,132 @@
         <!-- Records not found -->
         {% if not combined_items %}
         <p class="text-center">No records found so far </p>
-        {% endif %}
+    </article>
+    {% endif %}
 
-        <!-- Records found -->
-        {% for item in combined_items %}
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
-            <div class="card h-100">
-                <!-- Card Header -->
-                <header>
-                    {% if item.type %}
-                    <h2 class="card-header text-center">{{ item.get_type_display}}</h2>
-                    {% elif item.instance %}
-                    <h2 class="card-header text-center">{{ item.get_instance_display}}</h2>
-                    {% endif %}
-                </header>
+    <!-- Records found -->
+    {% for item in combined_items %}
+    <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+        <div class="card h-100">
+            <!-- Card Header -->
+            <header>
+                {% if item.type %}
+                <h2 class="card-header text-center">{{ item.get_type_display}}</h2>
+                {% elif item.instance %}
+                <h2 class="card-header text-center">{{ item.get_instance_display}}</h2>
+                {% endif %}
+            </header>
 
-                <!-- Card Thumbnail -->
-                <a href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}"
-                    class="row bg-thumbnail d-block">
-                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
-                        <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
-                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
-                        </div>
+            <!-- Card Thumbnail -->
+            <a href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}"
+                class="row bg-thumbnail d-block">
+                <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
+                    <div class="d-flex justify-content-between">
+                        <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
+                        <span class="thumbnail-tags-right">{{ item.price }} $</span>
                     </div>
-                </a>
+                </div>
+            </a>
 
-                <!-- Card Body -->
-                <section class="card-body pt-1 px-2 pb-1">
-                    <div class="row">
-                        <div class="col-12 d-inline-block">
-                            <div class="p-1">
+            <!-- Card Body -->
+            <section class="card-body pt-1 px-2 pb-1">
+                <div class="row">
+                    <div class="col-12 d-inline-block">
+                        <div class="p-1">
 
-                                <!-- Title -->
-                                <div>
-                                    <a class="pb-0 mb-0"
-                                        href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
-                                        <h3>{{ item.title }}</h3>
-                                    </a>
-                                </div>
+                            <!-- Title -->
+                            <div>
+                                <a class="pb-0 mb-0"
+                                    href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
+                                    <h3>{{ item.title }}</h3>
+                                </a>
+                            </div>
 
-                                <!-- Author -->
-                                <small>by {{ item.author }}</small>
+                            <!-- Author -->
+                            <small>by {{ item.author }}</small>
 
-                                <!-- Category -->
-                                {% if item.category %}
-                                <div class="small mt-1 mb-0">
-                                    <a class="text-muted"
-                                        href="{% url 'combined_items_all' %}/?q={{item.category.alt_name}}">
-                                        <i class="fas fa-tag mr-1"></i> {{ item.category }}
-                                    </a>
-                                </div>
-                                {% endif %}
+                            <!-- Category -->
+                            {% if item.category %}
+                            <div class="small mt-1 mb-0">
+                                <a class="text-muted"
+                                    href="{% url 'combined_items_all' %}/?q={{item.category.alt_name}}">
+                                    <i class="fas fa-tag mr-1"></i> {{ item.category }}
+                                </a>
+                            </div>
+                            {% endif %}
 
-                                <!-- Code Languages & Services -->
-                                <div class="my-0 fs-6">
-                                    {% if item.instance == 0%}
-                                    {% for code in item.code.all %}
-                                    <span class="item-tags d-inline-block m-0 mt-2">
-                                        {{ code }}
-                                    </span>
-                                    {% endfor %}
+                            <!-- Code Languages & Services -->
+                            <div class="my-0 fs-6">
+                                {% if item.instance == 0%}
+                                {% for code in item.code.all %}
+                                <span class="item-tags d-inline-block m-0 mt-2">
+                                    {{ code }}
+                                </span>
+                                {% endfor %}
 
-                                    {% else %}
-                                    {% for service in item.service.all %}
-                                    <span class="item-tags d-inline-block m-0 mt-2">
-                                        {{ service }}
-                                    </span>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
-
-                                <!-- Short description -->
-                                {% if item.instance == 0 %}
-                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
-                                    <a class="read-more" href="{% url 'single_product' item.slug %}">
-                                        Read More
-                                    </a>
-                                </p>
-                                {% elif item.instance == 1 %}
-                                <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
-                                    <a class="read-more" href="{% url 'single_service' item.slug %}">
-                                        Read More
-                                    </a>
-                                </p>
+                                {% else %}
+                                {% for service in item.service.all %}
+                                <span class="item-tags d-inline-block m-0 mt-2">
+                                    {{ service }}
+                                </span>
+                                {% endfor %}
                                 {% endif %}
                             </div>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Likes and Purchases -->
-                <div class="row mb-1">
-                    <div class="col-12">
-                        <div class="d-flex justify-content-between">
-                            <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
-                                {{ item.likescount }}</span>
-                            <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
-                                {% for title, count in order_count_combined.items %}
-                                {% if item.title == title %}
-                                {{ count }}
-                                {% endif %}
-                                {% endfor %}
-                            </span>
+                            <!-- Short description -->
+                            {% if item.instance == 0 %}
+                            <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
+                                <a class="read-more" href="{% url 'single_product' item.slug %}">
+                                    Read More
+                                </a>
+                            </p>
+                            {% elif item.instance == 1 %}
+                            <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
+                                <a class="read-more" href="{% url 'single_service' item.slug %}">
+                                    Read More
+                                </a>
+                            </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <footer>
-                    <!-- Card Footer -->
-                    {% if item.instance == 0 %}
-                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' item.slug %}">
-                        BUY NOW
-                    </a>
-                    {% else %}
-                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_service' item.slug %}">
-                        HIRE NOW
-                    </a>
-                    {% endif%}
-                </footer>
+            <!-- Likes and Purchases -->
+            <div class="row mb-1">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <span class="likes-tags-left"><i class="fa-regular fa-heart"></i>
+                            {{ item.likescount }}</span>
+                        <span class="purchases-tags-right"><i class="fa-solid fa-cart-shopping"></i>
+                            {% for title, count in order_count_combined.items %}
+                            {% if item.title == title %}
+                            {{ count }}
+                            {% endif %}
+                            {% endfor %}
+                        </span>
+                    </div>
+                </div>
             </div>
+
+            <footer>
+                <!-- Card Footer -->
+                {% if item.instance == 0 %}
+                <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' item.slug %}">
+                    BUY NOW
+                </a>
+                {% else %}
+                <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_service' item.slug %}">
+                    HIRE NOW
+                </a>
+                {% endif%}
+            </footer>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
-        <div class="col-12 text-center">
-            <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto see-more fs-5">See more</a>
-        </div>
+    </div>
+    {% if forloop.counter|divisibleby:3 %}
+    <div class="col-12 text-center">
+        <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto see-more fs-5">See more</a>
+    </div>
     </article>
     <div class="row">
         {% endif %}
