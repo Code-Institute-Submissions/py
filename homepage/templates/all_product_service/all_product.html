@@ -5,9 +5,9 @@
 
     <!-- Product Row-->
     <div id="item-container" class="row gx-4 gx-lg-5 mt-4">
-        <p class="h1 fairplay-font text-center mb-4">Product</p>
+        <h1 class="fairplay-font text-center mb-4">Product</h1>
 
-        <div class="row mb-4 m-0">
+        <aside class="row mb-4 m-0">
             <div class="col text-center">
                 <p class="text-muted text-center mb-0">
                     {{ product_all|length }} items on
@@ -19,10 +19,10 @@
                 </a>
                 {% endfor %}
             </div>
-        </div>
+        </aside>
 
         <!-- Sorting Element -->
-        <div class="row m-0">
+        <aside class="row m-0">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
                 <div class="sort-select-wrapper">
                     <select id="sort-selector-items"
@@ -74,7 +74,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </aside>
 
         <!-- Records not found -->
         {% if not product_all %}
@@ -83,14 +83,17 @@
 
         <!-- Records found -->
         {% for product in product_all %}
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12 item">
+        <article class="col-lg-4 col-md-12 mb-5 col-sm-12 item">
             <div class="card h-100">
-                <!-- Card Header -->
-                {% if product.type %}
-                <div class="card-header text-center h4">{{ product.get_type_display}}</div>
-                {% elif product.instance %}
-                <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
-                {% endif %}
+
+                <header>
+                    <!-- Card Header -->
+                    {% if product.type %}
+                    <h2 class="card-header text-center">{{ product.get_type_display}}</h2>
+                    {% elif product.instance %}
+                    <h2 class="card-header text-center">{{ product.get_instance_display}}</h2>
+                    {% endif %}
+                </header>
 
                 <!-- Card Thumbnail -->
                 <a href="{% url 'single_product' product.slug %}" class="row bg-thumbnail d-block">
@@ -103,15 +106,19 @@
                 </a>
 
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <section class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
-                                    <a href="{% url 'single_product' product.slug %}"
-                                        class="title h5 pb-0 mb-0">{{ product.title }}
+                                    <a href="{% url 'single_product' product.slug %}" class="title h5 pb-0 mb-0">
+                                        <h3>{{ product.title }}</h3>
                                     </a>
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ product.author }}</small>
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">
@@ -124,6 +131,8 @@
                                     </a>
                                 </p>
                                 {% endif %}
+
+                                <!-- Code Languages-->
                                 <p class="my-0 fs-6">
                                     {% for codes in product.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -131,6 +140,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
+
+                                <!-- Description -->
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ product.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' product.slug %}">
                                         Read More
@@ -139,7 +150,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
+
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -161,10 +173,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY NOW</a>
+                <footer>
+                    <!-- Card Footer -->
+                    <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY
+                        NOW</a>
+                </footer>
             </div>
-        </div>
+        </article>
         {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row">
