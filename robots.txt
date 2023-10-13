@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /account/
+Disallow: /media/downloads/
+Disallow: /bag/
+Disallow: /checkout/
+Sitemap: https://plexosoft-2714f270803c.herokuapp.com/sitemap.xml

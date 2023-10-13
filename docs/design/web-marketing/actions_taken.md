@@ -71,7 +71,7 @@ The forms are unique because it triggers actions in both Mailchimp and our own c
 
 We collect these emails for our email marketing campaigns, where we plan to send offers and updates.
 
-#### Newsletter
+### Newsletter
 
 We have implemented a Mailchimp-based newsletter that appears in various locations: within our product and service instances, in the footer, and in a pop-up model that appears when users attempt to leave the page. As seen here:
 
@@ -81,4 +81,59 @@ We have implemented a Mailchimp-based newsletter that appears in various locatio
 ??? info "Instance Newsletter Signup Form"
     ![Instance Newsletter](../../assets/img/instance-newsletter.png)
 
-### SEO
+### SEO Criteria
+
+We have used the following criteria for our SEO implementation:
+??? info "SEO Semantic"
+    #### 1. Utilizing Semantic HTML for Improved Searchability
+
+    - **Header and Nav**: Employing `<header>` and `<nav>` tags to define the website's top navigation and bring structure to the layout.
+    - **Article, Section, and Footer**: Using `<article>`, `<section>`, and `<footer>` elements to categorize content, which helps search engines understand the content's hierarchy and importance.
+    - **Aside**: Implementing the `<aside>` tag to specify content that is tangentially related to the main content, such as ads or side notes.
+    - **H1 - H6 Headings**: Strategically utilizing header tags (from `<h1>` to `<h6>`) to highlight important content and improve page structure.
+    - **Strong and Em**: Leveraging `<strong>` and `<em>` tags to emphasize keywords and important phrases.
+
+    #### 2. SEO Smart Content Creation and Optimization
+
+    Write and rewrite website content with a focus on integrating SEO Smart Keywords. The aim is to make the content search-engine-friendly without compromising readability and user experience.
+
+    #### 3. Effective Use of Anchor Tags
+
+    - **Internal Links Without `noopener` and `noreferrer`**: For internal linking, avoid using these attributes to maintain session continuity.
+    - **External Links With `noopener` and `noreferrer`**: For external links, especially those that open in a new tab, use these attributes for security reasons.
+    - **Selective Use of External Links Without `noopener` and `noreferrer`**: For high-quality, related content, these attributes may be omitted to pass link equity.
+    - **Keyword-Rich Link Text and ARIA Attributes**: Use keywords in the anchor text and `aria-label` attributes to provide context and improve accessibility.
+
+    #### 4. Alt Attributes for Images
+
+    - **SEO Smart Keywords**: Include these in the `alt` text to enhance image search results.
+    - **Descriptive Alt Text**: Make sure the `alt` text describes the image's content and function, especially if the image contains information or serves a specific purpose like a CTA button.
+
+    #### 5. Metadata in the Head Tag for Enhanced Search Engine Recognition
+
+    - **Title**: Craft a compelling and keyword-rich title that effectively represents the webpage content.
+    - **Description**: Write a succinct yet descriptive meta description that includes SEO Smart Keywords.
+    - **Keywords**: Stack short-tail and long-tail SEO Smart Keywords to cover various search queries.
+    - **Author**: Attribute the content to the author for additional metadata richness.
+
+??? info "Sitemap & Robots"
+    ### 6. Sitemaps and Robots.txt for Search Engine Crawling
+
+    Our `sitemap.xml` and `robots.txt`can be found on our project's main directory.
+
+    #### Sitemaps
+    - **Generating Sitemaps**: Utilize XML Sitemap generators like [XML-Sitemaps](https://www.xml-sitemaps.com/) to create a sitemap for your website.
+    - **Submission to Google**: Follow guidelines on how to build and submit a sitemap to Google as outlined in their [official documentation](https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap).
+
+    #### Robots.txt
+    - **Creating Robots.txt**: This file guides search engine bots on what parts of the website should or shouldn't be crawled and indexed.
+    - **Robots.txt Guidelines**: Consult [Google's support guide](https://support.google.com/webmasters/answer/7451001) for best practices on setting up your robots.txt file.
+
+    #### Submission to Google
+    - **Google Search Console**: Submit your sitemap and robots.txt files to [Google's Search Console](https://search.google.com/search-console/) for better indexation.
+    - **Additional Guidance**: For further reading on the submission process, check out [Google's support documentation](https://support.google.com/webmasters/answer/6062598?hl=en).
+
+??? info "SEO Smart Keywords"
+    ### SEO Keywords Plan
+    Our SEO keywords plan can be found here [SEO Plan](../../design/user-centric/strategy/strategy.md/#seo-plan)
+
