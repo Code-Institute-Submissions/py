@@ -6,21 +6,26 @@
     <!-- Call to Action-->
     <div class="card text-white quote my-4 py-2 text-center bg-main">
         <div class="card-body">
-            <p class="text-white m-0">Dive into a Sea of Software Solutions: For You, Your Business, and Your Next Big
+            <p class="text-white m-0">Dive into the sea of universal <strong>software solutions</strong>: For You, Your
+                Business, and Your Next Big
                 Project! <br>
                 Get {{ normal_discount }}% to {{ grand_discount }}% discount today!</p>
         </div>
     </div>
     <div class="row gx-4 gx-lg-5 align-items-center my-4 cta-card">
-        <div class="col-lg-6"><iframe class="rounded" width="100%" height="315"
-                src="https://www.youtube.com/embed/rfscVS0vtbw?si=Y0e1xHEOp3z_4Tfi" title="YouTube video player"
+        <div class="col-lg-6">
+            <iframe class="rounded" width="100%" height="315"
+                src="https://www.youtube.com/embed/rfscVS0vtbw?si=Y0e1xHEOp3z_4Tfi" title="Python educational video"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+                allowfullscreen>
+            </iframe>
         </div>
         <div class="col-lg-5 mt-3">
-            <h1 class="font-weight-light text-center">Navigating the Software World?</h1>
-            <p class="text-center">Find the Perfect Fit for Individuals, Businesses, and Developers Right Here!</p>
+            <h1 class="font-weight-light text-center">Looking for Custom Software Development?</h1>
+            <p class="text-center">Developing websites with <strong>Python</strong> in the best <strong>software
+                    marketplace</strong> for Individuals, Businesses, and
+                Developers!</p>
             <a class="btn btn-primary" href="https://github.com/plexoio/musa" target="_blank" rel="noopener noreferrer"
                 aria-label="GitHub">Know More</a>
         </div>
@@ -93,8 +98,8 @@
 
 
     <!-- PRODUCT & SERVICE Row-->
-    <div class="row gx-4 gx-lg-5 mt-4">
-        <p class="h1 fairplay-font text-center mb-5">Product & Service</p>
+    <article class="row gx-4 gx-lg-5 mt-4">
+        <h1 class="fairplay-font text-center mb-5">Product & Service</h1>
 
         <!-- Records not found -->
         {% if not combined_items %}
@@ -106,24 +111,17 @@
         <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
                 <!-- Card Header -->
-                {% if item.type %}
-                <div class="card-header text-center h4">{{ item.get_type_display}}</div>
-                {% elif item.instance %}
-                <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
-                {% endif %}
+                <header>
+                    {% if item.type %}
+                    <h2 class="card-header text-center">{{ item.get_type_display}}</h2>
+                    {% elif item.instance %}
+                    <h2 class="card-header text-center">{{ item.get_instance_display}}</h2>
+                    {% endif %}
+                </header>
+
                 <!-- Card Thumbnail -->
-                {% if item.instance == 0 %}
-                <a href="{% url 'single_product' item.slug %}" class="row bg-thumbnail d-block">
-                    <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
-                        <div class="d-flex justify-content-between">
-                            <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
-                            <span class="thumbnail-tags-right">{{ item.price }} $</span>
-                        </div>
-                    </div>
-                </a>
-                {% else %}
-
-                <a href="{% url 'single_service' item.slug %}" class="row bg-thumbnail d-block">
+                <a href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}"
+                    class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ item.image_url }}')">
                         <div class="d-flex justify-content-between">
                             <span class="thumbnail-tags-left">{{ item.get_instance_display }}</span>
@@ -132,33 +130,27 @@
                     </div>
                 </a>
 
-                {% endif%}
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <section class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
                                 <div>
-                                    {% if item.instance == 0 %}
-                                    <a class="h5 pb-0 mb-0" href="{% url 'single_product' item.slug %}">
-                                        {{ item.title }}
+                                    <a class="pb-0 mb-0"
+                                        href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
+                                        <h3>{{ item.title }}</h3>
                                     </a>
-                                    {% else %}
-                                    <a class="h5 pb-0 mb-0" href="{% url 'single_service' item.slug %}">
-                                        {{ item.title }}
-                                    </a>
-                                    {% endif%}
                                 </div>
                                 <small>by {{ item.author }}</small>
                                 {% if item.category %}
-                                <p class="small mt-1 mb-0">
+                                <div class="small mt-1 mb-0">
                                     <a class="text-muted"
                                         href="{% url 'combined_items_all' %}/?q={{item.category.alt_name}}">
                                         <i class="fas fa-tag mr-1"></i> {{ item.category }}
                                     </a>
-                                </p>
+                                </div>
                                 {% endif %}
-                                <p class="my-0 fs-6">
+                                <div class="my-0 fs-6">
                                     {% if item.instance == 0%}
                                     {% for code in item.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -173,7 +165,7 @@
                                     </span>
                                     {% endfor %}
                                     {% endif %}
-                                </p>
+                                </div>
 
                                 {% if item.instance == 0 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
@@ -191,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -208,31 +200,33 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card Footer -->
-                {% if item.instance == 0 %}
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' item.slug %}">
-                    BUY NOW
-                </a>
-                {% else %}
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' item.slug %}">
-                    HIRE NOW
-                </a>
-                {% endif%}
+                <footer>
+                    <!-- Card Footer -->
+                    {% if item.instance == 0 %}
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' item.slug %}">
+                        BUY NOW
+                    </a>
+                    {% else %}
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_service' item.slug %}">
+                        HIRE NOW
+                    </a>
+                    {% endif%}
+                </footer>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
         <div class="col-12 text-center">
             <a href="{% url 'combined_items_all' %}" class="btn btn-primary w-auto see-more fs-5">See more</a>
         </div>
-    </div>
+    </article>
     <div class="row">
         {% endif %}
         {% endfor %}
     </div>
 
     <!-- PRODUCT Row-->
-    <div class="row gx-4 gx-lg-5 mt-5">
-        <p class="h1 fairplay-font text-center mb-5">Product</p>
+    <article class="row gx-4 gx-lg-5 mt-5">
+        <h1 class="fairplay-font text-center mb-5">Product</h1>
 
         <!-- Records not found -->
         {% if not product_single %}
@@ -243,12 +237,15 @@
         {% for product in product_single %}
         <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
-                <!-- Card Header -->
-                {% if product.type %}
-                <div class="card-header text-center h4">{{ product.get_type_display}}</div>
-                {% elif product.instance %}
-                <div class="card-header text-center h4">{{ product.get_instance_display}}</div>
-                {% endif %}
+                <header>
+                    <!-- Card Header -->
+                    {% if product.type %}
+                    <h2 class="card-header text-center">{{ product.get_type_display}}</h2>
+                    {% elif product.instance %}
+                    <h2 class="card-header text-center">{{ product.get_instance_display}}</h2>
+                    {% endif %}
+                </header>
+
                 <!-- Card Thumbnail -->
                 <a href="{% url 'single_product' product.slug %}" class="row bg-thumbnail d-block">
                     <div class="col-12 bg-thumbnail-image" style="background-image: url('{{ product.image_url }}')">
@@ -260,13 +257,13 @@
                 </a>
 
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <section class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
                                 <div>
-                                    <a href="{% url 'single_product' product.slug %}"
-                                        class="h5 pb-0 mb-0">{{ product.title }}
+                                    <a href="{% url 'single_product' product.slug %}" class="pb-0 mb-0">
+                                        <h3>{{ product.title }}</h3>
                                     </a>
                                 </div>
                                 <small>by {{ product.author }}</small>
@@ -293,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -310,23 +307,26 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY NOW</a>
+                <footer>
+                    <!-- Card Footer -->
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' product.slug %}">BUY
+                        NOW</a>
+                </footer>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
         <div class="col-12 text-center">
             <a href="{% url 'product_all' %}" class="btn btn-primary w-auto see-more fs-5">See more</a>
         </div>
-    </div>
+    </article>
     <div class="row">
         {% endif %}
         {% endfor %}
     </div>
 
     <!-- SERVICE Row-->
-    <div class="row gx-4 gx-lg-5 mt-5">
-        <p class="h1 fairplay-font text-center mb-5">Service</p>
+    <article class="row gx-4 gx-lg-5 mt-5">
+        <h1 class="h1 fairplay-font text-center mb-5">Service</h1>
 
         <!-- Records not found -->
         {% if not service_single %}
@@ -339,9 +339,9 @@
             <div class="card h-100">
                 <!-- Card Header -->
                 {% if service.type %}
-                <div class="card-header text-center h4">{{ service.get_type_display}}</div>
+                <h2 class="card-header text-center">{{ service.get_type_display}}</h2>
                 {% elif service.instance %}
-                <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
+                <h2 class="card-header text-center">{{ service.get_instance_display}}</h2>
                 {% endif %}
 
                 <!-- Card Thumbnail -->
@@ -355,13 +355,13 @@
                 </a>
 
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <section class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
                                 <div>
-                                    <a href="{% url 'single_service' service.slug %}"
-                                        class="h5 pb-0 mb-0">{{ service.title }}
+                                    <a href="{% url 'single_service' service.slug %}" class="h5 pb-0 mb-0">
+                                        <h3>{{ service.title }}</h3>
                                     </a>
                                 </div>
                                 <small>by {{ service.author }}</small>
@@ -388,7 +388,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -405,15 +405,19 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card Footer -->
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' service.slug %}">HIRE NOW</a>
+                <footer>
+                    <!-- Card Footer -->
+                    <a class="card-footer text-center fs-5 btn w-100"
+                        href="{% url 'single_service' service.slug %}">HIRE
+                        NOW</a>
+                </footer>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
         <div class="col-12 text-center">
             <a href="{% url 'service_all' %}" class="btn btn-primary w-auto see-more fs-5">See more</a>
         </div>
-    </div>
+    </article>
     <div class="row">
         {% endif %}
         {% endfor %}
