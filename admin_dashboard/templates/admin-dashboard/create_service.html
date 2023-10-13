@@ -1,6 +1,6 @@
 {% extends "admin-dashboard/base.html" %}
 {% load i18n %}
-
+{% block title %}- Create Service{% endblock %}
 {% block content%}
 <main class="pb-5 mb-5">
     <div class="container-fluid px-5 pb-5">
@@ -276,8 +276,8 @@
                             <!-- Download Files-->
                             <div class="mb-3">
                                 <label for="download_url" class="form-label"><strong>File Download</strong></label>
-                                <input type="text" name="download_url" class="form-control text-center" id="download_url"
-                                    value="Update this field after service creation" disabled>
+                                <input type="text" name="download_url" class="form-control text-center"
+                                    id="download_url" value="Update this field after service creation" disabled>
                                 {% if service.download_url.errors %}
                                 <div class="errors">{{ service.download_url.errors }}</div>
                                 {% endif %}

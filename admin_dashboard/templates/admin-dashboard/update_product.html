@@ -1,6 +1,6 @@
 {% extends "admin-dashboard/base.html" %}
 {% load i18n %}
-
+{% block title %}- Update Product{% endblock %}
 {% block content%}
 <main class="pb-5 mb-5">
     <div class="container-fluid px-4 pb-5">
@@ -226,7 +226,8 @@
                             <!-- Download URL -->
                             <div class="mb-3">
                                 <label for="related_downloads" class="form-label"><strong>Download File
-                                    </strong><br><small>(Hold down “Control”, or “Command” on a Mac, to select more than one.)</small></label>
+                                    </strong><br><small>(Hold down “Control”, or “Command” on a Mac, to select more than
+                                        one.)</small></label>
                                 <select name="related_downloads" class="form-control" id="related_downloads"
                                     multiple="multiple" required>
                                     {% for url in related_downloads %}
