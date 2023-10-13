@@ -38,16 +38,14 @@
 
                     <!-- Card Body -->
                     <aside class="d-flex justify-content-between">
-                        <a class="single-item-button w-100 text-center" href="{{ product.docs }}"
-                            rel="noopener noreferrer" target="_blank">
+                        <a class="single-item-button w-100 text-center" href="{{ product.docs }}" target="_blank">
                             Docs
                         </a>
-                        <a class="single-item-button w-100 text-center" href="{{ product.support }}"
-                            rel="noopener noreferrer" target="_blank">
+                        <a class="single-item-button w-100 text-center" href="{{ product.support }}" target="_blank">
                             Support
                         </a>
                         <a class="single-item-button-right w-100 text-center" href="{{ product.preview }}"
-                            rel="noopener noreferrer" target="_blank">
+                            target="_blank">
                             Live Preview
                         </a>
                     </aside>
@@ -59,7 +57,7 @@
 
                                     <!-- Title -->
                                     <div>
-                                        <a href="{% url 'single_product' product.slug %}" class="h5 pb-0 mb-0">
+                                        <a href="{% url 'single_product' product.slug %}" class="pb-0 mb-0">
                                             <h2>{{ product.title }}</h2>
                                         </a>
                                     </div>
@@ -164,9 +162,9 @@
 <aside class="d-flex justify-content-center">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-uppercase mb-4 text-center">
+            <h3 class="text-uppercase mb-4 text-center">
                 Newsletter
-            </h2>
+            </h3>
             <section class="mb-4">
                 <div class="row">
                     <div class="col-sm-12">

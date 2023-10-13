@@ -12,16 +12,18 @@
         {% endif %}
 
         <!-- Records found -->
-        <div class="col-lg-8 col-md-12 mb-5 col-sm-12">
+        <article class="col-lg-8 col-md-12 mb-5 col-sm-12">
             <form action="{% url 'add_to_cart_service' service.id %}" method="POST">
                 {% csrf_token %}
                 <div class="card h-100">
-                    <!-- Card Header -->
-                    {% if service.type %}
-                    <div class="card-header text-center h4">{{ service.get_type_display}}</div>
-                    {% elif service.instance %}
-                    <div class="card-header text-center h4">{{ service.get_instance_display}}</div>
-                    {% endif %}
+                    <header>
+                        <!-- Card Header -->
+                        {% if service.type %}
+                        <h1 class="card-header text-center">{{ service.get_type_display}}</h1>
+                        {% elif service.instance %}
+                        <h1 class="card-header text-center">{{ service.get_instance_display}}</h1>
+                        {% endif %}
+                    </header>
 
                     <!-- Card Thumbnail -->
                     <a href="{% url 'single_service' service.slug %}" class="row bg-thumbnail d-block">
@@ -34,30 +36,35 @@
                     </a>
 
                     <!-- Card Body -->
-                    <div class="d-flex justify-content-between">
-                        <a class="single-item-button w-100 text-center" href="{{ service.docs }}"
-                            rel="noopener noreferrer" target="_blank">
+                    <aside class="d-flex justify-content-between">
+                        <a class="single-item-button w-100 text-center" href="{{ service.docs }}" target="_blank">
                             Docs
                         </a>
-                        <a class="single-item-button w-100 text-center" href="{{ service.support }}"
-                            rel="noopener noreferrer" target="_blank">
+                        <a class="single-item-button w-100 text-center" href="{{ service.support }}" target="_blank">
                             Support
                         </a>
-                        <a class="single-item-button-right w-100 text-center" href="" rel="noopener noreferrer"
-                            target="_blank">
+                        <a class="single-item-button-right w-100 text-center" href="" target="_blank">
                             FAQ
                         </a>
-                    </div>
-                    <div class="card-body pt-2 px-2 pb-1">
+                    </aside>
+
+                    <section class="card-body pt-2 px-2 pb-1">
                         <div class="row">
                             <div class="col-12 d-inline-block">
                                 <div class="px-1 pb-1 pt-0">
+
+                                    <!-- Title -->
                                     <div>
-                                        <a href="{% url 'single_service' service.slug %}"
-                                            class="h5 pb-0 mb-0">{{ service.title }}
+                                        <a href="{% url 'single_service' service.slug %}" class="pb-0 mb-0">
+                                            <h2>{{ service.title }}</h2>
                                         </a>
                                     </div>
+
+                                    <!-- Author -->
+
                                     <small>by {{ service.author }}</small>
+                                    <!-- Category -->
+
                                     {% if service.category %}
                                     <p class="small mt-1 mb-0">
                                         <a class="text-muted"
@@ -66,6 +73,8 @@
                                         </a>
                                     </p>
                                     {% endif %}
+
+                                    <!-- Code Languages -->
                                     <p class="my-0 fs-6">
                                         {% for codes in service.code.all %}
                                         <span class="item-tags d-inline-block m-0 mt-2">
@@ -73,9 +82,13 @@
                                         </span>
                                         {% endfor %}
                                     </p>
+
+                                    <!-- Description -->
                                     <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
                                         {{ service.description|safe }}
                                     </p>
+
+                                    <!-- Services Provided -->
                                     <p class="my-0 fs-6">
                                         {% for services in service.service.all %}
                                         <span class="item-tags d-inline-block m-0 mt-2">
@@ -83,13 +96,15 @@
                                         </span>
                                         {% endfor %}
                                     </p>
+
+                                    <!-- Extra Note -->
                                     <p class="my-0 fs-6 text-justify mx-3 my-3 lh-sm">
                                         Note: here it goes
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
                     <!-- Likes and Purchases -->
                     <div class="row mb-1">
@@ -121,33 +136,35 @@
                         </div>
                     </div>
 
-                    <!-- Card Footer -->
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                    {% if service.status == 2 %}
-                    <div class="card-footer text-center fs-5 btn">
-                        <input class="add-to-cart" type="submit" value="1" name="quantity">
-                        Add to Cart
-                    </div>
+                    <footer>
+                        <!-- Card Footer -->
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        {% if service.status == 2 %}
+                        <div class="card-footer text-center fs-5 btn w-100">
+                            <input class="add-to-cart" type="submit" value="1" name="quantity">
+                            Add to Cart
+                        </div>
 
-                    {% elif service.status == 1 %}
-                    <button class="card-footer text-center fs-5 btn">SUSPENDED SERVICE</button>
-                    {% elif service.status == 0 %}
-                    <button class="card-footer text-center fs-5 btn">DRAFT SERVICE</button>
-                    {% endif %}
+                        {% elif service.status == 1 %}
+                        <button class="card-footer text-center fs-5 btn w-100">SUSPENDED SERVICE</button>
+                        {% elif service.status == 0 %}
+                        <button class="card-footer text-center fs-5 btn w-100">DRAFT SERVICE</button>
+                        {% endif %}
+                    </footer>
                 </div>
             </form>
-        </div>
+        </article>
     </div>
 </div>
 
 <!-- Newsletter -->
 <!-- Our own with Mailchimp functionalities -->
-<div class="d-flex justify-content-center">
+<aside class="d-flex justify-content-center">
     <div class="row">
         <div class="col-12">
-            <p class="h5 text-uppercase mb-4 text-center">
+            <h3 class="text-uppercase mb-4 text-center">
                 Newsletter
-            </p>
+            </h3>
             <section class="mb-4">
                 <div class="row">
                     <div class="col-sm-12">
@@ -198,10 +215,10 @@
             </section>
         </div>
     </div>
-</div>
+</aside>
 
 <!-- Comments -->
-<div class="container mt-3 px-4 px-lg-0">
+<aside class="container mt-3 px-4 px-lg-0">
     <div class="row align-items-center justify-content-center">
 
         <!-- Comment Display -->
@@ -209,9 +226,9 @@
             <div class="content">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="m-0 text-center">
+                        <h3 class="m-0 text-center">
                             Comments <i class="fa-solid fa-comment"></i> {{ comment_count }}
-                        </h5>
+                        </h3>
                     </div>
                     <div class="card-body">
                         {% for comment in comments_list %}
@@ -292,7 +309,7 @@
             </div>
         </div>
     </div>
-</div>
+</aside>
 
 <!-- Like & Newsletter Functionality -->
 <script>
