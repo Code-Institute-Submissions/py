@@ -5,8 +5,8 @@
 
     <!-- Product & Service Row-->
     <div class="row gx-4 gx-lg-5 mt-4">
-        <p class="h1 fairplay-font text-center mb-4">Product & Service</p>
-        <div class="row mb-4 m-0">
+        <h1 class="fairplay-font text-center mb-4">Product & Service</h1>
+        <aside class="row mb-4 m-0">
             <div class="col-12 text-center">
                 <p class="text-muted text-center mb-0">
                     {{ combined_items|length }} items on
@@ -18,10 +18,10 @@
                 </a>
                 {% endfor %}
             </div>
-        </div>
+        </aside>
 
         <!-- Sorting Element -->
-        <div class="row">
+        <aside class="row">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
                 <div class="sort-select-wrapper">
                     <select id="sort-selector"
@@ -83,7 +83,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </aside>
 
         <!-- Records not found -->
         {% if not combined_items %}
@@ -92,14 +92,16 @@
 
         <!-- Records found -->
         {% for item in combined_items %}
-        <div class="col-lg-4 col-md-12 mb-5 col-sm-12">
+        <article class="col-lg-4 col-md-12 mb-5 col-sm-12">
             <div class="card h-100">
-                <!-- Card Header -->
-                {% if item.type %}
-                <div class="card-header text-center h4">{{ item.get_type_display}}</div>
-                {% elif item.instance %}
-                <div class="card-header text-center h4">{{ item.get_instance_display}}</div>
-                {% endif %}
+                <header>
+                    <!-- Card Header -->
+                    {% if item.type %}
+                    <h2 class="card-header text-center">{{ item.get_type_display}}</h2>
+                    {% elif item.instance %}
+                    <h2 class="card-header text-center">{{ item.get_instance_display}}</h2>
+                    {% endif %}
+                </header>
 
                 <!-- Card Thumbnail -->
                 {% if item.instance == 0 %}
@@ -123,24 +125,25 @@
                 </a>
 
                 {% endif%}
+
                 <!-- Card Body -->
-                <div class="card-body pt-1 px-2 pb-1">
+                <section class="card-body pt-1 px-2 pb-1">
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
-                                    {% if item.instance == 0 %}
-                                    <a class="h5 pb-0 mb-0" href="{% url 'single_product' item.slug %}">
-                                        {{ item.title }}
+                                    <a class="pb-0 mb-0"
+                                        href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
+                                        <h3>{{ item.title }}</h3>
                                     </a>
-                                    {% else %}
-                                    <a class="h5 pb-0 mb-0" href="{% url 'single_service' item.slug %}">
-                                        {{ item.title }}
-                                    </a>
-                                    {% endif%}
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ item.author }}</small>
 
+                                <!-- Category -->
                                 {% if item.category %}
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -150,6 +153,7 @@
                                 </p>
                                 {% endif %}
 
+                                <!-- Code Languages & Services -->
                                 <p class="my-0 fs-6">
                                     {% for code in item.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -157,12 +161,15 @@
                                     </span>
                                     {% endfor %}
                                 </p>
+
+                                <!-- Short Description -->
                                 {% if item.instance == 0 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' item.slug %}">
                                         Read More
                                     </a>
                                 </p>
+
                                 {% elif item.instance == 1 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_service' item.slug %}">
@@ -173,7 +180,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
+
                 <!-- Likes and Purchases -->
                 <div class="row">
                     <div class="col-12">
@@ -190,18 +198,21 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card Footer -->
-                {% if item.instance == 0 %}
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' item.slug %}">
-                    BUY NOW
-                </a>
-                {% else %}
-                <a class="card-footer text-center fs-5 btn" href="{% url 'single_service' item.slug %}">
-                    HIRE NOW
-                </a>
-                {% endif%}
+
+                <footer>
+                    <!-- Card Footer -->
+                    {% if item.instance == 0 %}
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' item.slug %}">
+                        BUY NOW
+                    </a>
+                    {% else %}
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_service' item.slug %}">
+                        HIRE NOW
+                    </a>
+                    {% endif%}
+                </footer>
             </div>
-        </div>
+        </article>
         {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row">
