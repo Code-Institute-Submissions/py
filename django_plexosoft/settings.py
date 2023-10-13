@@ -30,7 +30,7 @@ IN_DEVELOPMENT = os.environ.get('IN_DEVELOPMENT', False)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = IN_DEVELOPMENT
 
-if IN_DEVELOPMENT:
+if DEBUG:
     ALLOWED_HOSTS = [os.environ.get('GITPOD_WORKSPACE_URL'),]
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME'),]
@@ -113,7 +113,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-if IN_DEVELOPMENT:
+if DEBUG:
     SITE_ID = 2  # ID for development domain
 else:
     SITE_ID = 2  # ID for production domain
@@ -147,7 +147,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if IN_DEVELOPMENT:
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
