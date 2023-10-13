@@ -57,7 +57,7 @@ class StripeWebhookView(View):
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         event = None
 
-        # Inside your post method
+        # For Debugging
         logger.info(f"Received payload: {payload}")
         logger.info(f"Received Stripe signature header: {sig_header}")
 
