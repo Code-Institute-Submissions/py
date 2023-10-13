@@ -11,6 +11,9 @@ import stripe
 # Application-specific imports
 from .webhook_handler import StripeWebhookHandler
 from django.conf import settings
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Initialize Stripe API
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
@@ -53,6 +56,10 @@ class StripeWebhookView(View):
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         event = None
+
+        # Inside your post method
+        logger.info(f"Received payload: {payload}")
+        logger.info(f"Received Stripe signature header: {sig_header}")
 
         try:
             event = stripe.Webhook.construct_event(
