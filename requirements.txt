@@ -1,5 +1,7 @@
 asgiref==3.7.2
 async-timeout==4.0.3
+boto3==1.28.63
+botocore==1.31.63
 cairocffi==1.6.1
 CairoSVG==2.7.1
 click==8.1.6
@@ -10,9 +12,11 @@ Django==3.2.20
 django-allauth==0.54.0
 django-countries==7.2.1
 django-crispy-forms==1.14.0
+django-storages==1.14.2
 django-summernote==0.8.20.0
 ghp-import==2.1.0
 gunicorn==21.2.0
+jmespath==1.0.1
 Markdown==3.4.4
 mergedeep==1.3.4
 mkdocs==1.5.2
@@ -29,6 +33,7 @@ python3-openid==3.2.0
 pyyaml_env_tag==0.1
 regex==2023.8.8
 requests-oauthlib==1.3.1
+s3transfer==0.7.0
 sqlparse==0.4.4
 stripe==6.6.0
 urllib3==1.26.16

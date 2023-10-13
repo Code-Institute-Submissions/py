@@ -1,0 +1,23 @@
+Dear {{ order.full_name }},
+
+We are delighted to confirm your recent purchase at Plexosoft, your trusted platform for top-notch software solutions. Below are the specifics of your transaction for your reference:
+
+- **Order Number**: {{ order.order_number }}
+- **Order Date**: {{ order.date }}
+- **Subtotal**: ${{ order.order_total }}
+- **Grand Total**: ${{ order.grand_total }}
+
+**Delivery Details**  
+Your order is destined for:  
+📍 {{ order.country }}
+
+**Contact Information**  
+We have your contact number registered as:  
+📱 {{ order.phone_number }}
+
+If there are any discrepancies or if you have questions about your order, do not hesitate to reach out to us at [{{ contact_email }}](mailto:{{ contact_email }}).
+
+Thank you for choosing Plexosoft Marketplace. We look forward to exceeding your expectations!
+
+Warm regards,  
+The Plexosoft Team
