@@ -12,7 +12,7 @@
                 Get {{ normal_discount }}% to {{ grand_discount }}% discount today!</p>
         </div>
     </aside>
-    
+
     <aside class="row gx-4 gx-lg-5 align-items-center my-4 cta-card">
         <div class="col-lg-6">
             <iframe class="rounded" width="100%" height="315"
@@ -137,13 +137,19 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
                                     <a class="pb-0 mb-0"
                                         href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
                                         <h3>{{ item.title }}</h3>
                                     </a>
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ item.author }}</small>
+
+                                <!-- Category -->
                                 {% if item.category %}
                                 <div class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -152,6 +158,8 @@
                                     </a>
                                 </div>
                                 {% endif %}
+
+                                <!-- Code Languages & Services -->
                                 <div class="my-0 fs-6">
                                     {% if item.instance == 0%}
                                     {% for code in item.code.all %}
@@ -169,6 +177,7 @@
                                     {% endif %}
                                 </div>
 
+                                <!-- Short description -->
                                 {% if item.instance == 0 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' item.slug %}">
@@ -186,6 +195,7 @@
                         </div>
                     </div>
                 </section>
+
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -202,6 +212,7 @@
                         </div>
                     </div>
                 </div>
+
                 <footer>
                     <!-- Card Footer -->
                     {% if item.instance == 0 %}
@@ -263,12 +274,18 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
                                     <a href="{% url 'single_product' product.slug %}" class="pb-0 mb-0">
                                         <h3>{{ product.title }}</h3>
                                     </a>
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ product.author }}</small>
+
+                                <!-- Category -->
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -277,6 +294,7 @@
                                     </a>
                                 </p>
                                 {% endif %}
+                                <!-- Code Languages & Services -->
                                 <p class="my-0 fs-6">
                                     {% for codes in product.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -284,6 +302,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
+
+                                <!-- Short Description -->
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ product.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' product.slug %}">
                                         Read More
@@ -293,6 +313,7 @@
                         </div>
                     </div>
                 </section>
+
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -309,6 +330,7 @@
                         </div>
                     </div>
                 </div>
+
                 <footer>
                     <!-- Card Footer -->
                     <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' product.slug %}">BUY
@@ -361,12 +383,18 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
                                     <a href="{% url 'single_service' service.slug %}" class="h5 pb-0 mb-0">
                                         <h3>{{ service.title }}</h3>
                                     </a>
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ service.author }}</small>
+
+                                <!-- Category -->
                                 {% if service.category %}
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -375,6 +403,8 @@
                                     </a>
                                 </p>
                                 {% endif %}
+
+                                <!-- Code Languages & Services -->
                                 <p class="my-0 fs-6">
                                     {% for services in service.service.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -382,6 +412,8 @@
                                     </span>
                                     {% endfor %}
                                 </p>
+
+                                <!-- Short Description -->
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ service.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_service' service.slug %}">
                                         Read More
@@ -391,6 +423,7 @@
                         </div>
                     </div>
                 </section>
+
                 <!-- Likes and Purchases -->
                 <div class="row mb-1">
                     <div class="col-12">
@@ -407,6 +440,7 @@
                         </div>
                     </div>
                 </div>
+
                 <footer>
                     <!-- Card Footer -->
                     <a class="card-footer text-center fs-5 btn w-100"

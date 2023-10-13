@@ -120,6 +120,8 @@
 
                                 <!-- Author -->
                                 <small>by {{ product.author }}</small>
+
+                                <!-- Category -->
                                 {% if product.category %}
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -132,7 +134,7 @@
                                 </p>
                                 {% endif %}
 
-                                <!-- Code Languages-->
+                                <!-- Code Languages & Services -->
                                 <p class="my-0 fs-6">
                                     {% for codes in product.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -141,7 +143,7 @@
                                     {% endfor %}
                                 </p>
 
-                                <!-- Description -->
+                                <!-- Short Description -->
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ product.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' product.slug %}">
                                         Read More
@@ -175,7 +177,7 @@
                 </div>
                 <footer>
                     <!-- Card Footer -->
-                    <a class="card-footer text-center fs-5 btn" href="{% url 'single_product' product.slug %}">BUY
+                    <a class="card-footer text-center fs-5 btn w-100" href="{% url 'single_product' product.slug %}">BUY
                         NOW</a>
                 </footer>
             </div>

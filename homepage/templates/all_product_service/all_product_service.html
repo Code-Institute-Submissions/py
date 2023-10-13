@@ -110,14 +110,19 @@
                     <div class="row">
                         <div class="col-12 d-inline-block">
                             <div class="p-1">
+
+                                <!-- Title -->
                                 <div>
                                     <a class="pb-0 mb-0"
                                         href="{% if item.instance == 0 %}{% url 'single_product' item.slug %}{% else %}{% url 'single_service' item.slug %}{% endif %}">
                                         <h3>{{ item.title }}</h3>
                                     </a>
                                 </div>
+
+                                <!-- Author -->
                                 <small>by {{ item.author }}</small>
 
+                                <!-- Category -->
                                 {% if item.category %}
                                 <p class="small mt-1 mb-0">
                                     <a class="text-muted"
@@ -130,6 +135,7 @@
                                 </p>
                                 {% endif %}
 
+                                <!-- Code Languages & Services -->
                                 <p class="my-0 fs-6">
                                     {% for code in item.code.all %}
                                     <span class="item-tags d-inline-block m-0 mt-2">
@@ -138,6 +144,7 @@
                                     {% endfor %}
                                 </p>
 
+                                <!-- Short Decription -->
                                 {% if item.instance == 0 %}
                                 <p class="my-0 fs-6 text-justify mt-2"> {{ item.excerpt|safe }}...
                                     <a class="read-more" href="{% url 'single_product' item.slug %}">
