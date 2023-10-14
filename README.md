@@ -45,27 +45,21 @@ Deployed project and login credentials found below.
 ### Credentials
 #### Buyer
 
-- **Username**: user
-- **Password**: musa12345678
-- **Role**: Not Publisher, Not Admin & Not verified (set back to Not Verified for testing)
+- **Username**: test
+- **Password**: test123.
+- **Role**: Buyer
 
-#### Administrator
+#### Administrator & Superuser (Only for Code Institute)
 
-- **Username**: frank
-- **Password**: musa12345678
-- **Role**: Verified & Admin
-
-#### Superuser (Only for Code Institute)
-
-- **Username**: Musa
+- **Username**: plexosoft
 - **Password**: `Sent on project submission`
 
 ---
 
 ## Credits
 
-- [Technologies Used](https://github.com/plexoio/musa/blob/main/documentation/readme/tech-used/tech_used.md): All technologies and tools used to build this project as presented in this section.
-- **Brian O'Hare**: for his tips and scope presentation and mentoring me, in general, two times on this project.
+- [Technologies Used](https://github.com/plexoio/py/blob/main/docs/tech/tech_used.md): All technologies and tools used to build this project as presented in this section.
+- **Mentors**: for all their tips and scope presentation and mentoring me, in general, two times on this project.
 - [Unsplash's Authors](https://unsplash.com/): for providing high quality images for our vote card creation
 - [Stackoverflow](https://stackoverflow.com/): for in-depth consultation and checking user-created content (from experienced developers) or human opinion.
 - [Google](https://google.com): for programming queries.
