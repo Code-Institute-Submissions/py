@@ -10,9 +10,14 @@ Explore Plexosoft and discover a world of software possibilities designed with y
 
 **Key Features:**
 
-
-**FAQ Integration**: 
-
+- Digital Downloads
+- Stripe Payments
+- User & Guest Checkout
+- User & Admin Dashboard
+- AWS S3
+- Newsletter (Mailchimp)
+- Contact Page
+- FAQ Page
 
 ---
 
