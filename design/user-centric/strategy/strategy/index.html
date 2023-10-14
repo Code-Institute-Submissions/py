@@ -1,0 +1,2584 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../overview/">
+      
+      
+        <link rel="next" href="../../scope/scope/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
+    
+    
+      
+        <title>Strategy - Plexosoft Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.35e1ed30.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#strategy-plane-reason-solution-and-value" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Plexosoft Docs" class="md-header__button md-logo" aria-label="Plexosoft Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Plexosoft Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Strategy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../overview/" class="md-tabs__link">
+          
+  
+  Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../development/agile-development/agile_development/" class="md-tabs__link">
+          
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../features/actual-features/actual_features/" class="md-tabs__link">
+          
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../tech/tech_used/" class="md-tabs__link">
+          
+  
+  Tech
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../initialize/setup_and_deployment/" class="md-tabs__link">
+          
+  
+  Initialize
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../snack/developer-snack/overview/" class="md-tabs__link">
+          
+  
+  Snack
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../about/about/" class="md-tabs__link">
+          
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../credits/credits/" class="md-tabs__link">
+        
+  
+    
+  
+  Credits
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Plexosoft Docs" class="md-nav__button md-logo" aria-label="Plexosoft Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Plexosoft Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Design Thinking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Design Thinking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/idea-outline/idea_outline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Idea Outline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/empathy/empathy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Empathy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/personas/personas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Personas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/definition/definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/persona/persona/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persona
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/ideate/ideate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ideate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/conclusion/conclusion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conclusion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../design-thinking/PoC/poc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PoC Prototype
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    User-Centric Design
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            User-Centric Design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Strategy
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Strategy
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#strategy-plane-reason-solution-and-value" class="md-nav__link">
+    Strategy Plane - Reason, Solution, and Value
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategy Plane - Reason, Solution, and Value">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research-table" class="md-nav__link">
+    Research Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-graphic" class="md-nav__link">
+    Research Graphic
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e-commerce-app-blueprint" class="md-nav__link">
+    E-commerce App Blueprint
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seo-plan" class="md-nav__link">
+    SEO Plan
+  </a>
+  
+    <nav class="md-nav" aria-label="SEO Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-identification-of-relevant-topics" class="md-nav__link">
+    STEP 1: Identification of Relevant Topics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-brain-dump-possible-keywords-for-each-of-the-relevant-topics" class="md-nav__link">
+    STEP 2: Brain Dump Possible Keywords for each of the Relevant Topics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-try-out-on-google" class="md-nav__link">
+    STEP 3: Try Out On Google
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-keyword-selection-based-on-ravc" class="md-nav__link">
+    STEP 4: Keyword Selection Based on RAV/C
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP 4: Keyword Selection Based on RAV/C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keywords-on-wordtrackercom" class="md-nav__link">
+    Keywords on wordtracker.com
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-final-results" class="md-nav__link">
+    STEP 5: Final Results
+  </a>
+  
+    <nav class="md-nav" aria-label="STEP 5: Final Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#final-table" class="md-nav__link">
+    Final Table
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tech-implementations" class="md-nav__link">
+    Tech Implementations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-creation" class="md-nav__link">
+    Content Creation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scope/scope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../structure/structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skeleton/skeleton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Skeleton
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surface/surface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Surface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Entity Relationship Diagram ERD
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entity Relationship Diagram ERD
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../erd/erd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ERD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Web Marketing Strategy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Web Marketing Strategy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web-marketing/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web-marketing/strategy_plan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Strategy Plan
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../web-marketing/actions_taken/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actions Taken
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../development/agile-development/agile_development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Agile Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../development/bug-test-security/bug_test_security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bug, Testing & Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../features/actual-features/actual_features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actual Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../features/future-features/future_features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Future Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Tech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tech/tech_used/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technologies Used
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Initialize
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Initialize
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../initialize/setup_and_deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set Up & Deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Snack
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Snack
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/mkdoc/mkdoc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Make Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/development_reminder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Django Admin & Summernote
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/google_auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Auth Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/common_bugs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common Bugs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/naming_convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Naming Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/lambda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lambda Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/shell_database/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database & Django Shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/download_security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../snack/developer-snack/session_delete_and_print/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session Delete/Print
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            About
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plexosoft Docs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../credits/credits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Credits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Strategy</h1>
+
+<h2 id="strategy-plane-reason-solution-and-value">Strategy Plane - Reason, Solution, and Value</h2>
+<p>In this phase, we analyze the data obtained from conducting 4 different interviews with individuals from diverse backgrounds. This time we included the author's opinions. These interviews have provided valuable insights into the general and specific aspects of a <strong>Software Marketplace</strong>.</p>
+<p>Based on our findings from the <strong>Design Thinking</strong> process, we have reached the following conclusions, which will serve as our official source of information for Plexosoft's MVP:</p>
+<ul>
+<li>
+<p>Although our users may not have had a complete understanding of their needs, we made every effort to comprehend their requirements and propose the best possible solutions.</p>
+</li>
+<li>
+<p>Recognizing that users are the key stakeholders, our primary focus is to create a platform that benefits both business professionals and future users.</p>
+</li>
+<li>
+<details class="info">
+<summary>Critical Concerns</summary>
+<ul>
+<li>Clear Product &amp; Service Descriptions.</li>
+<li>Transparency, Trust-enhancing, Privacy &amp; Security.</li>
+<li>Solutions, Customization,  Distinct Offerings &amp; Extended Services.</li>
+<li>Affordability, Presentation, Accessibility &amp; Performance.</li>
+<li>Education, Inclusion, Opportunities, Peers Endorsement &amp; User Reviews (Likes &amp; Comments). </li>
+</ul>
+</details>
+</li>
+</ul>
+<p>To address these issues, we will tackle specific problems and fulfill their desires, enabling them to thrive within the ecosystem. For this iteration, we have identified the following core technologies to utilize:</p>
+<ul>
+<li>
+<details class="info">
+<summary>Core Technologies</summary>
+<ul>
+<li>Django</li>
+<li>JQuery</li>
+<li>Bootstrap</li>
+<li>PostgreSQL</li>
+<li>psycopg2</li>
+<li>SQLAlchemy</li>
+<li>Font Awesome</li>
+<li>Lottie Files</li>
+<li>Social Media Login</li>
+<li>Stripe</li>
+<li>Mailchimp (Newsletter)</li>
+<li>Google Analytics</li>
+<li>RSS</li>
+<li>Allauth</li>
+<li>AWS S3</li>
+<li>EmailJS</li>
+<li>Vendor-specific Templates</li>
+</ul>
+</details>
+</li>
+</ul>
+<p>To address individual issues, tasks, or desires, please refer to the following resources (Design Thinking):</p>
+<ul>
+<li><a href="../../../design-thinking/conclusion/conclusion/">Conclusion</a></li>
+<li><a href="../../../design-thinking/PoC/poc/">Prototype</a></li>
+</ul>
+<p>Our insights are grounded in sufficient research, supported by the accompanying table and graphic:</p>
+<ul>
+<li>From this table, we can extract the themes, epics, and potential ideas for user stories.</li>
+</ul>
+<h3 id="research-table">Research Table</h3>
+<details class="abstract">
+<summary>Open Research Table</summary>
+<table>
+<thead>
+<tr>
+<th>Goals</th>
+<th>Relevancy (0-5)</th>
+<th>Viability (0-5)</th>
+<th>N. Items (0-~)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Display Products &amp; Labels on Homepage</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Search Bar &amp; Filtering</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Menu &amp; Dropdowns</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Product &amp; Service Page</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Sign in/up option</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Social Media Login</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Email Verification</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Abstract User (roles, etc.)</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>User Feedback</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Likes &amp; Comments</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Cart, Purchase &amp; Download</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>User &amp; Admin Dashboard</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Support Button</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Contact Form</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Request Formats</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>FAQ</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Newsletter</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Caching</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Google Analytics</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>AWS S3</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EmailJS</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Lottie Files</td>
+<td>3</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Terms of Service &amp; Privacy Policy (GDPR)</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Database Model</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>N. Items</td>
+<td></td>
+<td></td>
+<td>26</td>
+</tr>
+<tr>
+<td>Max. Points</td>
+<td></td>
+<td></td>
+<td>130</td>
+</tr>
+<tr>
+<td>Results</td>
+<td>121</td>
+<td>112</td>
+<td></td>
+</tr>
+<tr>
+<td>Percentage</td>
+<td>93.07% (Strategy)</td>
+<td>86.15% (Scope)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>We've conducted an estimation based on our experience, and we are pleasantly surprised by the <code>design thinking</code> results. The decisions about which features to implement felt grounded in real factors and user needs, rather than personal assumptions or ideas:</p>
+<ul>
+<li>
+<p>As indicated in the table and the graphic, most of the features have high relevancy for this iteration. An exception is the <strong>Request Formats</strong> feature, which received a '3' for relevancy and '4' for viability. the same for <strong>RSS</strong> and <strong>Lottie Files</strong> with '3' and '5' respectevely. These features could take various forms, and its style and functionality is subject to continuous changes to improve the user experience.</p>
+</li>
+<li>
+<p>Looking at the viability column, the most important features range from 4 to 5, which isn't a significant difference. This slight variation represents our ability to fulfill potential requirements within our time and resource constraints. The lowest score was <strong>Social Media Login</strong> with '3' due to the fact that this is an MVP and to be accepted by Google or Facebook may require extra features and formalities.</p>
+</li>
+<li>
+<p>Despite being powerful features, their full implementation might be constrained by our limited resources and time. However, we will strive to add functional aspects for each to meet the Minimum Viable Product (MVP) requirements.</p>
+</li>
+</ul>
+<p>We should highlight that achieving most of the features described above doesn't necessarily mean they are all perfect or that the development process has come to an end. On the contrary, this MVP is the foundation for a much more robust and reliable software marketplace.</p>
+<h3 id="research-graphic">Research Graphic</h3>
+<p><img alt="Research Graphic" src="../../../../assets/img/graph-1.png" /></p>
+<ul>
+<li>
+<p><strong>Relevancy</strong>: As seen from the research graphic, there is a difference of '9' points between the maximum point value of '130' and the relevancy results. This suggests that we might be omitting almost the amount of 2 features, with each feature being 5 points, due to a lack of relevancy or the partial development of some features.</p>
+</li>
+<li>
+<p><strong>Viability</strong>: As observed from the research graphic, there's a difference of '18' points between the maximum point value of '130' and the viability results. This indicates that we might be developing almost the amount of 3.6 features partially, with each feature being 5 points, due to a lack of viability.</p>
+</li>
+<li>
+<p><strong>Conclusion</strong>: From the research graphic, there's a difference of '9' points between the relevancy and viability sections. This implies that roughly 2 features might be partially developed or that some features might not be fully completed due to constraints in resources and time. A gap of '9' isn't substantial, representing only a 7.43% impact on all crucial features. This indicates that most of our desired features for our MVP are entirely achievable.</p>
+</li>
+</ul>
+<h2 id="e-commerce-app-blueprint">E-commerce App Blueprint</h2>
+<details class="abstract">
+<summary>Open E-commerce App Blueprint</summary>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Category</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Target Audience - Who</strong></td>
+<td>Primarily B2C (Business to Consumer)<br>B2B (Business to Business): possible with further expansion and customization</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Offerings - What</strong></td>
+<td>Digital Products <br> Services</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Payment Methods - How</strong></td>
+<td>One-time Payment</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Key Features &amp; Information Display</strong></td>
+<td>Refer to the above section for details.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Essential Data Tables</strong></td>
+<td>Product<br>Category<br>Abstract User<br>Transaction<br>Download<br>Review<br>Newsletter</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 id="seo-plan">SEO Plan</h2>
+<h3 id="step-1-identification-of-relevant-topics">STEP 1: Identification of Relevant Topics</h3>
+<p>Based on our existing knowledge of our business, we've compiled a list of general topics. This will help us rank prominently in search results. To understand our target keywords better, consider the personas: what topics or keywords would our potential customers likely search for?</p>
+<ul>
+<li>
+<p>Software Marketplace</p>
+</li>
+<li>
+<p>Buy Your Own Software to Create a Website</p>
+</li>
+<li>
+<p>Buy Software with License and Support</p>
+</li>
+<li>
+<p>Buy Customizable Software</p>
+</li>
+</ul>
+<h3 id="step-2-brain-dump-possible-keywords-for-each-of-the-relevant-topics">STEP 2: Brain Dump Possible Keywords for each of the Relevant Topics</h3>
+<p>Below is a table that breaks down the main titles and their associated long-tail (LT) and short-tail (ST) keywords:</p>
+<details class="abstract">
+<summary>Brain Dump Possible Keywords</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Software Marketplace</strong></td>
+<td>User-friendly software, fix bug website, python websites, Software Licensing, Software ownership</td>
+<td>Best software marketplace, software marketplace with good support services, where to find websites made with python, buy software with licenses, Buy software for Ownership, Support Software Idea</td>
+</tr>
+<tr>
+<td><strong>Buy Your Own Software to Create a Website</strong></td>
+<td>Software AI, Software Blockchain, Software Community, Software Academy, Powerful Software, multilingual website</td>
+<td>I need a website with AI, I need a software or website with Blockchain, Software Service with Community, Software Marketplace and academy to learn, powerful software for websites</td>
+</tr>
+<tr>
+<td><strong>Buy Software with License and Support</strong></td>
+<td>Software and license, website and license, support for website, fix bug website, expert team website, python expert website, multilingual software website</td>
+<td>Where to buy software with license, where to buy a website with license, best support with software or website marketplace, developer to fix bug website, developer team for websites, find python expert for website creation</td>
+</tr>
+<tr>
+<td><strong>Buy Customizable Software</strong></td>
+<td>Customizable Software, Customizable Marketplace Website, Ideas software, Ideas website, Affordable Software, Idea Support Website</td>
+<td>Create website based on my idea, buy website in a marketplace, best software ideas for websites, affordable website to buy marketplace, best support for website creation, maintenance for website and software</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="step-3-try-out-on-google">STEP 3: Try Out On Google</h3>
+<p>We have added and removed keywords based on the results obtained from the following Google features:</p>
+<ul>
+<li>Autocomplete Feature</li>
+<li>People Also Ask</li>
+<li>Related Searches</li>
+<li>Titles from Similar Websites</li>
+<li>Descriptions from Similar Websites</li>
+</ul>
+<details class="abstract">
+<summary>Tried Out On Google</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Software Marketplace</strong></td>
+<td>second hand software, fix website bug, fix website bug online, python made websites, software licensing service, licensing as a service, software ownership service</td>
+<td>saas software for sale, websites developed by using Python, best software marketplace for business, best marketplace to sell software, marketplace for software products, software marketplace with good support services saas, buy websites made with python+django, buy software with license online, best place to buy software with license, buy software for ownership online, who can help me build my website?, support for my website idea email, software ideas for project, how do I fix a bug on my website?</td>
+</tr>
+<tr>
+<td><strong>Buy Your Own Software to Create a Website</strong></td>
+<td>blockchain software download, software ai engineer, software ai tools, software blockchain projects, ai website design, community software group, software academy online, software university, best website software download, multilingual website service</td>
+<td>make my website multilingual, software for blockchain development, can I create a website with AI?, how do I create a blockchain web application?, how can blockchain be used in business, community software platforms, what is a community software?, online community software platforms, software marketplace platform, b2b software marketplace, b2c software marketplace, powerful software for websites</td>
+</tr>
+<tr>
+<td><strong>Buy Software with License and Support</strong></td>
+<td>software license and service agreement, website support services, fix website issues, expert web developers, python expert website developers, multilingual software website</td>
+<td>python expert website developers, does NASA use Python?, is Python good for web development?, website support and maintenance services, do you need a software license?, where to buy a website with license, marketplace for software products, best developer to fix bug website, web developer roles and responsibilities, find python expert for website creation online, how do I find and hire expert Python developers?</td>
+</tr>
+<tr>
+<td><strong>Buy Customizable Software</strong></td>
+<td>customizable software applications, custom software development, customizable marketplace website template, best marketplace website builder, ideas software development, ideas website design, cheap software licenses, buy website marketplace</td>
+<td>best website to buy software online, affordable software for business, where to get programming ideas?, how do you develop software ideas?, how do I create a custom marketplace?, how do I get ideas for a website design?, software project ideas for students, software engineering projects ideas, what if I have an idea for a website?, can I build a website on my own?, create website based on my idea online, create website based on my idea app, how much does it cost to build a marketplace website, local buy and sell websites, where to buy an established website?, how much does it cost to set up a marketplace?, online software marketplace germany, web application ideas for students, best online software marketplace platform, online buying and selling sites, website design services near me, best website builder software</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="step-4-keyword-selection-based-on-ravc">STEP 4: Keyword Selection Based on RAV/C</h3>
+<p>We've adjusted our keywords according to RAV/C:</p>
+<ul>
+<li><strong>Relevance:</strong> Does our app fulfill the requirement?</li>
+<li><strong>Authority:</strong> Are we genuinely addressing this topic? Do we provide that value?</li>
+<li><strong>Volume &amp; Competition:</strong> Do we face low volume, high volume, high competition, or low competition? Ideally, we aim for high volume and low competition.</li>
+</ul>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>Consistently monitor keywords that repeatedly appear organically throughout this SEO plan, as they'll be crucial for subsequent phases. For tracking, consider utilizing:</p>
+<ul>
+<li><a href="https://www.wordtracker.com/">wordtracker.com</a></li>
+<li><a href="https://ads.google.com/home/tools/keyword-planner/">Google Keyword Planner</a> </li>
+</ul>
+</details>
+<p>The table has been rearranged to put the most relevant keywords up front for each topic. This enhances clarity and aligns the keywords more closely with their associated main topic. It is ready for the <strong>final result</strong> process.</p>
+<details class="abstract">
+<summary>Keyword Selection Based on RAV/C (Rearranged)</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Software Marketplace</strong></td>
+<td>software licensing service, licensing as a service, software ownership service, python made websites, fix website bug, second hand software, fix website bug online</td>
+<td>best software marketplace for business, marketplace for software products, best marketplace to sell software, saas software for sale, websites developed by using Python, software marketplace with good support services saas, buy websites made with python+django, buy software with license online, best place to buy software with license, buy software for ownership online, support for my website idea email, software ideas for project, how do I fix a bug on my website?</td>
+</tr>
+<tr>
+<td><strong>Buy Your Own Software to Create a Website</strong></td>
+<td>software ai engineer, software ai tools, blockchain software download, software blockchain projects, ai website design, community software group, software academy online, software university, multilingual website service, best website software download</td>
+<td>can I create a website with AI?, how do I create a blockchain web application?, how can blockchain be used in business, make my website multilingual, software for blockchain development, community software platforms, what is a community software?, online community software platforms, software marketplace platform, b2b software marketplace, b2c software marketplace, powerful software for websites</td>
+</tr>
+<tr>
+<td><strong>Buy Software with License and Support</strong></td>
+<td>software license and service agreement, website support services, fix website issues, expert web developers, python expert website developers, multilingual software website</td>
+<td>where to buy a website with license, does NASA use Python?, is Python good for web development?, website support and maintenance services, do you need a software license?, marketplace for software products, best developer to fix bug website, web developer roles and responsibilities, find python expert for website creation online, how do I find and hire expert Python developers?</td>
+</tr>
+<tr>
+<td><strong>Buy Customizable Software</strong></td>
+<td>customizable software applications, custom software development, customizable marketplace website template, best marketplace website builder, ideas software development, ideas website design, cheap software licenses, buy website marketplace</td>
+<td>best website to buy software online, affordable software for business, how do I create a custom marketplace?, how do you develop software ideas?, where to get programming ideas?, how do I get ideas for a website design?, software project ideas for students, software engineering projects ideas, create website based on my idea online, create website based on my idea app, how much does it cost to build a marketplace website, local buy and sell websites, where to buy an established website?, how much does it cost to set up a marketplace?, online software marketplace germany, web application ideas for students, best online software marketplace platform, online buying and selling sites, website design services near me, best website builder software</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h4 id="keywords-on-wordtrackercom">Keywords on wordtracker.com</h4>
+<p>We have chosen 3 keywords from the rearranged table and used them on wordtracker.com. Thanks to that tool we were able to collect better long-tail &amp; short-tail keywords and they were added to the <strong>final table</strong>; the others were added arbitrarily for future research.</p>
+<ul>
+<li>Results after using this tool:</li>
+</ul>
+<details class="abstract">
+<summary>Relevant Topic: Software Marketplace</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Software Marketplace</strong></td>
+<td>software licensing service, second hand software, python made websites</td>
+<td>perpetual license to software as a service, second hand software for sale, websites made with python</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Wordtracker 1" src="../../../../assets/img/row1.1.png" />
+<img alt="Wordtracker 2" src="../../../../assets/img/row1.2.png" />
+<img alt="Wordtracker 3" src="../../../../assets/img/row1.3.png" /></p>
+</details>
+<details class="abstract">
+<summary>Relevant Topic: Buy Your Own Software to Create a Website</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Buy Your Own Software to Create a Website</strong></td>
+<td>community software group, software university, best website software download</td>
+<td>community interactive social media private group software, universal software solutions, best website builder software download</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Wordtracker 1" src="../../../../assets/img/row2.1.png" />
+<img alt="Wordtracker 2" src="../../../../assets/img/row2.2.png" />
+<img alt="Wordtracker 3" src="../../../../assets/img/row2.3.png" /></p>
+</details>
+<details class="abstract">
+<summary>Relevant Topic: Buy Software with License and Support</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Buy Software with License and Support</strong></td>
+<td>software license and service agreement, website support services, python expert website developers</td>
+<td>software development and license and services agreement, website maintenance and support services, developing websites with python</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Wordtracker 1" src="../../../../assets/img/row3.1.png" />
+<img alt="Wordtracker 2" src="../../../../assets/img/row3.2.png" />
+<img alt="Wordtracker 3" src="../../../../assets/img/row3.3.png" /></p>
+</details>
+<details class="abstract">
+<summary>Relevant Topic: Buy Customizable Software</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Buy Customizable Software</strong></td>
+<td>customizable software applications, custom software development, ideas software development, buy website marketplace, website buy sell marketplace</td>
+<td>custom software development near me, software development ideas</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Wordtracker 1" src="../../../../assets/img/row4.1.png" />
+<img alt="Wordtracker 2" src="../../../../assets/img/row4.2.png" />
+<img alt="Wordtracker 3" src="../../../../assets/img/row4.3.png" /></p>
+</details>
+<h3 id="step-5-final-results">STEP 5: Final Results</h3>
+<h4 id="final-table">Final Table</h4>
+<p>Final table incorporating all results for this iteration. Words used &amp; sourced from wordtracker.com are highlighted.</p>
+<details class="abstract">
+<summary>Final Table</summary>
+<table>
+<thead>
+<tr>
+<th>Relevant Topic</th>
+<th>Short-Tail Keywords (ST)</th>
+<th>Long-Tail Keywords (LT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Software Marketplace</strong></td>
+<td><mark class="critic">software licensing service, second hand software, python made websites</mark>, licensing as a service, software ownership service, fix website bug, fix website bug online</td>
+<td><mark class="critic">perpetual license to software as a service, second hand software for sale, websites made with python</mark>, best software marketplace for business, marketplace for software products, best marketplace to sell software, saas software for sale, websites developed by using Python, software marketplace with good support services saas, buy websites made with python+django, buy software with license online, best place to buy software with license, buy software for ownership online, support for my website idea email, software ideas for project, how do I fix a bug on my website?</td>
+</tr>
+<tr>
+<td><strong>Buy Your Own Software to Create a Website</strong></td>
+<td><mark class="critic">community software group, software university, best website software download</mark>, multilingual website service</td>
+<td><mark class="critic">community interactive social media private group software, universal software solutions, best website builder software download</mark>, can I create a website with AI?, how do I create a blockchain web application?, how can blockchain be used in business, make my website multilingual, software for blockchain development, community software platforms, what is a community software?, online community software platforms, software marketplace platform, b2b software marketplace, b2c software marketplace, powerful software for websites</td>
+</tr>
+<tr>
+<td><strong>Buy Software with License and Support</strong></td>
+<td><mark class="critic">software license and service agreement, website support services, python expert website developers</mark>, fix website issues, expert web developers, multilingual software website</td>
+<td><mark class="critic">software development and license and services agreement, website maintenance and support services, developing websites with python</mark>, where to buy a website with license, does NASA use Python?, is Python good for web development?, website support and maintenance services, do you need a software license?, marketplace for software products, best developer to fix bug website, web developer roles and responsibilities, find python expert for website creation online, how do I find and hire expert Python developers?</td>
+</tr>
+<tr>
+<td><strong>Buy Customizable Software</strong></td>
+<td><mark class="critic">customizable software applications, custom software development, ideas software development, buy website marketplace, website buy sell marketplace</mark>, customizable marketplace website template, best marketplace website builder, ideas website design, cheap software licenses</td>
+<td><mark class="critic">custom software development near me, software development ideas, software development project ideas</mark>, best website to buy software online, affordable software for business, how do I create a custom marketplace?, how do you develop software ideas?, where to get programming ideas?, how do I get ideas for a website design?, software project ideas for students, software engineering projects ideas, create website based on my idea online, create website based on my idea app, how much does it cost to build a marketplace website, local buy and sell websites, where to buy an established website?, how much does it cost to set up a marketplace?, online software marketplace germany, web application ideas for students, best online software marketplace platform, online buying and selling sites, website design services near me, best website builder software</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="tech-implementations">Tech Implementations</h3>
+<p>To implement within our code</p>
+<h3 id="content-creation">Content Creation</h3>
+<p>Great content &amp; importance</p>
+<p>Armed with this information, we can now move to the next stage, which is defining the <code>scope</code> of our project.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 by <a href="https://github.com/plexoio"  target="_blank" rel="noopener">Frank Arellano</a> 
+with 
+<a href="https://www.mkdocs.org/"  target="_blank" rel="noopener">MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/plexoio" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/plexoio" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/arellanofrank/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+    
+  </body>
+</html>
