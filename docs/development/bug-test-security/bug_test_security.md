@@ -97,12 +97,10 @@ At the development's conclusion, we performed another round with the CI Python L
 ### Lighthouse
 Lighthouse offered comprehensive analysis across various aspects of our application. Although its use wasn't obligatory, we paired it with GT-Metrix to guarantee a high-quality product delivery. The outcomes were in line with our expectations.
 
-![Lighthouse](https://github.com/plexoio/musa/blob/main/documentation/assets/img/testing/lighthouse.png)
-
 ### GTMetrix
 Leveraging its distinct capabilities, GT-Metrix became an integral component of our testing regimen. It furnished us with invaluable recommendations, all of which were considered non-critical for this version. The app is performing optimally and is primed for release.
 
-![GTMetrix](https://github.com/plexoio/musa/blob/main/documentation/assets/img/testing/gtmetrix.png)
+- [GTMetrix](https://gtmetrix.com/)
 
 ### Responsiveness
 
@@ -115,30 +113,25 @@ Like any project, ours has had its share of bugs. Below are some of the challeng
 #### a) Website Performance
 We endeavored to consolidate everything using Django, Bootstrap, JQuery, PostgreSQL database and other technologies, aiming for a robust web application that functions seamlessly across all devices. However, we cannot assure consistent performance on devices with limited memory or processing capabilities.
 
-#### b) Cloudinary Error: KeyError 'etag'
-We encountered an error that prevented us from submitting our project to the Code Institute on time. Despite many hours of debugging with tutor assistance, the only resolution was to create a 'custom_storage.py' file to circumvent the problem.
+#### b) Stripe Integration
 
-**Error breakdown:**
+We did no have any particular bug that would delay our project, however we encounter many times issues related to variable values, like secret keys, etc.
 
-> During the execution of the `collectstatic` command, Django attempted to gather and process static files. The `cloudinary_storage` package managed some or all of these files. As part of its routine, `cloudinary_storage` checks for duplicate content on Cloudinary to avoid redundant uploads. It does this by verifying the ETAG header in Cloudinary's response. However, the ETAG header was absent, resulting in a KeyError.
-
-#### c) Event Completion Status
-Events marked as expired only transition to "complete" after a user attempts to vote. This behavior is intentional for performance reasons. In the future, we might programmatically update the status upon loading, similar to the vote count or progress bar.
-
-#### d) Social Media Links
+#### c) Social Media Links
 At the moment, social media buttons direct users to the primary pages, intended solely for demonstration.
 
-#### e) Vote Events Deletion
-Indeed, in this version, VoteCards are only marked as completed, preventing further voting. Only a superuser or the website owner can delete a VoteCard. Deleting a VoteCard will also remove associated elected persons and vote card records, effectively erasing all data linked to that event.
+#### d) Features
+
+There were some features such as the Like functionality that costed us a lot of time to figure out. At the end we opted for using AJAX and Json responses. All issues were solved.
 
 #### Other Potential Bugs
-For other issues, we suggest refreshing the page or clearing cache files. If problems persist, it's likely not an issue with the Musa project but may pertain to third-party services or the specific settings and capabilities of your device.
+For other issues, we suggest refreshing the page or clearing cache files. If problems persist, it's likely not an issue with the Plexosoft project but may pertain to third-party services or the specific settings and capabilities of your device.
 
 ## Security
 
 Concise explanation of why Django, Bootstrap, and PostgreSQL are considered safe:
 
-### Musa's system
+### Plexosoft's system
 
 1. **Django**:
    - **Framework Design**: Django follows the "batteries-included" philosophy and provides built-in protection against many common security threats like SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF).
