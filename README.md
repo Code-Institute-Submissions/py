@@ -75,7 +75,7 @@ Deployed project and login credentials found below.
     2. Copywriting and proofreading.
     3. Used to validate code.
     4. Used to confirm whether or not my code snippet is correct after many minutes or even hours of self-debugging.
-    5. Understand the use of different keywords, know libraries and modules, and more.
+    5. Understand the use of different keywords, libraries and modules, and more.
 
 ## Badges
 
