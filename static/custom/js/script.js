@@ -4,5 +4,4 @@ window.addEventListener('DOMContentLoaded', event => {
     myModal.addEventListener('click', event => {
         event.preventDefault();
     });
-
 });

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+- FAQ - Best Software Marketplace for Business
+{% endblock %}
+
+{% block content %}
+<!-- Page Content-->
+<div class="container my-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header card-header-blue text-center h4">
+                    Plexosoft Marketplace FAQ - Your Trusted Software Ownership Service
+                </div>
+                <div class="card-body px-5 py-3">
+                    <p class="mb-0 text-justify">
+                        {% if request.user.username %}
+                        Hello <strong>{{ request.user.username }}</strong>,
+                        {% else %}
+                        Hello dear visitor,
+                        {% endif %}
+                        welcome to the FAQ section of Plexosoft, the best marketplace to buy software for ownership or licensing and support. Here you'll find answers to commonly asked questions about how to buy your own software to create a website, customizable software applications, and more.
+                    </p>
+
+                    <div class="mt-3">
+                        <p class="text-center">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target=".multi-collapse" aria-expanded="false"
+                                aria-controls="multiCollapseExample1 multiCollapseExample2">See All</button>
+                        </p>
+                    </div>
+
+                    <!-- FAQ QUESTIONS -->
+                    <div class="text-center h5 mb-3">
+                        Frequently Asked Questions for Best Software Marketplace for Business
+                    </div>
+
+                    <!-- QUESTION 1 -->
+                    <div class="row card">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question1" aria-expanded="false"
+                            aria-controls="question1">1. How do I buy customizable software?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question1">
+                                <div class="card-body">
+                                    Browse our customizable software applications and add them to your cart. Once you're ready, proceed to checkout to complete your purchase.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION 2 -->
+                    <div class="row card mt-3">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question2" aria-expanded="false"
+                            aria-controls="question2">2. What are the software license and service agreement terms?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question2">
+                                <div class="card-body">
+                                    We offer software ownership and licensing. For more details, please refer to our software development and license and services agreement.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION 3 -->
+                    <div class="row card mt-3">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question3" aria-expanded="false"
+                            aria-controls="question3">3. What is Plexosoft's mission?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question3">
+                                <div class="card-body">
+                                    Our mission is rooted in clarity, transparency, and inclusivity. We aim to bridge the gap between software ownership and licensing by offering a diverse range of products, from second-hand software to Python-made websites.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION 4 -->
+                    <div class="row card mt-3">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question4" aria-expanded="false"
+                            aria-controls="question4">4. What types of payment methods do you accept?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question4">
+                                <div class="card-body">
+                                    We accept all major credit cards, debit cards, and other secure payment methods like Stripe.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION 5 -->
+                    <div class="row card mt-3">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question5" aria-expanded="false"
+                            aria-controls="question5">5. Do you offer website support services?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question5">
+                                <div class="card-body">
+                                    Yes, we offer comprehensive website support services. Whether you're looking to fix website issues or need support for your website idea via email, Plexosoft has you covered.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUESTION 6 -->
+                    <div class="row card mt-3">
+                        <button class="btn btn-primary card-header" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#question6" aria-expanded="false"
+                            aria-controls="question6">6. What makes Plexosoft different from other software marketplaces?</button>
+                        <div class="col-12">
+                            <div class="collapse multi-collapse" id="question6">
+                                <div class="card-body">
+                                    Plexosoft is not just about code; we're about building trust and fostering powerful software for websites. We prioritize user privacy and security, offer diverse payment options, and embrace culturally relevant designs.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

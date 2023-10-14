@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+- Contact Us - Plexosoft Software Marketplace
+{% endblock %}
+
+{% block extra_corejs %}
+{{ block.super }}
+<!-- MailJS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+    (function () {
+        emailjs.init("zTLiX8hsWc1NuiPs_");
+    })();
+</script>
+{% endblock  %}
+
+{% block content %}
+<!-- Page Content-->
+<div class="container my-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+
+            <!-- User Feedback -->
+            <div id="email_sent" class="container my-4"></div>
+
+            <!-- Contact Form -->
+            <div class="card">
+                <div class="card-header card-header-blue text-center h5">Plexosoft Contact Form</div>
+                <form id="contactForm" class="card-body p-5" onsubmit="return sendMail(this, event);">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input name="from_name"
+                            value="{% if user.is_authenticated %}{{ request.user.first_name }} {% endif %}"
+                            class="form-control" id="name" aria-describedby="name" required>
+                        <div id="nameHelp" class="form-text">Autofilled if you are already registered with Plexosoft.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input name="emailaddress" type="email"
+                            value="{% if user.is_authenticated %}{{ request.user.email }} {% endif %}"
+                            class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text">We value your privacy and will never share your email.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input name="the_subject" type="text" value="Plexosoft Support: " class="form-control"
+                            id="subject" aria-describedby="subjectHelp" required>
+                        <div id="subjectHelp" class="form-text">Please provide a clear subject line.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea name="the_idea" type="text" class="form-control" id="message" rows="7" cols="7"
+                            aria-describedby="messageHelp" required>Dear Plexosoft support team, </textarea>
+                        <div id="messageHelp" class="form-text">Feel free to express your ideas or issues.</div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary-blue">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function sendMail(contactForm, event) { // as 'this' on the form tag
+
+        event.preventDefault();
+
+        // API interaction
+        emailjs.send("service_esx4qk2", "template_lz29zt7", {
+            "from_name": contactForm.from_name.value,
+            "emailaddress": contactForm.emailaddress.value,
+            "the_subject": contactForm.the_subject.value,
+            "the_idea": contactForm.the_idea.value,
+        }).then( // Promise
+            function (response) {
+                console.log('Success', response);
+
+                // Frontend message
+                $('#email_sent').html(`
+        <div class="alert alert-success alert-dismissible text-center" role="alert" tabindex="-1">
+            <div>Your email has been sent successfully we'll be in touch with you shortly!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`);
+                $('#email_sent .alert').focus()
+            },
+            function (error) {
+                console.log('Failed', error);
+
+                // Frontend message
+                $('#email_sent').html(`
+        <div class="alert alert-danger alert-dismissible text-center" role="alert" tabindex="-1">
+       <div>STATUS: ${error.status} and ERROR: ${error.text}</div>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>`);
+                $('#email_sent .alert').focus()
+            }
+        );
+    }
+</script>
+{% endblock content %}
