@@ -255,7 +255,7 @@ DEFAULT_FROM_EMAIL = 'plexosoft@plexosoft.com'
 
 if 'IN_DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+    DEFAULT_FROM_EMAIL = 'plexo@plexo.io'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True

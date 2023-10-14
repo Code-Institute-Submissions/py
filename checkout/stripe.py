@@ -65,7 +65,7 @@ class StripeCheckoutView(View):
                 user.set_password(password)
                 user.first_name = form_data['full_name']
                 user.save()
-                _send_password_email(user, password)
+                _send_password_email(self, user, password)
                 messages.info(
                     request, f'''Your new password <b>{password} </b>
                         has been downloaded!

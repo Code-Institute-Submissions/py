@@ -27,7 +27,7 @@ from .forms import (CustomLoginForm,
                     ServiceCommentCreationForm,)
 from product_service.models import Product, Service
 from checkout.models import Order
-from .models import Comment, Like, NewsLetter
+from .models import Comment, Like, NewsLetter, UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -827,3 +827,39 @@ class NewsletterPost(View):
 
         return JsonResponse(
             {'status': 'success', 'message': 'Email added to our internal newsletter!'})
+
+# TERMS & CONDITIONS PAGE
+
+
+class TermsView(ListView):
+    ''' Implemented terms & conditions view ready for adjustments '''
+    model = UserProfile
+    template_name = "policy_terms/terms_conditions.html"
+    context_object_name = 'terms_page'
+
+# PRIVACY POLICY PAGE
+
+
+class PrivacyView(ListView):
+    ''' Implemented privacy policy view ready for adjustments '''
+    model = UserProfile
+    template_name = "policy_terms/privacy_policy.html"
+    context_object_name = 'privacy_page'
+
+# CONTACT FORM
+
+
+class ContactView(ListView):
+    ''' Implemented contact view ready for adjustments '''
+    model = UserProfile
+    template_name = "faq_contact/contact.html"
+    context_object_name = 'contact_form'
+
+# FAQ
+
+
+class FAQView(ListView):
+    ''' Implemented FAQ view ready for adjustments '''
+    model = UserProfile
+    template_name = "faq_contact/faq.html"
+    context_object_name = 'faq_page'

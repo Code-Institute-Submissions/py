@@ -2,9 +2,6 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.messages.storage.fallback import FallbackStorage
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.conf import settings
 
 # Third-party imports
 import json
@@ -110,7 +107,7 @@ class StripeWebhookHandler:
                 order.save()
 
                 # Send Email
-                _send_confirmation_email(order)
+                _send_confirmation_email(self, order)
 
         return HttpResponse(
             content=f'Unknown webhook received {event["type"]}',

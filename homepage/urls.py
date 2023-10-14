@@ -14,7 +14,11 @@ from .views import (HomepageProductServiceView,
                     CustomLogoutView,
                     ProductLikePost,
                     ServiceLikePost,
-                    NewsletterPost,)
+                    NewsletterPost,
+                    ContactView,
+                    FAQView,
+                    TermsView,
+                    PrivacyView,)
 from . import role_redirect
 
 
@@ -59,4 +63,16 @@ urlpatterns = [
     # USER ROLE
     path('role_redirect/', role_redirect.UserRoleRedirectView.as_view(),
          name='role_redirect'),
+
+    # Contact Page & FAQ
+    path('contact/', ContactView.as_view(),
+         name='contact_form'),
+    path('faq/', FAQView.as_view(),
+         name='faq_page'),
+
+    # Terms & Policy
+    path('terms/', TermsView.as_view(),
+         name='terms_page'),
+    path('policy/', PrivacyView.as_view(),
+         name='policy_page'),
 ]

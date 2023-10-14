@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 from functools import wraps
 from django.http import HttpResponse, HttpResponseForbidden
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 
 def generate_download_token(length=12):
@@ -73,7 +75,8 @@ def check_rate_limit(request):
 
 
 def _send_confirmation_email(self, order):
-    """Send a confirmation email afte order complete"""
+    """Send a confirmation email after order complete
+    in our stripe webhook handler."""
     buyer_email = order.email
     subject = render_to_string(
         'checkout/confirmation_email/confirmation_email_subject.txt',
@@ -91,14 +94,16 @@ def _send_confirmation_email(self, order):
 
 
 def _send_password_email(self, user, password):
-    """Send new password email afte order complete"""
+    """Send new password email after order
+    checkout in our checkout form to stripe."""
     buyer_email = user.email
     subject = render_to_string(
         'checkout/confirmation_email/password_email_subject.txt',
         {'user': user})
     body = render_to_string(
         'checkout/confirmation_email/password_email_body.txt',
-        {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+        {'user': user, 'password': password,
+         'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,
