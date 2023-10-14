@@ -19,7 +19,7 @@ Every detail, every nuance is pivotal to the project's triumph, and we are unwav
 
 |                                                                  | Color Type      | Color Name      | Hex Code  |
 | ---------------------------------------------------------------- | --------------- | --------------- | --------- |
-| ![Color](https://via.placeholder.com/50x50/34495e/34495e?text=+) | Primary Color   | Shade of Blue   | `#34495e` |
+| ![Color](https://via.placeholder.com/50x50/2980B9/2980B9?text=+) | Primary Color   | Shade of Blue   | `#2980B9` |
 | ![Color](https://via.placeholder.com/50x50/ffffff/ffffff?text=+) | Secondary Color | White   | `#ffffff` |
 | ![Color](https://via.placeholder.com/50x50/f8f9fa/f8f9fa?text=+) | Secondary Color | Shade of White      | `#f8f9fa` |
 | ![Color](https://via.placeholder.com/50x50/dadada/dadada?text=+) | Secondary Color | Shade of White      | `#dadada` |
@@ -34,13 +34,13 @@ Every detail, every nuance is pivotal to the project's triumph, and we are unwav
 
 The following color palette was used as a reference throughout the project:
 
-- [My Color Space](https://mycolor.space/?hex=%2334495E&sub=1)
+- [My Color Space](https://mycolor.space/?hex=%232980B9&sub=1)
 
 ### Layout
 
 #### Technologies Used
 
-- Vendor templates (as referenced in [Technologies Used](../../../tech/tech_used.md)
+- Vendor templates as referenced in [Technologies Used](../../../tech/tech_used.md)
 - Bootstrap
 - Custom Code
 
