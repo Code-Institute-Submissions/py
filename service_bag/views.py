@@ -54,8 +54,9 @@ class ServiceAddToCartView(View, ServiceAddToCartMixin):
 
             messages.success(
                 request, f'''You have added
-                <strong>{item_bag['service'][str(service_id)]['quantity']}</strong> services
-                for <strong>{item_bag['service'][str(service_id)]['title']}</strong>
+                <strong>{item_bag['service'][str(service_id)]['quantity']}</strong>
+                services for
+                <strong>{item_bag['service'][str(service_id)]['title']}</strong>
                 in the cart!'''
             )
 
@@ -102,8 +103,9 @@ class UpdateServiceCartView(View):
 
             messages.success(
                 request, f'''You have
-                <strong>{item_bag['service'][str(service_id)]['quantity']}</strong> services
-                for <strong>{item_bag['service'][str(service_id)]['title']}</strong>
+                <strong>{item_bag['service'][str(service_id)]['quantity']}</strong>
+                services for
+                <strong>{item_bag['service'][str(service_id)]['title']}</strong>
                 in the cart!'''
             )
 
@@ -131,8 +133,8 @@ class DeleteServiceCartView(View):
             if service_id and item_bag:
                 messages.success(
                     request, f'''You have deleted
-                    <strong>{item_bag['service'][str(service_id)]['title']}</strong> service
-                    from the cart successfully!'''
+                    <strong>{item_bag['service'][str(service_id)]['title']}</strong>
+                    service from the cart successfully!'''
                 )
                 item_bag['service'].pop(service_id)
             else:

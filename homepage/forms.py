@@ -1,16 +1,14 @@
 # Django Imports
 from django import forms
-from django.utils.text import slugify
 from django.core.validators import MaxLengthValidator
 
 # Python imports
-from datetime import date
 
 from allauth.account.forms import LoginForm, SignupForm
 
 # Local Imports
 
-from .models import UserProfile, USER_TYPE, Comment
+from .models import USER_TYPE, Comment
 
 
 class CustomSignupForm(SignupForm):

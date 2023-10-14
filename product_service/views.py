@@ -425,8 +425,9 @@ class AdminOrderListView(AdminRequiredMixin, ListView):
             queryset = Order.objects.annotate(
                 ordercount=Count('id')).order_by('-date')
             queryset = queryset.prefetch_related(
-                Prefetch('lineitems', queryset=OrderLineItem.objects.select_related(
-                    'product', 'service'))
+                Prefetch('lineitems',
+                         queryset=OrderLineItem.objects.select_related(
+                             'product', 'service'))
             )
             return queryset
         except Exception as e:
@@ -457,8 +458,9 @@ class BuyerOrderListView(BuyerRequiredMixin, ListView):
                 ordercount=Count('id')).order_by('-date')
 
             queryset = queryset.prefetch_related(
-                Prefetch('lineitems', queryset=OrderLineItem.objects.select_related(
-                    'product', 'service'))
+                Prefetch('lineitems',
+                         queryset=OrderLineItem.objects.select_related(
+                             'product', 'service'))
             )
             return queryset
         except Exception as e:

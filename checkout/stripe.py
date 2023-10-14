@@ -2,7 +2,6 @@
 import uuid
 import os
 import json
-import time
 from urllib.parse import quote
 
 # Third-party library imports (Django and Stripe)
@@ -11,8 +10,6 @@ from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import View, TemplateView
-from django.views.decorators.http import require_POST
-from django.http import JsonResponse
 import stripe
 
 # Application-specific imports
@@ -26,6 +23,35 @@ from .models import Order, OrderLineItem, GATEWAY_TYPE
 
 
 class StripeCheckoutView(View):
+    """
+    Handles the checkout process using Stripe as the payment gateway.
+
+    Component: Checkout View
+    Action:
+        1. Retrieves the shopping bag from the session and
+        initializes user to None.
+        2. Validates and processes the order form.
+        3. Tries to find an existing user profile based on email;
+        if not found, creates one.
+        4. Associates the order with the user profile.
+        5. Saves line items for both products and services to the order.
+        6. Redirects the user to the Stripe payment page.
+
+    Expected Results:
+        - Shopping bag items are saved as order line items.
+        - A new user is created if no matching email is found,
+        or existing user is fetched.
+        - Order is successfully created and associated with the user.
+        - User is redirected to Stripe for payment or shown an
+        error message if something goes wrong.
+
+    Notes:
+        - The view is designed to handle both authenticated
+        and unauthenticated users.
+        - The view expects 'item_bag' to exist in the session
+        to fetch shopping bag items.
+    """
+
     def post(self, request):
         user = None
         bag = request.session.get('item_bag', {})
@@ -100,7 +126,9 @@ class StripeCheckoutView(View):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(
-                        request, "One of the products in your bag wasn't found in our database. Please call us for assistance.")
+                        request, '''One of the products in your bag
+                        wasn't foundin our database. Please call us
+                        for assistance.''')
                     order.delete()
                     return redirect(reverse('view_bag'))
 
@@ -117,7 +145,9 @@ class StripeCheckoutView(View):
                             order_line_item.save()
                 except Service.DoesNotExist:
                     messages.error(
-                        request, "One of the services in your bag wasn't found in our database. Please call us for assistance.")
+                        request, '''One of the services in your bag
+                        wasn't found in our database. Please call us
+                        for assistance.''')
                     order.delete()
                     return redirect(reverse('view_bag'))
 
@@ -125,10 +155,12 @@ class StripeCheckoutView(View):
                 messages.error(request, 'Please, use your own email address.')
                 return redirect(reverse('checkout_page'))
             else:
-                return redirect(reverse('stripe_redirect', args=[order.order_number]))
+                return redirect(
+                    reverse('stripe_redirect', args=[order.order_number]))
         else:
             messages.error(
-                request, 'There was an error with your form. Please double-check your information.')
+                request, '''There was an error with your form.
+                Please double-check your information.''')
             return redirect(reverse('checkout_failure'))
 
 
@@ -149,7 +181,7 @@ class StripeCheckoutRedirect(TemplateView):
         good, if applicable.
 
     Methods:
-        - get(request, order_number): Executes the primary logic for populating 
+        - get(request, order_number): Executes the primary logic for populating
           variables and initializing Stripe's checkout session.
             1. Retrieves the current shopping bag's total amount
             and item count.
@@ -180,8 +212,8 @@ class StripeCheckoutRedirect(TemplateView):
                 STRIPE: Public key not provided!''')
 
         # # Generate dynamic success URL
-        scheme = request.scheme  # http or https
-        host = request.get_host()  # localhost:8000 or your domain
+        scheme = request.scheme
+        host = request.get_host()
         success_url = f"{scheme}://{host}/checkout/success/"
         cancelled_url = f"{scheme}://{host}/checkout/cancelled/"
 
@@ -214,15 +246,6 @@ class StripeCheckoutRedirect(TemplateView):
         self.session_id = session.id
 
         order = get_object_or_404(Order, order_number=order_number)
-
-        # # Save the user's info
-        # if save_info:
-        #     profile_data = {
-        #         'default_phone_number': order.phone_number,
-        #     }
-        #     user_profile_form = UserProfileForm(profile_data, instance=profile)
-        #     if user_profile_form.is_valid():
-        #         user_profile_form.save()
 
         messages.success(request, f'Order created, \
             You will be redirected after 5 seconds!')

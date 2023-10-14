@@ -1,12 +1,11 @@
 from allauth.account.models import EmailAddress
 from decimal import Decimal
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from product_service.models import (Product, Service)
 from django_plexosoft.settings import (GRAND_DISCOUNT_THRESHOLD,
                                        GRAND_DISCOUNT_PERCENTAGE,
 
-                                       NORMAL_DISCOUNT_THRESHOLD,
-                                       NORMAL_DISCOUNT_PERCENTAGE)
+                                       NORMAL_DISCOUNT_PERCENTAGE,)
 
 
 def get_verified_email(request):
@@ -48,7 +47,8 @@ def service_product_bag_content(request):
                     # Check if the product is already in bag_items
                     found_product = None
                     for item in bag_items:
-                        if 'product' in item and item['product'].id == product_id:
+                        if 'product' in item and item[
+                                'product'].id == product_id:
                             found_product = item
                             break
 
@@ -76,7 +76,8 @@ def service_product_bag_content(request):
                     # Check if the service is already in bag_items
                     found_service = None
                     for item in bag_items:
-                        if 'service' in item and item['service'].id == service_id:
+                        if 'service' in item and item[
+                                'service'].id == service_id:
                             found_service = item
                             break
 

@@ -56,8 +56,9 @@ class ProductAddToCartView(View, ProductAddToCartMixin):
 
                 messages.success(
                     request, f'''You have added
-                    <strong>{item_bag['product'][str(product_id)]['quantity']}</strong> products
-                    for <strong>{item_bag['product'][str(product_id)]['title']}</strong>
+                    <strong>{item_bag['product'][str(product_id)]['quantity']}
+                    </strong> products for
+                    <strong>{item_bag['product'][str(product_id)]['title']}</strong>
                     in the cart!'''
                 )
 
@@ -104,8 +105,9 @@ class UpdateProductCartView(View):
 
             messages.success(
                 request, f'''You have
-                <strong>{item_bag['product'][str(product_id)]['quantity']}</strong> products
-                for <strong>{item_bag['product'][str(product_id)]['title']}</strong>
+                <strong>{item_bag['product'][str(product_id)]['quantity']}</strong>
+                products for
+                <strong>{item_bag['product'][str(product_id)]['title']}</strong>
                 in the cart!'''
             )
 
@@ -133,8 +135,8 @@ class DeleteProductCartView(View):
             if product_id and item_bag:
                 messages.success(
                     request, f'''You have deleted
-                    <strong>{item_bag['product'][str(product_id)]['title']}</strong> product
-                    from the cart successfully!'''
+                    <strong>{item_bag['product'][str(product_id)]['title']}</strong>
+                    product from the cart successfully!'''
                 )
                 item_bag['product'].pop(product_id)
             else:

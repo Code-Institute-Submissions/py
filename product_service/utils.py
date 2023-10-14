@@ -1,7 +1,10 @@
+# Python
 import secrets
 import string
 import random
 import os
+
+# Django
 from django.core.cache import cache
 from datetime import datetime, timedelta
 from functools import wraps
@@ -55,14 +58,16 @@ def check_rate_limit(request):
     """
 
     if not request.user.is_authenticated:
-        return HttpResponseForbidden("You must be logged in to download files.")
+        return HttpResponseForbidden(
+            "You must be logged in to download files.")
 
     user_id = str(request.user.id)
     cache_key = f"rate_limit_{user_id}"
     rate_limit_info = cache.get(
         cache_key, {'count': 0, 'timestamp': datetime.now()})
 
-    if rate_limit_info['count'] >= 3 and (datetime.now() - rate_limit_info['timestamp']).seconds < 60:
+    if rate_limit_info['count'] >= 3 and (datetime.now() - rate_limit_info[
+            'timestamp']).seconds < 60:
         return HttpResponse('Too many requests', status=429)
 
     if (datetime.now() - rate_limit_info['timestamp']).seconds >= 60:

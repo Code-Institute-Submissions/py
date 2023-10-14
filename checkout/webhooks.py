@@ -10,7 +10,6 @@ import stripe
 
 # Application-specific imports
 from .webhook_handler import StripeWebhookHandler
-from django.conf import settings
 import logging
 
 logger = logging.getLogger(__name__)

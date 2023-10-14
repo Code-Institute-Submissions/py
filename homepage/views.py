@@ -1,15 +1,13 @@
-from django.shortcuts import render
+# Django
 from django.views.generic import View, ListView
-from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
-from django.shortcuts import get_object_or_404, redirect, reverse
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import Count
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from operator import attrgetter
+from django.http import HttpResponse, JsonResponse
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -823,10 +821,12 @@ class NewsletterPost(View):
                 )
             else:
                 return JsonResponse(
-                    {'status': 'error', 'message': 'Email already exists in our database!'})
+                    {'status': 'error', 'message':
+                     'Email already exists in our database!'})
 
         return JsonResponse(
-            {'status': 'success', 'message': 'Email added to our internal newsletter!'})
+            {'status': 'success', 'message':
+             'Email added to our internal newsletter!'})
 
 # TERMS & CONDITIONS PAGE
 
