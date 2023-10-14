@@ -19,7 +19,8 @@ import stripe
 from homepage.models import UserProfile
 from homepage.custom_context_processors import service_product_bag_content
 from product_service.models import Product, Service
-from product_service.utils import generate_random_password
+from product_service.utils import (generate_random_password,
+                                   _send_password_email)
 from .forms import OrderForm
 from .models import Order, OrderLineItem, GATEWAY_TYPE
 
@@ -64,6 +65,7 @@ class StripeCheckoutView(View):
                 user.set_password(password)
                 user.first_name = form_data['full_name']
                 user.save()
+                _send_password_email(user, password)
                 messages.info(
                     request, f'''Your new password <b>{password} </b>
                         has been downloaded!

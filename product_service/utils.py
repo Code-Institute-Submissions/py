@@ -6,6 +6,7 @@ from django.core.cache import cache
 from datetime import datetime, timedelta
 from functools import wraps
 from django.http import HttpResponse, HttpResponseForbidden
+from django.conf import settings
 
 
 def generate_download_token(length=12):
@@ -69,3 +70,39 @@ def check_rate_limit(request):
 
     cache.set(cache_key, rate_limit_info, timeout=60)
     return None
+
+
+def _send_confirmation_email(self, order):
+    """Send a confirmation email afte order complete"""
+    buyer_email = order.email
+    subject = render_to_string(
+        'checkout/confirmation_email/confirmation_email_subject.txt',
+        {'order': order})
+    body = render_to_string(
+        'checkout/confirmation_email/confirmation_email_body.txt',
+        {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [buyer_email]
+    )
+
+
+def _send_password_email(self, user, password):
+    """Send new password email afte order complete"""
+    buyer_email = user.email
+    subject = render_to_string(
+        'checkout/confirmation_email/password_email_subject.txt',
+        {'user': user})
+    body = render_to_string(
+        'checkout/confirmation_email/password_email_body.txt',
+        {'user': user, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [buyer_email]
+    )

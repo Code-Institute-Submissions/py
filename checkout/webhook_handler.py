@@ -12,6 +12,7 @@ import stripe
 
 # Application-specific imports
 from .models import Order
+from product_service.utils import _send_confirmation_email
 
 
 class StripeWebhookHandler:
@@ -49,23 +50,6 @@ class StripeWebhookHandler:
         """
 
         self.request = request
-
-    def _send_confirmation_email(self, order):
-        """Send a confirmation email afte order complete"""
-        buyer_email = order.email
-        subject = render_to_string(
-            'checkout/confirmation_email/confirmation_email_subject.txt',
-            {'order': order})
-        body = render_to_string(
-            'checkout/confirmation_email/confirmation_email_body.txt',
-            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [buyer_email]
-        )
 
     def event_handler(self, event):
         """
@@ -124,8 +108,9 @@ class StripeWebhookHandler:
                 order.stripe_pid = payment_intent_id
                 order.status = 2
                 order.save()
+
                 # Send Email
-                self._send_confirmation_email(order)
+                _send_confirmation_email(order)
 
         return HttpResponse(
             content=f'Unknown webhook received {event["type"]}',
