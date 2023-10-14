@@ -42,23 +42,22 @@ The user stories have undergone some modifications since their initial conceptio
     | | Develop Product & Service Metrics | s a user or admin, I want visibility on product or service metrics, such as purchase counts, likes, and comments, both on the homepage and dedicated pages so that they provide insight into the product's popularity and additional data.  | **13** |
     | | Configure Role Visualization | As a user, visitor, or admin, I want a visual representation of my privileges based on my role so that it helps me realize the website's full potential | **7** |
     | | Integrate Cart, Purchase & Download | As a user, I want to add products to my cart, experience a smooth payment process, and download the digital product immediately after payment so that I can minimize friction in my purchasing journey. | **13** |
-    | | Develop Support Button | As a user, I want a support button on the product & service page that redirects me to a contact form with pre-filled information based on my prior selection, reducing repetitive input. | **4** |
     | Search & Filter | Develop Category Menu | As a user, I want a 'Category' menu so that it streamlines my search for products & services. | **4** |
     | | Incorporate Search Bar | As a user, I want a search engine so I that I can find specific products or services. | **7** |
     | | Integrate Filter Function | As a user, I want a filter section on the same page, allowing me to sort by categories, price, license, ownership, etc. | **4** |
     | Likes & Comments | Implement Likes & Comments | As a user, after a purchase, I want to like and comment on my product or service, and share my thoughts so that I can contribute to the community. | **4** |
     | Accountability | Construct Contact Form | As a user, I desire a well-crafted contact page to reach the support team. | **4** |
-    | | Implement Request Formats in Contact Form | As a user, I want predefined request formats in the contact form, ensuring effective communication of my ideas. | **4** |
     | | Assemble FAQ Section | As a user, I seek a FAQ section on the support page, offering videos or articles for troubleshooting or answering Plexosoft Marketplace-related questions. | **4** |
     | | Assemble Newsletter | As a user, I wish to subscribe to the site's newsletter with ease, staying updated with top offers, educational articles, and software news. | **4** |
-    | | Integrate RSS Articles | As a user, I aspire to read top-quality articles from various sources within the marketplace, aiding my present and future decision-making. | **4** |
     | | Terms of Service & Privacy Policy (GDPR) | As a user, I want to easily access the terms of service & privacy policy (GDPR) pages, understanding my obligations and rights. | **4** |
 
 #### Won't-have
 
 | Theme                 | Epics                                | User Stories | Story Point |
 |-----------------------|--------------------------------------|--------------|-------------|
-
+| Accountability | Develop Support Button | As a user, I want a support button on the product & service page that redirects me to a contact form with pre-filled information based on my prior selection, reducing repetitive input. | **4** |
+| | Integrate RSS Articles | As a user, I aspire to read top-quality articles from various sources within the marketplace, aiding my present and future decision-making. | **4** |
+| | Implement Request Formats in Contact Form | As a user, I want predefined request formats in the contact form, ensuring effective communication of my ideas. | **4** |
 
 ### Product Backlog
 
