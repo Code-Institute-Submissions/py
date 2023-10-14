@@ -5,21 +5,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="User Dashboard" />
-    <meta name="author" content="Frank Arellano" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="User Dashboard"/>
+    <meta name="author" content="Frank Arellano"/>
     <title>Plexosoft {% block title %}- User Dashboard{% endblock %}</title>
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{% static 'frontend/assets/favicon.ico' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'frontend/assets/favicon.ico' %}"/>
 
     <!-- Tables SB Admin (https://startbootstrap.com/template/sb-admin) -->
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
 
     <!-- Dashboard SB Admin (https://startbootstrap.com/template/sb-admin)-->
-    <link href="{% static 'backend/css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'backend/css/styles.css' %}" rel="stylesheet"/>
 
     <!-- Fontawesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -50,7 +50,7 @@
                         <li><a class="dropdown-item" href="{% url 'buyer_settings' %}">Settings</a></li>
                         {% endif %}
                         <li>
-                            <hr class="dropdown-divider" />
+                            <hr class="dropdown-divider"/>
                         </li>
                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 href="{% url 'account_logout' %}">Logout</a></li>
@@ -130,7 +130,7 @@
                 <form class="modal-content" method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
                     {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>

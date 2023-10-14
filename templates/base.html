@@ -45,10 +45,10 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{% static 'frontend/assets/favicon.ico' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'frontend/assets/favicon.ico' %}"/>
 
     <!-- Bootstrap ICONS-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
 
     <!-- Shop Homepage TEMPLATE CSS: https://startbootstrap.com/template/shop-homepage  -->
     <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
@@ -64,13 +64,13 @@
     {% endblock extra_corecss %}
 
     <!-- Google Login -->
-    <meta name="google-site-verification" content="pTMvs4bE_63e72RvIq8fimy4O8z3DFjqvabF4XFQET4" />
+    <meta name="google-site-verification" content="pTMvs4bE_63e72RvIq8fimy4O8z3DFjqvabF4XFQET4"/>
 
     <meta name="description"
-        content="Welcome to Plexosoft, your ultimate software marketplace. From licensing to ownership, we make software acquisition transparent and secure. Shop and download Python-made websites, get expert website support, or buy software with a license. Join us and discover a new standard in software solutions." />
+        content="Welcome to Plexosoft, your ultimate software marketplace. From licensing to ownership, we make software acquisition transparent and secure. Shop and download Python-made websites, get expert website support, or buy software with a license. Join us and discover a new standard in software solutions."/>
     <meta name="keywords"
-        content="software licensing service, second hand software, python made websites, community software group, software university, best website software download, software license and service agreement, website support services, python expert website developers, customizable software applications, custom software development, ideas software development, buy website marketplace, website buy sell marketplace, licensing as a service, software ownership service, fix website bug, fix website bug online, multilingual website service, fix website issues, expert web developers, multilingual software website, customizable marketplace website template, best marketplace website builder, ideas website design, cheap software licenses" />
-    <meta name="author" content="Frank Arellano | @inplexo (Instagram)" />
+        content="software licensing service, second hand software, python made websites, community software group, software university, best website software download, software license and service agreement, website support services, python expert website developers, customizable software applications, custom software development, ideas software development, buy website marketplace, website buy sell marketplace, licensing as a service, software ownership service, fix website bug, fix website bug online, multilingual website service, fix website issues, expert web developers, multilingual software website, customizable marketplace website template, best marketplace website builder, ideas website design, cheap software licenses"/>
+    <meta name="author" content="Frank Arellano | @inplexo (Instagram)"/>
     <title>Plexosoft {% block title %}- Home{% endblock %}</title>
 
 </head>
@@ -93,7 +93,7 @@
 
                         <!-- Search Engine -->
 
-                        <li class="nav-item m-1 search-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                        <li class="nav-item m-1 search-pointer" data-bs-toggle="modal" data-bs-target="#popupModal3">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </li>
 
@@ -167,7 +167,7 @@
                                 {% elif request.user.role == 1  %}
                                 <li><a class="dropdown-item" href="{% url 'admin_settings' %}">Settings</a></li>
                                 {%endif%}
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#popupModal"
                                         href="{% url 'account_logout' %}">Logout</a></li>
                                 {% else %}
                                 <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
@@ -209,15 +209,15 @@
     </header>
 
     <!-- LOGOUT Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form class="modal-content" method="post" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                 {% endif %}
                 <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="exampleModalLabel">Logout</h5>
+                    <span class="modal-title fs-5" id="popupModalLabel">Logout</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -232,16 +232,16 @@
     </div>
 
     <!-- SEARCH Modal -->
-    <aside class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <aside class="modal fade" id="popupModal3" tabindex="-1" aria-labelledby="popupModalLabel3" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 {% csrf_token %}
                 {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                 {% endif %}
 
                 <div class="modal-header">
-                    <h4 class="modal-title fs-5" id="exampleModalLabel">Search Product & Service</h4>
+                    <span class="modal-title fs-5" id="popupModalLabel3">Search Product & Service</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -392,7 +392,7 @@
 
                                                             <!-- Send Button -->
                                                             <span class="input-group-btn">
-                                                                <button type="submit" name="subscribe"
+                                                                <button type="submit" aria-label="Subscribe to Newsletter" name="subscribe"
                                                                     id="mc-embedded-subscribe"
                                                                     class="newsletter-btn px-3 mb-0"><i
                                                                         class="fa-regular fa-paper-plane"></i></button>
