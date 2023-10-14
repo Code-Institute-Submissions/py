@@ -11,8 +11,7 @@
 
 ??? danger "Temp: Watchout"
     - This page details
-    - Update Main Readme
-    - Update Agile Development section to end
+    - "Actual Features," "Future Features," and "Tech Used"
     - Duplicate at the end to align to Code Institute if needed
 
 ## Index
